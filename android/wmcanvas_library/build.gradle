@@ -1,0 +1,97 @@
+apply plugin: 'com.android.library'
+
+group = rootProject.extensions.groups.Main
+version = "1.2.0"
+
+android {
+    namespace = 'com.taobao.wmcanvas'
+    compileSdkVersion rootProject.extensions.sdks.CompileSDK
+    ndkVersion = "21.1.6352462"
+    
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            jniLibs.srcDirs '../../core/android/freetype-prebuilt/libs'
+        }
+    }
+
+    lintOptions {
+        abortOnError = false
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.extensions.sdks.MinSDK
+        targetSdkVersion rootProject.extensions.sdks.TargetSDK
+
+        consumerProguardFiles 'proguard-rules.txt'
+        externalNativeBuild {
+            cmake {
+                arguments  '-DWMCANVAS=0'
+            }
+
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
+    }
+
+    flavorDimensions "target_app"
+    productFlavors {
+        standalone {
+            dimension "target_app"
+            externalNativeBuild {
+                cmake {
+                    arguments  '-DWMCANVAS=0', '-DANDROID_STL=c++_shared', '-DGSTANDALONE=1', '-DWMCANVAS_RUNTIME=1'
+                }
+
+                ndk {
+                    abiFilters 'armeabi-v7a', 'arm64-v8a'
+                }
+            }
+
+            packagingOptions {
+                exclude '**/libc++_shared.so'
+                exclude '**/**/libc++_shared.so'
+            }
+        }
+    }
+
+
+    externalNativeBuild {
+        cmake {
+            path file('../../CMakeLists.txt')
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.alibaba:fastjson:1.1.54.android'
+    
+    // Image loader dependencies (optional, for specific implementations)
+    compileOnly "com.android.support:appcompat-v7:${rootProject.extensions.sdks.Support}"
+    compileOnly "com.facebook.fresco:fresco:${rootProject.extensions.sdks.Fresco}"
+    compileOnly 'com.squareup.picasso:picasso:2.71828'
+}
+project.ext.id = rootProject.extensions.artifacts.Core
+project.ext.meta.labels = ['GPU', 'OpenGL', 'GCanvas', "canvas", 'WebGL', 'Rendering', 'High Performance']
+project.ext.meta.description = 'This package defines GCanvas main library.'
+
+// 使用本地 Maven 发布配置
+apply from: "${rootProject.projectDir}/publish_local.gradle"
+

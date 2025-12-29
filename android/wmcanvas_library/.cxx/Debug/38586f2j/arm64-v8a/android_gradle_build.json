@@ -1,0 +1,41 @@
+{
+  "buildFiles": [
+    "D:\\02-Learning\\GCanvasMaster\\CMakeLists.txt",
+    "D:\\02-Learning\\GCanvasMaster\\core\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\27575\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\02-Learning\\GCanvasMaster\\android\\wmcanvas_library\\.cxx\\Debug\\38586f2j\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\27575\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\02-Learning\\GCanvasMaster\\android\\wmcanvas_library\\.cxx\\Debug\\38586f2j\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "gcanvas::@57760688d1f824db5d9c": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "gcanvas",
+      "output": "D:\\02-Learning\\GCanvasMaster\\android\\wmcanvas_library\\build\\intermediates\\cxx\\Debug\\38586f2j\\obj\\arm64-v8a\\libgcanvas.so",
+      "runtimeFiles": [
+        "D:\\02-Learning\\GCanvasMaster\\core\\android\\freetype-prebuilt\\libs\\arm64-v8a\\libfreetype.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\27575\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\27575\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

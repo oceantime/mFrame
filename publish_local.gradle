@@ -1,0 +1,64 @@
+// 本地 Maven 发布配置
+// 这个配置允许将编译好的 AAR 发布到本地 Maven 仓库
+
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // For Android library
+                if (project.components.findByName('release')) {
+                    from components.release
+                } else {
+                    // For older Android Gradle Plugin versions
+                    groupId = project.group
+                    artifactId = project.ext.id
+                    version = project.version
+                    
+                    // Add AAR artifact
+                    if (tasks.findByName('bundleReleaseAar')) {
+                        artifact(tasks.bundleReleaseAar)
+                    }
+                }
+                
+                groupId = project.group
+                artifactId = project.ext.id
+                version = project.version
+                
+                pom {
+                    name = String.valueOf("${project.group}:${project.ext.id}")
+                    description = String.valueOf(project.ext.meta.description)
+                    url = 'https://github.com/alibaba/GCanvas'
+                    
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    
+                    developers {
+                        developer {
+                            name = 'Alibaba GCanvas Team'
+                            email = 'gcanvas@alibaba-inc.com'
+                        }
+                    }
+                    
+                    scm {
+                        connection = 'scm:git:git://github.com/alibaba/GCanvas.git'
+                        developerConnection = 'scm:git:ssh://github.com:alibaba/GCanvas.git'
+                        url = 'https://github.com/alibaba/GCanvas'
+                    }
+                }
+            }
+        }
+        
+        repositories {
+            maven {
+                // 本地 Maven 仓库 (默认: ~/.m2/repository)
+                url = uri(mavenLocal().url)
+            }
+        }
+    }
+}

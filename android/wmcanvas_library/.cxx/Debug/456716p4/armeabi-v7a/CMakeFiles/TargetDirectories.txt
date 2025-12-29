@@ -1,0 +1,5 @@
+D:/02-Learning/GCanvasMaster/android/wmcanvas_library/.cxx/Debug/456716p4/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/02-Learning/GCanvasMaster/android/wmcanvas_library/.cxx/Debug/456716p4/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+D:/02-Learning/GCanvasMaster/android/wmcanvas_library/.cxx/Debug/456716p4/armeabi-v7a/core/CMakeFiles/gcanvas.dir
+D:/02-Learning/GCanvasMaster/android/wmcanvas_library/.cxx/Debug/456716p4/armeabi-v7a/core/CMakeFiles/edit_cache.dir
+D:/02-Learning/GCanvasMaster/android/wmcanvas_library/.cxx/Debug/456716p4/armeabi-v7a/core/CMakeFiles/rebuild_cache.dir
