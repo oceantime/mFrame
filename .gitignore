@@ -7,6 +7,11 @@ dist
 .vscode
 souce
 external
+gradlew
+gradlew.bat
+.android-sdk/
+.gradle-dist/
+.jdk/
 
 local.properties
 gradle/
@@ -19,6 +24,7 @@ Podfile.lock
 xcuserdata
 build/
 .externalNativeBuild/
+android/wmcanvas_library/.cxx/*
 
 .classpath
 .settings/

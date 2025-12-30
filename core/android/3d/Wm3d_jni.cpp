@@ -5,7 +5,6 @@
 #include "g3d_jni.h"
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
-#include "jsc/weexjsc.h"
 #include <WmCanvasLinkNative.h>
 #include <dlfcn.h>
 #include <wmcanvas/GPoint.h>
@@ -14,7 +13,6 @@
 //using namespace taobao::g_engine::WmCanvas;
 using namespace std;
 using namespace WmCanvas;
-using namespace WEEXJSC;
 
 
 char *jstringToString_(JNIEnv *env, jstring jstr) {
