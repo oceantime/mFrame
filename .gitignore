@@ -24,7 +24,7 @@ Podfile.lock
 xcuserdata
 build/
 .externalNativeBuild/
-android/wmcanvas_library/.cxx/*
+android/wmcanvas_library/.cxx/**
 
 .classpath
 .settings/

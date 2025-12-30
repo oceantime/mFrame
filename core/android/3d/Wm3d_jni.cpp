@@ -10,7 +10,7 @@
 #include <wmcanvas/GPoint.h>
 #include "Wmmanager.h"
 
-//using namespace taobao::g_engine::WmCanvas;
+//using namespace wm::g_engine::WmCanvas;
 using namespace std;
 using namespace WmCanvas;
 

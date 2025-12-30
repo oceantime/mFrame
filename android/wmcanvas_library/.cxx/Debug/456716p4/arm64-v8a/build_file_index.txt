@@ -1,2 +1,0 @@
-D:\02-Learning\GCanvasMaster\CMakeLists.txt
-D:\02-Learning\GCanvasMaster\core\CMakeLists.txt

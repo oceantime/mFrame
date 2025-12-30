@@ -4,7 +4,7 @@
 
 #ifndef G_CANVAS_I_DELETE_H
 #define G_CANVAS_I_DELETE_H
-namespace taobao {
+namespace wm {
     namespace g_engine {
         namespace WmCanvas {
             class IDelete {

@@ -2,13 +2,13 @@
 // Created by yuantong on 2017/8/2.
 //
 
-#ifndef G_CANVAS_AUTO_PTR_H
-#define G_CANVAS_AUTO_PTR_H
+#ifndef WM_CANVAS_AUTO_PTR_H
+#define WM_CANVAS_AUTO_PTR_H
 
 #include "i_delete.h"
 #include "ref_count.h"
 
-namespace taobao {
+namespace wm {
     namespace g_engine {
         namespace WmCanvas {
             template<typename T>
@@ -107,4 +107,4 @@ namespace taobao {
     }
 }
 
-#endif //G_CANVAS_AUTO_PTR_H
+#endif //WM_CANVAS_AUTO_PTR_H

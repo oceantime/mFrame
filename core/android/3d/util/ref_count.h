@@ -5,7 +5,7 @@
 #ifndef G_CANVAS_REF_COUNT_H
 #define G_CANVAS_REF_COUNT_H
 
-namespace taobao {
+namespace wm {
     namespace g_engine {
         namespace WmCanvas {
             class RefCount {
