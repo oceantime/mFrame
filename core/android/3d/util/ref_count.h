@@ -2,8 +2,8 @@
 // Created by yuantong on 2017/8/2.
 //
 
-#ifndef G_CANVAS_REF_COUNT_H
-#define G_CANVAS_REF_COUNT_H
+#ifndef WM_CANVAS_REF_COUNT_H
+#define WM_CANVAS_REF_COUNT_H
 
 namespace wm {
     namespace wm_engine {
@@ -31,4 +31,4 @@ namespace wm {
     }
 }
 
-#endif //G_CANVAS_REF_COUNT_H
+#endif //WM_CANVAS_REF_COUNT_H
