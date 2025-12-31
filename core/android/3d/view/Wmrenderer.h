@@ -2,8 +2,8 @@
 // Created by yuantong on 2017/8/1.
 //
 
-#ifndef G_CANVAS_GRENDER_H
-#define G_CANVAS_GRENDER_H
+#ifndef WM_CANVAS_GRENDER_H
+#define WM_CANVAS_GRENDER_H
 
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
@@ -99,4 +99,4 @@ public:
 };
 
 
-#endif //G_CANVAS_GRENDER_H
+#endif //WM_CANVAS_GRENDER_H
