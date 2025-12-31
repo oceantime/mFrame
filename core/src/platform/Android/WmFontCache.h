@@ -16,7 +16,7 @@
 #include <string>
 
 
-class GCanvas2DContextAndroid;
+class WmCanvas2DContextAndroid;
 
 
 class GFont;

@@ -21,19 +21,19 @@ extern bool g_use_pre_compile;
 extern std::string g_shader_cache_path;
 
 
-GCanvas2DContextAndroid::GCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config) :
+WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config) :
         GCanvasContext(w, h, config, nullptr) {
     Create();
 }
 
 
-GCanvas2DContextAndroid::GCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks) :
+WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks) :
         GCanvasContext(w, h, config, hooks) {
     Create();
 }
 
 
-void GCanvas2DContextAndroid::Create() {
+void WmCanvas2DContextAndroid::Create() {
     mShaderManager = nullptr;
 
     if (!mConfig.sharedShader) {
@@ -42,7 +42,7 @@ void GCanvas2DContextAndroid::Create() {
 }
 
 
-GCanvas2DContextAndroid::~GCanvas2DContextAndroid() {
+WmCanvas2DContextAndroid::~WmCanvas2DContextAndroid() {
     if (!mConfig.sharedShader) {
         if (mShaderManager != nullptr) {
             delete mShaderManager;
@@ -52,18 +52,18 @@ GCanvas2DContextAndroid::~GCanvas2DContextAndroid() {
 }
 
 
-void GCanvas2DContextAndroid::SetUseShaderBinaryCache(bool v) {
+void WmCanvas2DContextAndroid::SetUseShaderBinaryCache(bool v) {
     g_use_pre_compile = true;
 }
 
 
-void GCanvas2DContextAndroid::SetShaderBinaryCachePath(const std::string& v) {
+void WmCanvas2DContextAndroid::SetShaderBinaryCachePath(const std::string& v) {
     g_shader_cache_path = v;
 }
 
 
 
-void GCanvas2DContextAndroid::InitFBO() {
+void WmCanvas2DContextAndroid::InitFBO() {
     if (0 != mContextType) return;
 
     if (!mConfig.useFbo) {
@@ -86,27 +86,27 @@ void GCanvas2DContextAndroid::InitFBO() {
 
 
 
-void GCanvas2DContextAndroid::ClearColorToTransparent()
+void WmCanvas2DContextAndroid::ClearColorToTransparent()
 {
     GColorRGBA c = GColorTransparent;
     ClearColor(c);
 }
 
 
-void GCanvas2DContextAndroid::ClearColor(GColorRGBA& c) {
+void WmCanvas2DContextAndroid::ClearColor(GColorRGBA& c) {
     glClearColor(c.rgba.r, c.rgba.g, c.rgba.b, c.rgba.a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 
-void GCanvas2DContextAndroid::GetRawImageData(int width, int height, uint8_t *pixels) {
+void WmCanvas2DContextAndroid::GetRawImageData(int width, int height, uint8_t *pixels) {
     SendVertexBufferToGPU();
     glReadPixels(0, 0, width, height, GL_RGBA,
                  GL_UNSIGNED_BYTE, pixels);
 }
 
 
-//void GCanvas2DContextAndroid::GLBlend(GCompositeOperation op, GCompositeOperation alphaOp)
+//void WmCanvas2DContextAndroid::GLBlend(GCompositeOperation op, GCompositeOperation alphaOp)
 //{
 //    GBlendOperationFuncs funcs = GCompositeOperationFuncs(op);
 //    GBlendOperationFuncs alphaFuncs = GCompositeOperationFuncs(alphaOp);
@@ -116,7 +116,7 @@ void GCanvas2DContextAndroid::GetRawImageData(int width, int height, uint8_t *pi
 //}
 
 
-void GCanvas2DContextAndroid::BeginDraw(bool is_first_draw) {
+void WmCanvas2DContextAndroid::BeginDraw(bool is_first_draw) {
     glEnable(GL_DEPTH_TEST);
 
     if (mConfig.useFbo) {
@@ -132,7 +132,7 @@ void GCanvas2DContextAndroid::BeginDraw(bool is_first_draw) {
 }
 
 
-void GCanvas2DContextAndroid::EndDraw() {
+void WmCanvas2DContextAndroid::EndDraw() {
     if (!mConfig.useFbo) {
         return;
     }
@@ -146,12 +146,12 @@ void GCanvas2DContextAndroid::EndDraw() {
 }
 
 
-GTexture *GCanvas2DContextAndroid::GetFBOTextureData() {
+GTexture *WmCanvas2DContextAndroid::GetFBOTextureData() {
     return &(mFboMap[DefaultFboName].mFboTexture);
 }
 
 
-void GCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
+void WmCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
     mWidth = width;
     mHeight = height;
 
@@ -192,7 +192,7 @@ void GCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
  * 在改变canvas view大小时进行内容复制
  * 新建fbo, 并进行fbo复制
  */
-void GCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
+void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
     bool sizeChanged = mWidth != width || height != mHeight;
     mWidth = width;
     mHeight = height;
@@ -244,7 +244,7 @@ void GCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
 }
 
 
-void GCanvas2DContextAndroid::CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferObject &destFbo) {
+void WmCanvas2DContextAndroid::CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferObject &destFbo) {
     if (!mIsFboSupported) {
         return;
     }
@@ -271,7 +271,7 @@ void GCanvas2DContextAndroid::CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferOb
 
 
 void
-GCanvas2DContextAndroid::ResizeCopyUseImage(int width, int height, const unsigned char *rgbaData,
+WmCanvas2DContextAndroid::ResizeCopyUseImage(int width, int height, const unsigned char *rgbaData,
                                             int imgWidth,
                                             int imgHeight) {
     bool sizeChanged = (mWidth != width) || (height != mHeight);
@@ -299,7 +299,7 @@ GCanvas2DContextAndroid::ResizeCopyUseImage(int width, int height, const unsigne
 }
 
 
-void GCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
+void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
                                                 const unsigned char *rgbaData, int imgWidth,
                                                 int imgHeight) {
     ResetGLBeforeCopyFrame(width, height);
@@ -318,7 +318,7 @@ void GCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
 
 
 void
-GCanvas2DContextAndroid::
+WmCanvas2DContextAndroid::
 DrawFBO(std::string fboName, GCompositeOperation compositeOp, float sx, float sy, float sw,
         float sh, float dx, float dy, float dw, float dh) {
     if (!mIsFboSupported) {
@@ -363,7 +363,7 @@ DrawFBO(std::string fboName, GCompositeOperation compositeOp, float sx, float sy
 }
 
 
-void GCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
+void WmCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
     Save();
     GColorRGBA c = mClearColor;
     SetClearColor(GColorTransparent);
@@ -384,7 +384,7 @@ void GCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
 }
 
 
-void GCanvas2DContextAndroid::RestoreGLAfterCopyFrame() {
+void WmCanvas2DContextAndroid::RestoreGLAfterCopyFrame() {
     if (HasClipRegion()) {
         glEnable(GL_STENCIL_TEST);
     }
@@ -394,7 +394,7 @@ void GCanvas2DContextAndroid::RestoreGLAfterCopyFrame() {
 }
 
 
-void GCanvas2DContextAndroid::DrawFrame(bool clear) {
+void WmCanvas2DContextAndroid::DrawFrame(bool clear) {
     SendVertexBufferToGPU();
     if (clear) {
         ClearGeometryDataBuffers();
@@ -402,11 +402,11 @@ void GCanvas2DContextAndroid::DrawFrame(bool clear) {
 }
 
 
-void GCanvas2DContextAndroid::SetShaderManager(GShaderManager* shaderManager) {
+void WmCanvas2DContextAndroid::SetShaderManager(GShaderManager* shaderManager) {
     this->mShaderManager = shaderManager;
 }
 
 
-GShaderManager *GCanvas2DContextAndroid::GetShaderManager() {
+GShaderManager *WmCanvas2DContextAndroid::GetShaderManager() {
     return this->mShaderManager;
 }

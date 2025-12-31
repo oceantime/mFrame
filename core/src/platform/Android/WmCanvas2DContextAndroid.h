@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GCANVAS2DCONTEXTANDROID_H
-#define GCANVAS_GCANVAS2DCONTEXTANDROID_H
+#ifndef WMCANVAS_WMCANVAS2DCONTEXTANDROID_H
+#define WMCANVAS_WMCANVAS2DCONTEXTANDROID_H
 
 
 #include "WmCanvas2dContext.h"
@@ -22,19 +22,19 @@
 
 
 
-class GCanvas2DContextAndroid : public GCanvasContext {
+class WmCanvas2DContextAndroid : public GCanvasContext {
 
 
 public:
 
 
-    API_EXPORT  GCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config);
+    API_EXPORT  WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config);
 
 
-    API_EXPORT GCanvas2DContextAndroid(uint32_t width, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks);
+    API_EXPORT WmCanvas2DContextAndroid(uint32_t width, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks);
 
 
-    virtual ~GCanvas2DContextAndroid();
+    virtual ~WmCanvas2DContextAndroid();
 
 
     void InitFBO() override;
@@ -119,4 +119,4 @@ private:
 };
 
 
-#endif //GCANVAS_GCANVAS2DCONTEXTANDROID_H
+#endif //WMCANVAS_WMCANVAS2DCONTEXTANDROID_H

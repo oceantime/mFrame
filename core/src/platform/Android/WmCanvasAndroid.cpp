@@ -19,13 +19,13 @@ GCanvasAndroid::GCanvasAndroid(std::string contextId, const GCanvasConfig& confi
 
 
 void GCanvasAndroid::CreateContext() {
-    mCanvasContext = new GCanvas2DContextAndroid(0, 0, mConfig, mHooks);
+    mCanvasContext = new WmCanvas2DContextAndroid(0, 0, mConfig, mHooks);
     mCanvasContext->mContextId = this->mContextId;
 }
 
 
-GCanvas2DContextAndroid* GCanvasAndroid::GetCanvasContextAndroid() {
-    return (GCanvas2DContextAndroid*)mCanvasContext;
+WmCanvas2DContextAndroid* GCanvasAndroid::GetCanvasContextAndroid() {
+    return (WmCanvas2DContextAndroid*)mCanvasContext;
 }
 
 

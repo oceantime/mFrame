@@ -42,7 +42,7 @@ GCanvasWeex::~GCanvasWeex() {
 
 void GCanvasWeex::CreateContext() {
 #ifdef ANDROID
-    mCanvasContext = new GCanvas2DContextAndroid(0, 0, mConfig);
+    mCanvasContext = new WmCanvas2DContextAndroid(0, 0, mConfig);
 #else
     mCanvasContext = new GCanvasContext(0, 0, mConfig);
 #endif
@@ -312,7 +312,7 @@ void GCanvasWeex::UsePatternRenderPipeline(int textureListId, int textureWidth, 
 #endif
 
 #ifdef ANDROID
-    mCanvasContext->mCurrentState->mShader = ((GCanvas2DContextAndroid *) mCanvasContext)->GetShaderManager()->programForKey(
+    mCanvasContext->mCurrentState->mShader = ((WmCanvas2DContextAndroid *) mCanvasContext)->GetShaderManager()->programForKey(
             "PATTERN");
 #endif
 
@@ -354,7 +354,7 @@ void GCanvasWeex::UsePatternRenderPipeline(int textureListId,
 #endif
 
 #ifdef ANDROID
-    mCanvasContext->mCurrentState->mShader = ((GCanvas2DContextAndroid *) mCanvasContext)->GetShaderManager()->programForKey(
+    mCanvasContext->mCurrentState->mShader = ((WmCanvas2DContextAndroid *) mCanvasContext)->GetShaderManager()->programForKey(
             "PATTERN");
 #endif
 

@@ -27,7 +27,7 @@ public:
     void CreateContext() override;
 
 
-    API_EXPORT GCanvas2DContextAndroid* GetCanvasContextAndroid();
+    API_EXPORT WmCanvas2DContextAndroid* GetCanvasContextAndroid();
 
 
 };
