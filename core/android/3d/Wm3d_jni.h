@@ -4,8 +4,8 @@
 
 
 
-#ifndef G_CANVAS_G3D_JNI_H
-#define G_CANVAS_G3D_JNI_H
+#ifndef WM_CANVAS_G3D_JNI_H
+#define WM_CANVAS_G3D_JNI_H
 
 #include <jni.h>
 
@@ -31,4 +31,4 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onRenderExit(JNIEnv *env,
                                                                   jstring key);
 }
 
-#endif //G_CANVAS_G3D_JNI_H
+#endif //WM_CANVAS_G3D_JNI_H
