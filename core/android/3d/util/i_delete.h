@@ -2,10 +2,10 @@
 // Created by yuantong on 2017/8/2.
 //
 
-#ifndef G_CANVAS_I_DELETE_H
-#define G_CANVAS_I_DELETE_H
+#ifndef WM_CANVAS_I_DELETE_H
+#define WM_CANVAS_I_DELETE_H
 namespace wm {
-    namespace g_engine {
+    namespace wm_engine {
         namespace WmCanvas {
             class IDelete {
             public:
@@ -20,4 +20,4 @@ namespace wm {
         }
     }
 }
-#endif //G_CANVAS_I_DELETE_H
+#endif //WM_CANVAS_I_DELETE_H

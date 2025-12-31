@@ -6,7 +6,7 @@
 #define G_CANVAS_REF_COUNT_H
 
 namespace wm {
-    namespace g_engine {
+    namespace wm_engine {
         namespace WmCanvas {
             class RefCount {
             public:

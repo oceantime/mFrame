@@ -9,7 +9,7 @@
 #include "ref_count.h"
 
 namespace wm {
-    namespace g_engine {
+    namespace wm_engine {
         namespace WmCanvas {
             template<typename T>
             class AutoPtr final {
