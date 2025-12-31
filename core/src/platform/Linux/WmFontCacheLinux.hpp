@@ -15,40 +15,40 @@
 #include <queue>
 #include <string>
 
-class GFont;
+class WmFont;
 namespace wmcanvas
 {
-    class GFontStyle;
+    class WmFontStyle;
 }
 
 struct GFontSet
 {
-    GFont *font = nullptr;
-    GFont *fallbackFont = nullptr;
+    WmFont *font = nullptr;
+    WmFont *fallbackFont = nullptr;
 };
 
-class GFontManager;
+class WmFontManager;
 
 class GFontCache
 {
 public:
-    GFontCache(GFontManager &fontManager);
+    GFontCache(WmFontManager &fontManager);
 
     ~GFontCache();
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
-    GFont *GetOrCreateFont(wmcanvas::GFontStyle *fontStyle, wchar_t charCode, const float size);
+    WmFont *GetOrCreateFont(wmcanvas::WmFontStyle *fontStyle, wchar_t charCode, const float size);
 
 #else
-    GFont *GetOrCreateFont(const std::string &key);
+    WmFont *GetOrCreateFont(const std::string &key);
 #endif
 
     void ReadyToRemoveCacheForFonts(
-        const std::map<GFont *, std::vector<wchar_t>> &fontsToBeDeleted, bool isStroke);
+        const std::map<WmFont *, std::vector<wchar_t>> &fontsToBeDeleted, bool isStroke);
 
     void RemoveCacheForFonts(
-        const std::map<GFont *, std::vector<wchar_t>> &fontsToBeDeleted, bool isStroke);
+        const std::map<WmFont *, std::vector<wchar_t>> &fontsToBeDeleted, bool isStroke);
 
 private:
     void Clear();
@@ -62,8 +62,8 @@ private:
     char *TryDefaultFallbackFont(const wchar_t charCode, const float size,
                                  const char *currentFontLocation);
 
-    char *TryOtherFallbackFont(GCanvasContext *context, const wchar_t charCode, const float size,
-                               const char *currentFontLocation, wmcanvas::GFontStyle *fontStyle);
+    char *TryOtherFallbackFont(WmCanvasContext *context, const wchar_t charCode, const float size,
+                               const char *currentFontLocation, wmcanvas::WmFontStyle *fontStyle);
 
     char *TrySpecFont(const wchar_t charCode, const float size,
                       const char *currentFontLocation,
@@ -73,9 +73,9 @@ private:
                               const std::string &filename);
 
 private:
-    GFontManager &mFontManager;
+    WmFontManager &mFontManager;
     std::map<std::string, GFontSet> mFontCache;
-    std::queue<std::map<GFont *, std::vector<wchar_t>>> mCachedPages;
+    std::queue<std::map<WmFont *, std::vector<wchar_t>>> mCachedPages;
     FT_Library mFtLibrary = nullptr;
     bool LazyInitFontLibrary();
 };

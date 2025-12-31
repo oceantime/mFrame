@@ -8,7 +8,7 @@
 */
 
 #import "GFontManagerIOS.h"
-#include "../../gcanvas/GFontManager.h"
+#include "../../gcanvas/WmFontManager.h"
 #include "../../gcanvas/GCanvas2dContext.h"
 #include "../../support/Log.h"
 #include "../../WmCanvas.hpp"
@@ -17,13 +17,13 @@
 #include <assert.h>
 
 
-extern void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, GCanvasContext *context, void* fontContext);
-extern float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::GFontStyle *fontStyle);
-float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::GFontStyle *fontStyle);
+extern void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext *context, void* fontContext);
+extern float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
+float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
 
 
 
-GFontManager* GFontManager::NewInstance()
+WmFontManager* WmFontManager::NewInstance()
 {
     return new GFontManagerIOS();
 }
@@ -45,7 +45,7 @@ GFontManagerIOS::GFontManagerIOS()
     [curFont setTreemap: &mTreemap];
 }
 
-void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, GCanvasContext* context, float scaleX, float scaleY)
+void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext* context, float scaleX, float scaleY)
 {
     if (text == nullptr || text_length == 0)
     {
@@ -57,7 +57,7 @@ void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_len
     iOS_GCanvas_Draw_Text(text, text_length, x, y, isStroke, context, (__bridge void*)curFont);
 }
 
-float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gcanvas::GFontStyle *fontStyle)
+float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
     GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
@@ -65,7 +65,7 @@ float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gc
 }
 
 
-float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength, gcanvas::GFontStyle *fontStyle)
+float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
     GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
@@ -83,17 +83,17 @@ float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength
  * @param x             draw position x
  * @param y             draw position y
  * @param isStroke      isStroke flag
- * @param context       see GCanvasContext
+ * @param context       see WmCanvasContext
  *
  */
-void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, GCanvasContext *context, void* fontContext)
+void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext *context, void* fontContext)
 {
     if (text == nullptr || text_length == 0 || context == nullptr || fontContext == nullptr) {
         return;
     }
     
     GCanvasState *current_state_ = context->GetCurrentState();
-    gcanvas::GFontStyle *fontStyle = current_state_->mFont;
+    gcanvas::WmFontStyle *fontStyle = current_state_->mFont;
     GCVFont *curFont = (__bridge GCVFont*)fontContext;
     [curFont resetWithFontStyle:fontStyle isStroke:isStroke context:context];
     
@@ -112,7 +112,7 @@ void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length,
     [curFont drawString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:context] withLayout:fontLayout withPosition:destPoint context:context];
 }
 
-float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::GFontStyle *fontStyle)
+float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
 {
     if (text == nullptr || text_length == 0 || fontContext == nullptr) {
         return 0;
@@ -128,7 +128,7 @@ float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void*
 }
 
 
-float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::GFontStyle *fontStyle)
+float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
 {
     if (text == nullptr || text_length == 0 || fontContext == nullptr) {
         float *ret = new float[4];

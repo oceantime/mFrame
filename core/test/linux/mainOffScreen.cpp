@@ -14,11 +14,11 @@ const static GLuint renderBufferHeight = 400;
 const static GLuint renderBufferWidth = 400;
 
    
-extern void prepareCases( std::unordered_map< std::string,std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)>>  &testCases);
+extern void prepareCases( std::unordered_map< std::string,std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  WmCanvasContext *mCanvasContext,int width,int height)>>  &testCases);
 
 int main(int argc, char *argv[])
 {
-    std::unordered_map< std::string,std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)>> testCases;
+    std::unordered_map< std::string,std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  WmCanvasContext *mCanvasContext,int width,int height)>> testCases;
 
     prepareCases(testCases);
 

@@ -19,10 +19,10 @@
 class WmCanvas2DContextAndroid;
 
 
-class GFont;
+class WmFont;
 namespace wmcanvas
 {
-    class GFontStyle;
+    class WmFontStyle;
 }
 
 
@@ -34,24 +34,24 @@ struct GFontKeySet {
 
 
 
-class GFontManager;
+class WmFontManager;
 
 class GFontCache
 {
 public:
 
-    GFontCache(GFontManager* fontManager);
+    GFontCache(WmFontManager* fontManager);
 
 
     ~GFontCache();
 
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
-    GFont *GetOrCreateFont(wmcanvas::GFontStyle *fontStyle, wchar_t charCode);
+    WmFont *GetOrCreateFont(wmcanvas::WmFontStyle *fontStyle, wchar_t charCode);
 
 #else
-    GFont *GetOrCreateFont(const std::string &key);
+    WmFont *GetOrCreateFont(const std::string &key);
 #endif
 
 
@@ -79,18 +79,18 @@ private:
     char *TryFontFile(const wchar_t charCode, const char *fileFullPath, const char* fileName);
 
 
-    GFont* LoadAndSaveFont(const char* fontFileName);
+    WmFont* LoadAndSaveFont(const char* fontFileName);
 
 
 private:
 
-    GFontManager* mFontManager;
+    WmFontManager* mFontManager;
 
     FT_Library mFtLibrary = nullptr;
 
     std::unordered_map<std::string, GFontKeySet> mFontRefMap;
 
-    std::unordered_map<std::string, GFont*> mFontMap;
+    std::unordered_map<std::string, WmFont*> mFontMap;
 
 };
 

@@ -13,21 +13,21 @@
 #include "export.h"
 #include "WmPoint.h"
 
-#define GColorTransparent       GColorRGBA({0,0,0,0})
-#define GColorTransparentWhite  GColorRGBA({1.0,1.0,1.0,0})
-#define GColorWhite             GColorRGBA({1.0,1.0,1.0,1.0})
+#define GColorTransparent       WmColorRGBA({0,0,0,0})
+#define GColorTransparentWhite  WmColorRGBA({1.0,1.0,1.0,0})
+#define GColorWhite             WmColorRGBA({1.0,1.0,1.0,1.0})
 namespace wmcanvas{
-    API_EXPORT GColorRGBA StrValueToColorRGBA(const char *value);
+    API_EXPORT WmColorRGBA StrValueToColorRGBA(const char *value);
 
 
-    API_EXPORT GColorRGBA StrValueToColorRGBALegacy(const char *value);
+    API_EXPORT WmColorRGBA StrValueToColorRGBALegacy(const char *value);
 
 
 
-    API_EXPORT GColorRGBA IntValueToColorRGBA(int value);
+    API_EXPORT WmColorRGBA IntValueToColorRGBA(int value);
 
 
-    API_EXPORT std::string ColorToString(const GColorRGBA &color);
+    API_EXPORT std::string ColorToString(const WmColorRGBA &color);
 }
 
 

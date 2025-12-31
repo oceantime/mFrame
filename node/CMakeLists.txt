@@ -51,12 +51,12 @@ set(SOURCE_FILES
         ${CORE_DIR}src/gcanvas/GCanvas2dContext.cpp
         ${CORE_DIR}src/gcanvas/GCanvasState.cpp
         ${CORE_DIR}src/gcanvas/GConvert.cpp
-        ${CORE_DIR}src/gcanvas/GFontManager.cpp
-        ${CORE_DIR}src/gcanvas/GFontStyle.cpp
+        ${CORE_DIR}src/gcanvas/WmFontManager.cpp
+        ${CORE_DIR}src/gcanvas/WmFontStyle.cpp
         ${CORE_DIR}src/gcanvas/GPath2D.cpp
         ${CORE_DIR}src/gcanvas/GL/GFrameBufferObject.cpp
-        ${CORE_DIR}src/gcanvas/GGlyphCache.cpp
-        ${CORE_DIR}src/gcanvas/GPath.cpp
+        ${CORE_DIR}src/gcanvas/WmGlyphCache.cpp
+        ${CORE_DIR}src/gcanvas/WmPath.cpp
         ${CORE_DIR}src/gcanvas/GL/GShader.cpp
         ${CORE_DIR}src/gcanvas/GL/GShaderManager.cpp
         ${CORE_DIR}src/gcanvas/GStrSeparator.cpp

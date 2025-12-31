@@ -22,13 +22,13 @@ extern std::string g_shader_cache_path;
 
 
 WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, WmCanvasConfig &config) :
-        GCanvasContext(w, h, config, nullptr) {
+        WmCanvasContext(w, h, config, nullptr) {
     Create();
 }
 
 
 WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, WmCanvasConfig &config, WmCanvasHooks* hooks) :
-        GCanvasContext(w, h, config, hooks) {
+        WmCanvasContext(w, h, config, hooks) {
     Create();
 }
 
@@ -88,12 +88,12 @@ void WmCanvas2DContextAndroid::InitFBO() {
 
 void WmCanvas2DContextAndroid::ClearColorToTransparent()
 {
-    GColorRGBA c = GColorTransparent;
+    WmColorRGBA c = GColorTransparent;
     ClearColor(c);
 }
 
 
-void WmCanvas2DContextAndroid::ClearColor(GColorRGBA& c) {
+void WmCanvas2DContextAndroid::ClearColor(WmColorRGBA& c) {
     glClearColor(c.rgba.r, c.rgba.g, c.rgba.b, c.rgba.a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
@@ -181,7 +181,7 @@ void WmCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
         ClearScreen();
     }
 
-    mFboMap.erase(GCanvasContext::DefaultFboName);
+    mFboMap.erase(WmCanvasContext::DefaultFboName);
     InitFBO();
     BindFBO();
 }
@@ -257,7 +257,7 @@ void WmCanvas2DContextAndroid::CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferO
 
     ResetGLBeforeCopyFrame(destFbo.mWidth, destFbo.mHeight);
 
-    GColorRGBA color = GColorWhite;
+    WmColorRGBA color = GColorWhite;
     glBindTexture(GL_TEXTURE_2D, srcFbo.mFboTexture.GetTextureID());
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);
     glDrawArrays(GL_TRIANGLES, 0, mVertexBufferIndex);
@@ -305,7 +305,7 @@ void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
     ResetGLBeforeCopyFrame(width, height);
     // 绑定图像纹理
     GLuint glID = BindImage(rgbaData, GL_RGBA, (GLuint) imgWidth, (GLuint) imgHeight);
-    GColorRGBA color = GColorWhite;
+    WmColorRGBA color = GColorWhite;
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);
     mCurrentState->mShader->SetTransform(GTransformIdentity);
     glDrawArrays(GL_TRIANGLES, 0, mVertexBufferIndex);
@@ -342,7 +342,7 @@ DrawFBO(std::string fboName, WmCompositeOperation compositeOp, float sx, float s
 
     DoSetGlobalCompositeOperation(compositeOp, compositeOp);
 
-    GColorRGBA color = GColorWhite;
+    WmColorRGBA color = GColorWhite;
     mCurrentState->mShader->SetOverideTextureColor(0);
     mCurrentState->mShader->SetHasTexture(1);
     fbo.mFboTexture.Bind();
@@ -365,7 +365,7 @@ DrawFBO(std::string fboName, WmCompositeOperation compositeOp, float sx, float s
 
 void WmCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
     Save();
-    GColorRGBA c = mClearColor;
+    WmColorRGBA c = mClearColor;
     SetClearColor(GColorTransparent);
     ClearScreen();
     SetClearColor(c);

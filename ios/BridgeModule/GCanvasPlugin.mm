@@ -22,7 +22,7 @@
 
 @property(nonatomic, strong) NSString *componentId;
 @property(nonatomic, assign) gcanvas::GCanvasWeex *gcanvas;
-@property(nonatomic, assign) GCanvasContext *context;
+@property(nonatomic, assign) WmCanvasContext *context;
 @property(nonatomic, strong) NSMutableArray *renderCommandArray;
 @property(nonatomic, strong) NSMutableDictionary *textureDict;
 
@@ -95,7 +95,7 @@
         CGFloat r, g, b, a;
         BOOL ret = [color getRed:&r green:&g blue:&b alpha:&a];
         if( ret ){
-            GColorRGBA c;
+            WmColorRGBA c;
             c.rgba.r = r;
             c.rgba.g = g;
             c.rgba.b = b;
@@ -196,7 +196,7 @@
     
     self.gcanvas->SetContextType((GCVContextTypeWebGL == contextType ) ? GCVContextTypeWebGL : GCVContextType2D);
     
-    //register function for GFont and WebGL texImage2D && texSubImage2D.
+    //register function for WmFont and WebGL texImage2D && texSubImage2D.
     if( self.gcanvas->GetContextType() != 0 ){
         self.context->SetGWebGLTxtImage2DFunc(iOS_GCanvas_GWebGLTxtImage2D);
         self.context->SetGWebGLTxtSubImage2DFunc(iOS_GCanvas_GWebGLTxtSubImage2D);

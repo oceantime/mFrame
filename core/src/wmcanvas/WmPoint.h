@@ -30,15 +30,15 @@ typedef union
         GLfloat r, g, b, a;
     } rgba;
     GLfloat components[4];
-} GColorRGBA;
+} WmColorRGBA;
 
 
 typedef struct
 {
     GPoint pos;
     GPoint uv;
-    GColorRGBA color;
-} GVertex;
+    WmColorRGBA color;
+} WmVertex;
 
 static inline GPoint PointMake(float x, float y)
 {
@@ -78,7 +78,7 @@ static inline GPoint PointNormalize(GPoint v)
     return v;
 }
 
-struct GRectf
+struct WmRectf
 {
     bool isTransformed = false; //坐标是否经过transform变换
     GPoint leftTop = {0, 0};
@@ -103,9 +103,9 @@ struct GRectf
     }
 };
 
-inline GRectf operator *(const GRectf &rect, float factor )
+inline WmRectf operator *(const WmRectf &rect, float factor )
 {
-    GRectf result = rect;
+    WmRectf result = rect;
     result.leftTop.x *= factor;
     result.leftTop.y *= factor;
     result.bottomRight.x *= factor;

@@ -42,10 +42,10 @@ WmBlendOperationFuncs WmCompositeOperationFuncs(int index)
     return funcs[index];
 }
 
-GColorRGBA BlendColor(GCanvasContext *context, GColorRGBA color)
+WmColorRGBA BlendColor(WmCanvasContext *context, WmColorRGBA color)
 {
     float alpha = context->GlobalAlpha() * color.rgba.a;
-    GColorRGBA c;
+    WmColorRGBA c;
     c.rgba.r = color.rgba.r * alpha;
     c.rgba.g = color.rgba.g * alpha;
     c.rgba.b = color.rgba.b * alpha;
@@ -53,23 +53,23 @@ GColorRGBA BlendColor(GCanvasContext *context, GColorRGBA color)
     return c;
 }
 
-GColorRGBA BlendWhiteColor(GCanvasContext *context)
+WmColorRGBA BlendWhiteColor(WmCanvasContext *context)
 {
-    GColorRGBA c = {1, 1, 1, 1};
+    WmColorRGBA c = {1, 1, 1, 1};
     return BlendColor(context, c);
 }
 
-GColorRGBA BlendFillColor(GCanvasContext *context)
+WmColorRGBA BlendFillColor(WmCanvasContext *context)
 {
     return BlendColor(context, context->FillStyle());
 }
 
-GColorRGBA BlendStrokeColor(GCanvasContext *context)
+WmColorRGBA BlendStrokeColor(WmCanvasContext *context)
 {
     return BlendColor(context, context->StrokeStyle());
 }
 
-void GCanvasContext::FillText(const unsigned short *text, unsigned int text_length,
+void WmCanvasContext::FillText(const unsigned short *text, unsigned int text_length,
                               float x, float y, bool isStroke, float scaleWidth)
 {
     if (mFontManager == nullptr)
@@ -81,7 +81,7 @@ void GCanvasContext::FillText(const unsigned short *text, unsigned int text_leng
 
     if (mCurrentState->mFont == nullptr)
     {
-        mCurrentState->mFont = new GFontStyle(nullptr, mDevicePixelRatio);
+        mCurrentState->mFont = new WmFontStyle(nullptr, mDevicePixelRatio);
     }
     if (mCurrentState->mShader)
     {
@@ -105,7 +105,7 @@ void GCanvasContext::FillText(const unsigned short *text, unsigned int text_leng
     }
 }
 
-GCanvasContext::GCanvasContext(short w, short h, const WmCanvasConfig &config, WmCanvasHooks *hooks) : mIsFboSupported(true), mWidth(w), mHeight(h), mIsContextReady(false),
+WmCanvasContext::WmCanvasContext(short w, short h, const WmCanvasConfig &config, WmCanvasHooks *hooks) : mIsFboSupported(true), mWidth(w), mHeight(h), mIsContextReady(false),
                                                                                                      mHasClipRegion(false), mHiQuality(false), mVertexBufferIndex(0),
                                                                                                      mSaveShader(nullptr),
                                                                                                      mClearColor(GColorTransparentWhite),
@@ -128,16 +128,16 @@ GCanvasContext::GCanvasContext(short w, short h, const WmCanvasConfig &config, W
 
     if (!mConfig.sharedFont)
     {
-        mFontManager = GFontManager::NewInstance();
+        mFontManager = WmFontManager::NewInstance();
     }
 }
 
-bool GCanvasContext::IsUseFbo()
+bool WmCanvasContext::IsUseFbo()
 {
     return mConfig.useFbo;
 }
 
-float GCanvasContext::GetCanvasDimensionWidthScale()
+float WmCanvasContext::GetCanvasDimensionWidthScale()
 {
     if (mWidth <= 0)
     {
@@ -150,7 +150,7 @@ float GCanvasContext::GetCanvasDimensionWidthScale()
     }
 }
 
-float GCanvasContext::GetCanvasDimensionHeightScale()
+float WmCanvasContext::GetCanvasDimensionHeightScale()
 {
     if (mHeight <= 0)
     {
@@ -163,7 +163,7 @@ float GCanvasContext::GetCanvasDimensionHeightScale()
     }
 }
 
-float GCanvasContext::GetCurrentScaleX()
+float WmCanvasContext::GetCurrentScaleX()
 {
     int w = GetCanvasWidth();
     if (mCurrentState != nullptr && w > 0)
@@ -176,7 +176,7 @@ float GCanvasContext::GetCurrentScaleX()
     }
 }
 
-float GCanvasContext::GetCurrentScaleY()
+float WmCanvasContext::GetCurrentScaleY()
 {
     int h = GetCanvasHeight();
     if (mCurrentState != nullptr && h > 0)
@@ -189,23 +189,23 @@ float GCanvasContext::GetCurrentScaleY()
     }
 }
 
-void GCanvasContext::SetDevicePixelRatio(const float ratio)
+void WmCanvasContext::SetDevicePixelRatio(const float ratio)
 {
     mDevicePixelRatio = ratio;
     UpdateProjectTransform();
 }
 
-void GCanvasContext::SetFontManager(GFontManager *fontManager)
+void WmCanvasContext::SetFontManager(WmFontManager *fontManager)
 {
     mFontManager = fontManager;
 }
 
-float GCanvasContext::GetDevicePixelRatio()
+float WmCanvasContext::GetDevicePixelRatio()
 {
     return mDevicePixelRatio;
 }
 
-void GCanvasContext::SetCanvasDimension(const int w, const int h, bool resetStatus)
+void WmCanvasContext::SetCanvasDimension(const int w, const int h, bool resetStatus)
 {
     mCanvasWidth = w;
     mCanvasHeight = h;
@@ -239,27 +239,27 @@ void GCanvasContext::SetCanvasDimension(const int w, const int h, bool resetStat
     }
 }
 
-int GCanvasContext::GetCanvasWidth()
+int WmCanvasContext::GetCanvasWidth()
 {
     return mCanvasWidth <= 0 ? mWidth : mCanvasWidth;
 }
 
-int GCanvasContext::GetCanvasHeight()
+int WmCanvasContext::GetCanvasHeight()
 {
     return mCanvasHeight <= 0 ? mHeight : mCanvasHeight;
 }
 
-short GCanvasContext::GetWidth() const
+short WmCanvasContext::GetWidth() const
 {
     return mWidth;
 }
 
-short GCanvasContext::GetHeight() const
+short WmCanvasContext::GetHeight() const
 {
     return mHeight;
 }
 
-void GCanvasContext::UpdateProjectTransform()
+void WmCanvasContext::UpdateProjectTransform()
 {
     int w = GetCanvasWidth();
     int h = GetCanvasHeight();
@@ -271,7 +271,7 @@ void GCanvasContext::UpdateProjectTransform()
     mProjectTransform = CalculateProjectTransform(w, h);
 }
 
-GTransform GCanvasContext::CalculateProjectTransform(int w, int h, bool needFlipY)
+GTransform WmCanvasContext::CalculateProjectTransform(int w, int h, bool needFlipY)
 {
     GTransform t = GTransformIdentity;
     if (mConfig.flip || needFlipY)
@@ -289,7 +289,7 @@ GTransform GCanvasContext::CalculateProjectTransform(int w, int h, bool needFlip
     return t;
 }
 
-void GCanvasContext::InitFBO()
+void WmCanvasContext::InitFBO()
 {
     if (0 != mContextType)
         return;
@@ -314,32 +314,32 @@ void GCanvasContext::InitFBO()
     }
 }
 
-void GCanvasContext::BindFBO()
+void WmCanvasContext::BindFBO()
 {
     mFboMap[DefaultFboName].BindFBO();
 }
 
-void GCanvasContext::UnbindFBO()
+void WmCanvasContext::UnbindFBO()
 {
     mFboMap[DefaultFboName].UnbindFBO();
 }
 
-long GCanvasContext::DrawCallCount()
+long WmCanvasContext::DrawCallCount()
 {
     return mDrawCallCount;
 }
 
-void GCanvasContext::ClearDrawCallCount()
+void WmCanvasContext::ClearDrawCallCount()
 {
     mDrawCallCount = 0;
 }
 
-GTexture *GCanvasContext::GetFboTexture()
+GTexture *WmCanvasContext::GetFboTexture()
 {
     return &mFboMap[DefaultFboName].mFboTexture;
 }
 
-GCanvasContext::~GCanvasContext()
+WmCanvasContext::~WmCanvasContext()
 {
     if (!mConfig.sharedFont)
     {
@@ -348,7 +348,7 @@ GCanvasContext::~GCanvasContext()
     }
 }
 
-bool GCanvasContext::InitializeGLEnvironment()
+bool WmCanvasContext::InitializeGLEnvironment()
 {
     if (0 != mContextType)
     { // only 2D need to init
@@ -387,7 +387,7 @@ bool GCanvasContext::InitializeGLEnvironment()
     return true;
 }
 
-void GCanvasContext::CheckContextStatus()
+void WmCanvasContext::CheckContextStatus()
 {
     // size
     if (mWidth == 0 || mHeight == 0)
@@ -403,7 +403,7 @@ void GCanvasContext::CheckContextStatus()
     mIsContextReady = true;
 }
 
-bool GCanvasContext::InitializeGLShader()
+bool WmCanvasContext::InitializeGLShader()
 {
     UsePatternRenderPipeline();
     GShader::TraceErrorIfHas(FindShader("PATTERN"), mHooks, mContextId);
@@ -464,7 +464,7 @@ bool GCanvasContext::InitializeGLShader()
     return true;
 }
 
-void GCanvasContext::ClearGeometryDataBuffers()
+void WmCanvasContext::ClearGeometryDataBuffers()
 {
     mPath.Reset();
     mVertexBufferIndex = 0;
@@ -475,7 +475,7 @@ void GCanvasContext::ClearGeometryDataBuffers()
  * states include: fillStyle/strokeStyle,lineJoin/miter,textAlign,font style,
  * shadow, globalCompositeOperation,clip, transform
 */
-void GCanvasContext::ResetStateStack()
+void WmCanvasContext::ResetStateStack()
 {
     mPath.Reset();
 
@@ -499,7 +499,7 @@ void GCanvasContext::ResetStateStack()
     SetClipFlag(false);
 }
 
-void GCanvasContext::BindVertexBuffer()
+void WmCanvasContext::BindVertexBuffer()
 {
     BindPositionVertexBuffer();
 
@@ -507,19 +507,19 @@ void GCanvasContext::BindVertexBuffer()
     {
         glEnableVertexAttribArray((GLuint)mCurrentState->mShader->GetTexcoordSlot());
         glVertexAttribPointer((GLuint)mCurrentState->mShader->GetTexcoordSlot(), 2,
-                              GL_FLOAT, GL_FALSE, sizeof(GVertex),
+                              GL_FLOAT, GL_FALSE, sizeof(WmVertex),
                               ((float *)CanvasVertexBuffer) + 2);
     }
     if (mCurrentState->mShader && mCurrentState->mShader->GetColorSlot() >= 0)
     {
         glEnableVertexAttribArray((GLuint)mCurrentState->mShader->GetColorSlot());
         glVertexAttribPointer((GLuint)mCurrentState->mShader->GetColorSlot(), 4,
-                              GL_FLOAT, GL_FALSE, sizeof(GVertex),
+                              GL_FLOAT, GL_FALSE, sizeof(WmVertex),
                               ((float *)CanvasVertexBuffer) + 4);
     }
 }
 
-GLuint GCanvasContext::PositionSlot()
+GLuint WmCanvasContext::PositionSlot()
 {
     if (mCurrentState->mShader)
     {
@@ -528,18 +528,18 @@ GLuint GCanvasContext::PositionSlot()
     return -1;
 }
 
-void GCanvasContext::BindPositionVertexBuffer()
+void WmCanvasContext::BindPositionVertexBuffer()
 {
     if (mCurrentState->mShader && mCurrentState->mShader->GetPositionSlot() >= 0)
     {
         glEnableVertexAttribArray((GLuint)mCurrentState->mShader->GetPositionSlot());
         glVertexAttribPointer((GLuint)mCurrentState->mShader->GetPositionSlot(), 2,
-                              GL_FLOAT, GL_FALSE, sizeof(GVertex),
+                              GL_FLOAT, GL_FALSE, sizeof(WmVertex),
                               CanvasVertexBuffer);
     }
 }
 
-void GCanvasContext::SetTexture(int textureId)
+void WmCanvasContext::SetTexture(int textureId)
 {
     // LOG_E("SetTexture %i, current=%i", textureId, mCurrentState->mTextureId);
     if (mCurrentState->mTextureId != textureId)
@@ -551,7 +551,7 @@ void GCanvasContext::SetTexture(int textureId)
     }
 }
 
-void GCanvasContext::SendVertexBufferToGPU(const GLenum geometry_type)
+void WmCanvasContext::SendVertexBufferToGPU(const GLenum geometry_type)
 {
     if (mVertexBufferIndex == 0)
     {
@@ -584,7 +584,7 @@ void GCanvasContext::SendVertexBufferToGPU(const GLenum geometry_type)
     mVertexBufferIndex = 0;
 }
 
-bool GCanvasContext::NeedSendVertexBufferToGPUWithSize(size_t size)
+bool WmCanvasContext::NeedSendVertexBufferToGPUWithSize(size_t size)
 {
     if (mVertexBufferIndex >= GCANVAS_VERTEX_BUFFER_SIZE - size)
     {
@@ -594,7 +594,7 @@ bool GCanvasContext::NeedSendVertexBufferToGPUWithSize(size_t size)
     return false;
 }
 
-void GCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
+void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
 {
     if (mVertexBufferIndex == 0)
     {
@@ -652,11 +652,11 @@ void GCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
     mVertexBufferIndex = 0;
 }
 
-void GCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, GColorRGBA color,
-                                  GTransform transform, std::vector<GVertex> *vec)
+void WmCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA color,
+                                  GTransform transform, std::vector<WmVertex> *vec)
 {
-    GVertex *vb = NULL;
-    GVertex vertex[3];
+    WmVertex *vb = NULL;
+    WmVertex vertex[3];
     if (vec)
     {
         vb = vertex;
@@ -698,7 +698,7 @@ void GCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, GColorRGBA co
     }
 }
 
-void GCanvasContext::SaveVertexShaderProperty(int offset, int count)
+void WmCanvasContext::SaveVertexShaderProperty(int offset, int count)
 {
     // comment out for unvery optim
     //    std::string shaderType = mCurrentState->mShader->GetName();
@@ -731,9 +731,9 @@ void GCanvasContext::SaveVertexShaderProperty(int offset, int count)
     //    }
 }
 
-void GCanvasContext::DrawTexture(int textureId, float *vertexList)
+void WmCanvasContext::DrawTexture(int textureId, float *vertexList)
 {
-    GColorRGBA color = BlendWhiteColor(this);
+    WmColorRGBA color = BlendWhiteColor(this);
     SetTexture(textureId);
 
     NeedSendVertexBufferToGPUWithSize(3);
@@ -746,7 +746,7 @@ void GCanvasContext::DrawTexture(int textureId, float *vertexList)
     GPoint t2 = PointMake(vertexList[6], vertexList[7]);
     GPoint t3 = PointMake(vertexList[10], vertexList[11]);
 
-    GVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
+    WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p1;
     vb[0].uv = t1;
     vb[1].pos = p2;
@@ -760,15 +760,15 @@ void GCanvasContext::DrawTexture(int textureId, float *vertexList)
     SaveVertexShaderProperty(mVertexBufferIndex - 3, 3);
 }
 
-void GCanvasContext::DrawTextureArray(int textureId, int count, float *vertexList, float *texList)
+void WmCanvasContext::DrawTextureArray(int textureId, int count, float *vertexList, float *texList)
 {
-    GColorRGBA color = BlendWhiteColor(this);
+    WmColorRGBA color = BlendWhiteColor(this);
     SetTexture(textureId);
 
     NeedSendVertexBufferToGPUWithSize(count);
 
     // max size
-    GVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
+    WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     for (int i = 0; i < count; i++)
     {
         vb[i].pos.x = vertexList[i * 2];
@@ -784,11 +784,11 @@ void GCanvasContext::DrawTextureArray(int textureId, int count, float *vertexLis
     SaveVertexShaderProperty(mVertexBufferIndex - count, count);
 }
 
-void GCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
-                              GColorRGBA color, GTransform transform, std::vector<GVertex> *vec)
+void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
+                              WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec)
 {
-    GVertex *vb = NULL;
-    GVertex vertex[6];
+    WmVertex *vb = NULL;
+    WmVertex vertex[6];
     if (vec)
     {
         vb = vertex;
@@ -835,21 +835,21 @@ void GCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
     }
 }
 
-void GCanvasContext::PushRectangle(float x, float y, float w, float h,
+void WmCanvasContext::PushRectangle(float x, float y, float w, float h,
                                    float tx, float ty, float tw, float th,
-                                   GColorRGBA color, GTransform transform, bool flipY,
-                                   std::vector<GVertex> *vec)
+                                   WmColorRGBA color, GTransform transform, bool flipY,
+                                   std::vector<WmVertex> *vec)
 {
     PushRectangleFormat(x, y, w, h, tx, ty, tw, th, color, transform, flipY, vec, false);
 }
 
-void GCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
+void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
                                          float tx, float ty, float tw, float th,
-                                         GColorRGBA color, GTransform transform, bool flipY,
-                                         std::vector<GVertex> *vec, bool formatIntVertex)
+                                         WmColorRGBA color, GTransform transform, bool flipY,
+                                         std::vector<WmVertex> *vec, bool formatIntVertex)
 {
-    GVertex *vb = NULL;
-    GVertex vertex[6];
+    WmVertex *vb = NULL;
+    WmVertex vertex[6];
     if (vec)
     {
         // push to std::vector
@@ -929,8 +929,8 @@ void GCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
     }
 }
 
-void GCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float h,
-                                               float tx, float ty, float tw, float th, GColorRGBA color,
+void WmCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float h,
+                                               float tx, float ty, float tw, float th, WmColorRGBA color,
                                                GTransform transform, bool flipY)
 {
     NeedSendVertexBufferToGPUWithSize(6);
@@ -957,7 +957,7 @@ void GCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float 
     GPoint t21 = PointMake(tx + tw, ty);
     GPoint t12 = PointMake(tx, ty + th);
     GPoint t22 = PointMake(tx + tw, ty + th);
-    GVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
+    WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p11;
     vb[0].uv = t11;
     vb[1].pos = p21;
@@ -979,9 +979,9 @@ void GCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float 
     SaveVertexShaderProperty(mVertexBufferIndex - 6, 6);
 }
 
-void GCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
+void WmCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
                                           float tx, float ty, float tw, float th,
-                                          GColorRGBA color)
+                                          WmColorRGBA color)
 {
     NeedSendVertexBufferToGPUWithSize(6);
 
@@ -995,7 +995,7 @@ void GCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
     GPoint t12 = PointMake(tx, ty);
     GPoint t22 = PointMake(tx + tw, ty);
 
-    GVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
+    WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p11;
     vb[0].uv = t11;
     vb[1].pos = p21;
@@ -1020,8 +1020,8 @@ void GCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
 /**
  * deprecated
  */
-void GCanvasContext::PushPoints(const std::vector<GPoint> &points,
-                                GColorRGBA color)
+void WmCanvasContext::PushPoints(const std::vector<GPoint> &points,
+                                WmColorRGBA color)
 {
     GPoint uv = PointMake(0, 0);
     for (int i = 0; i + 2 < (int)points.size(); i += 3)
@@ -1037,7 +1037,7 @@ void GCanvasContext::PushPoints(const std::vector<GPoint> &points,
     }
 }
 
-void GCanvasContext::PushVertexs(const std::vector<GVertex> &vertexs)
+void WmCanvasContext::PushVertexs(const std::vector<WmVertex> &vertexs)
 {
     for (int i = 0; i + 2 < (int)vertexs.size(); i += 3)
     {
@@ -1054,7 +1054,7 @@ void GCanvasContext::PushVertexs(const std::vector<GVertex> &vertexs)
     }
 }
 
-void GCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, GColorRGBA color)
+void WmCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, WmColorRGBA color)
 {
     GPoint uv = PointMake(0, 0);
     GPoint head = points[0];
@@ -1103,7 +1103,7 @@ void GCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, GC
 }
 
 #ifdef WMCANVAS
-void GCanvasContext::ApplyTransform(float m11, float m12, float m21, float m22,
+void WmCanvasContext::ApplyTransform(float m11, float m12, float m21, float m22,
                                     float dx, float dy)
 {
     mCurrentState->mTransform = GTransformConcat(
@@ -1111,19 +1111,19 @@ void GCanvasContext::ApplyTransform(float m11, float m12, float m21, float m22,
     SetTransformOfShader(mCurrentState->mTransform);
 }
 
-void GCanvasContext::ApplyTransform(GTransform t)
+void WmCanvasContext::ApplyTransform(GTransform t)
 {
     mCurrentState->mTransform = GTransformConcat(mProjectTransform, t);
     SetTransformOfShader(mCurrentState->mTransform);
 }
 #endif
 
-GShaderManager *GCanvasContext::GetShaderManager()
+GShaderManager *WmCanvasContext::GetShaderManager()
 {
     return GShaderManager::getSingleton();
 }
 
-GShader *GCanvasContext::FindShader(const char *name)
+GShader *WmCanvasContext::FindShader(const char *name)
 {
     GShaderManager *s = GetShaderManager();
     if (s == nullptr)
@@ -1136,7 +1136,7 @@ GShader *GCanvasContext::FindShader(const char *name)
     }
 }
 
-void GCanvasContext::SetTransformOfShader(const GTransform &trans)
+void WmCanvasContext::SetTransformOfShader(const GTransform &trans)
 {
     // emit the buffered geometry data
     // before the updating of transform matrix
@@ -1163,14 +1163,14 @@ void GCanvasContext::SetTransformOfShader(const GTransform &trans)
     }
 }
 
-WmCompositeOperation GCanvasContext::GlobalCompositeOperation()
+WmCompositeOperation WmCanvasContext::GlobalCompositeOperation()
 {
     return mCurrentState->mGlobalCompositeOp;
 }
 
 #ifdef IOS
 
-void GCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp)
+void WmCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp)
 {
     if (mCurrentState->mGlobalCompositeOp == op)
     {
@@ -1186,7 +1186,7 @@ void GCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCo
 }
 #endif
 
-void GCanvasContext::DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &dest)
+void WmCanvasContext::DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &dest)
 {
     int w = dest.ExpectedWidth();
     int h = dest.ExpectedHeight();
@@ -1207,7 +1207,7 @@ void GCanvasContext::DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &d
     mVertexBufferIndex = 0;
 }
 
-void GCanvasContext::PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offsetX, float offsetY)
+void WmCanvasContext::PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offsetX, float offsetY)
 {
     int w = fbo.ExpectedWidth();
     int h = fbo.ExpectedHeight();
@@ -1220,8 +1220,8 @@ void GCanvasContext::PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offse
     ResetTransform();
 }
 
-void GCanvasContext::DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y, float w, float h,
-                                     GColorRGBA color)
+void WmCanvasContext::DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y, float w, float h,
+                                     WmColorRGBA color)
 {
     SetTexture(fbo.mFboTexture.GetTextureID());
     PushRectangle4TextureArea(x, y, w, h, 0, 0,
@@ -1230,7 +1230,7 @@ void GCanvasContext::DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y, 
                               color, GTransformIdentity, false);
 }
 
-void GCanvasContext::DoDrawBlur(const GRectf &rect, float blur, std::function<void()> draw,
+void WmCanvasContext::DoDrawBlur(const WmRectf &rect, float blur, std::function<void()> draw,
                                 GFrameBufferObjectPtr &inputFbo, GFrameBufferObjectPtr &outputFbo,
                                 float scale)
 {
@@ -1282,10 +1282,10 @@ void GCanvasContext::DoDrawBlur(const GRectf &rect, float blur, std::function<vo
     Restore();
 }
 
-void GCanvasContext::DrawBlur(const GRectf &rect, float blur, std::function<void()> draw,
-                              std::vector<GPath *> *clipPath)
+void WmCanvasContext::DrawBlur(const WmRectf &rect, float blur, std::function<void()> draw,
+                              std::vector<WmPath *> *clipPath)
 {
-    GRectf shadowRect = rect;
+    WmRectf shadowRect = rect;
     shadowRect.Enlarge(blur, blur);
     GFrameBufferObjectPtr shadowFbo, blurFbo;
     // draw content image to shadow fbo
@@ -1296,7 +1296,7 @@ void GCanvasContext::DrawBlur(const GRectf &rect, float blur, std::function<void
     DoDrawShadowFBOToScreen(blurFbo, shadowRect, clipPath);
 }
 
-void GCanvasContext::DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float dpr, const GRectf &rect,
+void WmCanvasContext::DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float dpr, const WmRectf &rect,
                                        std::function<void()> draw)
 {
     // draw to fbo
@@ -1319,8 +1319,8 @@ void GCanvasContext::DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float d
     shadowFbo->UnbindFBO();
 }
 
-void GCanvasContext::DoDrawShadowFBOToScreen(GFrameBufferObjectPtr &shadowFbo, const GRectf &rect,
-                                             std::vector<GPath *> *clipPath)
+void WmCanvasContext::DoDrawShadowFBOToScreen(GFrameBufferObjectPtr &shadowFbo, const WmRectf &rect,
+                                             std::vector<WmPath *> *clipPath)
 {
     Save();
     UseShadowRenderPipeline();
@@ -1343,12 +1343,12 @@ void GCanvasContext::DoDrawShadowFBOToScreen(GFrameBufferObjectPtr &shadowFbo, c
     Restore();
 }
 
-void GCanvasContext::DrawShadow(const GRectf &rect, std::function<void()> drawFun, bool isStroke)
+void WmCanvasContext::DrawShadow(const WmRectf &rect, std::function<void()> drawFun, bool isStroke)
 {
     SendVertexBufferToGPU();
 
     // get current clip path and move it locally, temp disable clip for shadow render
-    std::vector<GPath *> savedClipPaths = (mCurrentState->clipPaths);
+    std::vector<WmPath *> savedClipPaths = (mCurrentState->clipPaths);
     bool hasClip = savedClipPaths.size() > 0;
     if (hasClip)
     {
@@ -1381,7 +1381,7 @@ void GCanvasContext::DrawShadow(const GRectf &rect, std::function<void()> drawFu
     }
 }
 
-bool GCanvasContext::NeedDrawShadow()
+bool WmCanvasContext::NeedDrawShadow()
 {
     if (mCurrentState->mGlobalCompositeOp == COMPOSITE_OP_COPY ||
         (mCurrentState->mGlobalCompositeOp == COMPOSITE_OP_DESTINATION_ATOP &&
@@ -1394,7 +1394,7 @@ bool GCanvasContext::NeedDrawShadow()
     return mCurrentState->mShadowColor.rgba.a > 0.01;
 }
 
-float GCanvasContext::GetCurrentAlphaOfStyle(bool isStroke)
+float WmCanvasContext::GetCurrentAlphaOfStyle(bool isStroke)
 {
     GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style == nullptr || style->IsDefault() || style->IsPattern())
@@ -1433,7 +1433,7 @@ float GCanvasContext::GetCurrentAlphaOfStyle(bool isStroke)
     return 1;
 }
 
-void GCanvasContext::ApplyFillStylePipeline(bool isStroke)
+void WmCanvasContext::ApplyFillStylePipeline(bool isStroke)
 {
     GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style == nullptr || style->IsDefault())
@@ -1457,18 +1457,18 @@ void GCanvasContext::ApplyFillStylePipeline(bool isStroke)
     }
 }
 
-void GCanvasContext::SetClearColor(const GColorRGBA &c)
+void WmCanvasContext::SetClearColor(const WmColorRGBA &c)
 {
     mClearColor = c;
 }
 
-void GCanvasContext::SaveRenderPipeline()
+void WmCanvasContext::SaveRenderPipeline()
 {
     mSaveShader = mCurrentState->mShader;
     mSaveIsStroke = mCurrentState->mStrokeStyle != nullptr;
 }
 
-void GCanvasContext::RestoreRenderPipeline()
+void WmCanvasContext::RestoreRenderPipeline()
 {
     if (mSaveShader)
     {
@@ -1505,7 +1505,7 @@ void GCanvasContext::RestoreRenderPipeline()
     }
 }
 
-void GCanvasContext::UseDefaultRenderPipeline()
+void WmCanvasContext::UseDefaultRenderPipeline()
 {
     GShader *newShader = FindShader("DEFAULT");
 
@@ -1519,7 +1519,7 @@ void GCanvasContext::UseDefaultRenderPipeline()
     SetTexture(InvalidateTextureId);
 }
 
-void GCanvasContext::UseTextureRenderPipeline()
+void WmCanvasContext::UseTextureRenderPipeline()
 {
     GShader *newShader = FindShader("TEXTURE");
 
@@ -1551,7 +1551,7 @@ inline void WeightCalculate(double radius, float *weight, int lastIndex)
     }
 }
 
-void GCanvasContext::UseShadowRenderPipeline()
+void WmCanvasContext::UseShadowRenderPipeline()
 {
     GShader *newShader = FindShader("SHADOW");
 
@@ -1564,7 +1564,7 @@ void GCanvasContext::UseShadowRenderPipeline()
     ShadowShader *shadowShader = (ShadowShader *)(mCurrentState->mShader);
     if (shadowShader)
     {
-        GColorRGBA color = mCurrentState->mShadowColor;
+        WmColorRGBA color = mCurrentState->mShadowColor;
         float alpha = color.rgba.a;
         color.rgba.r = color.rgba.r * alpha;
         color.rgba.g = color.rgba.g * alpha;
@@ -1573,7 +1573,7 @@ void GCanvasContext::UseShadowRenderPipeline()
     }
 }
 
-void GCanvasContext::UseBlurRenderPipeline()
+void WmCanvasContext::UseBlurRenderPipeline()
 {
     GShader *newShader = FindShader("BLUR");
 
@@ -1585,7 +1585,7 @@ void GCanvasContext::UseBlurRenderPipeline()
     }
 }
 
-void GCanvasContext::UseBlurRenderPipeline(double radius)
+void WmCanvasContext::UseBlurRenderPipeline(double radius)
 {
     GShader *newShader = FindShader("BLUR");
 
@@ -1611,7 +1611,7 @@ void GCanvasContext::UseBlurRenderPipeline(double radius)
     bs->SetWeight(weight, count);
 }
 
-void GCanvasContext::UsePatternRenderPipeline(bool isStroke)
+void WmCanvasContext::UsePatternRenderPipeline(bool isStroke)
 {
     GShader *newShader = FindShader("PATTERN");
 
@@ -1644,7 +1644,7 @@ void GCanvasContext::UsePatternRenderPipeline(bool isStroke)
     }
 }
 
-void GCanvasContext::UseLinearGradientPipeline(bool isStroke)
+void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
 {
     GShader *newShader = FindShader("LINEAR");
 
@@ -1669,13 +1669,13 @@ void GCanvasContext::UseLinearGradientPipeline(bool isStroke)
         for (int i = 0; i < count; ++i)
         {
             const FillStyleLinearGradient::ColorStop *stop = grad->GetColorStop(i);
-            GColorRGBA c = BlendColor(this, stop->color);
+            WmColorRGBA c = BlendColor(this, stop->color);
             mCurrentState->mShader->SetColorStop(c.components, stop->pos, i);
         }
     }
 }
 
-void GCanvasContext::UseRadialGradientPipeline(bool isStroke)
+void WmCanvasContext::UseRadialGradientPipeline(bool isStroke)
 {
     GShader *newShader = FindShader("RADIAL");
 
@@ -1706,7 +1706,7 @@ void GCanvasContext::UseRadialGradientPipeline(bool isStroke)
         for (int i = 0; i < count; ++i)
         {
             const FillStyleRadialGradient::ColorStop *stop = grad->GetColorStop(i);
-            GColorRGBA c = BlendColor(this, stop->color);
+            WmColorRGBA c = BlendColor(this, stop->color);
             mCurrentState->mShader->SetColorStop(c.components, stop->pos, i);
         }
     }
@@ -1717,7 +1717,7 @@ void GCanvasContext::UseRadialGradientPipeline(bool isStroke)
 //////////////////////////////////////////////////
 
 #ifdef IOS
-void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x, float y,
+void WmCanvasContext::DrawTextWithLength(const char *text, int strLength, float x, float y,
                                         bool isStroke, float maxWidth)
 {
     if (strLength == 0)
@@ -1748,35 +1748,35 @@ void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x
 ///   Context2D Property
 //////////////////////////////////////////////////////////////////////////////
 //global
-void GCanvasContext::SetGlobalAlpha(float a)
+void WmCanvasContext::SetGlobalAlpha(float a)
 {
     SendVertexBufferToGPU();
     a = std::min<float>(1, std::max<float>(a, 0));
     mCurrentState->mGlobalAlpha = a;
 }
 
-float GCanvasContext::GlobalAlpha()
+float WmCanvasContext::GlobalAlpha()
 {
     return mCurrentState->mGlobalAlpha;
 }
 
-void GCanvasContext::SetGlobalCompositeOperation(int op)
+void WmCanvasContext::SetGlobalCompositeOperation(int op)
 {
     DoSetGlobalCompositeOperation(WmCompositeOperation(op), WmCompositeOperation(op));
 }
 
 //font
-void GCanvasContext::SetTextAlign(GTextAlign textAlign)
+void WmCanvasContext::SetTextAlign(GTextAlign textAlign)
 {
     mCurrentState->mTextAlign = textAlign;
 }
 
-void GCanvasContext::SetTextBaseline(GTextBaseline textbaseline)
+void WmCanvasContext::SetTextBaseline(GTextBaseline textbaseline)
 {
     mCurrentState->mTextBaseline = textbaseline;
 }
 
-void GCanvasContext::SetFont(const char *font)
+void WmCanvasContext::SetFont(const char *font)
 {
     if (mCurrentState->mFont != nullptr)
     {
@@ -1786,44 +1786,44 @@ void GCanvasContext::SetFont(const char *font)
         }
         delete mCurrentState->mFont;
     }
-    mCurrentState->mFont = new GFontStyle(font, mDevicePixelRatio);
+    mCurrentState->mFont = new WmFontStyle(font, mDevicePixelRatio);
 }
 
 //shadow
-void GCanvasContext::SetShadowColor(const char *str)
+void WmCanvasContext::SetShadowColor(const char *str)
 {
-    GColorRGBA color = StrValueToColorRGBA(str);
+    WmColorRGBA color = StrValueToColorRGBA(str);
     mCurrentState->mShadowColor = color;
 }
 
-void GCanvasContext::SetShadowBlur(float blur)
+void WmCanvasContext::SetShadowBlur(float blur)
 {
     mCurrentState->mShadowBlur = blur;
 }
 
-void GCanvasContext::SetShadowOffsetX(float x)
+void WmCanvasContext::SetShadowOffsetX(float x)
 {
     mCurrentState->mShadowOffsetX = x;
 }
 
-void GCanvasContext::SetShadowOffsetY(float y)
+void WmCanvasContext::SetShadowOffsetY(float y)
 {
     mCurrentState->mShadowOffsetY = y;
 }
 
 //style
-void GCanvasContext::SetFillStyle(const char *str)
+void WmCanvasContext::SetFillStyle(const char *str)
 {
     if ((str != NULL) && (str[0] == '\0'))
     { // empty str
         return;
     }
 
-    GColorRGBA color = StrValueToColorRGBA(str);
+    WmColorRGBA color = StrValueToColorRGBA(str);
     SetFillStyle(color);
 }
 
-void GCanvasContext::SetFillStyle(GColorRGBA c)
+void WmCanvasContext::SetFillStyle(WmColorRGBA c)
 {
     if (mCurrentState->mFillStyle != nullptr)
     {
@@ -1835,17 +1835,17 @@ void GCanvasContext::SetFillStyle(GColorRGBA c)
     //    UseDefaultRenderPipeline();
 }
 
-void GCanvasContext::SetStrokeStyle(const char *str)
+void WmCanvasContext::SetStrokeStyle(const char *str)
 {
     if ((str != NULL) && (str[0] == '\0'))
     { // empty str
         return;
     }
-    GColorRGBA color = StrValueToColorRGBA(str);
+    WmColorRGBA color = StrValueToColorRGBA(str);
     SetStrokeStyle(color);
 }
 
-void GCanvasContext::SetStrokeStyle(const GColorRGBA &c)
+void WmCanvasContext::SetStrokeStyle(const WmColorRGBA &c)
 {
     if (mCurrentState->mStrokeStyle != nullptr)
     {
@@ -1860,7 +1860,7 @@ void GCanvasContext::SetStrokeStyle(const GColorRGBA &c)
     //    }
 }
 
-void GCanvasContext::SetFillStylePattern(int textureId, int width, int height, const char *repeatMode,
+void WmCanvasContext::SetFillStylePattern(int textureId, int width, int height, const char *repeatMode,
                                          bool isStroke)
 {
     //change fill style, need send vertex buffer
@@ -1884,7 +1884,7 @@ void GCanvasContext::SetFillStylePattern(int textureId, int width, int height, c
     }
 }
 
-void GCanvasContext::SetFillStyleLinearGradient(float startArr[], float endArr[], int stop_count,
+void WmCanvasContext::SetFillStyleLinearGradient(float startArr[], float endArr[], int stop_count,
                                                 const float posArray[],
                                                 const std::string colorArray[],
                                                 bool isStroke)
@@ -1924,7 +1924,7 @@ void GCanvasContext::SetFillStyleLinearGradient(float startArr[], float endArr[]
     }
 }
 
-void GCanvasContext::SetFillStyleRadialGradient(float startArr[], float endArr[], int stop_count,
+void WmCanvasContext::SetFillStyleRadialGradient(float startArr[], float endArr[], int stop_count,
                                                 const float posArray[],
                                                 const std::string colorArray[],
                                                 bool isStroke)
@@ -1958,7 +1958,7 @@ void GCanvasContext::SetFillStyleRadialGradient(float startArr[], float endArr[]
 }
 
 //path
-void GCanvasContext::SetLineCap(const char *p)
+void WmCanvasContext::SetLineCap(const char *p)
 {
     GLineCap lineCap = mCurrentState->mLineCap;
     if (strncmp(p, "butt", 4) == 0)
@@ -1976,7 +1976,7 @@ void GCanvasContext::SetLineCap(const char *p)
     SetLineCap(lineCap);
 }
 
-void GCanvasContext::SetLineJoin(const char *p)
+void WmCanvasContext::SetLineJoin(const char *p)
 {
     GLineJoin lineJoin = mCurrentState->mLineJoin;
     if (strncmp(p, "miter", 4) == 0)
@@ -1994,7 +1994,7 @@ void GCanvasContext::SetLineJoin(const char *p)
     SetLineJoin(lineJoin);
 }
 
-std::vector<float> &GCanvasContext::GetLineDash()
+std::vector<float> &WmCanvasContext::GetLineDash()
 {
     return mCurrentState->mLineDash;
 }
@@ -2002,7 +2002,7 @@ std::vector<float> &GCanvasContext::GetLineDash()
 //////////////////////////////////////////////////////////////////////////////
 ///   Context2D Method
 //////////////////////////////////////////////////////////////////////////////
-void GCanvasContext::ClearScreen()
+void WmCanvasContext::ClearScreen()
 {
     LOG_D("ClearScreen: r:%f, g:%f, b:%f, a:%f", mClearColor.rgba.r, mClearColor.rgba.g,
           mClearColor.rgba.b,
@@ -2016,7 +2016,7 @@ void GCanvasContext::ClearScreen()
  * �ı�canvas ������С(Ŀǰ֧�����ڲ�δʹ��)
  * reset״̬ΪĬ�ϣ��Ҹ���OpenGL״̬ΪĬ��
  */
-void GCanvasContext::Resize(int width, int height)
+void WmCanvasContext::Resize(int width, int height)
 {
     mWidth = width;
     mHeight = height;
@@ -2033,47 +2033,47 @@ void GCanvasContext::Resize(int width, int height)
         UseDefaultRenderPipeline();
     }
 
-    mFboMap.erase(GCanvasContext::DefaultFboName);
+    mFboMap.erase(WmCanvasContext::DefaultFboName);
     InitFBO();
     BindFBO();
 }
 
-void GCanvasContext::SetTransform(float a, float b, float c, float d, float tx, float ty)
+void WmCanvasContext::SetTransform(float a, float b, float c, float d, float tx, float ty)
 {
     GTransform t = GTransform(a, b, c, d, tx, ty);
     mPath.mTransform = mCurrentState->mTransform = t;
 }
 
-void GCanvasContext::Transfrom(float a, float b, float c, float d, float tx, float ty)
+void WmCanvasContext::Transfrom(float a, float b, float c, float d, float tx, float ty)
 {
     GTransform t = GTransform(a, b, c, d, tx, ty);
     mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform, t);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
-void GCanvasContext::ResetTransform()
+void WmCanvasContext::ResetTransform()
 {
     mPath.mTransform = mCurrentState->mTransform = GTransformIdentity;
 }
 
-void GCanvasContext::DoResetTransform()
+void WmCanvasContext::DoResetTransform()
 {
     SetTransformOfShader(mProjectTransform);
 }
 
-void GCanvasContext::Scale(float sx, float sy)
+void WmCanvasContext::Scale(float sx, float sy)
 {
     mCurrentState->mTransform = GTransformScale(mCurrentState->mTransform, sx, sy);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
-void GCanvasContext::DoScale(float sx, float sy)
+void WmCanvasContext::DoScale(float sx, float sy)
 {
     mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform,
                                                  GTransformMakeScale(sx, sy));
 }
 
-void GCanvasContext::Rotate(float angle)
+void WmCanvasContext::Rotate(float angle)
 {
     if (fabs(angle) < FLT_EPSILON)
     {
@@ -2084,13 +2084,13 @@ void GCanvasContext::Rotate(float angle)
     mPath.mTransform = mCurrentState->mTransform;
 }
 
-void GCanvasContext::DoRotate(float angle)
+void WmCanvasContext::DoRotate(float angle)
 {
     mCurrentState->mTransform = GTransformRotate(mCurrentState->mTransform, angle);
     SetTransformOfShader(mCurrentState->mTransform);
 }
 
-void GCanvasContext::Translate(float tx, float ty)
+void WmCanvasContext::Translate(float tx, float ty)
 {
     if (fabs(tx) < FLT_EPSILON && fabs(ty) < FLT_EPSILON)
     {
@@ -2101,13 +2101,13 @@ void GCanvasContext::Translate(float tx, float ty)
     mPath.mTransform = mCurrentState->mTransform;
 }
 
-void GCanvasContext::DoTranslate(float tx, float ty)
+void WmCanvasContext::DoTranslate(float tx, float ty)
 {
     mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform,
                                                  GTransformMakeTranslation(tx, ty));
 }
 
-void GCanvasContext::Save()
+void WmCanvasContext::Save()
 {
     // LOG_I("call save and the mstatestack size is %d\n", mStateStack.size());
     GCanvasState *newState = new GCanvasState(*mCurrentState);
@@ -2115,7 +2115,7 @@ void GCanvasContext::Save()
     mCurrentState = newState;
 }
 
-bool GCanvasContext::Restore()
+bool WmCanvasContext::Restore()
 {
     // FIXME by zhanqu
     // performance concern, avoid issue draw call
@@ -2170,43 +2170,43 @@ bool GCanvasContext::Restore()
 }
 
 //path
-void GCanvasContext::BeginPath()
+void WmCanvasContext::BeginPath()
 {
     mPath.Reset();
 }
 
-void GCanvasContext::ClosePath()
+void WmCanvasContext::ClosePath()
 {
     mPath.Close();
 }
 
-void GCanvasContext::MoveTo(float x, float y)
+void WmCanvasContext::MoveTo(float x, float y)
 {
     mPath.MoveTo(x, y);
 }
 
-void GCanvasContext::LineTo(float x, float y)
+void WmCanvasContext::LineTo(float x, float y)
 {
     mPath.LineTo(x, y);
 }
 
-void GCanvasContext::Rect(float x, float y, float w, float h)
+void WmCanvasContext::Rect(float x, float y, float w, float h)
 {
     mPath.Rect(x, y, w, h);
 }
 
-void GCanvasContext::Arc(float x, float y, float radius, float startAngle, float endAngle,
+void WmCanvasContext::Arc(float x, float y, float radius, float startAngle, float endAngle,
                          bool anticlockwise)
 {
     mPath.Arc(x, y, radius, startAngle, endAngle, anticlockwise);
 }
 
-void GCanvasContext::ArcTo(float x1, float y1, float x2, float y2, float radius)
+void WmCanvasContext::ArcTo(float x1, float y1, float x2, float y2, float radius)
 {
     mPath.ArcTo(x1, y1, x2, y2, radius);
 }
 
-void GCanvasContext::QuadraticCurveTo(float cpx, float cpy, float x, float y)
+void WmCanvasContext::QuadraticCurveTo(float cpx, float cpy, float x, float y)
 {
     //    float sx = mCurrentState->mTransform.a * GetWidth();
     //    float sy = mCurrentState->mTransform.d * GetHeight();
@@ -2214,7 +2214,7 @@ void GCanvasContext::QuadraticCurveTo(float cpx, float cpy, float x, float y)
     mPath.QuadraticCurveTo(cpx, cpy, x, y);
 }
 
-void GCanvasContext::BezierCurveTo(float cp1x, float cp1y, float cp2x,
+void WmCanvasContext::BezierCurveTo(float cp1x, float cp1y, float cp2x,
                                    float cp2y, float x, float y)
 {
     //    float scale = mCurrentState->mTransform.a * mCurrentState->mTransform.a +
@@ -2224,17 +2224,17 @@ void GCanvasContext::BezierCurveTo(float cp1x, float cp1y, float cp2x,
 }
 
 //rect
-void GCanvasContext::FillRect(float x, float y, float w, float h)
+void WmCanvasContext::FillRect(float x, float y, float w, float h)
 {
     ApplyFillStylePipeline();
-    GColorRGBA color = BlendFillColor(this);
+    WmColorRGBA color = BlendFillColor(this);
     if (NeedDrawShadow())
     {
-        std::vector<GVertex> vec;
+        std::vector<WmVertex> vec;
         PushRectangle(x, y, w, h, 0, 0, 0, 0, color, mCurrentState->mTransform, false, &vec);
 
-        GRectf rect;
-        GPath::GetRectCoverVertex(rect, vec);
+        WmRectf rect;
+        WmPath::GetRectCoverVertex(rect, vec);
         DrawShadow(rect, [&] {
             PushVertexs(vec);
         });
@@ -2246,27 +2246,27 @@ void GCanvasContext::FillRect(float x, float y, float w, float h)
     }
 }
 
-void GCanvasContext::DoFillRect(float x, float y, float w, float h)
+void WmCanvasContext::DoFillRect(float x, float y, float w, float h)
 {
-    GColorRGBA color = BlendFillColor(this);
+    WmColorRGBA color = BlendFillColor(this);
 
     ApplyFillStylePipeline();
     PushRectangle(x, y, w, h, 0, 0, 0, 0, color, mCurrentState->mTransform);
 }
 
-void GCanvasContext::StrokeRect(float x, float y, float w, float h)
+void WmCanvasContext::StrokeRect(float x, float y, float w, float h)
 {
     if (NeedDrawShadow())
     {
-        GPath tempPath;
+        WmPath tempPath;
         GenStrokeRectPath(tempPath, x, y, w, h);
 
-        GColorRGBA color = BlendStrokeColor(this);
-        std::vector<GVertex> vertexVec;
+        WmColorRGBA color = BlendStrokeColor(this);
+        std::vector<WmVertex> vertexVec;
         tempPath.Stroke(this, color, &vertexVec);
 
-        GRectf rect;
-        GPath::GetRectCoverVertex(rect, vertexVec);
+        WmRectf rect;
+        WmPath::GetRectCoverVertex(rect, vertexVec);
         DrawShadow(rect, [&] {
             mPath.DrawVertexToContext(this, vertexVec);
         });
@@ -2276,16 +2276,16 @@ void GCanvasContext::StrokeRect(float x, float y, float w, float h)
     {
         ApplyFillStylePipeline(true);
 
-        GPath path;
+        WmPath path;
         GenStrokeRectPath(path, x, y, w, h);
         path.Stroke(this);
     }
 }
 
 // for weex
-void GCanvasContext::DoStrokeRect(float x, float y, float w, float h)
+void WmCanvasContext::DoStrokeRect(float x, float y, float w, float h)
 {
-    GPath *tempPath = new GPath();
+    WmPath *tempPath = new WmPath();
 
     tempPath->mTransform = mCurrentState->mTransform;
     tempPath->MoveTo(x, y);
@@ -2298,7 +2298,7 @@ void GCanvasContext::DoStrokeRect(float x, float y, float w, float h)
     delete tempPath;
 }
 
-void GCanvasContext::GenStrokeRectPath(GPath &path, float x, float y, float w, float h)
+void WmCanvasContext::GenStrokeRectPath(WmPath &path, float x, float y, float w, float h)
 {
     path.mTransform = mCurrentState->mTransform;
     path.MoveTo(x, y);
@@ -2308,7 +2308,7 @@ void GCanvasContext::GenStrokeRectPath(GPath &path, float x, float y, float w, f
     path.Close();
 }
 
-void GCanvasContext::ClearRect(float x, float y, float w, float h)
+void WmCanvasContext::ClearRect(float x, float y, float w, float h)
 {
     UseDefaultRenderPipeline();
 
@@ -2328,16 +2328,16 @@ void GCanvasContext::ClearRect(float x, float y, float w, float h)
  * Open subpaths must be implicitly closed when computing the clipping region, without affecting the actual subpaths.
  * The new clipping region replaces the current clipping region.
  */
-void GCanvasContext::Clip(GFillRule rule)
+void WmCanvasContext::Clip(GFillRule rule)
 {
     mPath.Close();
-    GPath *newPath = new GPath(mPath);
+    WmPath *newPath = new WmPath(mPath);
     DoClipPath(newPath, rule);
 }
 
-void GCanvasContext::Clip(GPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Clip(GPath2D &path2d, GFillRule rule)
 {
-    GPath *path = new GPath();
+    WmPath *path = new WmPath();
     path->mTransform = mPath.mTransform;
     path2d.WriteToPath(*path);
     path->Close();
@@ -2348,13 +2348,13 @@ void GCanvasContext::Clip(GPath2D &path2d, GFillRule rule)
 /**
  * deprecated
  */
-void GCanvasContext::ClipRegion()
+void WmCanvasContext::ClipRegion()
 {
     BeforeClip();
 
     mPath.Close();
 
-    GPath *newPath = new GPath(mPath);
+    WmPath *newPath = new WmPath(mPath);
     DrawClipPath(newPath);
 
     mCurrentState->clipPaths.push_back(newPath);
@@ -2364,14 +2364,14 @@ void GCanvasContext::ClipRegion()
     AfterClip();
 }
 
-//void GCanvasContext::ClipRegionNew(GFillRule rule) {
+//void WmCanvasContext::ClipRegionNew(GFillRule rule) {
 //    mPath.Close();
 //
-//    GPath* newPath = new GPath(mPath);
+//    WmPath* newPath = new WmPath(mPath);
 //    DoClipPath(*newPath, rule);
 //}
 
-void GCanvasContext::DoClipPath(GPath *path, GFillRule rule)
+void WmCanvasContext::DoClipPath(WmPath *path, GFillRule rule)
 {
     path->mClipFillRule = rule;
     DrawClipPath(path);
@@ -2380,7 +2380,7 @@ void GCanvasContext::DoClipPath(GPath *path, GFillRule rule)
     SetClipFlag(true);
 }
 
-inline void GCanvasContext::DrawClip()
+inline void WmCanvasContext::DrawClip()
 {
     for (int i = 0; i < mCurrentState->clipPaths.size(); i++)
     {
@@ -2388,12 +2388,12 @@ inline void GCanvasContext::DrawClip()
     }
 }
 
-inline void GCanvasContext::DrawClipPath(GPath *path)
+inline void WmCanvasContext::DrawClipPath(WmPath *path)
 {
     path->Fill(this, path->mClipFillRule, FILL_TARGET_DEPTH);
 }
 
-void GCanvasContext::ResetClip()
+void WmCanvasContext::ResetClip()
 {
     if (mCurrentState->clipPaths.size() <= 0)
     {
@@ -2411,7 +2411,7 @@ void GCanvasContext::ResetClip()
     SetClipFlag(false);
 }
 
-void GCanvasContext::BeforeClip()
+void WmCanvasContext::BeforeClip()
 {
     UseDefaultRenderPipeline();
     if (mCurrentState->mShader)
@@ -2421,66 +2421,66 @@ void GCanvasContext::BeforeClip()
     }
 }
 
-void GCanvasContext::AfterClip()
+void WmCanvasContext::AfterClip()
 {
     RestoreRenderPipeline();
 }
 
-void GCanvasContext::Stroke()
+void WmCanvasContext::Stroke()
 {
     DoStrokeWithPath(mPath);
 }
 
-void GCanvasContext::Stroke(GPath2D &path2d)
+void WmCanvasContext::Stroke(GPath2D &path2d)
 {
-    GPath path;
+    WmPath path;
     path.mTransform = mPath.mTransform;
     path2d.WriteToPath(path);
 
     DoStrokeWithPath(path);
 }
 
-void GCanvasContext::Fill(GFillRule rule)
+void WmCanvasContext::Fill(GFillRule rule)
 {
     DoFillWithPath(mPath, rule);
 }
 
-void GCanvasContext::Fill(GPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Fill(GPath2D &path2d, GFillRule rule)
 {
-    GPath path;
+    WmPath path;
     path.mTransform = mPath.mTransform;
     path2d.WriteToPath(path);
 
     DoFillWithPath(path, rule);
 }
 
-void GCanvasContext::DoFillWithPath(GPath &path, GFillRule rule)
+void WmCanvasContext::DoFillWithPath(WmPath &path, GFillRule rule)
 {
     ApplyFillStylePipeline();
     if (NeedDrawShadow())
     {
-        GRectf rect;
+        WmRectf rect;
         path.GetRect(rect);
         DrawShadow(rect, [=]() {
-            GPath &cpath = const_cast<GPath &>(path);
+            WmPath &cpath = const_cast<WmPath &>(path);
             cpath.Fill(this, rule, FILL_TARGET_COLOR, true);
         });
     }
     path.Fill(this, rule);
 }
 
-void GCanvasContext::DoStrokeWithPath(GPath &path)
+void WmCanvasContext::DoStrokeWithPath(WmPath &path)
 {
     if (NeedDrawShadow())
     {
-        GColorRGBA color = BlendStrokeColor(this);
-        std::vector<GVertex> vertexVec;
+        WmColorRGBA color = BlendStrokeColor(this);
+        std::vector<WmVertex> vertexVec;
         // FIXME
         // draw 2 times for get cover rect, maybe we can reduce 1 time
         path.Stroke(this, color, &vertexVec);
 
-        GRectf rect;
-        GPath::GetRectCoverVertex(rect, vertexVec);
+        WmRectf rect;
+        WmPath::GetRectCoverVertex(rect, vertexVec);
         DrawShadow(rect, [&] {
             path.DrawVertexToContext(this, vertexVec);
         });
@@ -2494,17 +2494,17 @@ void GCanvasContext::DoStrokeWithPath(GPath &path)
 }
 
 //text
-void GCanvasContext::DrawText(const char *text, float x, float y, float maxWidth)
+void WmCanvasContext::DrawText(const char *text, float x, float y, float maxWidth)
 {
     DrawTextWithLength(text, (int)strlen(text), x, y, false, maxWidth);
 }
 
-void GCanvasContext::StrokeText(const char *text, float x, float y, float maxWidth)
+void WmCanvasContext::StrokeText(const char *text, float x, float y, float maxWidth)
 {
     DrawTextWithLength(text, (int)strlen(text), x, y, true, maxWidth);
 }
 
-float GCanvasContext::MeasureTextWidth(const char *text, int strLength)
+float WmCanvasContext::MeasureTextWidth(const char *text, int strLength)
 {
     if (text == nullptr)
     {
@@ -2516,7 +2516,7 @@ float GCanvasContext::MeasureTextWidth(const char *text, int strLength)
     }
     if (mCurrentState->mFont == nullptr)
     {
-        mCurrentState->mFont = new GFontStyle(nullptr, mDevicePixelRatio);
+        mCurrentState->mFont = new WmFontStyle(nullptr, mDevicePixelRatio);
     }
 
     if (mFontManager != nullptr)
@@ -2531,7 +2531,7 @@ float GCanvasContext::MeasureTextWidth(const char *text, int strLength)
 }
 
 //image
-void GCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeight,
+void WmCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeight,
                                float sx, float sy, float sw, float sh,
                                float dx, float dy, float dw, float dh,
                                bool flipY)
@@ -2545,17 +2545,17 @@ void GCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeigh
 
     UseTextureRenderPipeline();
     // FIXME ����blended white color, �����ظ�blend����
-    GColorRGBA color = BlendWhiteColor(this);
+    WmColorRGBA color = BlendWhiteColor(this);
     SetTexture(textureId);
 
     // if (NeedDrawShadow())
     // {
-    //     std::vector<GVertex> vec;
+    //     std::vector<WmVertex> vec;
     //     PushRectangle(dx, dy, dw, dh, sx / textureWidth, sy / textureHeight, sw / textureWidth,
     //                   sh / textureHeight, color, mCurrentState->mTransform, flipY, &vec);
 
-    //     GRectf rect;
-    //     GPath::GetRectCoverVertex(rect, vec);
+    //     WmRectf rect;
+    //     WmPath::GetRectCoverVertex(rect, vec);
     //     DrawShadow(rect, [&] {
     //         PushVertexs(vec);
     //     });
@@ -2568,7 +2568,7 @@ void GCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeigh
     // }
 }
 
-void GCanvasContext::DoDrawImage(float w, float h, int TextureId, float sx,
+void WmCanvasContext::DoDrawImage(float w, float h, int TextureId, float sx,
                                  float sy, float sw, float sh, float dx,
                                  float dy, float dw, float dh, bool flipY)
 {
@@ -2579,13 +2579,13 @@ void GCanvasContext::DoDrawImage(float w, float h, int TextureId, float sx,
         return;
     }
 
-    GColorRGBA color = BlendWhiteColor(this);
+    WmColorRGBA color = BlendWhiteColor(this);
     SetTexture(TextureId);
     PushRectangle(dx, dy, dw, dh, sx / w, sy / h, sw / w, sh / h, color, mCurrentState->mTransform,
                   flipY);
 }
 
-void GCanvasContext::GetImageData(int x, int y, int width, int height, uint8_t *pixels)
+void WmCanvasContext::GetImageData(int x, int y, int width, int height, uint8_t *pixels)
 {
     SendVertexBufferToGPU();
 
@@ -2628,7 +2628,7 @@ void GCanvasContext::GetImageData(int x, int y, int width, int height, uint8_t *
                            reinterpret_cast<int *>(pixels));
 }
 
-void GCanvasContext::PutImageData(const unsigned char *rgbaData, int tw,
+void WmCanvasContext::PutImageData(const unsigned char *rgbaData, int tw,
                                   int th, int x, int y, int sx, int sy,
                                   int sw, int sh, bool is_src_flip_y)
 {
@@ -2649,7 +2649,7 @@ void GCanvasContext::PutImageData(const unsigned char *rgbaData, int tw,
     glDeleteTextures(1, &glID);
 }
 
-int GCanvasContext::BindImage(const unsigned char *rgbaData, GLint format, unsigned int width,
+int WmCanvasContext::BindImage(const unsigned char *rgbaData, GLint format, unsigned int width,
                               unsigned int height)
 {
     std::vector<GCanvasLog> logVec;

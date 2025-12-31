@@ -22,65 +22,65 @@
 #include "WmFreeTypeWrap.h"
 
 
-class GCanvasContext;
+class WmCanvasContext;
 
 
 
-std::string GetGlyphKey(std::string& fontFileName, wmcanvas::GFontStyle* fontStyle,
+std::string GetGlyphKey(std::string& fontFileName, wmcanvas::WmFontStyle* fontStyle,
         float scaleFontX, float scaleFontY);
 
 
 //std::string FontStyleNameForScale(std::string& fontName, float scaleFontX, float scaleFontY);
 
 
-//std::string GetScaleFontName(GCanvasContext *context, float scaleFontX, float scaleFontY);
+//std::string GetScaleFontName(WmCanvasContext *context, float scaleFontX, float scaleFontY);
 
 
-//std::string GetCurrentScaleFontName(GCanvasContext *context);
+//std::string GetCurrentScaleFontName(WmCanvasContext *context);
 
 
 
-typedef struct GFontMetrics
+typedef struct WmFontMetrics
 {
-    GFontMetrics();
+    WmFontMetrics();
     // units of EM square: font units
     unsigned short unitsPerEM;
     // sized ascender: 26.6 pixel format
     float ascender;
     // sized descender" 26.6 pixel format: This could be negative.
     float descender;
-} GFontMetrics;
+} WmFontMetrics;
 
 
 
-class GFontManager;
+class WmFontManager;
 
 
 /**
  * Font Draw Impl
- * A GFont is a FreeType face wrap, different style(weight, italic) use different GFont,
- * a GFont can generate any size glyph and font bitmap
+ * A WmFont is a FreeType face wrap, different style(weight, italic) use different WmFont,
+ * a WmFont can generate any size glyph and font bitmap
  */
-class GFont
+class WmFont
 {
 public:
-#ifdef GFONT_LOAD_BY_FREETYPE
-    GFont(GFontManager& fontManager, const char *fontFileName);
+#ifdef WMFONT_LOAD_BY_FREETYPE
+    WmFont(WmFontManager& fontManager, const char *fontFileName);
 #else
-    GFont(const char *fontDefinition);
+    WmFont(const char *fontDefinition);
 #endif
-    ~GFont();
+    ~WmFont();
 
 
-    void DrawText(GCanvasContext *context, wchar_t text, float &x, float y,
-                  GColorRGBA color, float scaleX, float scaleY, bool isStroke);
+    void DrawText(WmCanvasContext *context, wchar_t text, float &x, float y,
+                  WmColorRGBA color, float scaleX, float scaleY, bool isStroke);
 
 
-    void DrawText(GCanvasContext *context, const wchar_t *text, float &x,
-                  float y, GColorRGBA color, float scaleX, float scaleY, bool isStroke);
+    void DrawText(WmCanvasContext *context, const wchar_t *text, float &x,
+                  float y, WmColorRGBA color, float scaleX, float scaleY, bool isStroke);
 
 
-    const GGlyph *GetOrLoadGlyph(wmcanvas::GFontStyle* fontStyle, const wchar_t charcode, bool isStroke,
+    const WmGlyphs *GetOrLoadGlyph(wmcanvas::WmFontStyle* fontStyle, const wchar_t charcode, bool isStroke,
                            float scaleX, float scaleY,float lineWidth=1.0,float deviceRatio=1.0);
 
 
@@ -88,7 +88,7 @@ public:
     void RemoveGlyph(const wchar_t charcode, bool isStroke);
 
 
-    GFontMetrics *GetMetrics() { return &mFontMetrics; }
+    WmFontMetrics *GetMetrics() { return &mFontMetrics; }
 
 
     const std::string &GetFontFileName() const;
@@ -108,8 +108,8 @@ public:
 
 private:
 
-  void DrawGlyph(GCanvasContext *context, const GGlyph *glyph, float x, float y,
-                float scaleX, float scaleY, GColorRGBA color, bool needDrawShadow);
+  void DrawGlyph(WmCanvasContext *context, const WmGlyphs *glyph, float x, float y,
+                float scaleX, float scaleY, WmColorRGBA color, bool needDrawShadow);
 
 
     static void *(*getFontCallback)(const char *fontDefinition);
@@ -121,9 +121,9 @@ private:
                                         int &top, float &advanceX,
                                         float &advanceY);
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
-    void LoadGlyphs(wmcanvas::GFontStyle* style, const wchar_t *charCodes, bool isStroke,
+    void LoadGlyphs(wmcanvas::WmFontStyle* style, const wchar_t *charCodes, bool isStroke,
                     float scaleX, float scaleY,float lineWidth,float deviceRatio);
 
 #endif
@@ -142,9 +142,9 @@ private:
 
 private:
 
-    GFontManager& mFontManager;
+    WmFontManager& mFontManager;
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
     float mPointSize;
 
     // font file path
@@ -158,7 +158,7 @@ private:
     std::string mFontDefinition;
     bool mHasSetMetrics;
 
-    GFontMetrics mFontMetrics;
+    WmFontMetrics mFontMetrics;
 
     // not own FT_Library, set from external, do not dispose!!
     FT_Library mLibrary = nullptr;

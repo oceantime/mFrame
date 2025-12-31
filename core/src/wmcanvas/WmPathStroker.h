@@ -14,8 +14,8 @@
 #include "WmTransform.h"
 
 
-class GPath;
-class GCanvasContext;
+class WmPath;
+class WmCanvasContext;
 
 
 
@@ -46,7 +46,7 @@ class GPathStroker {
 
 public:
 
-    void StrokePath(GCanvasContext *context, GPath *path, std::vector<GVertex> *vertexVec) ;
+    void StrokePath(WmCanvasContext *context, WmPath *path, std::vector<WmVertex> *vertexVec) ;
 
 
 private:
@@ -55,24 +55,24 @@ private:
     void FilterTooClosePoints(std::vector<GPoint> &pts);
 
 
-    void DrawLineJoin(GCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
-                             GColorRGBA color, GTransform& transform, std::vector<GVertex> *vertexVec);
+    void DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
+                             WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vertexVec);
 
 
-    void DrawArcForCapOrJoin(GCanvasContext *context, float halfLineWidth,
+    void DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
                                            GPoint& center, GPoint& p1, GPoint& p2,
-                                           GColorRGBA color, GTransform& transform, std::vector<GVertex> *vec,
+                                           WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
                                            float samePointThreshold);
 
 
-    void DrawMiterJoin(GCanvasContext *context, float halfLineWidth,
+    void DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
                        const GPoint &center, const GPoint &p1, const GPoint &p2,
-                       GColorRGBA color, GTransform transform, std::vector<GVertex> *vec);
+                       WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec);
 
 
-    void DrawLineCap(GCanvasContext *context, float halfLineWidth,
+    void DrawLineCap(WmCanvasContext *context, float halfLineWidth,
                                    GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
-                                   GColorRGBA color, GTransform& transform, std::vector<GVertex> *vec,
+                                   WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
                                    float samePointThreshold = 0.001f);
 };
 

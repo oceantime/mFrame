@@ -8,7 +8,7 @@
 #include "support/CharacterSet.h"
 #include <stdlib.h>
 
-class GFontManagerImplementLinux : public GFontManager
+class GFontManagerImplementLinux : public WmFontManager
 {
 public:
     GFontManagerImplementLinux(unsigned w, unsigned h);
@@ -19,18 +19,18 @@ public:
     };
 
     void DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
-                  bool isStroke, GCanvasContext *context, float scaleX = 1, float scaleY = 1) override;
+                  bool isStroke, WmCanvasContext *context, float scaleX = 1, float scaleY = 1) override;
 
-    float MeasureText(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle) override;
+    float MeasureText(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override;
 
     //空实现
-    float *MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle) override
+    float *MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override
     {
         return nullptr;
     }
 
     //空实现
-    float *PreMeasureTextHeight(const char *text, unsigned int text_length, GCanvasContext *context) override
+    float *PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext *context) override
     {
         return nullptr;
     }
@@ -39,15 +39,15 @@ public:
     GTexture *GetOrCreateFontTexture() override;
 
 private:
-    void AdjustTextPenPoint(GCanvasContext *context, const std::vector<GFont *> &font,
+    void AdjustTextPenPoint(WmCanvasContext *context, const std::vector<WmFont *> &font,
                             const unsigned short *text,
                             unsigned int textLength,
                             bool isStroke,
                             float &x, float &y, float sx, float sy);
 
-    GFont *GetFontByCharCode(wchar_t charCode, wmcanvas::GFontStyle *fontStyle);
+    WmFont *GetFontByCharCode(wchar_t charCode, wmcanvas::WmFontStyle *fontStyle);
 
-    void DrawTextInternal(GCanvasContext *context, GFont *font, bool isStroke, wchar_t text,
+    void DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t text,
                           float &x, float y, float sx, float sy);
     GFontCache *mFontCache = nullptr;
 };

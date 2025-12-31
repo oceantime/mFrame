@@ -17,7 +17,7 @@
 
 namespace wmcanvas {
 
-    GFontStyle::GFontStyle(const char *font, float ratio) : mFontName(font ? font : "") {
+    WmFontStyle::WmFontStyle(const char *font, float ratio) : mFontName(font ? font : "") {
         if (font != nullptr) {
             mFullFontStyle = font;
         } else {
@@ -39,13 +39,13 @@ namespace wmcanvas {
     }
 
 
-    GFontStyle::~GFontStyle() {}
+    WmFontStyle::~WmFontStyle() {}
 
-    std::string GFontStyle::GetName() {
+    std::string WmFontStyle::GetName() {
         return mFontName;
     }
 
-    void GFontStyle::Initialize(const char *font) {
+    void WmFontStyle::Initialize(const char *font) {
         if (font != nullptr) {
             mFullFontStyle = font;
         } else {

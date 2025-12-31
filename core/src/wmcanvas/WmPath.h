@@ -16,7 +16,7 @@
 #include <iostream>
 #include <vector>
 
-class GCanvasContext;
+class WmCanvasContext;
 
 
 
@@ -28,14 +28,14 @@ typedef struct {
 
 
 
-class GPath {
+class WmPath {
 
 public:
-    GPath();
+    WmPath();
 
-    GPath(const GPath &other);
+    WmPath(const WmPath &other);
 
-    ~GPath();
+    ~WmPath();
 
 
     void MoveTo(float x, float y);
@@ -62,26 +62,26 @@ public:
     void Reset();
 
 
-    void ClipRegion(GCanvasContext *context);
+    void ClipRegion(WmCanvasContext *context);
 
-    void Stroke(GCanvasContext *context);
+    void Stroke(WmCanvasContext *context);
 
-    void Stroke(GCanvasContext *context, GColorRGBA color, std::vector<GVertex> *vertexVec);
+    void Stroke(WmCanvasContext *context, WmColorRGBA color, std::vector<WmVertex> *vertexVec);
 
 
-    void Fill(GCanvasContext *context, GFillRule rule, GFillTarget target = FILL_TARGET_COLOR,
+    void Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target = FILL_TARGET_COLOR,
               bool needTransform = false);
 
 
-    void StencilRectForStroke(GCanvasContext *context, std::vector<GVertex> &vertexVec);
+    void StencilRectForStroke(WmCanvasContext *context, std::vector<WmVertex> &vertexVec);
 
-    void DrawVertexToContext(GCanvasContext *context, std::vector<GVertex> &vertexVec);
+    void DrawVertexToContext(WmCanvasContext *context, std::vector<WmVertex> &vertexVec);
 
-    void GetRect(GRectf &rect);
+    void GetRect(WmRectf &rect);
 
-    static void GetRectCoverVertex(GRectf &rect, std::vector<GVertex> &vertexVec);
+    static void GetRectCoverVertex(WmRectf &rect, std::vector<WmVertex> &vertexVec);
 
-    static void SubdivideCubicTo(GPath *path, GPoint points[4], int level = 4);
+    static void SubdivideCubicTo(WmPath *path, GPoint points[4], int level = 4);
 
     static void ChopCubicAt(GPoint src[4], GPoint dst[7], float t);
 
@@ -90,7 +90,7 @@ public:
 private:
 
 
-    std::vector<GSubPath*> *CreateLineDashPath(GCanvasContext *context);
+    std::vector<GSubPath*> *CreateLineDashPath(WmCanvasContext *context);
 
 
     void PushPoint(GPoint pt);
@@ -113,9 +113,9 @@ private:
 
     GSubPath* GetCurPath();
 
-//    void PushTriangleFanPoints(GCanvasContext *context, tSubPath* subPath, GColorRGBA color);
+//    void PushTriangleFanPoints(WmCanvasContext *context, tSubPath* subPath, WmColorRGBA color);
 
-//    void RestoreStencilForClip(GCanvasContext *context);
+//    void RestoreStencilForClip(WmCanvasContext *context);
 
     void SetStencilForClip();
 

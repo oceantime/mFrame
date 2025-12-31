@@ -17,21 +17,21 @@
 #include <assert.h>
 
 
-void * (*GFont::getFontCallback)(const char *fontDefinition) = nullptr;
+void * (*WmFont::getFontCallback)(const char *fontDefinition) = nullptr;
 
 
-bool (*GFont::getFontImageCallback)(void *font, wchar_t charcode,
+bool (*WmFont::getFontImageCallback)(void *font, wchar_t charcode,
                                     int &ftBitmapWidth, int &ftBitmapHeight,
                                     unsigned char *&bitmapBuffer, int &left,
                                     int &top, float &advanceX,
                                     float &advanceY) = nullptr;
 
-GFontMetrics::GFontMetrics() : unitsPerEM(0), ascender(0.0f), descender(0.0f) {
+WmFontMetrics::WmFontMetrics() : unitsPerEM(0), ascender(0.0f), descender(0.0f) {
 }
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
-GFont::GFont(GFontManager& fontManager, const char *fontFileName)
+WmFont::WmFont(WmFontManager& fontManager, const char *fontFileName)
         : mFontManager(fontManager),
           mFontFileName(fontFileName),
           mHinting(1),
@@ -41,14 +41,14 @@ GFont::GFont(GFontManager& fontManager, const char *fontFileName)
 }
 
 #else
-GFont::GFont(const char *fontDefinition)
+WmFont::WmFont(const char *fontDefinition)
     : m_fontDefinition(fontDefinition), m_font(0)
 {
 }
 #endif
 
 
-std::string GetGlyphKey(std::string& fontFileName, wmcanvas::GFontStyle* fontStyle,
+std::string GetGlyphKey(std::string& fontFileName, wmcanvas::WmFontStyle* fontStyle,
         float scaleFontX, float scaleFontY) {
     std::string result = "";
     float fontSize = fontStyle->GetSize();
@@ -59,13 +59,13 @@ std::string GetGlyphKey(std::string& fontFileName, wmcanvas::GFontStyle* fontSty
     result.append("_");
     // style: normal / italic
     std::string style = "normal";
-    if (fontStyle->GetStyle() == wmcanvas::GFontStyle::Style::ITALIC ||
-        fontStyle->GetStyle() == wmcanvas::GFontStyle::Style::OBLIQUE) {
+    if (fontStyle->GetStyle() == wmcanvas::WmFontStyle::Style::ITALIC ||
+        fontStyle->GetStyle() == wmcanvas::WmFontStyle::Style::OBLIQUE) {
         style = "italic";
     }
     result.append(style);
     // if smallcap, add to key
-    if (fontStyle->GetVariant() == wmcanvas::GFontStyle::Variant::SMALL_CAPS) {
+    if (fontStyle->GetVariant() == wmcanvas::WmFontStyle::Variant::SMALL_CAPS) {
         result.append("_smallcap");
     }
     // weight
@@ -81,25 +81,25 @@ std::string GetGlyphKey(std::string& fontFileName, wmcanvas::GFontStyle* fontSty
 
 
 
-GFont::~GFont() {
+WmFont::~WmFont() {
     if (mFace != nullptr) {
-        wmcanvas::GFT_DisposeFaceSafe(mFace);
+        wmcanvas::WmFT_DisposeFaceSafe(mFace);
         mFace = nullptr;
     }
     mLibrary = nullptr;
-    // LOG_E("GFont(%p):Clear %s", this, mFontFileName.data());
+    // LOG_E("WmFont(%p):Clear %s", this, mFontFileName.data());
 }
 
 
-void GFont::SetFtLibrary(FT_Library library) {
+void WmFont::SetFtLibrary(FT_Library library) {
     this->mLibrary = library;
 }
 
 
-void GFont::DrawText(GCanvasContext *context, wchar_t text, float &x, float y,
-                     GColorRGBA color, float sx, float sy, bool isStroke) {
+void WmFont::DrawText(WmCanvasContext *context, wchar_t text, float &x, float y,
+                     WmColorRGBA color, float sx, float sy, bool isStroke) {
     bool needDrawShadow = context->NeedDrawShadow();
-    const GGlyph *glyph = GetOrLoadGlyph(context->mCurrentState->mFont, text, isStroke, sx, sy,
+    const WmGlyphs *glyph = GetOrLoadGlyph(context->mCurrentState->mFont, text, isStroke, sx, sy,
     context->mCurrentState->mLineWidth,context->GetDevicePixelRatio());
     if (glyph != nullptr) {
         DrawGlyph(context, glyph, x, y, sx, sy, color,needDrawShadow);
@@ -110,14 +110,14 @@ void GFont::DrawText(GCanvasContext *context, wchar_t text, float &x, float y,
 /**
  * deprecated
  */
-void GFont::DrawText(GCanvasContext *context, const wchar_t *text, float &x,
-                     float y, GColorRGBA color, float sx, float sy, bool isStroke) {
+void WmFont::DrawText(WmCanvasContext *context, const wchar_t *text, float &x,
+                     float y, WmColorRGBA color, float sx, float sy, bool isStroke) {
     if (text == nullptr || wcslen(text) == 0) {
         return;
     }
     bool needDrawShadow = context->NeedDrawShadow();
     for (size_t i = 0; i < wcslen(text); ++i) {
-        const GGlyph *glyph = GetOrLoadGlyph(context->mCurrentState->mFont, text[i], isStroke, sx, sy,
+        const WmGlyphs *glyph = GetOrLoadGlyph(context->mCurrentState->mFont, text[i], isStroke, sx, sy,
         context->mCurrentState->mLineWidth,context->GetDevicePixelRatio());
         if (glyph != nullptr) {
             DrawGlyph(context, glyph, x, y, sx, sy, color,needDrawShadow);
@@ -127,8 +127,8 @@ void GFont::DrawText(GCanvasContext *context, const wchar_t *text, float &x,
 }
 
 
-void GFont::DrawGlyph(GCanvasContext *context, const GGlyph *glyph, float x,
-                      float y, float sx, float sy, GColorRGBA color,bool needDrawShadow) {
+void WmFont::DrawGlyph(WmCanvasContext *context, const WmGlyphs *glyph, float x,
+                      float y, float sx, float sy, WmColorRGBA color,bool needDrawShadow) {
     context->SetTexture(glyph->texture->GetTextureID());
     float x0 = x + (glyph->offsetX / sx);
     float y0 = y - (glyph->offsetY / sy);
@@ -145,13 +145,13 @@ void GFont::DrawGlyph(GCanvasContext *context, const GGlyph *glyph, float x,
     //         context->mCurrentState->mTransform, false, nullptr, true);
     if (needDrawShadow)
     {
-        std::vector<GVertex> vec;
+        std::vector<WmVertex> vec;
         context->PushRectangleFormat(x0, y0, w, h, s0, t0, s1 - s0, t1 - t0,
                                      color, context->mCurrentState->mTransform,
                                      false, &vec, true);
 
-        GRectf rect;
-        GPath::GetRectCoverVertex(rect, vec);
+        WmRectf rect;
+        WmPath::GetRectCoverVertex(rect, vec);
         context->DrawShadow(rect, [&] { context->PushVertexs(vec); });
         context->PushVertexs(vec);
     }
@@ -164,26 +164,26 @@ void GFont::DrawGlyph(GCanvasContext *context, const GGlyph *glyph, float x,
 }
 
 
-void GFont::SetFontCallback(
+void WmFont::SetFontCallback(
         void *(*getFontCB)(const char *fontDefinition),
         bool (*getFontImageCB)(void *font, wchar_t charcode, int &ftBitmapWidth,
                                int &ftBitmapHeight, unsigned char *&bitmapBuffer,
                                int &left, int &top, float &advanceX,
                                float &advanceY)) {
-    GFont::getFontCallback = getFontCB;
-    GFont::getFontImageCallback = getFontImageCB;
+    WmFont::getFontCallback = getFontCB;
+    WmFont::getFontImageCallback = getFontImageCB;
 }
 
 
-const GGlyph *GFont::GetOrLoadGlyph(wmcanvas::GFontStyle* fontStyle, const wchar_t charCode, bool isStroke,
+const WmGlyphs *WmFont::GetOrLoadGlyph(wmcanvas::WmFontStyle* fontStyle, const wchar_t charCode, bool isStroke,
                               float sx, float sy,float lineWidth,float deviceRatio) {
     std::string fontKey = GetGlyphKey(mFontFileName, fontStyle, sx, sy);
-    const GGlyph *glyph = mFontManager.mGlyphCache.GetGlyph(mFontFileName, charCode, fontKey, isStroke, false);
+    const WmGlyphs *glyph = mFontManager.mGlyphCache.GetGlyph(mFontFileName, charCode, fontKey, isStroke, false);
     if (glyph != nullptr) {
         return glyph;
     }
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
     wchar_t buffer[2] = {0, 0};
     buffer[0] = charCode;
@@ -224,10 +224,10 @@ const GGlyph *GFont::GetOrLoadGlyph(wmcanvas::GFontStyle* fontStyle, const wchar
 
 
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
 
-void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes, bool isStroke,
+void WmFont::LoadGlyphs(wmcanvas::WmFontStyle* fontStyle, const wchar_t *charcodes, bool isStroke,
         float sx, float sy,float lineWidth,float deviceRatio) {
     FT_Glyph ft_glyph = nullptr;
     FT_GlyphSlot slot;
@@ -269,7 +269,7 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
 
         // handle italic
         int mstyle = (int)fontStyle->GetStyle();
-        if ((mstyle & (int)wmcanvas::GFontStyle::Style::ITALIC) || (mstyle & (int)wmcanvas::GFontStyle::Style::OBLIQUE)) {
+        if ((mstyle & (int)wmcanvas::WmFontStyle::Style::ITALIC) || (mstyle & (int)wmcanvas::WmFontStyle::Style::OBLIQUE)) {
             FT_Matrix m_ItalicMatrix;
             m_ItalicMatrix.xx = 1 << 16;
             m_ItalicMatrix.xy = 0x5800;
@@ -280,7 +280,7 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
 
         // handle large weight, eg. bold
         int weight = (int)fontStyle->GetWeight();
-        if (weight > static_cast<int>(wmcanvas::GFontStyle::Weight::MEDIUM)) {
+        if (weight > static_cast<int>(wmcanvas::WmFontStyle::Weight::MEDIUM)) {
             if (mFace->glyph->format == FT_GLYPH_FORMAT_OUTLINE){
                 int boldPixel = 0;
                 if(mPointSize <= 35) {
@@ -313,7 +313,7 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
             FT_BitmapGlyph ft_bitmap_glyph;
             error = FT_Get_Glyph(face->glyph, &ft_glyph);
             if (error) {
-                wmcanvas::GFT_DisposeStrokeSafe(ftStroker);
+                wmcanvas::WmFT_DisposeStrokeSafe(ftStroker);
                 return;
             }
 
@@ -325,13 +325,13 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
                 error = FT_Glyph_StrokeBorder(&ft_glyph, ftStroker, 1, 1);
             }
             if (error) {
-                wmcanvas::GFT_DisposeStrokeSafe(ftStroker);
+                wmcanvas::WmFT_DisposeStrokeSafe(ftStroker);
                 return;
             }
 
             error = FT_Glyph_To_Bitmap(&ft_glyph, FT_RENDER_MODE_NORMAL, 0, 1);
             if (error) {
-                wmcanvas::GFT_DisposeStrokeSafe(ftStroker);
+                wmcanvas::WmFT_DisposeStrokeSafe(ftStroker);
                 return;
             }
 
@@ -361,7 +361,7 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
         float advanceY = slot->advance.y / 64.0f;
 
         // save glyph to cache, and load it to texture
-        GGlyph glyph;
+        WmGlyphs glyph;
         glyph.texture = nullptr;
         glyph.charcode = charcodes[i];
 
@@ -382,21 +382,21 @@ void GFont::LoadGlyphs(wmcanvas::GFontStyle* fontStyle, const wchar_t *charcodes
 
         mFontManager.AddGlyph(mFontFileName, glyphKey, glyph, isStroke);
 
-//        LOG_E("LoadGlyphs:%s, char=%i, GFont=%p, face=%p, bw=%i, bh=%i",
+//        LOG_E("LoadGlyphs:%s, char=%i, WmFont=%p, face=%p, bw=%i, bh=%i",
 //              glyphKey.data(), charcodes[i],
 //              this, mFace, ft_bitmap_width, ft_bitmap_rows);
 
         // free stroke bitmap glyph (no need free face glyph slot, it will be reused)
         if (isStroke) {
-            wmcanvas::GFT_DisposeGlyphSafe(ft_glyph);
+            wmcanvas::WmFT_DisposeGlyphSafe(ft_glyph);
         }
     }
 
-    wmcanvas::GFT_DisposeStrokeSafe(ftStroker);
+    wmcanvas::WmFT_DisposeStrokeSafe(ftStroker);
 }
 
 
-void GFont::UpdateCurrentTextMetrics()  {
+void WmFont::UpdateCurrentTextMetrics()  {
     this->mFontMetrics.unitsPerEM = mFace->units_per_EM;
     // 26.6 pixel format: convert it from font units
     this->mFontMetrics.ascender =
@@ -407,12 +407,12 @@ void GFont::UpdateCurrentTextMetrics()  {
 
 
 
-const std::string &GFont::GetFontFileName() const {
+const std::string &WmFont::GetFontFileName() const {
     return mFontFileName;
 }
 
 
-bool GFont::IsCharInFont(const wchar_t charCode) {
+bool WmFont::IsCharInFont(const wchar_t charCode) {
     if (mLibrary == nullptr) {
         return false;
     }
@@ -421,16 +421,16 @@ bool GFont::IsCharInFont(const wchar_t charCode) {
     if (!flag) {
         return false;
     }
-    return wmcanvas::GFT_IsCharInFace(mFace, charCode);
+    return wmcanvas::WmFT_IsCharInFace(mFace, charCode);
 }
 
 
-bool GFont::LoadFaceIfNot() {
+bool WmFont::LoadFaceIfNot() {
     bool flag;
     if (mFace == nullptr) {
-        flag = wmcanvas::GFT_LoadFace(mLibrary, &mFace, mFontFileName.data());
+        flag = wmcanvas::WmFT_LoadFace(mLibrary, &mFace, mFontFileName.data());
         if (!flag) { // load face or change face size fail,
-            wmcanvas::GFT_DisposeFaceSafe(mFace);
+            wmcanvas::WmFT_DisposeFaceSafe(mFace);
             mFace = nullptr;
         }
     } else {
@@ -440,7 +440,7 @@ bool GFont::LoadFaceIfNot() {
 }
 
 
-bool GFont::PrepareLoadGlyph(float fontSize, float scaleX, float scaleY) {
+bool WmFont::PrepareLoadGlyph(float fontSize, float scaleX, float scaleY) {
     if (mFace == nullptr) {
         return false;
     }
@@ -448,11 +448,11 @@ bool GFont::PrepareLoadGlyph(float fontSize, float scaleX, float scaleY) {
     float sizeW = fontSize * scaleX;
     float sizeH = fontSize * scaleY;
 
-    return wmcanvas::GFT_SetFaceCharSize(mFace, sizeW, sizeH);
+    return wmcanvas::WmFT_SetFaceCharSize(mFace, sizeW, sizeH);
 }
 
 
-bool GFont::LoadStroke(const char *filename, FT_Stroker *stroker, float sx, float sy,float lineWidth,float deviceRatio) {
+bool WmFont::LoadStroke(const char *filename, FT_Stroker *stroker, float sx, float sy,float lineWidth,float deviceRatio) {
     assert(filename);
     if (mLibrary == nullptr) {
         return false;

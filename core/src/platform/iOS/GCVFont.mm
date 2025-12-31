@@ -124,11 +124,11 @@ static NSMutableDictionary *staticFontInstaceDict;
     return isBoldtmp;
 }
 
-- (CTFontRef)createFontFromStyle:(gcanvas::GFontStyle *)fontStyle
+- (CTFontRef)createFontFromStyle:(gcanvas::WmFontStyle *)fontStyle
 {
     NSString *family = [NSString stringWithUTF8String:fontStyle->GetFamily().c_str()];
     // 这段逻辑主要是对不支持字体加粗的默认走Arial字体
-    if (fontStyle->GetWeight() == gcanvas::GFontStyle::Weight::BOLD) {
+    if (fontStyle->GetWeight() == gcanvas::WmFontStyle::Weight::BOLD) {
         BOOL isBoldtmp = [self isFamilySupportBold:family];
         if (!isBoldtmp) {
             family = @"Arial";
@@ -142,12 +142,12 @@ static NSMutableDictionary *staticFontInstaceDict;
     attrs[(NSString *)kCTFontSizeAttribute] = @(fontStyle->GetSize() * scale);
     // symbolicTraits
     CTFontSymbolicTraits symbolicTraits = 0;
-    if (fontStyle->GetWeight() == gcanvas::GFontStyle::Weight::BOLD)
+    if (fontStyle->GetWeight() == gcanvas::WmFontStyle::Weight::BOLD)
     {
         symbolicTraits |= kCTFontBoldTrait;
     }
     BOOL isItalic = NO;
-    if (fontStyle->GetStyle()==gcanvas::GFontStyle::Style::ITALIC)
+    if (fontStyle->GetStyle()==gcanvas::WmFontStyle::Style::ITALIC)
     {
         isItalic = YES;
         symbolicTraits |= kCTFontItalicTrait;
@@ -177,9 +177,9 @@ static NSMutableDictionary *staticFontInstaceDict;
     return curFont;
 }
 
-- (void)resetWithFontStyle:(gcanvas::GFontStyle *)fontStyle
+- (void)resetWithFontStyle:(gcanvas::WmFontStyle *)fontStyle
                   isStroke:(BOOL)isStroke
-                   context:(GCanvasContext *)context
+                   context:(WmCanvasContext *)context
 {
     self.isStroke = isStroke;
     
@@ -248,11 +248,11 @@ static NSMutableDictionary *staticFontInstaceDict;
        withFontName:(NSString*)fontName
          withLayout:(GFontLayout*)fontLayout
        withPosition:(CGPoint)destPoint
-            context:(GCanvasContext *)context
+            context:(WmCanvasContext *)context
 {
     bool needDrawShadow = context->NeedDrawShadow();
     int offsetX = 0;
-    GColorRGBA color = self.isStroke ? BlendStrokeColor(context) : BlendFillColor(context);
+    WmColorRGBA color = self.isStroke ? BlendStrokeColor(context) : BlendFillColor(context);
 
     float scale = GTransformGetMaxScale( context->mCurrentState->mTransform );
     
@@ -261,7 +261,7 @@ static NSMutableDictionary *staticFontInstaceDict;
     for (i = 0; i < n; i++) {
         c = [string characterAtIndex:i];
         
-        const GGlyph *pGlyph = _glyphCache->GetGlyph([fontName UTF8String], c, fontName.UTF8String, self.isStroke);
+        const WmGlyphs *pGlyph = _glyphCache->GetGlyph([fontName UTF8String], c, fontName.UTF8String, self.isStroke);
         
         if (pGlyph == nullptr) {
             // texture is full，get font glyph again
@@ -287,13 +287,13 @@ static NSMutableDictionary *staticFontInstaceDict;
             }
             context->SetTexture(textureId);
             
-            GGlyph &glyphInfo = gl.info;
+            WmGlyphs &glyphInfo = gl.info;
             float gx = destPoint.x + gl.xpos + glyphInfo.offsetX / scale;
             float gy = destPoint.y - (glyphInfo.height / scale + glyphInfo.offsetY / scale);
             
             
             if( needDrawShadow ){
-                std::vector<GVertex> vec;
+                std::vector<WmVertex> vec;
                 context->PushRectangle(gx,
                     gy,
                     glyphInfo.width / scale,
@@ -306,8 +306,8 @@ static NSMutableDictionary *staticFontInstaceDict;
                     context->mCurrentState->mTransform,
                                        false, &vec);
 
-                GRectf rect;
-                GPath::GetRectCoverVertex(rect, vec);
+                WmRectf rect;
+                WmPath::GetRectCoverVertex(rect, vec);
                 context->DrawShadow(rect, [&] {
                    context->PushVertexs(vec);
                 });
@@ -343,7 +343,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 {
     GTextMetrics metrics = fontLayout.metrics;
     NSMutableData *layoutData = fontLayout.glyphLayout;
-    const GGlyph *pGlyph = _glyphCache->GetGlyph([fontName UTF8String], c, [fontName UTF8String], self.isStroke);
+    const WmGlyphs *pGlyph = _glyphCache->GetGlyph([fontName UTF8String], c, [fontName UTF8String], self.isStroke);
     
     if (pGlyph) {
         GFontGlyphLayout gl;
@@ -429,7 +429,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 - (void)createGlyph:(CGGlyph)glyph
            withFont:(CTFontRef)font
        withFontName:(NSString*)fontName
-          glyphInfo:(GGlyph *)glyphInfo
+          glyphInfo:(WmGlyphs *)glyphInfo
 {
     CGRect bbRect;
     CTFontGetBoundingRectsForGlyphs(font, kCTFontOrientationDefault, &glyph, &bbRect, 1);
@@ -519,8 +519,8 @@ static NSMutableDictionary *staticFontInstaceDict;
     return srcPoint;
 }
 
-- (NSString *)getFontNameWithCurrentScale:(gcanvas::GFontStyle *)fontStyle
-                                  context:(GCanvasContext *)context
+- (NSString *)getFontNameWithCurrentScale:(gcanvas::WmFontStyle *)fontStyle
+                                  context:(WmCanvasContext *)context
 {
     NSString *fontName = [NSString stringWithUTF8String:fontStyle->GetName().c_str()];
     float scaleX = 1.0;

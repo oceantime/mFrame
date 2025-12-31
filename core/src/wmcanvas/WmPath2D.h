@@ -97,7 +97,7 @@ public:
     API_EXPORT void Rect(int x, int y, int w, int h);
 
 
-    void WriteToPath(GPath& path);
+    void WriteToPath(WmPath& path);
 
 
 private:

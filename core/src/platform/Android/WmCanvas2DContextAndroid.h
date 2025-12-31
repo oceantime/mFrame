@@ -22,7 +22,7 @@
 
 
 
-class WmCanvas2DContextAndroid : public GCanvasContext {
+class WmCanvas2DContextAndroid : public WmCanvasContext {
 
 
 public:
@@ -49,7 +49,7 @@ public:
     API_EXPORT void ClearColorToTransparent();
 
 
-    API_EXPORT void ClearColor(GColorRGBA& c);
+    API_EXPORT void ClearColor(WmColorRGBA& c);
 
 
     API_EXPORT void GetRawImageData(int width, int height, uint8_t *pixels);

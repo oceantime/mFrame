@@ -79,7 +79,7 @@ public:
     bool m_viewportchanged = false;
     bool m_bindtexture = false;
     bool m_subImage2D = false;
-    GColorRGBA mClearColor;
+    WmColorRGBA mClearColor;
     float m_device_pixel_ratio = 1.0f;
 
     std::queue<struct BitmapCmd *> mBitmapQueue;

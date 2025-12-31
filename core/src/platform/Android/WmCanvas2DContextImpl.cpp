@@ -13,7 +13,7 @@
 #include "wmcanvas/WmCanvas2dContext.h"
 #include "support/Log.h"
 
-void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x, float y,
+void WmCanvasContext::DrawTextWithLength(const char *text, int strLength, float x, float y,
                                         bool isStroke, float maxWidth) {
     if (strLength == 0) {
         strLength = static_cast<int>(strlen(text));
@@ -42,7 +42,7 @@ void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x
 
 
 void
-GCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp) {
+WmCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp) {
     if (mCurrentState == nullptr)
         return;
     if (mCurrentState->mGlobalCompositeOp == op) {

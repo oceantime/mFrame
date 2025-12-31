@@ -17,11 +17,11 @@ namespace wmcanvas
 
         font_file_name = nullptr;
 
-        style = GFontStyle::Style::NORMAL;
+        style = WmFontStyle::Style::NORMAL;
 
-        variant = GFontStyle::Variant::NORMAL;
+        variant = WmFontStyle::Variant::NORMAL;
 
-        weight = GFontStyle::Weight::NORMAL;
+        weight = WmFontStyle::Weight::NORMAL;
 
     }
 
@@ -31,22 +31,22 @@ namespace wmcanvas
     }
 
 
-    const char *GFontFamily::MatchFamilyStyle(GFontStyle &fontStyle) {
-        GFontStyle::Style style = fontStyle.GetStyle();
-        GFontStyle::Weight weight = fontStyle.GetWeight();
-        GFontStyle::Variant variant = fontStyle.GetVariant();
+    const char *GFontFamily::MatchFamilyStyle(WmFontStyle &fontStyle) {
+        WmFontStyle::Style style = fontStyle.GetStyle();
+        WmFontStyle::Weight weight = fontStyle.GetWeight();
+        WmFontStyle::Variant variant = fontStyle.GetVariant();
 
         // web属性收敛
         // Android内oblique与italic一样
-        if (style == GFontStyle::Style::OBLIQUE) {
-            style = GFontStyle::Style::ITALIC;
+        if (style == WmFontStyle::Style::OBLIQUE) {
+            style = WmFontStyle::Style::ITALIC;
         }
 
-        if (weight == GFontStyle::Weight::BOLDER || weight == GFontStyle::Weight::EXTRA_BOLD
-            || weight == GFontStyle::Weight::SEMI_BOLD) {
-            weight = GFontStyle::Weight::BOLD;
-        } else if (weight == GFontStyle::Weight::LIGHTER || weight == GFontStyle::Weight::EXTRA_LIGHT) {
-            weight = GFontStyle::Weight::LIGHT;
+        if (weight == WmFontStyle::Weight::BOLDER || weight == WmFontStyle::Weight::EXTRA_BOLD
+            || weight == WmFontStyle::Weight::SEMI_BOLD) {
+            weight = WmFontStyle::Weight::BOLD;
+        } else if (weight == WmFontStyle::Weight::LIGHTER || weight == WmFontStyle::Weight::EXTRA_LIGHT) {
+            weight = WmFontStyle::Weight::LIGHT;
         }
 
         GFontFamilyItem* closetItem = nullptr;
@@ -112,25 +112,25 @@ namespace wmcanvas
             GFontFamilyItem item;
 
             if (strstr(fontFileLowerCase, style_italic) != nullptr) {
-                item.style = GFontStyle::Style::ITALIC;
+                item.style = WmFontStyle::Style::ITALIC;
             }
 
             if (strstr(fontFileLowerCase, var_smallcaps) != nullptr) {
-                item.variant = GFontStyle::Variant::SMALL_CAPS;
+                item.variant = WmFontStyle::Variant::SMALL_CAPS;
             }
 
             if (strstr(fontFileLowerCase, weight_thin) != nullptr) {
-                item.weight = GFontStyle::Weight::THIN;
+                item.weight = WmFontStyle::Weight::THIN;
             } else if (strstr(fontFileLowerCase, weight_light) != nullptr) {
-                item.weight = GFontStyle::Weight::LIGHT;
+                item.weight = WmFontStyle::Weight::LIGHT;
             } else if (strstr(fontFileLowerCase, weight_regular) != nullptr) {
-                item.weight = GFontStyle::Weight::NORMAL;
+                item.weight = WmFontStyle::Weight::NORMAL;
             } else if (strstr(fontFileLowerCase, weight_medium) != nullptr) {
-                item.weight = GFontStyle::Weight::MEDIUM;
+                item.weight = WmFontStyle::Weight::MEDIUM;
             } else if (strstr(fontFileLowerCase, weight_bold) != nullptr) {
-                item.weight = GFontStyle::Weight::BOLD;
+                item.weight = WmFontStyle::Weight::BOLD;
             } else if (strstr(fontFileLowerCase, weight_black) != nullptr) {
-                item.weight = GFontStyle::Weight::BLACK;
+                item.weight = WmFontStyle::Weight::BLACK;
             }
 
             item.font_file_name = *it;

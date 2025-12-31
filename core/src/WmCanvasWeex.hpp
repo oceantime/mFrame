@@ -131,7 +131,7 @@ public:
     
     
     //call context API
-    void SetClearColor(const GColorRGBA &c);
+    void SetClearColor(const WmColorRGBA &c);
     void SetDevicePixelRatio(const float ratio);
     
     int GetContextType();

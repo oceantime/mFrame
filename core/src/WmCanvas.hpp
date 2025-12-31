@@ -26,7 +26,7 @@ public:
     
     API_EXPORT void OnSurfaceChanged(int x, int y, int width, int height);
     
-    GCanvasContext* GetGCanvasContext() { return mCanvasContext; }
+    WmCanvasContext* GetGCanvasContext() { return mCanvasContext; }
     float GetDevicePixelRatio() { return mCanvasContext->GetDevicePixelRatio();}
     API_EXPORT bool IsGCanvasReady();
     
@@ -37,7 +37,7 @@ public:
     WmCanvasConfig mConfig;
     WmCanvasHooks *mHooks;
     
-    GCanvasContext *mCanvasContext;
+    WmCanvasContext *mCanvasContext;
 };
 }
 

@@ -44,17 +44,17 @@ public:
     GTransform mTransform;
     
     // Clip Paths
-    std::vector<GPath*> clipPaths;
+    std::vector<WmPath*> clipPaths;
 
 
     //fill style,stroke style,shadow
-    GColorRGBA mFillColor;
+    WmColorRGBA mFillColor;
     GFillStyle *mFillStyle;
 
-    GColorRGBA mStrokeColor;
+    WmColorRGBA mStrokeColor;
     GFillStyle *mStrokeStyle;
 
-    GColorRGBA mShadowColor;
+    WmColorRGBA mShadowColor;
     float mShadowBlur;
     float mShadowOffsetX;
     float mShadowOffsetY;
@@ -69,7 +69,7 @@ public:
     float mLineDashOffset;
     
     //font style
-    wmcanvas::GFontStyle *mFont;
+    wmcanvas::WmFontStyle *mFont;
     GTextAlign mTextAlign;
     GTextBaseline mTextBaseline;
     

@@ -8,17 +8,17 @@
 #include <vector>
 
 
-GFontManager::GFontManager(unsigned w, unsigned h) : mGlyphCache(*this), mTreemap(w, h) {
+WmFontManager::WmFontManager(unsigned w, unsigned h) : mGlyphCache(*this), mTreemap(w, h) {
     mFontTexture = nullptr;
 };
 
 
-GFontManager::~GFontManager() {
+WmFontManager::~WmFontManager() {
     ClearFontBuffer();
 }
 
 
-GTexture *GFontManager::GetOrCreateFontTexture() {
+GTexture *WmFontManager::GetOrCreateFontTexture() {
     if (mFontTexture == nullptr) {
         std::vector<GCanvasLog> logVec;
         mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
@@ -33,18 +33,18 @@ GTexture *GFontManager::GetOrCreateFontTexture() {
 /**
  * dumb impl
  */
-float* GFontManager::PreMeasureTextHeight(const char *text, unsigned int text_length, GCanvasContext* context) {
+float* WmFontManager::PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext* context) {
     float *ret = new float[4];
     return ret;
 }
 
 
-float* GFontManager::MeasureTextMetrics(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle) {
+float* WmFontManager::MeasureTextMetrics(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) {
     return MeasureTextExt(text, text_length, fontStyle);
 }
 
 
-void GFontManager::ClearFontBuffer() {
+void WmFontManager::ClearFontBuffer() {
     mTreemap.Clear();
     mGlyphCache.ClearGlyphsTexture();
 
@@ -55,7 +55,7 @@ void GFontManager::ClearFontBuffer() {
 }
 
 
-bool GFontManager::LoadGlyphToTexture(GGlyph &glyph) {
+bool WmFontManager::LoadGlyphToTexture(WmGlyphs &glyph) {
     GTexture *texture = GetOrCreateFontTexture();
     GRect rect;
     bool flag = PrepareGlyphTexture((int)glyph.width, (int)glyph.height, rect);
@@ -94,7 +94,7 @@ bool GFontManager::LoadGlyphToTexture(GGlyph &glyph) {
 }
 
 
-bool GFontManager::AddGlyph(std::string& fontFileName, std::string& glyphKey, GGlyph& glyph, bool isStroke) {
+bool WmFontManager::AddGlyph(std::string& fontFileName, std::string& glyphKey, WmGlyphs& glyph, bool isStroke) {
     bool flag = LoadGlyphToTexture(glyph);
     if (flag) {
         mGlyphCache.Insert(fontFileName, glyph.charcode, glyphKey, isStroke, glyph);
@@ -105,7 +105,7 @@ bool GFontManager::AddGlyph(std::string& fontFileName, std::string& glyphKey, GG
 }
 
 
-bool GFontManager::PrepareGlyphTexture(int w, int h, GRect& rect) {
+bool WmFontManager::PrepareGlyphTexture(int w, int h, GRect& rect) {
     GSize size(w, h);
     return mTreemap.Add(size, rect);
 }

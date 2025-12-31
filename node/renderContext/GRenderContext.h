@@ -40,7 +40,7 @@ public:
     void initRenderEnviroment();
     void render2file(std::string caseName,PIC_FORMAT format);
     void drawFrame();
-    GCanvasContext *getCtx() { return mCanvas->GetGCanvasContext(); }
+    WmCanvasContext *getCtx() { return mCanvas->GetGCanvasContext(); }
     int inline getWdith() { return this->mWidth; }
     int inline getHeight() { return this->mHeight; }
     void destoryRenderEnviroment();

@@ -25,11 +25,11 @@ namespace wmcanvas
 
         const char* font_file_name;
 
-        GFontStyle::Style style;
+        WmFontStyle::Style style;
 
-        GFontStyle::Variant variant;
+        WmFontStyle::Variant variant;
 
-        GFontStyle::Weight  weight;
+        WmFontStyle::Weight  weight;
 
 
         GFontFamilyItem();
@@ -44,7 +44,7 @@ public:
     GFontFamily(std::list< const char * > &fontFamily);
     virtual ~GFontFamily() {}
 
-    API_EXPORT const char *MatchFamilyStyle(GFontStyle &fontStyle);
+    API_EXPORT const char *MatchFamilyStyle(WmFontStyle &fontStyle);
     char *GetProperFontFile();
 
 private:

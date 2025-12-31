@@ -32,9 +32,9 @@ public:
     GFrameBufferObject(GFrameBufferObject&& src);
 
 
-    bool InitFBO(int width, int height, GColorRGBA color, std::vector<GCanvasLog> *errVec = nullptr);
+    bool InitFBO(int width, int height, WmColorRGBA color, std::vector<GCanvasLog> *errVec = nullptr);
 
-    bool InitFBO(int width, int height, GColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec = nullptr);
+    bool InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec = nullptr);
 
     void BindFBO();
 
@@ -44,7 +44,7 @@ public:
 
     int DetachTexture();
 
-    void GLClearScreen(GColorRGBA color);
+    void GLClearScreen(WmColorRGBA color);
 
 
     int Width()

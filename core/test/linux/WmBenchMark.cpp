@@ -140,7 +140,7 @@ float GBenchMark::computeRatioWithW3C(std::string caseName)
     return 1.0f * correctCount / N;
 }
 
-void GBenchMark::run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height)> drawFunc)
+void GBenchMark::run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas, WmCanvasContext *ctx, int width, int height)> drawFunc)
 {
     std::shared_ptr<wmcanvas::WmCanvas> p(new wmcanvas::WmCanvas("benchMark", {true, true}, nullptr));
     p->CreateContext();

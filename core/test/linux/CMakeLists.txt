@@ -33,11 +33,11 @@ set(SRC_FILES
         ../../src/gcanvas/GCanvas2dContext.cpp
         ../../src/gcanvas/GCanvasState.cpp
         ../../src/gcanvas/GConvert.cpp
-        ../../src/gcanvas/GFontStyle.cpp
-        ../../src/gcanvas/GFontManager.cpp
+        ../../src/gcanvas/WmFontStyle.cpp
+        ../../src/gcanvas/WmFontManager.cpp
         ../../src/gcanvas/GL/GFrameBufferObject.cpp
-        ../../src/gcanvas/GGlyphCache.cpp
-        ../../src/gcanvas/GPath.cpp
+        ../../src/gcanvas/WmGlyphCache.cpp
+        ../../src/gcanvas/WmPath.cpp
         ../../src/gcanvas/GPath2D.cpp
         ../../src/gcanvas/GPathStroker.cpp
         ../../src/gcanvas/GL/GShader.cpp

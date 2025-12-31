@@ -65,13 +65,13 @@ void GFrameBufferObject::DeleteFBO() {
 }
 
 
-bool GFrameBufferObject::InitFBO(int width, int height, GColorRGBA color, std::vector<GCanvasLog> *errVec) {
+bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, std::vector<GCanvasLog> *errVec) {
     return InitFBO(width, height, color, false, errVec);
 }
 
 #ifdef IOS
 
-bool GFrameBufferObject::InitFBO(int width, int height, GColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec)
+bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec)
 {
 
     mWidth = width;
@@ -183,7 +183,7 @@ void GFrameBufferObject::BindFBO() {
     }
 }
 
-void GFrameBufferObject::GLClearScreen(GColorRGBA color) {
+void GFrameBufferObject::GLClearScreen(WmColorRGBA color) {
     glClearColor(color.rgba.r, color.rgba.g, color.rgba.b, color.rgba.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }

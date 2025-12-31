@@ -32,7 +32,7 @@ WmCanvas::WmCanvas(std::string canvasId, const WmCanvasConfig &config, WmCanvasH
 }
 
 void WmCanvas::CreateContext() {
-    mCanvasContext = new GCanvasContext(0, 0, mConfig, mHooks);
+    mCanvasContext = new WmCanvasContext(0, 0, mConfig, mHooks);
     mCanvasContext->mContextId = this->mContextId;
 }
 

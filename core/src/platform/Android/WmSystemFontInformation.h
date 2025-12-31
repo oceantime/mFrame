@@ -47,7 +47,7 @@ namespace wmcanvas {
         char *GetClosestFontFamily(void* ftLibrary,
                                    const char *currentFontLocation,
                                    const wchar_t charCode, const float width, const float height,
-                                   GFontStyle &fontStyle);
+                                   WmFontStyle &fontStyle);
 
         static SystemFontInformation *GetSystemFontInformation() {
             return &sSystemFontInformation;

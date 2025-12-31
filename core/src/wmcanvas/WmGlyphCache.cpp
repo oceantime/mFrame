@@ -9,15 +9,15 @@
 #include "WmGlyphCache.h"
 #include "WmCanvas2dContext.h"
 
-GGlyphCache::GGlyphCache(GFontManager &fontManager) :mFontManager(fontManager) {
+WmGlyphCache::WmGlyphCache(WmFontManager &fontManager) :mFontManager(fontManager) {
 
 }
 
-const GGlyph *GGlyphCache::GetGlyph(const std::string& fontName,
+const WmGlyphs *WmGlyphCache::GetGlyph(const std::string& fontName,
                                     const wchar_t charCode,
                                     const std::string &glyphKey,
                                     bool isStroke, bool autoLoadTexture) {
-    GGlyphMap::iterator iter = mGlyphs.find(make_tuple(fontName, charCode, glyphKey, isStroke));
+    WmGlyphMap::iterator iter = mGlyphs.find(make_tuple(fontName, charCode, glyphKey, isStroke));
     if (iter != mGlyphs.end()) {
         if (autoLoadTexture) {
             printf("the autoLoadTexture \n");   
@@ -38,8 +38,8 @@ const GGlyph *GGlyphCache::GetGlyph(const std::string& fontName,
 }
 
 
-void GGlyphCache::ClearGlyphsTexture() {
-    for (GGlyphMap::iterator i = mGlyphs.begin(); i != mGlyphs.end(); ++i) {
+void WmGlyphCache::ClearGlyphsTexture() {
+    for (WmGlyphMap::iterator i = mGlyphs.begin(); i != mGlyphs.end(); ++i) {
         unsigned char *buffer = i->second.bitmapBuffer;
         if (buffer != nullptr) {
             delete[] buffer;
@@ -52,7 +52,7 @@ void GGlyphCache::ClearGlyphsTexture() {
 }
 
 
-void GGlyphCache::Erase(const std::string& fontName,
+void WmGlyphCache::Erase(const std::string& fontName,
                         const wchar_t charCode,
                         const std::string &font,
                         bool isStroke) {
@@ -60,10 +60,10 @@ void GGlyphCache::Erase(const std::string& fontName,
 }
 
 
-void GGlyphCache::Insert(const std::string& fontName,
+void WmGlyphCache::Insert(const std::string& fontName,
                          const wchar_t charCode,
                          const std::string &glyphKey,
                          bool isStroke,
-                         const GGlyph &glyph) {
-    mGlyphs.insert(GGlyphMap::value_type(make_tuple(fontName, charCode, glyphKey, isStroke), glyph));
+                         const WmGlyphs &glyph) {
+    mGlyphs.insert(WmGlyphMap::value_type(make_tuple(fontName, charCode, glyphKey, isStroke), glyph));
 }

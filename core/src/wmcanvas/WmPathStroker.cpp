@@ -54,8 +54,8 @@ static void CalculateOutlinePoint(float halfLineWidthTrans, GPathOutLine& outlin
  * 1.similarity transform can directly draw
  * 2.not similarity transform should first inverse transform handle lineWidth, then transform back
  */
-void GPathStroker::StrokePath(GCanvasContext *context, GPath *path, std::vector<GVertex> *vertexVec) {
-    GColorRGBA color = BlendStrokeColor(context);
+void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vector<WmVertex> *vertexVec) {
+    WmColorRGBA color = BlendStrokeColor(context);
     GTransform& transform = context->mCurrentState->mTransform;
     bool isSimilarity = GTransformIsSimilarity(context->mCurrentState->mTransform);
     bool drawCapFlag = context->LineCap() != LINE_CAP_BUTT;
@@ -199,8 +199,8 @@ void GPathStroker::FilterTooClosePoints(std::vector<GPoint> &pts) {
 
 
 
-void GPathStroker::DrawLineJoin(GCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
-                                GColorRGBA color, GTransform& transform, std::vector<GVertex> *vertexVec) {
+void GPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
+                                WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vertexVec) {
     // angle changed
     float nextAngle = wmcanvas::CalcPointAngle(lineTwo.to, lineTwo.from);
     float curAngle = wmcanvas::CalcPointAngle(lineOne.from, lineOne.to);
@@ -238,9 +238,9 @@ void GPathStroker::DrawLineJoin(GCanvasContext* context, float halfLineWidth, GP
 
 
 
-void GPathStroker::DrawArcForCapOrJoin(GCanvasContext *context, float halfLineWidth,
+void GPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
                              GPoint& center, GPoint& p1, GPoint& p2,
-                             GColorRGBA color, GTransform& transform, std::vector<GVertex> *vec,
+                             WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
                              float samePointThreshold) {
     // filter invalid point
     bool fixAndroidCompatible = false;
@@ -315,9 +315,9 @@ void GPathStroker::DrawArcForCapOrJoin(GCanvasContext *context, float halfLineWi
 }
 
 
-void GPathStroker::DrawLineCap(GCanvasContext *context, float halfLineWidth,
+void GPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
                 GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
-                GColorRGBA color, GTransform& transform, std::vector<GVertex> *vec,
+                WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
                 float samePointThreshold) {
     if (context->LineCap() == LINE_CAP_SQUARE) {
         context->PushQuad(p1, p2, PointMake(p2.x + deltaX, p2.y + deltaY),
@@ -329,9 +329,9 @@ void GPathStroker::DrawLineCap(GCanvasContext *context, float halfLineWidth,
 
 
 
-void GPathStroker::DrawMiterJoin(GCanvasContext *context, float halfLineWidth,
+void GPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
                                  const GPoint &center, const GPoint &p1, const GPoint &p2,
-                                 GColorRGBA color, GTransform transform, std::vector<GVertex> *vec) {
+                                 WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec) {
     float angle1 = wmcanvas::CalcPointAngle(p1, center);
     float angle2 = wmcanvas::CalcPointAngle(p2, center);
 

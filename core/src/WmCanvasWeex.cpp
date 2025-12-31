@@ -44,7 +44,7 @@ void GCanvasWeex::CreateContext() {
 #ifdef ANDROID
     mCanvasContext = new WmCanvas2DContextAndroid(0, 0, mConfig);
 #else
-    mCanvasContext = new GCanvasContext(0, 0, mConfig);
+    mCanvasContext = new WmCanvasContext(0, 0, mConfig);
 #endif
     mCanvasContext->mContextId = this->mContextId;
 }
@@ -63,7 +63,7 @@ void GCanvasWeex::Clear() {
 }
 
 
-void GCanvasWeex::SetClearColor(const GColorRGBA &c) {
+void GCanvasWeex::SetClearColor(const WmColorRGBA &c) {
     mCanvasContext->SetClearColor(c);
 }
 
@@ -147,7 +147,7 @@ void GCanvasWeex::drawFBO(std::string fboName, WmCompositeOperation compositeOp,
 
     mCanvasContext->DoSetGlobalCompositeOperation(compositeOp, compositeOp);
 
-    GColorRGBA color = GColorWhite;
+    WmColorRGBA color = GColorWhite;
     mCanvasContext->mCurrentState->mShader->SetOverideTextureColor(0);
     mCanvasContext->mCurrentState->mShader->SetHasTexture(1);
     fbo.mFboTexture.Bind();
@@ -234,7 +234,7 @@ void GCanvasWeex::Render(const char *renderCommands, int length) {
         glClearColor(0, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-        drawFBO(GCanvasContext::DefaultFboName);
+        drawFBO(WmCanvasContext::DefaultFboName);
     }
 }
 
@@ -673,7 +673,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
                     ++p;
                 }
                 if (*p == ';') ++p;
-                GColorRGBA color = StrValueToColorRGBA(str);
+                WmColorRGBA color = StrValueToColorRGBA(str);
                 mCanvasContext->SetFillStyle(color);
                 break;
             }
@@ -688,7 +688,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
                     ++p;
                 }
                 if (*p == ';') ++p;
-                GColorRGBA color = StrValueToColorRGBA(str);
+                WmColorRGBA color = StrValueToColorRGBA(str);
                 mCanvasContext->SetStrokeStyle(color);
                 break;
             }
@@ -761,7 +761,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
             case 'p': {
                 p++;
                 // clip
-                mCanvasContext->GCanvasContext::ClipRegion();
+                mCanvasContext->WmCanvasContext::ClipRegion();
                 if (*p == ';') ++p;
                 break;
             }
@@ -1099,7 +1099,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
         if (mCanvasContext->mCurrentState->mFont != nullptr) {
             delete mCanvasContext->mCurrentState->mFont;
         }
-        mCanvasContext->mCurrentState->mFont = new GFontStyle("20px");
+        mCanvasContext->mCurrentState->mFont = new WmFontStyle("20px");
 #endif
         char fpsString[20];
         snprintf(fpsString, sizeof(fpsString), "%.0f", mFps);

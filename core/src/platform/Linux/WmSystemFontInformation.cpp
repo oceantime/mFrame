@@ -180,8 +180,8 @@ namespace wmcanvas {
 
 
     char *SystemFontInformation::GetClosestFontFamily(
-            GCanvasContext *context, const char *currentFontLocation,
-            const wchar_t charCode, const float size, GFontStyle &fontStyle) {
+            WmCanvasContext *context, const char *currentFontLocation,
+            const wchar_t charCode, const float size, WmFontStyle &fontStyle) {
         const char *currentFontFile = nullptr;
         std::string fontFileFullPath = currentFontLocation;
         std::string fontFileName = fontFileFullPath;

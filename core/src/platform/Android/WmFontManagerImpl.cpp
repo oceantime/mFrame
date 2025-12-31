@@ -12,7 +12,7 @@
 //#include "WmFontManagerAndroid.h"
 //
 //
-//GFontManager *GFontManager::NewInstance(GCanvasContext *context) {
+//WmFontManager *WmFontManager::NewInstance(WmCanvasContext *context) {
 //    return new GFontManagerAndroid(context);
 //}
 //

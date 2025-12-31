@@ -18,7 +18,7 @@
 #include <tuple>
 #include <unordered_map>
 
-class GCanvasContext;
+class WmCanvasContext;
 
 typedef std::tuple<std::string, wchar_t, std::string, bool> key_tuple;
 
@@ -45,7 +45,7 @@ struct key_equal : public std::binary_function<key_tuple, key_tuple, bool>
 };
 
 
-struct GGlyph
+struct WmGlyphs
 {
     /**
      * Wide character this glyph represents
@@ -126,20 +126,20 @@ struct GGlyph
 };
 
 // key_tuple: <simpleFontName, charCode, fullFontName, isStroke>
-typedef std::unordered_map<key_tuple, GGlyph, key_hash, key_equal> GGlyphMap;
+typedef std::unordered_map<key_tuple, WmGlyphs, key_hash, key_equal> WmGlyphMap;
 
 
-class GFontManager;
+class WmFontManager;
 
 
-class GGlyphCache
+class WmGlyphCache
 {
 public:
-    GGlyphCache(GFontManager &fontManager);
+    WmGlyphCache(WmFontManager &fontManager);
 
-    ~GGlyphCache() {};
+    ~WmGlyphCache() {};
 
-    const GGlyph *GetGlyph(const std::string &fontName, const wchar_t charcode,
+    const WmGlyphs *GetGlyph(const std::string &fontName, const wchar_t charcode,
                            const std::string &fullFontName, bool isStroke, bool autoLoadTexture = true);
 
 
@@ -148,18 +148,18 @@ public:
 
     void
     Insert(const std::string &fontName, const wchar_t charcode, const std::string &font, bool isStroke,
-           const GGlyph &glyph);
+           const WmGlyphs &glyph);
 
     void ClearGlyphsTexture();
 
 private:
 
-    bool LoadGlyphToTexture(GGlyph &glyph);
+    bool LoadGlyphToTexture(WmGlyphs &glyph);
 
 private:
-    // GCanvasContext *mContext;
-    GFontManager &mFontManager;
-    GGlyphMap mGlyphs;
+    // WmCanvasContext *mContext;
+    WmFontManager &mFontManager;
+    WmGlyphMap mGlyphs;
 };
 
 #endif /* GCANVAS_GGLYPHCACHE_H */

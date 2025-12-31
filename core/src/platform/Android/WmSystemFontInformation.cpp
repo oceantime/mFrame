@@ -184,7 +184,7 @@ namespace wmcanvas {
 
     char *SystemFontInformation::GetClosestFontFamily(
             void* ftLibrary, const char *currentFontLocation,
-            const wchar_t charCode, const float width, const float height, GFontStyle &fontStyle) {
+            const wchar_t charCode, const float width, const float height, WmFontStyle &fontStyle) {
         const char *currentFontFile = nullptr;
         std::string fontFileFullPath = currentFontLocation;
         std::string fontFileName;
@@ -196,7 +196,7 @@ namespace wmcanvas {
             if (currentFontFile != nullptr) {
                 fontFileName = fontFileFullPath + currentFontFile;
 
-                if (GFT_IsCharInFontFile((FT_Library)ftLibrary, charCode, fontFileName.data(),
+                if (WmFT_IsCharInFontFile((FT_Library)ftLibrary, charCode, fontFileName.data(),
                                  width, height)) {
                     break;
                 } else {
@@ -211,7 +211,7 @@ namespace wmcanvas {
                 currentFontFile = *it;
                 if (currentFontFile != nullptr) {
                     fontFileName = fontFileFullPath + currentFontFile;
-                    if (GFT_IsCharInFontFile((FT_Library)ftLibrary, charCode, fontFileName.data(),
+                    if (WmFT_IsCharInFontFile((FT_Library)ftLibrary, charCode, fontFileName.data(),
                                              width, height)) {
                         break;
                     } else {

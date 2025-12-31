@@ -20,7 +20,7 @@ using NSFontTool::TypefaceProvider;
 static GFontCache *sSharedFontInstance;
 
 using namespace wmcanvas;
-GFontCache::GFontCache(GFontManager &fontManager) : mFontManager(fontManager)
+GFontCache::GFontCache(WmFontManager &fontManager) : mFontManager(fontManager)
 {
 }
 
@@ -35,16 +35,16 @@ void GFontCache::Clear()
         //delete iter->second.fallbackFont;
     }
 
-     wmcanvas::GFT_DisposeLibrarySafe(mFtLibrary);
+     wmcanvas::WmFT_DisposeLibrarySafe(mFtLibrary);
     mFtLibrary = nullptr;
 
     mFontCache.clear();
 }
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 
-GFont *
-GFontCache::GetOrCreateFont(GFontStyle *fontStyle,
+WmFont *
+GFontCache::GetOrCreateFont(WmFontStyle *fontStyle,
                             wchar_t charCode, const float size)
 {
     if (!this->LazyInitFontLibrary())
@@ -89,7 +89,7 @@ GFontCache::GetOrCreateFont(GFontStyle *fontStyle,
         return nullptr;
     }
 
-    GFont *font = new GFont(mFontManager, face->source.data());
+    WmFont *font = new WmFont(mFontManager, face->source.data());
     font->SetFtLibrary(this->mFtLibrary);
     GFontSet &fontSet = mFontCache[key];
     fontSet.font = font;
@@ -100,7 +100,7 @@ bool GFontCache::LazyInitFontLibrary()
 {
     if (mFtLibrary == nullptr)
     {
-        return wmcanvas::GFT_InitLibrary(&mFtLibrary);
+        return wmcanvas::WmFT_InitLibrary(&mFtLibrary);
     }
     return true;
 }

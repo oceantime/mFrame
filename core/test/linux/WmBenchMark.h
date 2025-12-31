@@ -20,7 +20,7 @@ public:
     void intilGLOffScreenEnviroment();
 
     float computeRatioWithW3C(std::string caseName);
-    void run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)> drawFunc);
+    void run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  WmCanvasContext *mCanvasContext,int width,int height)> drawFunc);
 
     void dumpResult();
 private:

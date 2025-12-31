@@ -50,13 +50,13 @@ static void NormalizeAngles(float& startAngle, float& endAngle, bool anticlockwi
 
 
 
-GPath::GPath() {
+WmPath::WmPath() {
     Reset();
     mTransform = GTransformIdentity;
 }
 
 
-GPath::GPath(const GPath &other) {
+WmPath::WmPath(const WmPath &other) {
     needNewSubPath = other.needNewSubPath;
     mStartPosition = other.mStartPosition;
     mCurrentPosition = other.mCurrentPosition;
@@ -79,12 +79,12 @@ GPath::GPath(const GPath &other) {
 }
 
 
-GPath::~GPath() {
+WmPath::~WmPath() {
     ClearSubPath();
 }
 
 
-void GPath::Reset() {
+void WmPath::Reset() {
     ClearSubPath();
 
     needNewSubPath = true;
@@ -98,7 +98,7 @@ void GPath::Reset() {
 }
 
 
-void GPath::ClearSubPath() {
+void WmPath::ClearSubPath() {
     for (int i = 0; i < mPathStack.size(); i++) {
         delete mPathStack[i];
     }
@@ -113,7 +113,7 @@ void GPath::ClearSubPath() {
  * create a new subpath whose first point is the same as the previous subpath's first point,
  * and finally add this new subpath to the path.
  */
-void GPath::Close() {
+void WmPath::Close() {
     if (mPathStack.size() <= 0) {
         return;
     }
@@ -127,7 +127,7 @@ void GPath::Close() {
 
 
 
-void GPath::EnsureSubPathAtPoint(float x, float y) {
+void WmPath::EnsureSubPathAtPoint(float x, float y) {
     if (!needNewSubPath) {
         return;
     }
@@ -137,14 +137,14 @@ void GPath::EnsureSubPathAtPoint(float x, float y) {
 }
 
 
-void GPath::MoveTo(float x, float y) {
+void WmPath::MoveTo(float x, float y) {
     GPoint p = TransformPoint(x, y);
     NewSubPath(p.x, p.y);
     needNewSubPath = false;
 }
 
 
-void GPath::LineTo(float x, float y) {
+void WmPath::LineTo(float x, float y) {
     GPoint p = TransformPoint(x, y);
     if (mPathStack.size() <= 0) {
         EnsureSubPathAtPoint(p.x, p.y);
@@ -154,7 +154,7 @@ void GPath::LineTo(float x, float y) {
 }
 
 
-void GPath::Rect(float x, float y, float w, float h) {
+void WmPath::Rect(float x, float y, float w, float h) {
     MoveTo(x, y);
     LineTo(x + w, y);
     LineTo(x + w, y + h);
@@ -164,7 +164,7 @@ void GPath::Rect(float x, float y, float w, float h) {
 
 
 
-void GPath::QuadraticCurveTo(float cpx, float cpy, float x, float y) {
+void WmPath::QuadraticCurveTo(float cpx, float cpy, float x, float y) {
     GPoint cp = TransformPoint(cpx, cpy);
     GPoint p = TransformPoint(x, y);
 
@@ -184,7 +184,7 @@ void GPath::QuadraticCurveTo(float cpx, float cpy, float x, float y) {
 }
 
 
-void GPath::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y,
+void WmPath::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y,
                           float x, float y) {
     // mDistanceTolerance = G_PATH_DISTANCE_EPSILON / scale;
     // mDistanceTolerance *= mDistanceTolerance;
@@ -209,14 +209,14 @@ void GPath::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y,
 /**
  * TODO
  */
-API_EXPORT void GPath::Ellipse(float x, float y, float radiusX, float radiusY, float rotation, float startAngle,
+API_EXPORT void WmPath::Ellipse(float x, float y, float radiusX, float radiusY, float rotation, float startAngle,
                                float endAngle, bool antiClockwise) {
 
 }
 
 
 
-void GPath::ArcTo(float x1, float y1, float x2, float y2, float radius) {
+void WmPath::ArcTo(float x1, float y1, float x2, float y2, float radius) {
     // Lifted from http://code.google.com/p/fxcanvas/
     GPoint cp1 = TransformPoint(x1, y1);
     EnsureSubPathAtPoint(cp1.x, cp1.y);
@@ -253,7 +253,7 @@ void GPath::ArcTo(float x1, float y1, float x2, float y2, float radius) {
 }
 
 
-void GPath::Arc(float cx, float cy, float radius, float startAngle,
+void WmPath::Arc(float cx, float cy, float radius, float startAngle,
                 float endAngle, bool antiClockwise) {
     NormalizeAngles(startAngle, endAngle, antiClockwise);
 
@@ -316,7 +316,7 @@ void GPath::Arc(float cx, float cy, float radius, float startAngle,
 }
 
 
-void GPath::NewSubPath(float x, float y) {
+void WmPath::NewSubPath(float x, float y) {
     GPoint pos = PointMake(x, y);
     GSubPath* subPath = new GSubPath();
     subPath->isClosed = false;
@@ -327,16 +327,16 @@ void GPath::NewSubPath(float x, float y) {
 }
 
 
-GSubPath* GPath::GetCurPath() {
+GSubPath* WmPath::GetCurPath() {
     return mPathStack[mPathStack.size() - 1];
 }
 
 
-void GPath::PushPoint(GPoint pt) { PushPoint(pt.x, pt.y); }
+void WmPath::PushPoint(GPoint pt) { PushPoint(pt.x, pt.y); }
 
 
 
-void GPath::PushPoint(float x, float y) {
+void WmPath::PushPoint(float x, float y) {
     GPoint p = PointMake(x, y);
 
     GSubPath* curPath = GetCurPath();
@@ -357,7 +357,7 @@ void GPath::PushPoint(float x, float y) {
 
 
 
-void GPath::ClipRegion(GCanvasContext *context) {
+void WmPath::ClipRegion(WmCanvasContext *context) {
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
     glEnable(GL_STENCIL_TEST);
@@ -395,7 +395,7 @@ void GPath::ClipRegion(GCanvasContext *context) {
 }
 
 
-//void GPath::PushTriangleFanPoints(GCanvasContext *context, tSubPath* subPath, GColorRGBA color) {
+//void WmPath::PushTriangleFanPoints(WmCanvasContext *context, tSubPath* subPath, WmColorRGBA color) {
 //    std::vector<GPoint> &pts = subPath->points;
 //    if (subPath->isClosed) {
 //        context->PushTriangleFanPoints(pts, color);
@@ -409,10 +409,10 @@ void GPath::ClipRegion(GCanvasContext *context) {
 //}
 
 
-void GPath::Fill(GCanvasContext *context, GFillRule rule, GFillTarget target, bool needTransform) {
+void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, bool needTransform) {
     context->SendVertexBufferToGPU();
     
-    GColorRGBA color = BlendColor(context, context->mCurrentState->mFillColor);
+    WmColorRGBA color = BlendColor(context, context->mCurrentState->mFillColor);
     
     // Disable drawing to the color buffer, enable the stencil buffer
     if (context->mCurrentState->mShader) {
@@ -433,7 +433,7 @@ void GPath::Fill(GCanvasContext *context, GFillRule rule, GFillTarget target, bo
     
     // Clear the needed area in the stencil buffer
     glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
-    GColorRGBA white = {1,1,1,1};
+    WmColorRGBA white = {1,1,1,1};
     
     GPoint minPos = mMinPosition;
     GPoint maxPos = mMaxPosition;
@@ -517,7 +517,7 @@ void GPath::Fill(GCanvasContext *context, GFillRule rule, GFillTarget target, bo
 }
 
 
-std::vector<GSubPath*>* GPath::CreateLineDashPath(GCanvasContext *context) {
+std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
     std::vector<float> lineDash = context->LineDash();
     std::vector<float> firstLineDash = context->LineDash();
     bool firstNeedDraw = true;
@@ -641,15 +641,15 @@ std::vector<GSubPath*>* GPath::CreateLineDashPath(GCanvasContext *context) {
 }
 
 
-void GPath::Stroke(GCanvasContext *context, GColorRGBA color, std::vector<GVertex> *vertexVec) {
+void WmPath::Stroke(WmCanvasContext *context, WmColorRGBA color, std::vector<WmVertex> *vertexVec) {
     stroker.StrokePath(context, this, vertexVec);
 }
 
 
-void GPath::Stroke(GCanvasContext *context) {
+void WmPath::Stroke(WmCanvasContext *context) {
     context->SetTexture(InvalidateTextureId);
-    GColorRGBA color = BlendStrokeColor(context);
-    std::vector<GVertex> vertexVec;
+    WmColorRGBA color = BlendStrokeColor(context);
+    std::vector<WmVertex> vertexVec;
     if (color.rgba.a < 1.0) { //transparent, use stencil buffer
         Stroke(context, color, &vertexVec);
         StencilRectForStroke(context, vertexVec);
@@ -659,9 +659,9 @@ void GPath::Stroke(GCanvasContext *context) {
 }
 
 
-void GPath::DrawVertexToContext(GCanvasContext *context, std::vector<GVertex> &vertexVec) {
+void WmPath::DrawVertexToContext(WmCanvasContext *context, std::vector<WmVertex> &vertexVec) {
     context->SetTexture(InvalidateTextureId);
-    GColorRGBA color = BlendStrokeColor(context);
+    WmColorRGBA color = BlendStrokeColor(context);
     
     if (color.rgba.a < 1.0) { //transparent, use stencil buffer
         StencilRectForStroke(context, vertexVec);
@@ -672,9 +672,9 @@ void GPath::DrawVertexToContext(GCanvasContext *context, std::vector<GVertex> &v
 
 
 
-void GPath::StencilRectForStroke(GCanvasContext *context, std::vector<GVertex> &vertexVec) {
+void WmPath::StencilRectForStroke(WmCanvasContext *context, std::vector<WmVertex> &vertexVec) {
     context->SendVertexBufferToGPU();
-    GColorRGBA color = BlendStrokeColor(context);
+    WmColorRGBA color = BlendStrokeColor(context);
     
     //set environment
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -683,7 +683,7 @@ void GPath::StencilRectForStroke(GCanvasContext *context, std::vector<GVertex> &
     // clear stencil buffer
     glStencilFunc(GL_ALWAYS, 0, 0xff);
     glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
-    GColorRGBA white = {1,1,1,1};
+    WmColorRGBA white = {1,1,1,1};
     
     float scale = GTransformGetScaleX(mTransform);
     float width = scale * context->LineWidth();
@@ -727,7 +727,7 @@ void GPath::StencilRectForStroke(GCanvasContext *context, std::vector<GVertex> &
 }
 
 
-void GPath::SubdivideCubicTo(GPath *path, GPoint points[4], int level) {
+void WmPath::SubdivideCubicTo(WmPath *path, GPoint points[4], int level) {
     if (--level >= 0) {
         GPoint tmp[7];
 
@@ -742,7 +742,7 @@ void GPath::SubdivideCubicTo(GPath *path, GPoint points[4], int level) {
 }
 
 
-void GPath::ChopCubicAt(GPoint src[4], GPoint dst[7], float t) {
+void WmPath::ChopCubicAt(GPoint src[4], GPoint dst[7], float t) {
     GPoint tt = PointMake(t, t);
 
     GPoint ab = Interp(src[0], src[1], tt);
@@ -762,22 +762,22 @@ void GPath::ChopCubicAt(GPoint src[4], GPoint dst[7], float t) {
 }
 
 
-GPoint GPath::Interp(const GPoint &v0, const GPoint &v1, const GPoint &t) {
+GPoint WmPath::Interp(const GPoint &v0, const GPoint &v1, const GPoint &t) {
     return PointMake(v0.x + (v1.x - v0.x) * t.x, v0.y + (v1.y - v0.y) * t.y);
 }
 
 
-void GPath::GetRect(GRectf& rect) {
+void WmPath::GetRect(WmRectf& rect) {
     rect.leftTop = mMinPosition;
     rect.bottomRight = mMaxPosition;
     rect.isTransformed = true;
 }
 
 
-void GPath::GetRectCoverVertex(GRectf &rect, std::vector<GVertex> &vertexVec) {
+void WmPath::GetRectCoverVertex(WmRectf &rect, std::vector<WmVertex> &vertexVec) {
     float topX = 0, topY = 0, bottomX = 0, bottomY = 0;
     for (int i = 0; i < vertexVec.size(); i++) {
-        GVertex &vertex = vertexVec[i];
+        WmVertex &vertex = vertexVec[i];
         if (i == 0) {
             topX = vertex.pos.x;
             topY = vertex.pos.y;
@@ -796,7 +796,7 @@ void GPath::GetRectCoverVertex(GRectf &rect, std::vector<GVertex> &vertexVec) {
 }
 
 
-//void GPath::RestoreStencilForClip(GCanvasContext *context) {
+//void WmPath::RestoreStencilForClip(WmCanvasContext *context) {
 //    if (context->HasClipRegion()) {
 //        // reset stencil
 //        glClear(GL_STENCIL_BUFFER_BIT);
@@ -810,7 +810,7 @@ void GPath::GetRectCoverVertex(GRectf &rect, std::vector<GVertex> &vertexVec) {
 //}
 
 
-void GPath::SetStencilForClip() {
+void WmPath::SetStencilForClip() {
     GLuint mask = 0x80;
     glStencilMask(mask);
     glStencilFunc(GL_EQUAL, mask, mask);
@@ -818,7 +818,7 @@ void GPath::SetStencilForClip() {
 }
 
 
-GPoint GPath::TransformPoint(float x, float y) {
+GPoint WmPath::TransformPoint(float x, float y) {
     if(!GTransformIsIdentity(mTransform) ){
         return GPointApplyGTransform(PointMake(x, y), mTransform);
     } else {

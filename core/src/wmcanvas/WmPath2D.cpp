@@ -63,7 +63,7 @@ void GPath2D::AddPath(GPath2D &other, GTransform &transform) {
 }
 
 
-void GPath2D::WriteToPath(GPath &path) {
+void GPath2D::WriteToPath(WmPath &path) {
     for (int i = 0; i < cmds.size(); i++) {
         GPathCmd *item = cmds[i];
         // decode and fill

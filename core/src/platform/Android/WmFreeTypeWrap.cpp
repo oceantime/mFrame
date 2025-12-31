@@ -11,7 +11,7 @@
 #include <support/Log.h>
 #include "WmFreeTypeWrap.h"
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_STROKER_H
@@ -56,7 +56,7 @@ const struct
     /**
      * init FT_Library
      */
-    bool GFT_InitLibrary(FT_Library * library)
+    bool WmFT_InitLibrary(FT_Library * library)
     {
         if (library == nullptr)
         {
@@ -66,7 +66,7 @@ const struct
         FT_Error error = FT_Init_FreeType(library);
         if (error)
         {
-            LOG_E("GFT_InitLibrary:error,%s", getErrorMessage(error));
+            LOG_E("WmFT_InitLibrary:error,%s", getErrorMessage(error));
             return false;
         }
         return true;
@@ -75,7 +75,7 @@ const struct
     /**
      * try load filename face, if not
      */
-    bool GFT_LoadFace(FT_Library library, FT_Face * face,
+    bool WmFT_LoadFace(FT_Library library, FT_Face * face,
                       const char *filename, float width, float height)
     {
         if (library == nullptr)
@@ -132,7 +132,7 @@ const struct
         if (error)
         {
             printf("FT_New_Face error \n");
-            LOG_E("GFT_LoadFace %s fail: FT_New_Face error=%s", filename, getErrorMessage(error));
+            LOG_E("WmFT_LoadFace %s fail: FT_New_Face error=%s", filename, getErrorMessage(error));
             return false;
         }
 
@@ -140,7 +140,7 @@ const struct
         if (error)
         {
             printf("FT_Select_Charmap error \n");
-            LOG_E("GFT_LoadFace %s fail: FT_Select_Charmap error=%s", filename,
+            LOG_E("WmFT_LoadFace %s fail: FT_Select_Charmap error=%s", filename,
                   getErrorMessage(error));
             return false;
         }
@@ -148,7 +148,7 @@ const struct
         bool flag;
         if (width > 0 && height > 0)
         {
-            flag = GFT_SetFaceCharSize(*face, width, height);
+            flag = WmFT_SetFaceCharSize(*face, width, height);
             if (!flag)
             {
                 return false;
@@ -159,7 +159,7 @@ const struct
         return true;
     }
 
-    bool GFT_SetFaceCharSize(FT_Face face, float newWidth, float newHeight)
+    bool WmFT_SetFaceCharSize(FT_Face face, float newWidth, float newHeight)
     {
         size_t hres = 64;
         // FT_Matrix matrix = {(int) ((1.0 / hres) * 0x10000L), (int) ((0.0) * 0x10000L),
@@ -179,27 +179,27 @@ const struct
      * check char is in font file, will load face first
      * this call is costly, use carefully
      */
-    bool GFT_IsCharInFontFile(FT_Library library, const wchar_t charCode,
+    bool WmFT_IsCharInFontFile(FT_Library library, const wchar_t charCode,
                               const char *filename, float width, float height)
     {
         FT_Face face = nullptr;
         bool exist = false;
-        if (GFT_LoadFace(library, &face, filename, width, height))
+        if (WmFT_LoadFace(library, &face, filename, width, height))
         {
-            exist = GFT_IsCharInFace(face, charCode);
+            exist = WmFT_IsCharInFace(face, charCode);
         }
         else
         {
             // load face fail, ignore
         }
-        GFT_DisposeFaceSafe(face);
+        WmFT_DisposeFaceSafe(face);
         return exist;
     }
 
     /**
      * check charCode in FT_Face
      */
-    bool GFT_IsCharInFace(FT_Face face, const wchar_t charCode)
+    bool WmFT_IsCharInFace(FT_Face face, const wchar_t charCode)
     {
         bool exist = true;
         if (face == nullptr)
@@ -219,7 +219,7 @@ const struct
         return exist;
     }
 
-    void GFT_DisposeFaceSafe(FT_Face face)
+    void WmFT_DisposeFaceSafe(FT_Face face)
     {
         if (face == nullptr)
         {
@@ -228,7 +228,7 @@ const struct
         FT_Done_Face(face);
     }
 
-    void GFT_DisposeLibrarySafe(FT_Library library)
+    void WmFT_DisposeLibrarySafe(FT_Library library)
     {
         if (library == nullptr)
         {
@@ -237,7 +237,7 @@ const struct
         FT_Done_FreeType(library);
     }
 
-    void GFT_DisposeGlyphSafe(FT_Glyph glyph)
+    void WmFT_DisposeGlyphSafe(FT_Glyph glyph)
     {
         if (glyph == nullptr)
         {
@@ -246,7 +246,7 @@ const struct
         FT_Done_Glyph(glyph);
     }
 
-    void GFT_DisposeStrokeSafe(FT_Stroker stroker)
+    void WmFT_DisposeStrokeSafe(FT_Stroker stroker)
     {
         if (stroker == nullptr)
         {

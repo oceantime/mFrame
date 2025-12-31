@@ -14,17 +14,17 @@
 #include <map>
 #include <export.h>
 
-class GCanvasContext;
+class WmCanvasContext;
 
 
 namespace wmcanvas
 {
-class GFontStyle final
+class WmFontStyle final
 {
 public:
-    API_EXPORT GFontStyle(const char *font = nullptr, float ratio = 1.0);
+    API_EXPORT WmFontStyle(const char *font = nullptr, float ratio = 1.0);
 
-    API_EXPORT ~GFontStyle();
+    API_EXPORT ~WmFontStyle();
 
     enum class Style
     {

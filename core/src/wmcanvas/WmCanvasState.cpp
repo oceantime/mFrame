@@ -87,7 +87,7 @@ void GCanvasState::Clone(const GCanvasState& state) {
     }
 
     if (state.mFont != nullptr) {
-        mFont = new wmcanvas::GFontStyle(*state.mFont);
+        mFont = new wmcanvas::WmFontStyle(*state.mFont);
     } else {
         mFont = nullptr;
     }
@@ -96,7 +96,7 @@ void GCanvasState::Clone(const GCanvasState& state) {
     ClearClip();
     if (state.clipPaths.size() > 0) {
         for (int i = 0; i < state.clipPaths.size(); i++) {
-            GPath* gp = new GPath(*state.clipPaths[i]);
+            WmPath* gp = new WmPath(*state.clipPaths[i]);
             clipPaths.push_back(gp);
         }
     }

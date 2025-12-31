@@ -83,7 +83,7 @@ public:
     struct ColorStop
     {
         float pos;
-        GColorRGBA color;
+        WmColorRGBA color;
     };
 
     FillStyleLinearGradient(const GPoint &start_pos, const GPoint &end_pos)
@@ -137,7 +137,7 @@ public:
     struct ColorStop
     {
         float pos;
-        GColorRGBA color;
+        WmColorRGBA color;
     };
 
     FillStyleRadialGradient(const float *start, const float *end)

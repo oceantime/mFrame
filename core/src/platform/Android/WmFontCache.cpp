@@ -22,7 +22,7 @@ using namespace wmcanvas;
 
 
 
-GFontCache::GFontCache(GFontManager *fontManager) : mFontManager(fontManager) {
+GFontCache::GFontCache(WmFontManager *fontManager) : mFontManager(fontManager) {
     mFtLibrary = nullptr;
 }
 
@@ -40,7 +40,7 @@ void GFontCache::Clear() {
     size_t fontRefSize = mFontRefMap.size();
     mFontRefMap.clear();
 
-    wmcanvas::GFT_DisposeLibrarySafe(mFtLibrary);
+    wmcanvas::WmFT_DisposeLibrarySafe(mFtLibrary);
     mFtLibrary = nullptr;
 
     LOG_E("GFontCache(%p) Clear:fontRefMap size=%u, fontMap size=%u",
@@ -48,7 +48,7 @@ void GFontCache::Clear() {
 }
 
 
-GFont *GFontCache::GetOrCreateFont(GFontStyle *fontStyle, wchar_t charCode) {
+WmFont *GFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
     if (!LazyInitFontLibrary()) {
         return nullptr;
     }
@@ -130,7 +130,7 @@ GFont *GFontCache::GetOrCreateFont(GFontStyle *fontStyle, wchar_t charCode) {
         fontFileFullPath += currentFontFile;
     }
 
-    GFont* font = nullptr;
+    WmFont* font = nullptr;
     auto newIter = mFontMap.find(fontFileFullPath);
     if (mFontMap.find(fontFileFullPath) != mFontMap.end()) {
         font = newIter->second;
@@ -194,7 +194,7 @@ char *GFontCache::TryDefaultFallbackFont(const wchar_t charCode,
 
 bool GFontCache::LazyInitFontLibrary() {
     if (mFtLibrary == nullptr) {
-        return wmcanvas::GFT_InitLibrary(&mFtLibrary);
+        return wmcanvas::WmFT_InitLibrary(&mFtLibrary);
     }
     return true;
 }
@@ -208,7 +208,7 @@ char * GFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath,
             result = (char*)fileName;
         }
     } else {
-        GFont* font = LoadAndSaveFont(fileFullPath);
+        WmFont* font = LoadAndSaveFont(fileFullPath);
         if (font->IsCharInFont(charCode)) {
             result = (char*)fileName;
         }
@@ -220,11 +220,11 @@ char * GFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath,
 }
 
 
-GFont* GFontCache::LoadAndSaveFont(const char* fontFileName) {
-    GFont *font = new GFont(*mFontManager, fontFileName);
+WmFont* GFontCache::LoadAndSaveFont(const char* fontFileName) {
+    WmFont *font = new WmFont(*mFontManager, fontFileName);
     font->SetFtLibrary(mFtLibrary);
     // save to font map
-    mFontMap.insert(std::pair<std::string, GFont*>(fontFileName, font));
+    mFontMap.insert(std::pair<std::string, WmFont*>(fontFileName, font));
     // LOG_E("LoadAndSaveFont:%s, font=%p", fontFileName, font);
     return font;
 }

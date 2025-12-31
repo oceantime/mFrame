@@ -18,48 +18,48 @@
 #include <vector>
 
 
-class GCanvasContext;
+class WmCanvasContext;
 
 #define FontTextureWidth        2048
 #define FontTextureHeight       2048
 
 namespace wmcanvas
 {
-    class GFontStyle;
+    class WmFontStyle;
 }
 
-class GFontManager
+class WmFontManager
 {
 public:
 
-    static GFontManager *NewInstance();
-    virtual  ~GFontManager();
+    static WmFontManager *NewInstance();
+    virtual  ~WmFontManager();
 
     bool PrepareGlyphTexture(int w, int h, GRect& rect);
 
-    bool AddGlyph(std::string& fontFileName, std::string& glyphKey, GGlyph& glyph, bool isStroke);
+    bool AddGlyph(std::string& fontFileName, std::string& glyphKey, WmGlyphs& glyph, bool isStroke);
 
-    bool LoadGlyphToTexture(GGlyph& glyph);
+    bool LoadGlyphToTexture(WmGlyphs& glyph);
 
     
     virtual GTexture* GetOrCreateFontTexture();
         
     virtual void DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
-                          bool isStroke, GCanvasContext* context, float scaleX=1, float scaleY=1)=0;
+                          bool isStroke, WmCanvasContext* context, float scaleX=1, float scaleY=1)=0;
 
-    virtual float MeasureText(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle)=0;
+    virtual float MeasureText(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle)=0;
     
     // deprecated, use MeasureTextMetrics
-    virtual float* MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle)=0;
+    virtual float* MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle)=0;
 
     //return float[4]，0：top，1：height，2：ascender，3：descender
-    float* MeasureTextMetrics(const char *text, unsigned int text_length, wmcanvas::GFontStyle *fontStyle);
+    float* MeasureTextMetrics(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle);
 
-    virtual float* PreMeasureTextHeight(const char *text, unsigned int text_length, GCanvasContext* context);
+    virtual float* PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext* context);
 
 protected:
 
-    GFontManager(unsigned w = FontTextureWidth, unsigned h = FontTextureHeight);
+    WmFontManager(unsigned w = FontTextureWidth, unsigned h = FontTextureHeight);
 
     void ClearFontBuffer();
 
@@ -67,7 +67,7 @@ public:
 
     GTexture* mFontTexture;
 
-    GGlyphCache mGlyphCache;
+    WmGlyphCache mGlyphCache;
     GTreemap mTreemap;
 };
 

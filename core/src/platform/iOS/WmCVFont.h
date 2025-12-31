@@ -27,7 +27,7 @@ typedef struct {
 
 typedef struct {
     float xpos;
-    GGlyph info;
+    WmGlyphs info;
 } GFontGlyphLayout;
 
 typedef struct {
@@ -38,7 +38,7 @@ typedef struct {
 
 namespace wmcanvas
 {
-    class GFontStyle;
+    class WmFontStyle;
 }
 
 @interface GFontLayout : NSObject
@@ -49,11 +49,11 @@ namespace wmcanvas
 
 @end
 
-class GCanvasContext;
+class WmCanvasContext;
 
 @interface GCVFont : NSObject
 
-@property(nonatomic,assign) GGlyphCache *glyphCache;
+@property(nonatomic,assign) WmGlyphCache *glyphCache;
 @property(nonatomic,assign) GTreemap *treemap;
 
 + (instancetype)createGCFontWithKey:(NSString*)key;
@@ -68,7 +68,7 @@ class GCanvasContext;
  * @param fontStyle     fontStyle name
  * @param isStroke      stroke flag
  */
-- (void)resetWithFontStyle:(wmcanvas::GFontStyle *)fontStyle isStroke:(BOOL)isStroke context:(GCanvasContext *)context;
+- (void)resetWithFontStyle:(wmcanvas::WmFontStyle *)fontStyle isStroke:(BOOL)isStroke context:(WmCanvasContext *)context;
 
 /**
  * Get getLayoutForString.
@@ -84,7 +84,7 @@ class GCanvasContext;
        withFontName:(NSString*)fontName
          withLayout:(GFontLayout*)fontLayout
        withPosition:(CGPoint)destPoint
-            context:(GCanvasContext *)context;
+            context:(WmCanvasContext *)context;
 
 - (void)getGlyphForChar:(wchar_t)c
            withFontName:(NSString*)fontName
@@ -104,7 +104,7 @@ class GCanvasContext;
 - (void)createGlyph:(CGGlyph)glyph
            withFont:(CTFontRef)font
        withFontName:(NSString*)fontName
-          glyphInfo:(GGlyph *)glyphInfo;
+          glyphInfo:(WmGlyphs *)glyphInfo;
 
 
 /**
@@ -122,8 +122,8 @@ class GCanvasContext;
                     baseLine:(GTextBaseline)baseLine
                      metrics:(GTextMetrics)metrics;
 
-- (NSString *)getFontNameWithCurrentScale:(wmcanvas::GFontStyle *)fontStyle
-                                  context:(GCanvasContext *)context;
+- (NSString *)getFontNameWithCurrentScale:(wmcanvas::WmFontStyle *)fontStyle
+                                  context:(WmCanvasContext *)context;
 
 @end
 

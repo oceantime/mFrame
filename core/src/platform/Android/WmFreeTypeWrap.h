@@ -11,9 +11,9 @@
 #define GCANVAS_GFREETYPEWRAP_H
 
 
-#define GFONT_LOAD_BY_FREETYPE
+#define WMFONT_LOAD_BY_FREETYPE
 
-#ifdef GFONT_LOAD_BY_FREETYPE
+#ifdef WMFONT_LOAD_BY_FREETYPE
 #include <ft2build.h>
 #include <freetype/freetype.h>
 #include <freetype/ftstroke.h>
@@ -26,33 +26,33 @@ namespace wmcanvas
 {
 
 
-    bool GFT_InitLibrary(FT_Library *library);
+    bool WmFT_InitLibrary(FT_Library *library);
 
 
-    bool GFT_LoadFace(FT_Library library, FT_Face *face,
+    bool WmFT_LoadFace(FT_Library library, FT_Face *face,
                       const char *filename, float width = 0, float height = 0);
 
 
-    bool GFT_SetFaceCharSize(FT_Face face, float newWidth, float newHeight);
+    bool WmFT_SetFaceCharSize(FT_Face face, float newWidth, float newHeight);
 
 
-    bool GFT_IsCharInFontFile(FT_Library library, const wchar_t charCode,
+    bool WmFT_IsCharInFontFile(FT_Library library, const wchar_t charCode,
                               const char *filename, float width, float height);
 
 
-    bool GFT_IsCharInFace(FT_Face face, const wchar_t charCode);
+    bool WmFT_IsCharInFace(FT_Face face, const wchar_t charCode);
 
 
-    void GFT_DisposeLibrarySafe(FT_Library face);
+    void WmFT_DisposeLibrarySafe(FT_Library face);
 
 
-    void GFT_DisposeFaceSafe(FT_Face face);
+    void WmFT_DisposeFaceSafe(FT_Face face);
 
 
-    void GFT_DisposeGlyphSafe(FT_Glyph glyph);
+    void WmFT_DisposeGlyphSafe(FT_Glyph glyph);
 
 
-    void GFT_DisposeStrokeSafe(FT_Stroker stroker);
+    void WmFT_DisposeStrokeSafe(FT_Stroker stroker);
 
 }
 
