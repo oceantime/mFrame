@@ -2,8 +2,8 @@
 // Created by yuantong on 2017/8/1.
 //
 
-#ifndef G_CANVAS_GMANAGER_H
-#define G_CANVAS_GMANAGER_H
+#ifndef WM_CANVAS_GMANAGER_H
+#define WM_CANVAS_GMANAGER_H
 
 #include "view/grenderer.h"
 #include "util/auto_ptr.h"
@@ -30,4 +30,4 @@ public:
     static void release();
 };
 
-#endif //G_CANVAS_GMANAGER_H
+#endif //WM_CANVAS_GMANAGER_H
