@@ -206,7 +206,7 @@ public:
 
 protected:
     //GCanvas Weex API
-    void drawFBO(std::string fboName, GCompositeOperation compositeOp = COMPOSITE_OP_SOURCE_OVER,
+    void drawFBO(std::string fboName, WmCompositeOperation compositeOp = COMPOSITE_OP_SOURCE_OVER,
              float sx = 0, float sy = 0, float sw = 1, float sh = 1, float dx = 0, float dy = 0,
              float dw = 1, float dh = 1);
 

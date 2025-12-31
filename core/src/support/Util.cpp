@@ -149,38 +149,38 @@ namespace wmcanvas {
 
 
 #ifdef ANDROID
-    GCompositeOperation StringToGlobalCompositeOp(const char *str) {
-        GCompositeOperation op;
+    WmCompositeOperation StringToGlobalCompositeOp(const char *str) {
+        WmCompositeOperation op;
         if (strcmp(str, "source-over") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_SOURCE_OVER;
+            op = WmCompositeOperation::COMPOSITE_OP_SOURCE_OVER;
         } else if (strcmp(str, "source-atop") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_SOURCE_ATOP;
+            op = WmCompositeOperation::COMPOSITE_OP_SOURCE_ATOP;
         } else if (strcmp(str, "source-in") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_SOURCE_IN;
+            op = WmCompositeOperation::COMPOSITE_OP_SOURCE_IN;
         } else if (strcmp(str, "source-out") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_SOURCE_OUT;
+            op = WmCompositeOperation::COMPOSITE_OP_SOURCE_OUT;
         } else if (strcmp(str, "destination-over") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_DESTINATION_OVER;
+            op = WmCompositeOperation::COMPOSITE_OP_DESTINATION_OVER;
         } else if (strcmp(str, "destination-atop") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_SOURCE_ATOP;
+            op = WmCompositeOperation::COMPOSITE_OP_SOURCE_ATOP;
         } else if (strcmp(str, "destination-in") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_DESTINATION_IN;
+            op = WmCompositeOperation::COMPOSITE_OP_DESTINATION_IN;
         } else if (strcmp(str, "destination-out") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_DESTINATION_OUT;
+            op = WmCompositeOperation::COMPOSITE_OP_DESTINATION_OUT;
         } else if (strcmp(str, "lighter") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_LIGHTER;
+            op = WmCompositeOperation::COMPOSITE_OP_LIGHTER;
         } else if (strcmp(str, "xor") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_XOR;
+            op = WmCompositeOperation::COMPOSITE_OP_XOR;
         } else if (strcmp(str, "copy") == 0) {
-            op = GCompositeOperation::COMPOSITE_OP_COPY;
+            op = WmCompositeOperation::COMPOSITE_OP_COPY;
         } else {
-            op = GCompositeOperation::COMPOSITE_OP_NONE;
+            op = WmCompositeOperation::COMPOSITE_OP_NONE;
         }
         return op;
     }
 
 
-    std::string GlobalCompositeOpToString(GCompositeOperation &op) {
+    std::string GlobalCompositeOpToString(WmCompositeOperation &op) {
         std::string result = "";
         switch (op) {
             case COMPOSITE_OP_SOURCE_OVER:

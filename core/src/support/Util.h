@@ -66,10 +66,10 @@ namespace wmcanvas {
 
 #ifdef ANDROID
 
-    API_EXPORT GCompositeOperation StringToGlobalCompositeOp(const char *str);
+    API_EXPORT WmCompositeOperation StringToGlobalCompositeOp(const char *str);
 
 
-    API_EXPORT std::string GlobalCompositeOpToString(GCompositeOperation &op);
+    API_EXPORT std::string GlobalCompositeOpToString(WmCompositeOperation &op);
 
     void waitUtilTimeout(sem_t *sem, uint ms);
 

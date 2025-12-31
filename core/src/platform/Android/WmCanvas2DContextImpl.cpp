@@ -19,7 +19,7 @@ void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x
         strLength = static_cast<int>(strlen(text));
     }
 
-    const GCompositeOperation old_op = mCurrentState->mGlobalCompositeOp;
+    const WmCompositeOperation old_op = mCurrentState->mGlobalCompositeOp;
     DoSetGlobalCompositeOperation(COMPOSITE_OP_SOURCE_OVER, COMPOSITE_OP_SOURCE_OVER);
     // scaleWidth
     float scaleWidth = 1.0;
@@ -42,7 +42,7 @@ void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x
 
 
 void
-GCanvasContext::DoSetGlobalCompositeOperation(GCompositeOperation op, GCompositeOperation alphaOp) {
+GCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp) {
     if (mCurrentState == nullptr)
         return;
     if (mCurrentState->mGlobalCompositeOp == op) {
@@ -50,9 +50,9 @@ GCanvasContext::DoSetGlobalCompositeOperation(GCompositeOperation op, GComposite
     }
     SendVertexBufferToGPU();
 
-    GBlendOperationFuncs funcs = GCompositeOperationFuncs(op);
+    WmBlendOperationFuncs funcs = WmCompositeOperationFuncs(op);
 
-    GBlendOperationFuncs alphaFuncs = GCompositeOperationFuncs(alphaOp);
+    WmBlendOperationFuncs alphaFuncs = WmCompositeOperationFuncs(alphaOp);
 
     glBlendFuncSeparate(funcs.source, funcs.destination,
                         alphaFuncs.source, alphaFuncs.destination);

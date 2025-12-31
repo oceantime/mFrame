@@ -121,7 +121,7 @@ void GCanvasWeex::RemoveTexture(int textureId) {
     mTextureMgr.Remove(textureId);
 }
 
-void GCanvasWeex::drawFBO(std::string fboName, GCompositeOperation compositeOp,
+void GCanvasWeex::drawFBO(std::string fboName, WmCompositeOperation compositeOp,
                           float sx, float sy, float sw, float sh,
                           float dx, float dy, float dw, float dh) {
     if (!mCanvasContext->mIsFboSupported) {
@@ -972,7 +972,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
                 //globalCompositeOperation
                 float tokens[1] = {0};
                 p = parseTokens(p, tokens);
-                mCanvasContext->DoSetGlobalCompositeOperation(GCompositeOperation(tokens[0]));
+                mCanvasContext->DoSetGlobalCompositeOperation(WmCompositeOperation(tokens[0]));
                 break;
             }
             case 'A': {

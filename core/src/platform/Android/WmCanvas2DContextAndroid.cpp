@@ -106,10 +106,10 @@ void WmCanvas2DContextAndroid::GetRawImageData(int width, int height, uint8_t *p
 }
 
 
-//void WmCanvas2DContextAndroid::GLBlend(GCompositeOperation op, GCompositeOperation alphaOp)
+//void WmCanvas2DContextAndroid::GLBlend(WmCompositeOperation op, WmCompositeOperation alphaOp)
 //{
-//    GBlendOperationFuncs funcs = GCompositeOperationFuncs(op);
-//    GBlendOperationFuncs alphaFuncs = GCompositeOperationFuncs(alphaOp);
+//    WmBlendOperationFuncs funcs = WmCompositeOperationFuncs(op);
+//    WmBlendOperationFuncs alphaFuncs = WmCompositeOperationFuncs(alphaOp);
 //
 //    glBlendFuncSeparate(funcs.source, funcs.destination,
 //                        alphaFuncs.source, alphaFuncs.destination);
@@ -319,7 +319,7 @@ void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
 
 void
 WmCanvas2DContextAndroid::
-DrawFBO(std::string fboName, GCompositeOperation compositeOp, float sx, float sy, float sw,
+DrawFBO(std::string fboName, WmCompositeOperation compositeOp, float sx, float sy, float sw,
         float sh, float dx, float dy, float dw, float dh) {
     if (!mIsFboSupported) {
         return;
@@ -375,7 +375,7 @@ void WmCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_DEPTH_TEST);
 
-    GCompositeOperation compositeOp = COMPOSITE_OP_SOURCE_OVER;
+    WmCompositeOperation compositeOp = COMPOSITE_OP_SOURCE_OVER;
     DoSetGlobalCompositeOperation(compositeOp, compositeOp);
 
     mCurrentState->mShader->SetOverideTextureColor(0);

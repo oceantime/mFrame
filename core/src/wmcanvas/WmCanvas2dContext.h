@@ -200,10 +200,10 @@ public:
     API_EXPORT float GlobalAlpha();
     API_EXPORT void SetGlobalAlpha(float a);
 
-    API_EXPORT GCompositeOperation GlobalCompositeOperation();
+    API_EXPORT WmCompositeOperation GlobalCompositeOperation();
     API_EXPORT void SetGlobalCompositeOperation(int op);
-    API_EXPORT void DoSetGlobalCompositeOperation(GCompositeOperation op,
-                                                  GCompositeOperation alphaOp = COMPOSITE_OP_LIGHTER);
+    API_EXPORT void DoSetGlobalCompositeOperation(WmCompositeOperation op,
+                                                  WmCompositeOperation alphaOp = COMPOSITE_OP_LIGHTER);
 
     //font
     API_EXPORT GTextAlign TextAlign() const { return mCurrentState->mTextAlign; }

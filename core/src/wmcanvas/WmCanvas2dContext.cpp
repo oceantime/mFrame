@@ -18,9 +18,9 @@
 
 using namespace wmcanvas;
 
-GBlendOperationFuncs GCompositeOperationFuncs(int index)
+WmBlendOperationFuncs WmCompositeOperationFuncs(int index)
 {
-    static GBlendOperationFuncs funcs[] = {
+    static WmBlendOperationFuncs funcs[] = {
         {GL_ONE, GL_ONE_MINUS_SRC_ALPHA},                 // 0 source-over
         {GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA},           // 1 source-atop
         {GL_DST_ALPHA, GL_ZERO},                          // 2 source-in
@@ -1163,14 +1163,14 @@ void GCanvasContext::SetTransformOfShader(const GTransform &trans)
     }
 }
 
-GCompositeOperation GCanvasContext::GlobalCompositeOperation()
+WmCompositeOperation GCanvasContext::GlobalCompositeOperation()
 {
     return mCurrentState->mGlobalCompositeOp;
 }
 
 #ifdef IOS
 
-void GCanvasContext::DoSetGlobalCompositeOperation(GCompositeOperation op, GCompositeOperation alphaOp)
+void GCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmCompositeOperation alphaOp)
 {
     if (mCurrentState->mGlobalCompositeOp == op)
     {
@@ -1178,7 +1178,7 @@ void GCanvasContext::DoSetGlobalCompositeOperation(GCompositeOperation op, GComp
     }
     SendVertexBufferToGPU();
 
-    GBlendOperationFuncs funcs = GCompositeOperationFuncs(op);
+    WmBlendOperationFuncs funcs = WmCompositeOperationFuncs(op);
 
     glBlendFunc(funcs.source, funcs.destination);
 
@@ -1724,7 +1724,7 @@ void GCanvasContext::DrawTextWithLength(const char *text, int strLength, float x
     {
         strLength = static_cast<int>(strlen(text));
     }
-    const GCompositeOperation old_op = mCurrentState->mGlobalCompositeOp;
+    const WmCompositeOperation old_op = mCurrentState->mGlobalCompositeOp;
     DoSetGlobalCompositeOperation(COMPOSITE_OP_SOURCE_OVER, COMPOSITE_OP_SOURCE_OVER);
     LOG_I("before scalewidth %s", text);
     // scaleWidth
@@ -1762,7 +1762,7 @@ float GCanvasContext::GlobalAlpha()
 
 void GCanvasContext::SetGlobalCompositeOperation(int op)
 {
-    DoSetGlobalCompositeOperation(GCompositeOperation(op), GCompositeOperation(op));
+    DoSetGlobalCompositeOperation(WmCompositeOperation(op), WmCompositeOperation(op));
 }
 
 //font
@@ -2129,7 +2129,7 @@ bool GCanvasContext::Restore()
     }
 
     GShader *oldShader = mCurrentState->mShader;
-    GCompositeOperation oldCompositeOp = mCurrentState->mGlobalCompositeOp;
+    WmCompositeOperation oldCompositeOp = mCurrentState->mGlobalCompositeOp;
 
     // reset clip status
     ResetClip();
@@ -2150,7 +2150,7 @@ bool GCanvasContext::Restore()
     auto op = mCurrentState->mGlobalCompositeOp;
     if (op != oldCompositeOp)
     {
-        GBlendOperationFuncs funcs = GCompositeOperationFuncs(op);
+        WmBlendOperationFuncs funcs = WmCompositeOperationFuncs(op);
         glBlendFuncSeparate(funcs.source, funcs.destination,
                             funcs.source, funcs.destination);
     }
@@ -2312,7 +2312,7 @@ void GCanvasContext::ClearRect(float x, float y, float w, float h)
 {
     UseDefaultRenderPipeline();
 
-    GCompositeOperation oldOp = mCurrentState->mGlobalCompositeOp;
+    WmCompositeOperation oldOp = mCurrentState->mGlobalCompositeOp;
     //    SendVertexBufferToGPU();
     DoSetGlobalCompositeOperation(COMPOSITE_OP_COPY, COMPOSITE_OP_COPY);
 

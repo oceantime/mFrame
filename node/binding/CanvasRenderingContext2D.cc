@@ -1224,7 +1224,7 @@ DEFINE_GETTER_METHOD(getglobalCompositeOperation)
 Napi::Env env = info.Env();
 if (mRenderContext)
 {
-    GCompositeOperation value = mRenderContext->getCtx()->GlobalCompositeOperation();
+    WmCompositeOperation value = mRenderContext->getCtx()->GlobalCompositeOperation();
     if (value == COMPOSITE_OP_SOURCE_OVER)
     {
         return Napi::String::New(env, "source-over");

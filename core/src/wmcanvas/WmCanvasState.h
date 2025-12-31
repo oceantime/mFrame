@@ -75,7 +75,7 @@ public:
     
     //global alpha / composite
     float mGlobalAlpha;
-    GCompositeOperation mGlobalCompositeOp;
+    WmCompositeOperation mGlobalCompositeOp;
 
     // TODO manager shader pointer
     // shader & texture

@@ -42,14 +42,14 @@ typedef enum
     COMPOSITE_OP_XOR = 10,
     
     COMPOSITE_OP_NONE,
-} GCompositeOperation;
+} WmCompositeOperation;
 
 typedef struct {
     GLenum source;
     GLenum destination;
-} GBlendOperationFuncs;
+} WmBlendOperationFuncs;
 
-extern GBlendOperationFuncs GCompositeOperationFuncs(int index);
+extern WmBlendOperationFuncs WmCompositeOperationFuncs(int index);
 
 typedef enum
 {
