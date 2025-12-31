@@ -28,7 +28,6 @@
 #include <3d/gmanager.h>
 #include "WmCanvasManager.h"
 #include "WmCanvasLinkNative.h"
-#include "elf_sym_reader.h"
 
 #endif
 
@@ -73,11 +72,28 @@ typedef const char *(*FunType)(const char *, int, const char *);
 typedef void (*RegisterFunc)(FunType fp);
 
 
-RegisterFunc dlopen_weex_so_above_android_7(const char *soPath) {
-    RegisterFunc result = (RegisterFunc) ali::getSymbolAddr((char *) "Inject_WmCanvasFunc",
-                                                            (char *) soPath, "libweexcore.so");
-    LOG_E("load libweexcore.so result is 0x%x", result);
-    return result;
+bool RegisterCallNativeCallback_aboveN(const char *soPath) {
+    if (soPath == nullptr || strlen(soPath) == 0) {
+        LOG_E("so path is empty");
+        return false;
+    }
+
+    void *handle = dlopen(soPath, RTLD_NOW);
+    if (!handle) {
+        LOG_D("load %s failed,error=%s", soPath, dlerror());
+        return false;
+    }
+
+    RegisterFunc func = (RegisterFunc) dlsym(handle, "Inject_WmCanvasFunc");
+    if (!func) {
+        LOG_D("load Inject_WmCanvasFunc failed,error=%s", dlerror());
+        dlclose(handle);
+        return false;
+    }
+
+    func(WmCanvasLinkNative::CallNative);
+    dlclose(handle);
+    return true;
 }
 
 void RegisterCallNativeCallback_belowN() {
@@ -654,12 +670,10 @@ Java_com_taobao_wmcanvas_WmCanvasJNI_registerCallback(JNIEnv *je, jclass jc, jst
             je->ReleaseStringUTFChars(soPath, cSoPath);
             return;
         }
-        RegisterFunc func = dlopen_weex_so_above_android_7(cSoPath);
-        if (func == nullptr) {
+        if (!RegisterCallNativeCallback_aboveN(cSoPath)) {
             LOG_E("can not find Inject_WmCanvasFunc address.");
         } else {
             LOG_D("call Inject_WmCanvasFunc success.");
-            func(WmCanvasLinkNative::CallNative);
         }
     } else {
         LOG_D("Register for Android N Below");
