@@ -18,7 +18,7 @@
 namespace wmcanvas
 {
 
-class GCommandDecoderWebGL : public GCommandDecoder
+class GCommandDecoderWebGL : public WmCommandDecoder
 {
     enum GWEBGL_FUNC_ID
     {

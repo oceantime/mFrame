@@ -7,8 +7,8 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#ifndef GCANVAS_GCOMMANDDECODER_H
-#define GCANVAS_GCOMMANDDECODER_H
+#ifndef WM_CANVAS_COMMANDDECODER_H
+#define WM_CANVAS_COMMANDDECODER_H
 
 #include <stdio.h>
 #include <memory>
@@ -123,11 +123,11 @@ typedef void (*GCommandFuncPtr)(GCommandBuffer& , GDecodeRes& );
 //convert utf16 string to utf8 string
 std::string U16StrToU8Str( char16_t* u16char );
 
-class GCommandDecoder
+class WmCommandDecoder
 {
 public:
-    GCommandDecoder(){};
-    ~GCommandDecoder(){};
+    WmCommandDecoder(){};
+    ~WmCommandDecoder(){};
 
     void SetChangeContextFunc( std::function<void(unsigned int)> func){
         mChangeContextFunc = func;
@@ -147,4 +147,4 @@ protected:
 
 } //namespace wmcanvas
 
-#endif /* GCANVAS_GCOMMANDDECODER_H */
+#endif /* WM_CANVAS_COMMANDDECODER_H */
