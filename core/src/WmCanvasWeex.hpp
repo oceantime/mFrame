@@ -22,6 +22,7 @@
 #include <queue>
 #include <jni.h>
 #include <semaphore.h>
+#include <functional>
 #define GCANVAS_TIMEOUT 800
 
 #endif
@@ -187,6 +188,8 @@ public:
     void clearCmdQueue();
     void QueueProc(std::queue<struct GCanvasCmd *> *queue);
     virtual void setRefreshFlag(bool refresh);
+    void SetSignalUpGLThreadCallback(std::function<void()> callback);
+    void SetRefreshFlagCallback(std::function<void(bool)> callback);
     void setSyncFlag();
     void setThreadExit();
     void finishProc();
@@ -252,6 +255,8 @@ public:
     bool mExit = false;
     std::queue<struct GCanvasCmd *> mCmdQueue;
     std::queue<struct BitmapCmd *> mBitmapQueue;
+    std::function<void()> mSignalUpGLThreadCallback;
+    std::function<void(bool)> mRefreshFlagCallback;
 #endif
 
     

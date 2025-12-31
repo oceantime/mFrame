@@ -1146,7 +1146,17 @@ int GCanvasWeex::getOpType(int type) {
 }
 
 void GCanvasWeex::signalUpGLthread() {
-    return;
+    if (mSignalUpGLThreadCallback) {
+        mSignalUpGLThreadCallback();
+    }
+}
+
+void GCanvasWeex::SetSignalUpGLThreadCallback(std::function<void()> callback) {
+    mSignalUpGLThreadCallback = callback;
+}
+
+void GCanvasWeex::SetRefreshFlagCallback(std::function<void(bool)> callback) {
+    mRefreshFlagCallback = callback;
 }
 
 
@@ -1344,7 +1354,9 @@ void GCanvasWeex::finishProc() {
 }
 
 void GCanvasWeex::setRefreshFlag(bool refresh) {
-
+    if (mRefreshFlagCallback) {
+        mRefreshFlagCallback(refresh);
+    }
 }
 
 

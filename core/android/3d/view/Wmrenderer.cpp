@@ -337,7 +337,10 @@ void GRenderer::requestCreateCanvas(const std::string contextid) {
     if (!m_createCanvas) {
         LOG_D("not create canvas create");
         if (!mProxy) {
-            mProxy = new WmCanvasWeexAndroid(mContextId, this);
+            GCanvasConfig config = {false, true};
+            mProxy = new WmCanvasWeex(mContextId, config);
+            mProxy->SetSignalUpGLThreadCallback([this]() { this->signalUpGLthread(); });
+            mProxy->SetRefreshFlagCallback([this](bool refreshFlag) { this->setRefreshFlag(refreshFlag); });
             mProxy->CreateContext();
             mProxy->SetContextType(m_context_type);
             WmCanvasManager *m = WmCanvasManager::GetManager();

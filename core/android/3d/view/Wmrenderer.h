@@ -11,11 +11,9 @@
 #include <pthread.h>
 
 #include "../../WmCanvas.hpp"
-#include "WmCanvasWeexAndroid.h"
+#include <WmCanvasWeex.hpp>
 
 using namespace WmCanvas;
-
-class WmCanvasWeexAndroid;
 
 class GRenderer {
 public:
@@ -71,7 +69,7 @@ public:
     bool m_requestSurfaceDestroy = false;
     bool m_refresh = false;
     bool m_createCanvas = false;
-    WmCanvasWeexAndroid *mProxy = nullptr;
+    WmCanvasWeex *mProxy = nullptr;
     sem_t m_SyncSem;
     sem_t m_dummy;
     std::string mContextId;
