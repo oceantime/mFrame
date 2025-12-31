@@ -13,7 +13,7 @@
 
 namespace wmcanvas
 {
-    GFontFamilyItem::GFontFamilyItem() {
+    WmFontFamilyItem::WmFontFamilyItem() {
 
         font_file_name = nullptr;
 
@@ -26,12 +26,12 @@ namespace wmcanvas
     }
 
 
-    GFontFamily::GFontFamily(std::list< const char * > &fontFamily) {
+    WmFontFamily::WmFontFamily(std::list< const char * > &fontFamily) {
         InitFontFamily(fontFamily);
     }
 
 
-    const char *GFontFamily::MatchFamilyStyle(WmFontStyle &fontStyle) {
+    const char *WmFontFamily::MatchFamilyStyle(WmFontStyle &fontStyle) {
         WmFontStyle::Style style = fontStyle.GetStyle();
         WmFontStyle::Weight weight = fontStyle.GetWeight();
         WmFontStyle::Variant variant = fontStyle.GetVariant();
@@ -49,9 +49,9 @@ namespace wmcanvas
             weight = WmFontStyle::Weight::LIGHT;
         }
 
-        GFontFamilyItem* closetItem = nullptr;
+        WmFontFamilyItem* closetItem = nullptr;
         for (auto it = fontItems.begin(); it != fontItems.end(); ++it) {
-            GFontFamilyItem* item = &(*it);
+            WmFontFamilyItem* item = &(*it);
             // LOG_E("match fontStyle: familyt item=%s, style=%i, weight=%i", item->font_file_name, item->style, item->weight);
             if (item != nullptr) {
                 closetItem = item;
@@ -81,7 +81,7 @@ namespace wmcanvas
     /**
      * 将xml中的font名称 转化为font family item
      */
-    void GFontFamily::InitFontFamily(std::list<const char *> &fontFamily) {
+    void WmFontFamily::InitFontFamily(std::list<const char *> &fontFamily) {
         fontItems.clear();
 
         // style
@@ -109,7 +109,7 @@ namespace wmcanvas
             }
 
             // new item
-            GFontFamilyItem item;
+            WmFontFamilyItem item;
 
             if (strstr(fontFileLowerCase, style_italic) != nullptr) {
                 item.style = WmFontStyle::Style::ITALIC;
@@ -141,8 +141,8 @@ namespace wmcanvas
     }
 
 
-    char *GFontFamily::GetProperFontFile() {
-        GFontFamilyItem* closetItem = nullptr;
+    char *WmFontFamily::GetProperFontFile() {
+        WmFontFamilyItem* closetItem = nullptr;
         if(fontItems.size() > 0) {
             closetItem = &fontItems[0];
         }

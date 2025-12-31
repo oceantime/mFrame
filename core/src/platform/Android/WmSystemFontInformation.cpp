@@ -149,9 +149,9 @@ namespace wmcanvas {
             }
         }
 
-        GFontFamily fontFamily(newFontFileList);
+        WmFontFamily fontFamily(newFontFileList);
         mFontFamilies.insert(
-                std::pair<const char *, GFontFamily>(newFontName, fontFamily));
+            std::pair<const char *, WmFontFamily>(newFontName, fontFamily));
 
         return true;
     }
@@ -167,7 +167,7 @@ namespace wmcanvas {
         }
     }
 
-    GFontFamily *SystemFontInformation::FindFontFamily(const char *fontName) {
+    WmFontFamily *SystemFontInformation::FindFontFamily(const char *fontName) {
         if (fontName == nullptr) {
             return nullptr;
         }
@@ -188,7 +188,7 @@ namespace wmcanvas {
         const char *currentFontFile = nullptr;
         std::string fontFileFullPath = currentFontLocation;
         std::string fontFileName;
-        GFontFamily *family;
+        WmFontFamily *family;
 
         for (auto it = this->mFontFamilies.begin(); it != this->mFontFamilies.end(); ++it) {
             family = &((*it).second);

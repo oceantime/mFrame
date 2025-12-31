@@ -41,7 +41,7 @@ namespace wmcanvas {
 
         API_EXPORT void InsertFallbackFontFamily(std::list<const char *> &fontFileList);
 
-        API_EXPORT GFontFamily *FindFontFamily(const char *fontName);
+        API_EXPORT WmFontFamily *FindFontFamily(const char *fontName);
 
 
         char *GetClosestFontFamily(void* ftLibrary,
@@ -59,7 +59,7 @@ namespace wmcanvas {
         char *mDefaultFontFile;
         char *mSystemFontLocation;
         char *mExtraFontLocation;
-        std::map<const char *, GFontFamily, Lesser> mFontFamilies;
+        std::map<const char *, WmFontFamily, Lesser> mFontFamilies;
         std::list<const char *> mFallbackFontFileList;
         std::map<const char *, const char *, Lesser> mFontFiles;
     };

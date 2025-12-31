@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __GCanvas_GFontFamily__
-#define __GCanvas_GFontFamily__
+#ifndef __WmCanvas_WmFontFamily__
+#define __WmCanvas_WmFontFamily__
 
 #include "WmFontStyle.h"
 
@@ -21,7 +21,7 @@ namespace wmcanvas
     /**
      * font family内的单个字体
      */
-    struct GFontFamilyItem {
+    struct WmFontFamilyItem {
 
         const char* font_file_name;
 
@@ -32,17 +32,17 @@ namespace wmcanvas
         WmFontStyle::Weight  weight;
 
 
-        GFontFamilyItem();
+        WmFontFamilyItem();
 
     };
 
 
 
-class GFontFamily
+class WmFontFamily
 {
 public:
-    GFontFamily(std::list< const char * > &fontFamily);
-    virtual ~GFontFamily() {}
+    WmFontFamily(std::list< const char * > &fontFamily);
+    virtual ~WmFontFamily() {}
 
     API_EXPORT const char *MatchFamilyStyle(WmFontStyle &fontStyle);
     char *GetProperFontFile();
@@ -59,7 +59,7 @@ private:
 //    const char *mFontItalic= nullptr;
 //    const char *mFontBoldItalic= nullptr;
 
-    std::vector<GFontFamilyItem> fontItems;
+    std::vector<WmFontFamilyItem> fontItems;
 
     };
 }
