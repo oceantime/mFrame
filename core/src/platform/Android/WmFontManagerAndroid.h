@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GFONTMANAGERANDROID_H
-#define GCANVAS_GFONTMANAGERANDROID_H
+#ifndef WMCANVAS_WMFONTMANAGERANDROID_H
+#define WMCANVAS_WMFONTMANAGERANDROID_H
 
 
 class WmFont;
@@ -24,15 +24,15 @@ class WmFont;
 class WmFontCache;
 
 
-class GFontManagerAndroid : public WmFontManager {
+class WmFontManagerAndroid : public WmFontManager {
 
 public:
 
-    API_EXPORT GFontManagerAndroid(unsigned int w = ANDROID_FONT_TEXTURE_SIZE,
+        API_EXPORT WmFontManagerAndroid(unsigned int w = ANDROID_FONT_TEXTURE_SIZE,
             unsigned int h = ANDROID_FONT_TEXTURE_SIZE);
 
 
-    virtual ~GFontManagerAndroid();
+        virtual ~WmFontManagerAndroid();
 
 
     void DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
@@ -48,7 +48,7 @@ public:
     float* PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext* context) override;
 
 
-    GTexture* GetOrCreateFontTexture() override;
+    WmTexture* GetOrCreateFontTexture() override;
 
 
 private:
@@ -79,4 +79,4 @@ private:
 
 
 
-#endif //GCANVAS_GFONTMANAGERANDROID_H
+#endif //WMCANVAS_WMFONTMANAGERANDROID_H

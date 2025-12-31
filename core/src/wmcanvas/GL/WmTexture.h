@@ -130,4 +130,6 @@ private:
     GLuint mTextureID;
 };
 
+using WmTexture = GTexture;
+
 #endif /* GCANVAS_GTEXTURE_H */

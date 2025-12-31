@@ -23,16 +23,16 @@
 
 
 WmFontManager *WmFontManager::NewInstance() {
-    return new GFontManagerAndroid(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE);
+    return new WmFontManagerAndroid(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE);
 }
 
 
-GFontManagerAndroid::GFontManagerAndroid(unsigned w, unsigned h) : WmFontManager(w, h) {
+WmFontManagerAndroid::WmFontManagerAndroid(unsigned w, unsigned h) : WmFontManager(w, h) {
     mFontCache = new WmFontCache(this);
 }
 
 
-GFontManagerAndroid::~GFontManagerAndroid() {
+WmFontManagerAndroid::~WmFontManagerAndroid() {
     if (mFontCache != nullptr) {
         delete mFontCache;
         mFontCache = nullptr;
@@ -40,10 +40,10 @@ GFontManagerAndroid::~GFontManagerAndroid() {
 }
 
 
-GTexture* GFontManagerAndroid::GetOrCreateFontTexture() {
+WmTexture* WmFontManagerAndroid::GetOrCreateFontTexture() {
     if (!mFontTexture) {
         std::vector<GCanvasLog> logVec;
-        mFontTexture = new GTexture(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE,
+        mFontTexture = new WmTexture(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE,
                 GL_ALPHA, nullptr, &logVec);
         // FIXME
         // LOG_EXCEPTION_VECTOR(mHooks, "SharedFontTexture", logVec);
@@ -52,7 +52,7 @@ GTexture* GFontManagerAndroid::GetOrCreateFontTexture() {
 }
 
 
-void GFontManagerAndroid::DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
+void WmFontManagerAndroid::DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
                                    bool isStroke, WmCanvasContext *context, float sx, float sy) {
     if (text == nullptr || text_length == 0) {
         return;
@@ -73,7 +73,7 @@ void GFontManagerAndroid::DrawText(const unsigned short *text, unsigned int text
 }
 
 
-float *GFontManagerAndroid::MeasureTextWidthHeight(const char *text, unsigned int textLength,
+float *WmFontManagerAndroid::MeasureTextWidthHeight(const char *text, unsigned int textLength,
                                                     wmcanvas::WmFontStyle *fontStyle) {
     if (text == nullptr || textLength == 0) {
         float *ret = new float[4];
@@ -128,7 +128,7 @@ float *GFontManagerAndroid::MeasureTextWidthHeight(const char *text, unsigned in
     return ret;
 }
 
-float GFontManagerAndroid::MeasureText(const char *text,
+float WmFontManagerAndroid::MeasureText(const char *text,
                                        unsigned int textLength, wmcanvas::WmFontStyle *fontStyle) {
     float *tmpMeasure = MeasureTextWidthHeight(text, textLength, fontStyle);
     float width = tmpMeasure[0];
@@ -137,13 +137,13 @@ float GFontManagerAndroid::MeasureText(const char *text,
 }
 
 
-float *GFontManagerAndroid::MeasureTextExt(const char *text, unsigned int textLength,
+float *WmFontManagerAndroid::MeasureTextExt(const char *text, unsigned int textLength,
                                            wmcanvas::WmFontStyle *fontStyle) {
     return  MeasureTextWidthHeight(text, textLength, fontStyle);
 }
 
 
-float *GFontManagerAndroid::PreMeasureTextHeight(const char *text, unsigned int text_length,
+float *WmFontManagerAndroid::PreMeasureTextHeight(const char *text, unsigned int text_length,
                                                 WmCanvasContext *context) {
     if (text == nullptr || text_length == 0) {
         float *ret = new float[4];
@@ -193,7 +193,7 @@ float *GFontManagerAndroid::PreMeasureTextHeight(const char *text, unsigned int 
 }
 
 
-void GFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vector<WmFont*>& font,
+void WmFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vector<WmFont*>& font,
                                              const unsigned short *text, unsigned int textLength,
                                              bool isStroke, float &x, float &y, float sx, float sy) {
     wmcanvas::WmFontStyle *fontStyle = context->mCurrentState->mFont;
@@ -265,7 +265,7 @@ void GFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vect
 
 
 
-void GFontManagerAndroid::DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t charCode,
+void WmFontManagerAndroid::DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t charCode,
                                            float &x, float y, float sx, float sy) {
     if (isStroke) {
         font->DrawText(context, charCode, x, y, context->StrokeStyle(), sx, sy, isStroke);
@@ -278,6 +278,6 @@ void GFontManagerAndroid::DrawTextInternal(WmCanvasContext *context, WmFont *fon
 /**
  * query font by charcode
  */
-WmFont *GFontManagerAndroid::GetFontByCharCode(wchar_t charCode, wmcanvas::WmFontStyle *fontStyle) {
+WmFont *WmFontManagerAndroid::GetFontByCharCode(wchar_t charCode, wmcanvas::WmFontStyle *fontStyle) {
     return mFontCache->GetOrCreateFont(fontStyle, charCode);
 }

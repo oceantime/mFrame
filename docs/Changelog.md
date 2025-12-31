@@ -32,7 +32,7 @@ All notable changes of this project will be documented in.
 	* New `2d` property support `shadowColor`,`shadowBlur`, `shadowOffsetX`,`shadowOffstY`
 	* Font support `measureText` and `Italic` style
 	* `Fill()`、`Clip()` , support winding-rule and promote performance
-	* Out of Android platform- implementation :`WmCanvas2DContextAndroid`,`WmCanvasAndroid`,`GFontManagerAndroid`,
+	* Out of Android platform- implementation :`WmCanvas2DContextAndroid`,`WmCanvasAndroid`,`WmFontManagerAndroid`,
 	* Refactor Android-Weex `GcanvasWeexAndroid` 
 	* Fix some compatibility issue
 

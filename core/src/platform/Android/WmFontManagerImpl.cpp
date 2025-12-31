@@ -13,7 +13,7 @@
 //
 //
 //WmFontManager *WmFontManager::NewInstance(WmCanvasContext *context) {
-//    return new GFontManagerAndroid(context);
+//    return new WmFontManagerAndroid(context);
 //}
 //
 //
