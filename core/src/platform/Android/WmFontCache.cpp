@@ -22,14 +22,14 @@ using namespace wmcanvas;
 
 
 
-GFontCache::GFontCache(WmFontManager *fontManager) : mFontManager(fontManager) {
+WmFontCache::WmFontCache(WmFontManager *fontManager) : mFontManager(fontManager) {
     mFtLibrary = nullptr;
 }
 
-GFontCache::~GFontCache() { Clear(); }
+WmFontCache::~WmFontCache() { Clear(); }
 
 
-void GFontCache::Clear() {
+void WmFontCache::Clear() {
     size_t mapSize = mFontMap.size();
     auto iter = mFontMap.begin();
     for (; iter != mFontMap.end(); ++iter) {
@@ -43,12 +43,12 @@ void GFontCache::Clear() {
     wmcanvas::WmFT_DisposeLibrarySafe(mFtLibrary);
     mFtLibrary = nullptr;
 
-    LOG_E("GFontCache(%p) Clear:fontRefMap size=%u, fontMap size=%u",
+    LOG_E("WmFontCache(%p) Clear:fontRefMap size=%u, fontMap size=%u",
             this, fontRefSize, mapSize);
 }
 
 
-WmFont *GFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
+WmFont *WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
     if (!LazyInitFontLibrary()) {
         return nullptr;
     }
@@ -139,7 +139,7 @@ WmFont *GFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
     }
 
     // save to font ref map
-    GFontKeySet& fontKeySet = mFontRefMap[fontStyleKey];
+    WmFontKeySet& fontKeySet = mFontRefMap[fontStyleKey];
     if (fontKeySet.fontFileName.empty()) {
         fontKeySet.fallbackFontFileName = font->GetFontFileName();
     } else {
@@ -151,7 +151,7 @@ WmFont *GFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
 }
 
 
-char *GFontCache::TrySpecFont(const wchar_t charCode,
+char *WmFontCache::TrySpecFont(const wchar_t charCode,
                               const char *currentFontLocation,
                               const char *specFontFile) {
     // LOG_E("TrySpecFont: %s, %s", currentFontLocation, specFontFile);
@@ -165,7 +165,7 @@ char *GFontCache::TrySpecFont(const wchar_t charCode,
 }
 
 
-char *GFontCache::TryDefaultFont(const wchar_t charCode,
+char *WmFontCache::TryDefaultFont(const wchar_t charCode,
                                  const char *currentFontLocation) {
     auto defaultFontFile =
             SystemFontInformation::GetSystemFontInformation()->GetDefaultFontFile();
@@ -181,7 +181,7 @@ char *GFontCache::TryDefaultFont(const wchar_t charCode,
 }
 
 
-char *GFontCache::TryDefaultFallbackFont(const wchar_t charCode,
+char *WmFontCache::TryDefaultFallbackFont(const wchar_t charCode,
                                          const char *currentFontLocation) {
     auto defaultFontFile = "DroidSans.ttf";
 
@@ -192,7 +192,7 @@ char *GFontCache::TryDefaultFallbackFont(const wchar_t charCode,
 }
 
 
-bool GFontCache::LazyInitFontLibrary() {
+bool WmFontCache::LazyInitFontLibrary() {
     if (mFtLibrary == nullptr) {
         return wmcanvas::WmFT_InitLibrary(&mFtLibrary);
     }
@@ -200,7 +200,7 @@ bool GFontCache::LazyInitFontLibrary() {
 }
 
 
-char * GFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath, const char* fileName) {
+char * WmFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath, const char* fileName) {
     char* result = nullptr;
     auto fontIter = mFontMap.find(fileFullPath);
     if (fontIter != mFontMap.end()) {
@@ -220,7 +220,7 @@ char * GFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath,
 }
 
 
-WmFont* GFontCache::LoadAndSaveFont(const char* fontFileName) {
+WmFont* WmFontCache::LoadAndSaveFont(const char* fontFileName) {
     WmFont *font = new WmFont(*mFontManager, fontFileName);
     font->SetFtLibrary(mFtLibrary);
     // save to font map

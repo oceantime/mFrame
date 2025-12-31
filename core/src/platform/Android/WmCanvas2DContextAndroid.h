@@ -18,7 +18,7 @@
 
 #include <cstdint>
 
-//class GFontCache;
+//class WmFontCache;
 
 
 

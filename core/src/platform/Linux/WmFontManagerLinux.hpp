@@ -49,5 +49,5 @@ private:
 
     void DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t text,
                           float &x, float y, float sx, float sy);
-    GFontCache *mFontCache = nullptr;
+    WmFontCache *mFontCache = nullptr;
 };

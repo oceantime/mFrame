@@ -21,7 +21,7 @@ class WmFont;
 
 #define ANDROID_FONT_TEXTURE_SIZE 1024
 
-class GFontCache;
+class WmFontCache;
 
 
 class GFontManagerAndroid : public WmFontManager {
@@ -72,7 +72,7 @@ private:
             float& x, float y, float sx, float sy);
 
     // global FontCache
-    GFontCache *mFontCache;
+    WmFontCache *mFontCache;
 
 };
 

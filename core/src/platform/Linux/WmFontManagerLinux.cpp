@@ -16,7 +16,7 @@ WmFontManager *WmFontManager::NewInstance()
 
 GFontManagerImplementLinux::GFontManagerImplementLinux(unsigned w, unsigned h) : WmFontManager(w, h)
 {
-    this->mFontCache = new GFontCache(*this);
+    this->mFontCache = new WmFontCache(*this);
     using NSFontTool::TypefaceLoader;
     TypefaceLoader *tl = TypefaceLoader::getInstance();
     ASSERT(tl);

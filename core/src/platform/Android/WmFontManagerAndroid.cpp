@@ -28,7 +28,7 @@ WmFontManager *WmFontManager::NewInstance() {
 
 
 GFontManagerAndroid::GFontManagerAndroid(unsigned w, unsigned h) : WmFontManager(w, h) {
-    mFontCache = new GFontCache(this);
+    mFontCache = new WmFontCache(this);
 }
 
 

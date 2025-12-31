@@ -48,9 +48,9 @@ set(SRC_FILES
  
         # # platform srcs
 
-       ../../src/platform/Linux/GFontManagerLinux.cpp
-       ../../src/platform/Linux/GFontLinux.cpp
-       ../../src/platform/Linux/GFontCacheLinux.cpp
+        ../../src/platform/Linux/WmFontManagerLinux.cpp
+        ../../src/platform/Linux/WmFontLinux.cpp
+        ../../src/platform/Linux/WmFontCacheLinux.cpp
         ../../src/platform/Android/GFrameBufferObjectImpl.cpp
         ../../src/platform/Android/GFreeTypeWrap.cpp
         ../../src/platform/Android/GCanvas2DContextImpl.cpp

@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __GCanvas__GFontCache__
-#define __GCanvas__GFontCache__
+#ifndef __WmCanvas__WmFontCache__
+#define __WmCanvas__WmFontCache__
 
 #include "WmFont.h"
 #include <iostream>
@@ -26,7 +26,7 @@ namespace wmcanvas
 }
 
 
-struct GFontKeySet {
+struct WmFontKeySet {
     std::string fontFileName;
 
     std::string fallbackFontFileName;
@@ -36,14 +36,14 @@ struct GFontKeySet {
 
 class WmFontManager;
 
-class GFontCache
+class WmFontCache
 {
 public:
 
-    GFontCache(WmFontManager* fontManager);
+    WmFontCache(WmFontManager* fontManager);
 
 
-    ~GFontCache();
+    ~WmFontCache();
 
 
 #ifdef WMFONT_LOAD_BY_FREETYPE
@@ -88,7 +88,7 @@ private:
 
     FT_Library mFtLibrary = nullptr;
 
-    std::unordered_map<std::string, GFontKeySet> mFontRefMap;
+    std::unordered_map<std::string, WmFontKeySet> mFontRefMap;
 
     std::unordered_map<std::string, WmFont*> mFontMap;
 

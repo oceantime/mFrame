@@ -17,18 +17,18 @@
 using NSFontTool::TypefaceLoader;
 using NSFontTool::TypefaceProvider;
 
-static GFontCache *sSharedFontInstance;
+static WmFontCache *sSharedFontInstance;
 
 using namespace wmcanvas;
-GFontCache::GFontCache(WmFontManager &fontManager) : mFontManager(fontManager)
+WmFontCache::WmFontCache(WmFontManager &fontManager) : mFontManager(fontManager)
 {
 }
 
-GFontCache::~GFontCache() { Clear(); }
+WmFontCache::~WmFontCache() { Clear(); }
 
-void GFontCache::Clear()
+void WmFontCache::Clear()
 {
-    std::map<std::string, GFontSet>::iterator iter = mFontCache.begin();
+    std::map<std::string, WmFontSet>::iterator iter = mFontCache.begin();
     for (; iter != mFontCache.end(); ++iter)
     {
         delete iter->second.font;
@@ -44,7 +44,7 @@ void GFontCache::Clear()
 #ifdef WMFONT_LOAD_BY_FREETYPE
 
 WmFont *
-GFontCache::GetOrCreateFont(WmFontStyle *fontStyle,
+WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle,
                             wchar_t charCode, const float size)
 {
     if (!this->LazyInitFontLibrary())
@@ -54,7 +54,7 @@ GFontCache::GetOrCreateFont(WmFontStyle *fontStyle,
     std::string fontName = fontStyle->GetName();
     char key[256] = {0};
     snprintf(key, 256, "%s_%d_%f", fontName.c_str(), charCode, size);
-    std::map<std::string, GFontSet>::iterator iter = mFontCache.find(key);
+    std::map<std::string, WmFontSet>::iterator iter = mFontCache.find(key);
     if (iter != mFontCache.end())
     {
         return iter->second.font;
@@ -91,12 +91,12 @@ GFontCache::GetOrCreateFont(WmFontStyle *fontStyle,
 
     WmFont *font = new WmFont(mFontManager, face->source.data());
     font->SetFtLibrary(this->mFtLibrary);
-    GFontSet &fontSet = mFontCache[key];
+    WmFontSet &fontSet = mFontCache[key];
     fontSet.font = font;
     return font;
 }
 
-bool GFontCache::LazyInitFontLibrary()
+bool WmFontCache::LazyInitFontLibrary()
 {
     if (mFtLibrary == nullptr)
     {
