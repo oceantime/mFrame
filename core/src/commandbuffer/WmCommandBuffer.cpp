@@ -13,13 +13,13 @@
 namespace wmcanvas
 {
 
-    GCommandBuffer::GCommandBuffer():
+    WmCommandBuffer::WmCommandBuffer():
             mCurrentPos(0), mBufferData(nullptr), mBufferSize(0)
     {
 
     }
 
-    GCommandBuffer::GCommandBuffer(int8_t* buffer, size_t size):
+    WmCommandBuffer::WmCommandBuffer(int8_t* buffer, size_t size):
             mCurrentPos(0), mBufferData(buffer), mBufferSize(size)
     {
         //解析meta信息
@@ -30,12 +30,12 @@ namespace wmcanvas
 //    LOG_E("mBufferSize is %d",mBufferSize);
     }
 
-    GCommandBuffer::~GCommandBuffer()
+    WmCommandBuffer::~WmCommandBuffer()
     {
 
     }
 
-    void GCommandBuffer::resetBuffer(int8_t* bufffer, size_t size)
+    void WmCommandBuffer::resetBuffer(int8_t* bufffer, size_t size)
     {
         mBufferData = bufffer, mBufferSize = size, mCurrentPos = 0;
 
@@ -48,7 +48,7 @@ namespace wmcanvas
 
     }
 
-    int8_t* GCommandBuffer::getCurrentBufferPtr()
+    int8_t* WmCommandBuffer::getCurrentBufferPtr()
     {
         if( mCurrentPos < mBufferSize ) {
             return (mBufferData + mCurrentPos);
@@ -57,7 +57,7 @@ namespace wmcanvas
     }
 
     template <typename T>
-    T* GCommandBuffer::parseValue()
+    T* WmCommandBuffer::parseValue()
     {
         size_t size = sizeof(T);
         if( checkBufferSize(size) )
@@ -68,12 +68,12 @@ namespace wmcanvas
         }
         return nullptr;
     }
-    template uint32_t* GCommandBuffer::parseValue();
-    template float* GCommandBuffer::parseValue();
-    template uint64_t* GCommandBuffer::parseValue();
+    template uint32_t* WmCommandBuffer::parseValue();
+    template float* WmCommandBuffer::parseValue();
+    template uint64_t* WmCommandBuffer::parseValue();
 
     template <typename T>
-    bool GCommandBuffer::parseArray(T *arr, size_t length)
+    bool WmCommandBuffer::parseArray(T *arr, size_t length)
     {
         size_t size = sizeof(T) * length;
         if( checkBufferSize(size) )
@@ -89,11 +89,11 @@ namespace wmcanvas
         return false;
     }
 
-    template bool GCommandBuffer::parseArray(int32_t* arr, size_t length);
-    template bool GCommandBuffer::parseArray(uint32_t* arr, size_t length);
-    template bool GCommandBuffer::parseArray(float* arr, size_t length);
+    template bool WmCommandBuffer::parseArray(int32_t* arr, size_t length);
+    template bool WmCommandBuffer::parseArray(uint32_t* arr, size_t length);
+    template bool WmCommandBuffer::parseArray(float* arr, size_t length);
 
-    const void* GCommandBuffer::parseBuffer(size_t size)
+    const void* WmCommandBuffer::parseBuffer(size_t size)
     {
         if( checkBufferSize(size) )
         {
@@ -104,7 +104,7 @@ namespace wmcanvas
         return nullptr;
     }
 
-    const void* GCommandBuffer::parseBufferAlign(size_t size)
+    const void* WmCommandBuffer::parseBufferAlign(size_t size)
     {
         uint8_t delta = size % 4;
         size_t realSize = size;
@@ -124,7 +124,7 @@ namespace wmcanvas
 
 
 
-    inline bool GCommandBuffer::checkBufferSize(size_t size)
+    inline bool WmCommandBuffer::checkBufferSize(size_t size)
     {
         if( size <= 0 ) return false;
         return mCurrentPos+size <= mBufferSize;

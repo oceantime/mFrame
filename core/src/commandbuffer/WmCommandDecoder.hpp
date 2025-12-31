@@ -117,8 +117,8 @@ struct GDecodeRes
 };
 
 //define WebGL API function
-//using GCommandFunc = std::function< void(GCommandBuffer& buffer, GDecodeRes& res ) >;
-typedef void (*GCommandFuncPtr)(GCommandBuffer& , GDecodeRes& );
+//using GCommandFunc = std::function< void(WmCommandBuffer& buffer, GDecodeRes& res ) >;
+typedef void (*GCommandFuncPtr)(WmCommandBuffer& , GDecodeRes& );
 
 //convert utf16 string to utf8 string
 std::string U16StrToU8Str( char16_t* u16char );
@@ -138,7 +138,7 @@ public:
     }
 
     virtual void InitCommands() = 0;
-    virtual bool Decode(GCommandBuffer& buffer, GDecodeRes& res) = 0;
+    virtual bool Decode(WmCommandBuffer& buffer, GDecodeRes& res) = 0;
     virtual bool IsSyncCommand(uint32_t commandId) = 0;
 
 protected:

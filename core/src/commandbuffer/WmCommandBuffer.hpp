@@ -8,8 +8,8 @@
 */
 
 
-#ifndef GCANVAS_GCOMMANDBUFFER_H
-#define GCANVAS_GCOMMANDBUFFER_H
+#ifndef WM_CANVAS_COMMANDBUFFER_H
+#define WM_CANVAS_COMMANDBUFFER_H
 
 #include <stdio.h>
 #include <string>
@@ -27,13 +27,13 @@ namespace wmcanvas {
     funcId+param+...+funcId+param
  */
 
-    class GCommandBuffer {
+    class WmCommandBuffer {
     public:
-        API_EXPORT GCommandBuffer();
+        API_EXPORT WmCommandBuffer();
 
-        API_EXPORT GCommandBuffer(int8_t *buffer, size_t size);
+        API_EXPORT WmCommandBuffer(int8_t *buffer, size_t size);
 
-        API_EXPORT ~GCommandBuffer();
+        API_EXPORT ~WmCommandBuffer();
 
         API_EXPORT void resetBuffer(int8_t *bufffer, size_t size);
 
@@ -67,4 +67,4 @@ namespace wmcanvas {
 } //namespace wmcanvas
 
 
-#endif /* GCANVAS_GCOMMANDBUFFER_H */
+#endif /* WM_CANVAS_COMMANDBUFFER_H */
