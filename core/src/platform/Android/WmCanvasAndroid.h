@@ -15,13 +15,13 @@
 #include "WmCanvas2DContextAndroid.h"
 
 
-class GCanvasAndroid : public wmcanvas::GCanvas {
+class WmCanvasAndroid : public wmcanvas::WmCanvas {
 
 
 public:
 
 
-    API_EXPORT GCanvasAndroid(std::string contextId, const GCanvasConfig& config, GCanvasHooks *hooks = nullptr);
+    API_EXPORT WmCanvasAndroid(std::string contextId, const WmCanvasConfig& config, WmCanvasHooks *hooks = nullptr);
 
 
     void CreateContext() override;

@@ -479,11 +479,11 @@ export default class CanvasRenderingContext2D {
   }
 
   measureText = function(text) {
-    throw new Error('GCanvas not supported yet');
+    throw new Error('WmCanvas not supported yet');
   }
 
   isPointInPath = function(x, y) {
-    throw new Error('GCanvas not supported yet');
+    throw new Error('WmCanvas not supported yet');
   }
 
   drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh) {

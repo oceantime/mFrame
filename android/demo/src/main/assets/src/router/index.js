@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: '/gcanvas',
-        name: 'GCanvas',
+        name: 'WmCanvas',
         component: GCanvasView
     }
 ]

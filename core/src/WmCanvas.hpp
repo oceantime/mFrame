@@ -16,11 +16,11 @@
 namespace wmcanvas
 {
 
-class GCanvas
+class WmCanvas
 {
 public:
-    API_EXPORT GCanvas(std::string canvasId, const GCanvasConfig& config, GCanvasHooks *hooks = nullptr);
-    API_EXPORT virtual ~GCanvas();
+    API_EXPORT WmCanvas(std::string canvasId, const WmCanvasConfig& config, WmCanvasHooks *hooks = nullptr);
+    API_EXPORT virtual ~WmCanvas();
     virtual void CreateContext();
     virtual void Clear();
     
@@ -34,8 +34,8 @@ public:
 
 public:
     std::string mContextId;
-    GCanvasConfig mConfig;
-    GCanvasHooks *mHooks;
+    WmCanvasConfig mConfig;
+    WmCanvasHooks *mHooks;
     
     GCanvasContext *mCanvasContext;
 };

@@ -29,7 +29,7 @@ afterEvaluate {
                 pom {
                     name = String.valueOf("${project.group}:${project.ext.id}")
                     description = String.valueOf(project.ext.meta.description)
-                    url = 'https://github.com/alibaba/GCanvas'
+                    url = 'https://github.com/alibaba/WmCanvas'
                     
                     licenses {
                         license {
@@ -40,15 +40,15 @@ afterEvaluate {
                     
                     developers {
                         developer {
-                            name = 'Alibaba GCanvas Team'
+                            name = 'Alibaba WmCanvas Team'
                             email = 'gcanvas@alibaba-inc.com'
                         }
                     }
                     
                     scm {
-                        connection = 'scm:git:git://github.com/alibaba/GCanvas.git'
-                        developerConnection = 'scm:git:ssh://github.com:alibaba/GCanvas.git'
-                        url = 'https://github.com/alibaba/GCanvas'
+                        connection = 'scm:git:git://github.com/alibaba/WmCanvas.git'
+                        developerConnection = 'scm:git:ssh://github.com:alibaba/WmCanvas.git'
+                        url = 'https://github.com/alibaba/WmCanvas'
                     }
                 }
             }

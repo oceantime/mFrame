@@ -236,4 +236,4 @@ console.log('📱 Device Info:', deviceInfo)
 
 ## 📄 许可证
 
-遵循 GCanvas 项目的原始许可证。
+遵循 WmCanvas 项目的原始许可证。

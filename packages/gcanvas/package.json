@@ -1,7 +1,7 @@
 {
   "name": "@gcanvas/core",
   "version": "1.0.0",
-  "description": "Javascript Bridge for GCanvas",
+  "description": "Javascript Bridge for WmCanvas",
   "main": "dist/gcanvas.js",
   "scripts": {
     "build": "rollup --config",

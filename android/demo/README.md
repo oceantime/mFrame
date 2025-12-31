@@ -1,4 +1,4 @@
-# GCanvas Android Demo
+# WmCanvas Android Demo
 
 这是一个展示如何在Android WebView中使用GCanvas的示例项目。
 
@@ -108,7 +108,7 @@ dependencies {
 <application>
     <activity 
         android:name=".WebViewActivity"
-        android:label="GCanvas WebView Demo" />
+        android:label="WmCanvas WebView Demo" />
 </application>
 ```
 
@@ -228,7 +228,7 @@ function animate() {
 
 - [Android WebView官方文档](https://developer.android.com/reference/android/webkit/WebView)
 - [HTML5 Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
-- [GCanvas项目文档](https://alibaba.github.io/GCanvas/)
+- [GCanvas项目文档](https://alibaba.github.io/WmCanvas/)
 - [参考博客](https://blog.csdn.net/qq_33718648/article/details/82286559)
 
 ## 许可证

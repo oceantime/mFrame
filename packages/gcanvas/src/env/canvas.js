@@ -1,7 +1,7 @@
 import GContext2D from '../context/2d/RenderingContext';
 import GContextWebGL from '../context/webgl/RenderingContext';
 
-export default class GCanvas {
+export default class WmCanvas {
   static GBridge = null;
 
   id = null;
@@ -14,7 +14,7 @@ export default class GCanvas {
     this._disableAutoSwap = disableAutoSwap;
     if (disableAutoSwap) {
       this._swapBuffers = () => {
-        GCanvas.GBridge.render(this.id);
+        WmCanvas.GBridge.render(this.id);
       };
     }
   }
@@ -30,14 +30,14 @@ export default class GCanvas {
       if (!this._disableAutoSwap) {
         const render = () => {
           if (this._needRender) {
-            GCanvas.GBridge.render(this.id);
+            WmCanvas.GBridge.render(this.id);
             this._needRender = false;
           }
         };
         setInterval(render, 16);
       }
 
-      GCanvas.GBridge.callSetContextType(this.id, 1); // 0 for 2d; 1 for webgl
+      WmCanvas.GBridge.callSetContextType(this.id, 1); // 0 for 2d; 1 for webgl
     } else if (type.match(/2d/i)) {
       context = new GContext2D(this);
 
@@ -47,12 +47,12 @@ export default class GCanvas {
         const commands = context._drawCommands;
         context._drawCommands = '';
 
-        GCanvas.GBridge.render2d(this.id, commands);
+        WmCanvas.GBridge.render2d(this.id, commands);
         this._needRender = false;
       };
       setInterval(render, 16);
 
-      GCanvas.GBridge.callSetContextType(this.id, 0);
+      WmCanvas.GBridge.callSetContextType(this.id, 0);
     } else {
       throw new Error('not supported context ' + type);
     }
@@ -61,6 +61,6 @@ export default class GCanvas {
   }
 
   reset() {
-    GCanvas.GBridge.callReset(this.id);
+    WmCanvas.GBridge.callReset(this.id);
   }
 }

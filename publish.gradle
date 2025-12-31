@@ -1,7 +1,7 @@
 apply plugin: 'maven-publish'
 // apply plugin: 'com.jfrog.bintray'  // Bintray 已于 2021 年2月关闭，此插件不再需要
 
-project.ext.meta.vcsUrl = "https://github.com/alibaba/GCanvas.git"
+project.ext.meta.vcsUrl = "https://github.com/alibaba/WmCanvas.git"
 version = project.version
 buildscript {
     repositories {
@@ -23,9 +23,9 @@ buildscript {
 def pomConfig = {
     url "https://g-platform.github.io"
     scm {
-        url "https://github.com/alibaba/GCanvas"
-        connection "scm:git:https://github.com/alibaba/GCanvas.git"
-        developerConnection "scm:git:git@github.com:alibaba/GCanvas.git"
+        url "https://github.com/alibaba/WmCanvas"
+        connection "scm:git:https://github.com/alibaba/WmCanvas.git"
+        developerConnection "scm:git:git@github.com:alibaba/WmCanvas.git"
     }
     licenses {
         license {
@@ -135,7 +135,7 @@ bintray {
     // configurations = ['archives']  // 已废弃，使用 publications 替代
     publications = ['maven']
     pkg {
-        repo = "GCanvas"
+        repo = "WmCanvas"
         name = "${project.group}:${project.ext.id}"
         //读取 local.properties 文件里面的 bintray.user,对应的是https://bintray.com/signup/oss 的用户名
         userOrg = properties.getProperty("bintray.userOrg")

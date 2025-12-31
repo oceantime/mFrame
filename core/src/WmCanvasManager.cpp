@@ -56,12 +56,12 @@ GCanvasManager::~GCanvasManager()
     Clear();
 }
 
-GCanvas* GCanvasManager::NewCanvas(const std::string canvasId, GCanvasConfig config, GCanvasHooks *hooks)
+WmCanvas* GCanvasManager::NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks)
 {
-    GCanvas *c = GetCanvas(canvasId);
+    WmCanvas *c = GetCanvas(canvasId);
     if (!c)
     {
-        c = new GCanvas(canvasId, config, hooks);
+        c = new WmCanvas(canvasId, config, hooks);
         c->CreateContext();
         mCanvases[canvasId] = c;
     }
@@ -72,10 +72,10 @@ GCanvas* GCanvasManager::NewCanvas(const std::string canvasId, GCanvasConfig con
 #ifdef WMCANVAS
 GCanvasWeex* GCanvasManager::NewCanvasWeex(const std::string canvasId, bool onScreen, bool useFbo)
 {
-    GCanvas *c = GetCanvas(canvasId);
+    WmCanvas *c = GetCanvas(canvasId);
     if (!c)
     {
-        GCanvasConfig config = { !onScreen, useFbo };
+        WmCanvasConfig config = { !onScreen, useFbo };
         c = new GCanvasWeex(canvasId, config);
         c->CreateContext();
         mCanvases[canvasId] = c;
@@ -86,7 +86,7 @@ GCanvasWeex* GCanvasManager::NewCanvasWeex(const std::string canvasId, bool onSc
 
 void GCanvasManager::RemoveCanvas(const std::string canvasId)
 {
-    std::map< std::string, GCanvas * >::iterator it = mCanvases.find(canvasId);
+    std::map< std::string, WmCanvas * >::iterator it = mCanvases.find(canvasId);
     if (it != mCanvases.end())
     {
         delete it->second;
@@ -104,9 +104,9 @@ void GCanvasManager::RemoveCanvas(const std::string canvasId)
 #endif
 
 }
-GCanvas *GCanvasManager::GetCanvas(const std::string canvasId)
+WmCanvas *GCanvasManager::GetCanvas(const std::string canvasId)
 {
-    std::map< std::string, GCanvas * >::iterator it = mCanvases.find(canvasId);
+    std::map< std::string, WmCanvas * >::iterator it = mCanvases.find(canvasId);
     if (it != mCanvases.end())
     {
         return it->second;
@@ -116,7 +116,7 @@ GCanvas *GCanvasManager::GetCanvas(const std::string canvasId)
 
 void GCanvasManager::Clear()
 {
-    std::map< std::string, GCanvas * >::iterator it = mCanvases.begin();
+    std::map< std::string, WmCanvas * >::iterator it = mCanvases.begin();
     for (; it != mCanvases.end(); ++it)
     {
         if (it->second)
@@ -144,7 +144,7 @@ void GCanvasManager::Clear()
 }
 
 
-void GCanvasManager::AddCanvas(GCanvas *p)
+void GCanvasManager::AddCanvas(WmCanvas *p)
 {
     mCanvases[p->mContextId] = p;
 }

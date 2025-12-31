@@ -4,8 +4,8 @@ var wstream = fs.createWriteStream(path.resolve("../build/test.cc"));
 var prefix = `#include <unordered_map>
 #include <functional>
 #include <string>
-#include "GCanvas.hpp" 
-void prepareCases( std::unordered_map< std::string,std::function<void(std::shared_ptr<gcanvas::GCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)>>  &testCases)
+#include "WmCanvas.hpp" 
+void prepareCases( std::unordered_map< std::string,std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)>>  &testCases)
 { \n  `
 
 var postfix = ` }\n`
@@ -81,7 +81,7 @@ function writetoFile(folder, fileName, caseName) {
     
     // console.log(content);
     
-    var str = `testCases["${caseName}"]= [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx,int width,int height)
+    var str = `testCases["${caseName}"]= [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx,int width,int height)
     { \n    int  ratio=1; \n  ${content}  \n };\n`;
    
         // console.log(str);

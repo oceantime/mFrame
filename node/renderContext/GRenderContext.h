@@ -10,7 +10,7 @@
 #ifndef GBACKEND_H
 #define GBACKEND_H
 #include <iostream>
-#include <GCanvas.hpp>
+#include <WmCanvas.hpp>
 #include "lodepng.h"
 #include <functional>
 #include <unordered_map>
@@ -53,7 +53,7 @@ public:
     int getImagePixelJPG(unsigned char **data,unsigned long &size);
     int readPixelAndSampleFromCurrentCtx(unsigned char *data);
 private:
-    std::shared_ptr<gcanvas::GCanvas> mCanvas;
+    std::shared_ptr<wmcanvas::WmCanvas> mCanvas;
     void initCanvas();
     int mHeight;
     int mWidth;

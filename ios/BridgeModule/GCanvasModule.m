@@ -183,7 +183,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
  * Export JS method for context 2D render
  *
  * @param   commands    render commands from js
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  */
 - (void)render:(NSString *)commands componentId:(NSString*)componentId{
     if( self.enterBackground ) return;
@@ -206,10 +206,10 @@ static NSMutableDictionary  *_staticModuleExistDict;
 }
 
 /**
- * Export JS method for reset GCanvas component while disappear
+ * Export JS method for reset WmCanvas component while disappear
  * [iOS only]
  *
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  */
 - (void)resetComponent:(NSString*)componentId{
     GCVLOG_METHOD(@"resetComponent:,componentId=%@", componentId);
@@ -269,7 +269,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
  * @param   data        NSArray, contain 2 item
  *          data[0]     image source,
  *          data[1]     fake texture id(auto-increment id)of GCanvasImage in JS
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  * @param   callback    GCanvasModuleCallback callback
  */
 - (void)bindImageTexture:(NSArray *)data componentId:(NSString*)componentId callback:(GCanvasModuleCallback)callback{
@@ -346,7 +346,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
 }
 
 /**
- * Export JS method  set GCanvas plugin contextType
+ * Export JS method  set WmCanvas plugin contextType
  * @param   type    see GCVContextType
  */
 - (void)setContextType:(NSUInteger)type componentId:(NSString*)componentId{
@@ -452,7 +452,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
 }
 
 /**
- * reset and refresh GCanvas Plugin
+ * reset and refresh WmCanvas Plugin
  *
  * @param   plugin      the GCanvasPlugin object to refresh
  * @param   component   id<GCanvasViewProtocol component bind with plugin
@@ -485,7 +485,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
     
     GCVLOG_METHOD(@"glkView:drawInRect:, componentId:%@, context:%p", component.componentId, component.glkview.context);
     
-    //multi GCanvas instance, need change current context while execute render commands
+    //multi WmCanvas instance, need change current context while execute render commands
     [EAGLContext setCurrentContext:component.glkview.context];
     
     if ( component.needChangeEAGLContenxt ){
@@ -504,7 +504,7 @@ static NSMutableDictionary  *_staticModuleExistDict;
  * JS call native directly just for WebGL
  *
  * @param   dict    input WebGL command
- *          dict[@"contextId"] - GCanvas component identifier
+ *          dict[@"contextId"] - WmCanvas component identifier
  *          dict[@"type"] - type
  *          dict[@"args"] - WebGL command
  *

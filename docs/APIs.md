@@ -1,4 +1,4 @@
-### GCanvas API Support Summary
+### WmCanvas API Support Summary
 
 
 #### 1.Term Explanation

@@ -2,10 +2,10 @@
 #include <functional>
 #include <string>
 #include <math.h>
-#include "GCanvas.hpp"
-void prepareCases(std::unordered_map<std::string, std::function<void(std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *mCanvasContext, int width, int height)>> &testCases)
+#include "WmCanvas.hpp"
+void prepareCases(std::unordered_map<std::string, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *mCanvasContext, int width, int height)>> &testCases)
 {
-    testCases["tc_2d_arc"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_arc"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000 ");
         ctx->FillRect(0, 0, width, height);
@@ -14,7 +14,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Arc(50 * ratio, 75 * ratio, 50 * ratio, 0, 0.5 * M_PI);
         ctx->Stroke();
     };
-    testCases["tc_2d_arcTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_arcTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000 ");
         ctx->FillRect(0, 0, width, height);
@@ -26,7 +26,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(150 * ratio, 120 * ratio);                                    // 创建垂直线
         ctx->Stroke();
     };
-    testCases["tc_2d_MDN_arc"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_arc"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         for (int i = 0; i <= 3; i++)
         {
@@ -53,7 +53,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
             }
         }
     };
-    testCases["tc_2d_MDN_arcTo_1"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_arcTo_1"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         // Tangential lines
         ctx->BeginPath();
@@ -84,7 +84,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Arc(50 * ratio, 20 * ratio, 5 * ratio, 0, 2 * M_PI);   // Control point two
         ctx->Fill();
     };
-    testCases["tc_2d_MDN_arcTo_2"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_arcTo_2"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->MoveTo(180 * ratio, 90 * ratio);
@@ -92,7 +92,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(110 * ratio, 130 * ratio);
         ctx->Stroke();
     };
-    testCases["td_2d_clip"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["td_2d_clip"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->FillRect(0, 0, width, height);
@@ -108,11 +108,11 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(180 * ratio, 180 * ratio, 200 * ratio, 200 * ratio);
     };
 
-    testCases["tc_2d_clearRect"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_clearRect"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->ClearRect(0, 0, width, height);
     };
-    testCases["tc_2d_fill"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_fill"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->SetFillStyle("#000000");
@@ -126,25 +126,25 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(50 * ratio, 34 * ratio);
         ctx->Fill();
     };
-    testCases["tc_2d_fillRect"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_fillRect"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#ff0000");
         ctx->FillRect(0, 0, 100 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_bezierCurveTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_bezierCurveTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->MoveTo(20 * ratio, 20 * ratio);
         ctx->BezierCurveTo(20 * ratio, 100 * ratio, 200 * ratio, 100 * ratio, 200 * ratio, 20 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_text_fillText"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_fillText"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#FF0000 ");
         ctx->SetFont("30px Arial");
         ctx->DrawText("w3school.com.cn", 10 * ratio, 50 * ratio);
     };
-    testCases["tc_2d_lineGap_butt"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineGap_butt"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -153,7 +153,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(100 * ratio, 10 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineGap_round"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineGap_round"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -162,7 +162,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(100 * ratio, 50 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineGap_square"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineGap_square"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -171,7 +171,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(100 * ratio, 100 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineJoin_bevel"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineJoin_bevel"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -182,7 +182,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(50 * ratio, 200 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineJoin_miter"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineJoin_miter"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -193,7 +193,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(50 * ratio, 200 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineJoin_round"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineJoin_round"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->SetLineWidth(10 * ratio);
@@ -204,14 +204,14 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(50 * ratio, 200 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_lineTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->MoveTo(0, 0);
         ctx->LineTo(150 * ratio, 150 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_MDN_lineTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_lineTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->MoveTo(90 * ratio, 130 * ratio);
         ctx->LineTo(95 * ratio, 25 * ratio);
@@ -221,14 +221,14 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetLineWidth(15 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_quadraticCurveTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_quadraticCurveTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->MoveTo(10 * ratio, 10 * ratio);
         ctx->QuadraticCurveTo(20 * ratio, 100 * ratio, 200 * ratio, 50 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_beginPath"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_beginPath"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         // First path
         ctx->BeginPath();
@@ -244,7 +244,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(120 * ratio, 120 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_closePath"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_closePath"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->SetFillStyle("#000000 ");
@@ -258,7 +258,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->ClosePath();
         ctx->Stroke();
     };
-    testCases["tc_2d_lineTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->MoveTo(90 * ratio, 130 * ratio);
         ctx->LineTo(95 * ratio, 25 * ratio);
@@ -268,7 +268,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetLineWidth(15 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_moveTo"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_moveTo"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->BeginPath();
         ctx->MoveTo(50 * ratio, 50 * ratio);
@@ -276,7 +276,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->LineTo(150 * ratio, 150 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_shadow"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("blue");
         ctx->SetShadowColor("black");
@@ -285,7 +285,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetShadowOffsetY(20 * ratio);
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_shadowOffsetX"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadowOffsetX"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         // Shadow
         ctx->SetShadowColor("red ");
@@ -296,7 +296,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetFillStyle("blue ");
         ctx->FillRect(20 * ratio, 20 * ratio, 150 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_shadowOffsetY"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadowOffsetY"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         // Shadow
         ctx->SetShadowColor("red ");
@@ -307,7 +307,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetFillStyle("blue ");
         ctx->FillRect(20 * ratio, 20 * ratio, 150 * ratio, 80 * ratio);
     };
-    testCases["tc_2d_shaow_blur"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shaow_blur"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("blue");
         ctx->SetShadowBlur(20 * ratio);
@@ -316,13 +316,13 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetShadowOffsetY(10 * ratio);
         ctx->FillRect(40 * ratio, 100 * ratio, 200 * ratio, 200 * ratio);
     };
-    testCases["tc_2d_stroke_alpha"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_stroke_alpha"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetStrokeStyle("rgba(255,0,0,0.5) ");
         ctx->SetLineWidth(5 * ratio);
         ctx->StrokeRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_stroke"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_stroke"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->SetFillStyle("#000000 ");
@@ -333,13 +333,13 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Rect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
         ctx->Stroke();
     };
-    testCases["tc_2d_strokeRect"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_strokeRect"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetStrokeStyle("rgba(255,0,255,1.0)");
         ctx->SetLineWidth(5 * ratio);
         ctx->StrokeRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_MDN_scale"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_scale"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         // Scaled rectangle
         ctx->Scale(9, 3);
@@ -353,13 +353,13 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetFillStyle("gray ");
         ctx->FillRect(10 * ratio, 10 * ratio, 8 * ratio, 20 * ratio);
     };
-    testCases["tc_2d_MDN_transform"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_MDN_transform"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Transfrom(1, .2, .8, 1, 0, 0);
         ctx->FillRect(0, 0, 100 * ratio, 100 * ratio);
     };
 
-    // testCases["tc_2d_get_put_ImageData"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    // testCases["tc_2d_get_put_ImageData"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
     //     int ratio = 1;
     //     ctx->SetFillStyle("#000000");
     //     ctx->rect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
@@ -375,13 +375,13 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
     // ctx->putImageData(imgData, 50*ratio, 150*ratio);
     // };
 
-    testCases["tc_2d_rotate"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_rotate"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Rotate(20 * M_PI / 180);
         ctx->SetFillStyle("yellow");
         ctx->FillRect(50 * ratio, 20 * ratio, 100 * ratio, 50 * ratio);
     };
-    testCases["tc_2d_save"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_save"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000 ");
         ctx->Save();
@@ -390,13 +390,13 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Restore();
         ctx->FillRect(50 * ratio, 50 * ratio, 150 * ratio, 100 * ratio);
     };
-    testCases["tc_2d_scale"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_scale"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->StrokeRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
         ctx->Scale(2, 2);
         ctx->StrokeRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
     };
-    testCases["tc_2d_resetTransform"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_resetTransform"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->Rotate(45 * M_PI / 180);
@@ -405,7 +405,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetFillStyle("red");
         ctx->FillRect(70 * ratio, 0, 100 * ratio, 30 * ratio);
     };
-    testCases["tc_2d_transform"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_transform"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("yellow");
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
@@ -416,7 +416,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->SetFillStyle("blue");
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
     };
-    testCases["tc_2d_translate"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_translate"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
@@ -424,14 +424,14 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 50 * ratio);
     };
 
-    testCases["tc_2d_text_fillText_alpha"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_fillText_alpha"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("rgba(255,0,0,0.5) ");
         ctx->SetFont("30px Arial");
         ctx->DrawText("helloworld", 10 * ratio, 50 * ratio);
     };
 
-    testCases["tc_2d_text_measureText"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_measureText"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->SetFont("30px Arial");
@@ -444,14 +444,14 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10 * ratio, 60 * ratio, textWidth, 5 * ratio);
     };
 
-    testCases["tc_2d_text_strokeText"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_strokeText"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000 ");
         ctx->SetFont("40px Arial");
         ctx->StrokeText("helloworld", 10 * ratio, 50 * ratio);
     };
 
-    testCases["tc_2d_text_textAlign"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_textAlign"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000 ");
         ctx->SetStrokeStyle("blue");
@@ -472,7 +472,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->DrawText("textAlign=right", 125 * ratio, 200 * ratio);
     };
 
-    testCases["compite_desover"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["compite_desover"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("red");
         ctx->FillRect(20 * ratio, 140 * ratio, 75 * ratio, 50 * ratio);
@@ -481,7 +481,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(50 * ratio, 170 * ratio, 75 * ratio, 50 * ratio);
     };
 
-    testCases["composite_sourceover"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["composite_sourceover"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("red");
         ctx->FillRect(20 * ratio, 140 * ratio, 75 * ratio, 50 * ratio);
@@ -490,7 +490,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(50 * ratio, 170 * ratio, 75 * ratio, 50 * ratio);
     };
 
-    testCases["tc_2d_lineargradient"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_lineargradient"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->FillRect(0, 0, width, height);
@@ -502,7 +502,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
     };
 
-    testCases["tc_2d_radialgradient"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_radialgradient"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->FillRect(0, 0, width, height);
@@ -517,7 +517,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
     };
 
-    testCases["tc_2d_globalAlpha"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_globalAlpha"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("red");
         ctx->FillRect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
@@ -528,7 +528,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(100 * ratio, 100 * ratio, 100 * ratio, 100 * ratio);
     };
 
-    testCases["tc_2d_line_dash"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_line_dash"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#ff0000");
 
@@ -551,7 +551,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_2d_get_put_ImageData"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_get_put_ImageData"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->Rect(10 * ratio, 10 * ratio, 100 * ratio, 100 * ratio);
@@ -572,7 +572,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         imgData = nullptr;
     };
 
-    testCases["tc_sample_path_arc_rotate"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_arc_rotate"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000");
         ctx->FillRect(0, 0, width, height);
@@ -599,7 +599,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
 
         ctx->Restore();
     };
-    testCases["tc_sample_path_rotate"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_rotate"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetLineWidth(10);
         ctx->BeginPath();
@@ -625,7 +625,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_sample_path_scale"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_scale"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->SetLineWidth(10);
@@ -650,7 +650,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_sample_path_transform_fill2"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_transform_fill2"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Save();
         ctx->Scale(0.3, 0.3);
@@ -678,7 +678,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Restore();
     };
 
-    testCases["tc_sample_path_transform_fill"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_transform_fill"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         float startAngle = M_PI;
@@ -699,7 +699,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Restore();
     };
 
-    testCases["tc_sample_path_translate"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_translate"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetLineWidth(10);
 
@@ -722,7 +722,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_sample_path_transform"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_sample_path_transform"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->SetLineWidth(10);
@@ -743,7 +743,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_2d_arc_circle"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_arc_circle"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetLineWidth(10);
 
@@ -756,7 +756,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_2d_resetClip"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_resetClip"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Save();
         ctx->Rect(10 * ratio, 10 * ratio, 100 * ratio, 120 * ratio);
@@ -771,7 +771,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(200 * ratio, 0, 150 * ratio, 100 * ratio);
     };
 
-    testCases["tc_2d_text_textBaseLine"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_text_textBaseLine"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->SetFillStyle("#000000");
         ctx->SetStrokeStyle("blue");
@@ -791,7 +791,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->DrawText("Hanging", 200 * ratio, 125 * ratio);
     };
 
-    testCases["tc_2d_shadow_alpha"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow_alpha"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Translate(100, 100);
 
@@ -803,7 +803,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10, 10, 100, 100);
     };
 
-    testCases["tc_2d_shadow_fill"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow_fill"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
 
         ctx->Translate(100, 100);
@@ -825,7 +825,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Fill();
     };
 
-    testCases["tc_2d_shadow_fillrect"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow_fillrect"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Translate(100, 100);
         ctx->SetFillStyle("blue");
@@ -836,7 +836,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->FillRect(10, 10, 100, 100);
     };
 
-    testCases["tc_2d_shadow_stroke"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow_stroke"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Translate(100, 100);
 
@@ -856,7 +856,7 @@ void prepareCases(std::unordered_map<std::string, std::function<void(std::shared
         ctx->Stroke();
     };
 
-    testCases["tc_2d_shadow_strokerect"] = [](std::shared_ptr<gcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height) {
+    testCases["tc_2d_shadow_strokerect"] = [](std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height) {
         int ratio = 1;
         ctx->Translate(100, 100);
         ctx->SetStrokeStyle("red");

@@ -48,7 +48,7 @@ typedef void (^GCanvasModuleCallback)(id result);
 
 #pragma mark - Export Method of Context2D
 /**
- * Export JS method for initialize GCanvas Module, a synchronize method
+ * Export JS method for initialize WmCanvas Module, a synchronize method
  *
  * @param   args        input arguments
  *
@@ -60,15 +60,15 @@ typedef void (^GCanvasModuleCallback)(id result);
  * Export JS method for context 2D render
  *
  * @param   commands    render commands from js
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  */
 - (void)render:(NSString *)commands componentId:(NSString*)componentId;
 
 /**
- * Export JS method for reset GCanvas component while disappear
+ * Export JS method for reset WmCanvas component while disappear
  * [iOS only]
  *
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  */
 - (void)resetComponent:(NSString*)componentId;
 
@@ -88,13 +88,13 @@ typedef void (^GCanvasModuleCallback)(id result);
  * @param   data        NSArray, contain 2 item
  *          data[0]     image source,
  *          data[1]     fake texture id(auto-increment id)of GCanvasImage in JS
- * @param   componentId GCanvas component identifier
+ * @param   componentId WmCanvas component identifier
  * @param   callback    GCanvasModuleCallback callback
  */
 - (void)bindImageTexture:(NSArray *)data componentId:(NSString*)componentId callback:(GCanvasModuleCallback)callback;
 
 /**
- * Export JS method  set GCanvas plugin contextType
+ * Export JS method  set WmCanvas plugin contextType
  * @param   type    see GCVContextType
  */
 - (void)setContextType:(NSUInteger)type componentId:(NSString*)componentId;
@@ -113,7 +113,7 @@ typedef void (^GCanvasModuleCallback)(id result);
  * JS call native directly just for WebGL, a synchronize method
  *
  * @param   dict    input WebGL command
- *          dict[@"contextId"] - GCanvas component identifier
+ *          dict[@"contextId"] - WmCanvas component identifier
  *          dict[@"type"] - type
  *          dict[@"args"] - WebGL command
  *

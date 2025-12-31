@@ -23,7 +23,7 @@
 
 namespace wmcanvas {
 
-GCanvas::GCanvas(std::string canvasId, const GCanvasConfig &config, GCanvasHooks *hooks) :
+WmCanvas::WmCanvas(std::string canvasId, const WmCanvasConfig &config, WmCanvasHooks *hooks) :
         mContextId(canvasId),
         mConfig(config)
 {
@@ -31,19 +31,19 @@ GCanvas::GCanvas(std::string canvasId, const GCanvasConfig &config, GCanvasHooks
     LOG_D("Create Canvas");
 }
 
-void GCanvas::CreateContext() {
+void WmCanvas::CreateContext() {
     mCanvasContext = new GCanvasContext(0, 0, mConfig, mHooks);
     mCanvasContext->mContextId = this->mContextId;
 }
 
-void GCanvas::Clear() {
+void WmCanvas::Clear() {
     LOG_D("Canvas::DoContextLost start.");
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     LOG_D("Canvas::DoContextLost end.");
 }
 
 
-GCanvas::~GCanvas() {
+WmCanvas::~WmCanvas() {
     // LOG_D("Canvas clear");
     if (mCanvasContext != NULL) {
         delete mCanvasContext;
@@ -56,7 +56,7 @@ GCanvas::~GCanvas() {
 /**
  * View大小变化回调(GCanvas创建时会主动调一次)
  */
-void GCanvas::OnSurfaceChanged(int x, int y, int width, int height) {
+void WmCanvas::OnSurfaceChanged(int x, int y, int width, int height) {
     GLint maxRenderbufferSize;
     glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &maxRenderbufferSize);
     // if ((maxRenderbufferSize <= width) || (maxRenderbufferSize <= height)) {
@@ -81,12 +81,12 @@ void GCanvas::OnSurfaceChanged(int x, int y, int width, int height) {
     mCanvasContext->SetContextLost(false);
 }
 
-bool GCanvas::IsGCanvasReady()
+bool WmCanvas::IsGCanvasReady()
 {
     return mCanvasContext->mIsContextReady;
 }
 
-void GCanvas::drawFrame() {
+void WmCanvas::drawFrame() {
     mCanvasContext->SendVertexBufferToGPU();
 }
 

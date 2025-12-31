@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9A40B58A1ED4546700739AE6"
-               BuildableName = "GCanvas.framework"
-               BlueprintName = "GCanvas"
-               ReferencedContainer = "container:GCanvas.xcodeproj">
+               BuildableName = "WmCanvas.framework"
+               BlueprintName = "WmCanvas"
+               ReferencedContainer = "container:WmCanvas.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -51,9 +51,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9A40B58A1ED4546700739AE6"
-            BuildableName = "GCanvas.framework"
-            BlueprintName = "GCanvas"
-            ReferencedContainer = "container:GCanvas.xcodeproj">
+            BuildableName = "WmCanvas.framework"
+            BlueprintName = "WmCanvas"
+            ReferencedContainer = "container:WmCanvas.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

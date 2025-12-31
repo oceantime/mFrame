@@ -1,22 +1,22 @@
 ## 1. Why
 
-The project of GCanvas was started in 2013. At that time, canvas animation running on a mobile app was really a nightmare(at least in most cases). A few severe problems prevented developers utilizing the canvas in a wide way:
+The project of WmCanvas was started in 2013. At that time, canvas animation running on a mobile app was really a nightmare(at least in most cases). A few severe problems prevented developers utilizing the canvas in a wide way:
 - slow performance
 - bad compatibility(especially on Android)
 - lack of completeness of canvas APIs
 
 To solve the problems mentioned above, we decided to write a cross-platform solutions and provide APIs in JavaScript fully aligned with HTML5 canvas APIs. To ensure the performance, C++ with OpenGL ES appears to be the only way.
 
-Time has passed, powerful mobile hybrid frameworks such as ReactNative/Weex have become popular, but Canvas/WebGL has been scarcely implemented on these frameworks. So we have GCanvas integrated into the most popular framework to provide high performance canvas APIs.
+Time has passed, powerful mobile hybrid frameworks such as ReactNative/Weex have become popular, but Canvas/WebGL has been scarcely implemented on these frameworks. So we have WmCanvas integrated into the most popular framework to provide high performance canvas APIs.
 
 ## 2. How
 
-In short, the principle of GCanvas is quite simple:
+In short, the principle of WmCanvas is quite simple:
 - intercepts draw calls of canvas
 - reforms these draw calls and transfer them to render core implemented in C++
 - runs OpenGL ES APIs per draw calls
 
-The below diagram shows the high-level design of GCanvas:
+The below diagram shows the high-level design of WmCanvas:
 
 ![GCanvas_HLD](http://git.cn-hangzhou.oss-cdn.aliyun-inc.com/uploads/gcanvas/gcanvas/4c1e9581af4a374331cd3afb4c7db84d/GCanvas_HLD.png)
 
@@ -109,30 +109,30 @@ the latter is good for testing in different environment (such different test dev
 
 #### 2.6.5 Others
 
-In order to ensure and improve the quality of the GCanvas test code, we have refer some test code specification (link)
+In order to ensure and improve the quality of the WmCanvas test code, we have refer some test code specification (link)
 
-For more information about GCanvas test , such as environment installation, test project, test cases, you can read in the readme document.
+For more information about WmCanvas test , such as environment installation, test project, test cases, you can read in the readme document.
 
 ## 3. Future
 
-For now, GCanvas has a few limitation:
+For now, WmCanvas has a few limitation:
 - does not support video
 - part of WebGL APIs has been implemented, but not well covered.
 - does not support new-genernation GPU architectures
 
-In the future, GCanvas will
+In the future, WmCanvas will
 - fully support WebGL APIs
 - upgrade to OpenGL ES 3.0
 - integrate Vulkan & Metal
 - have independent JavaScript runtime
 
-VR/AR market is very hot. GCanvas is going to provide more capabilities in-application for developers to practice in these areas.
+VR/AR market is very hot. WmCanvas is going to provide more capabilities in-application for developers to practice in these areas.
 
-And, we also wants to try combining server-side rendering into GCanvas engine for high-quality realtime rendering on mobile phones.
+And, we also wants to try combining server-side rendering into WmCanvas engine for high-quality realtime rendering on mobile phones.
 
 ## 4. Last
 
 Last but not least, this project is inspired by a lot of open source projects instead of building from nothing. We should give special thanks to these projects: Chromium, Skia, Ejecta, Fast-Canvas, Cocos2d.
 We hope this project can provide more value to the community as we do gain a lot from it.
 
-<h5 align = "right">- GCanvas Open Source Team</h5>
+<h5 align = "right">- WmCanvas Open Source Team</h5>

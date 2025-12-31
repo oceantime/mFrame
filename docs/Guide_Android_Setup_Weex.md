@@ -1,4 +1,4 @@
-# GCanvas Android Guide
+# WmCanvas Android Guide
 
 ### Integrate to Android
 Tip: The following documents assume that you already hava a certain Android development experience.
@@ -20,13 +20,13 @@ The steps are as follows:
 
 1. Create an Android project. There is nothing to be specified, according to your habits to.
 
-2. <b>At this moment, our publication is being reviewed by Maven. Once published, source code dependency will be changed to AAR dependency. </b>.If you want to use the GCanvas On Android,You Can
+2. <b>At this moment, our publication is being reviewed by Maven. Once published, source code dependency will be changed to AAR dependency. </b>.If you want to use the WmCanvas On Android,You Can
    download source code, update build.gradle by adding the following dependencies. The Method is include the weex-brigdes project in your setting.gradle. Like this
 
 ```groovy
 include ':app'
 include 'weex_bridge'
-project(':weex_bridge').projectDir = new File('path to gcanvas/GCanvas/brgides/weex-bridge/android/weex-brigde')
+project(':weex_bridge').projectDir = new File('path to gcanvas/WmCanvas/brgides/weex-bridge/android/weex-brigde')
 
 ```
 When you include the weex-brigde to your project,you can add the dependency config to the weex-brigde
@@ -75,9 +75,9 @@ rootProject.extensions.artifacts = [
         'PicassoAdapter': 'img_picasso',
 ]
 ```
-You also can find the above configuration information in file of  the GCanvas source code root directory --- build.gradle.
+You also can find the above configuration information in file of  the WmCanvas source code root directory --- build.gradle.
 
-4. Register GCanvas Module and Component to your Weex Application.
+4. Register WmCanvas Module and Component to your Weex Application.
 
 ```java
 WXSDKEngine.registerModule("gcanvas", GCanvasWeexModule.class);
@@ -90,8 +90,8 @@ WXSDKEngine.registerComponent("gcanvas", WXGCanvasWeexComponent.class);
 <uses-feature android:glEsVersion="0x00020000" />
 ```
 
-6. You can also build the weex-playground to preview the GCanvas result.The location of weex-playground is
-<b>GCanvas/android/brigdes/weex-bridge/android/weex-playground </b>
+6. You can also build the weex-playground to preview the WmCanvas result.The location of weex-playground is
+<b>WmCanvas/android/brigdes/weex-bridge/android/weex-playground </b>
 
 
 ## Write Weex Sample

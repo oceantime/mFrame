@@ -1,6 +1,6 @@
 <template>
     <div class="gcanvas-container">
-        <h1>🎨 GCanvas WebView Demo</h1>
+        <h1>🎨 WmCanvas WebView Demo</h1>
         
         <canvas ref="canvas" id="myCanvas" width="400" height="400"></canvas>
         

@@ -5,7 +5,7 @@
       <div class="nav-buttons">
         <router-link to="/list" class="nav-btn" active-class="active">📋 列表</router-link>
         <router-link to="/picture" class="nav-btn" active-class="active">📷 相机</router-link>
-        <router-link to="/gcanvas" class="nav-btn" active-class="active">🎯 GCanvas</router-link>
+        <router-link to="/gcanvas" class="nav-btn" active-class="active">🎯 WmCanvas</router-link>
       </div>
     </nav>
     <div class="view-container">

@@ -2,7 +2,7 @@
 #ifndef GBENCHMARK_H
 #define GBENCHMARK_H
 #include <iostream>
-#include <GCanvas.hpp>
+#include <WmCanvas.hpp>
 #include <lodepng.h>
 #include <functional>
 #include <unordered_map>
@@ -20,11 +20,11 @@ public:
     void intilGLOffScreenEnviroment();
 
     float computeRatioWithW3C(std::string caseName);
-    void run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::GCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)> drawFunc);
+    void run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas,  GCanvasContext *mCanvasContext,int width,int height)> drawFunc);
 
     void dumpResult();
 private:
-    std::shared_ptr<wmcanvas::GCanvas> mCanvas;
+    std::shared_ptr<wmcanvas::WmCanvas> mCanvas;
     void initGcanvas();
     void render2file(std::string caseName);
     int mHeight;

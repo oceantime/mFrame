@@ -89,8 +89,8 @@ dependencies {
     compileOnly 'com.squareup.picasso:picasso:2.71828'
 }
 project.ext.id = rootProject.extensions.artifacts.Core
-project.ext.meta.labels = ['GPU', 'OpenGL', 'GCanvas', "canvas", 'WebGL', 'Rendering', 'High Performance']
-project.ext.meta.description = 'This package defines GCanvas main library.'
+project.ext.meta.labels = ['GPU', 'OpenGL', 'WmCanvas', "canvas", 'WebGL', 'Rendering', 'High Performance']
+project.ext.meta.description = 'This package defines WmCanvas main library.'
 
 // 使用本地 Maven 发布配置
 apply from: "${rootProject.projectDir}/publish_local.gradle"

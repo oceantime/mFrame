@@ -25,8 +25,8 @@
 
 namespace wmcanvas {
 
-GCanvasWeex::GCanvasWeex(std::string contextId, const GCanvasConfig &config) :
-        GCanvas(contextId, config) {
+GCanvasWeex::GCanvasWeex(std::string contextId, const WmCanvasConfig &config) :
+        WmCanvas(contextId, config) {
     mFrames = 0;
     mFps = 0.0f;
     mContextLost = false;
@@ -84,7 +84,7 @@ GTexture *GCanvasWeex::GetFboTexture() {
 }
 
 
-//GCanvas Weex
+//WmCanvas Weex
 void GCanvasWeex::SetOrtho(int width, int height) {
 }
 
@@ -426,7 +426,7 @@ GCanvasWeex::GetImageData(int
                           h, bool
                           base64Encode,
                           std::string &pixelsData) {
-    LOG_D("GCanvas.cpp::getImageData begin... xy=(%d, %d), wh=(%d, %d)", x,
+    LOG_D("WmCanvas.cpp::getImageData begin... xy=(%d, %d), wh=(%d, %d)", x,
 
           y, w, h);
 
@@ -450,7 +450,7 @@ GCanvasWeex::GetImageData(int
 
     // flip y axis to be in openGL lower left origin
     y = results[3] - y - h;
-    LOG_D("GCanvas.cpp::getImageData bounds... xy=(%d, %d), wh=(%d, %d)", x,
+    LOG_D("WmCanvas.cpp::getImageData bounds... xy=(%d, %d), wh=(%d, %d)", x,
           y, w, h);
 
     // use glGetPixels to get the bits from the current frame buffer
@@ -477,7 +477,7 @@ GCanvasWeex::GetImageData(int
         wmcanvas::Base64EncodeBuf((char *) (pixelsData.c_str()), ptr_data->c_str(),
                                  buf_size);
     }
-    LOG_D("GCanvas.cpp::getImageData end...[%d]=%s", buf_size,
+    LOG_D("WmCanvas.cpp::getImageData end...[%d]=%s", buf_size,
           pixelsData.c_str());
 }
 

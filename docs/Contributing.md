@@ -1,6 +1,6 @@
 # Contributing Guide
 
-Hi, folks, thanks for pay attention to GCanvas. Before submitting your contribution though, please make sure to take a moment and read through the following guidelines.
+Hi, folks, thanks for pay attention to WmCanvas. Before submitting your contribution though, please make sure to take a moment and read through the following guidelines.
 
 - [Issue Reporting Guidelines](#issue-reporting-guidelines)
 - [Pull Request Guidelines](#pull-request-guidelines)

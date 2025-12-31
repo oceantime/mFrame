@@ -1,4 +1,4 @@
-import GCanvas from './env/canvas';
+import WmCanvas from './env/canvas';
 import GImage from './env/image';
 
 import GWebGLRenderingContext from './context/webgl/RenderingContext';
@@ -13,7 +13,7 @@ export let WeexBridge = GBridgeWeex;
 export let ReactNativeBridge = GBridgeReactNative;
 
 export function enable(el, { bridge, debug, disableAutoSwap, disableComboCommands } = {}) {
-  const GBridge = GImage.GBridge = GCanvas.GBridge = GWebGLRenderingContext.GBridge = GContext2D.GBridge = bridge;
+  const GBridge = GImage.GBridge = WmCanvas.GBridge = GWebGLRenderingContext.GBridge = GContext2D.GBridge = bridge;
 
   GBridge.callEnable(el.ref, [
     0, // renderMode: 0--RENDERMODE_WHEN_DIRTY, 1--RENDERMODE_CONTINUOUSLY
@@ -32,7 +32,7 @@ export function enable(el, { bridge, debug, disableAutoSwap, disableComboCommand
     GBridge.callEnableDisableCombo();
   }
 
-  var canvas = new GCanvas(el.ref, { disableAutoSwap });
+  var canvas = new WmCanvas(el.ref, { disableAutoSwap });
   canvas.width = el.style.width;
   canvas.height = el.style.height;
 

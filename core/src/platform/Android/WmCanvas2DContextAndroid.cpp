@@ -21,13 +21,13 @@ extern bool g_use_pre_compile;
 extern std::string g_shader_cache_path;
 
 
-WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config) :
+WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, WmCanvasConfig &config) :
         GCanvasContext(w, h, config, nullptr) {
     Create();
 }
 
 
-WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks) :
+WmCanvas2DContextAndroid::WmCanvas2DContextAndroid(uint32_t w, uint32_t h, WmCanvasConfig &config, WmCanvasHooks* hooks) :
         GCanvasContext(w, h, config, hooks) {
     Create();
 }

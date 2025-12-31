@@ -337,7 +337,7 @@ void GRenderer::requestCreateCanvas(const std::string contextid) {
     if (!m_createCanvas) {
         LOG_D("not create canvas create");
         if (!mProxy) {
-            GCanvasConfig config = {false, true};
+            WmCanvasConfig config = {false, true};
             mProxy = new WmCanvasWeex(mContextId, config);
             mProxy->SetSignalUpGLThreadCallback([this]() { this->signalUpGLthread(); });
             mProxy->SetRefreshFlagCallback([this](bool refreshFlag) { this->setRefreshFlag(refreshFlag); });

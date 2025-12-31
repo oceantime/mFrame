@@ -1,8 +1,8 @@
-# GCanvas Android Build Script for PowerShell
+# WmCanvas Android Build Script for PowerShell
 # 用于编译生成 Android 所需的组件包
 
 Write-Host "====================================" -ForegroundColor Cyan
-Write-Host "GCanvas Android 编译工具" -ForegroundColor Cyan
+Write-Host "WmCanvas Android 编译工具" -ForegroundColor Cyan
 Write-Host "====================================" -ForegroundColor Cyan
 Write-Host ""
 

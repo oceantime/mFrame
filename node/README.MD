@@ -1,6 +1,6 @@
-# Node-GCanvas
+# Node-WmCanvas
 
-Node-GCanvas is `GCanvas(OpenGLES)` backed Canvas implementation for Node.js. It provide a way use `GCanvas` in Node.js environment. So you can use canvas-like object to do your own render task at server side just like on Web. Now, we just support Linux.
+Node-WmCanvas is `WmCanvas(OpenGLES)` backed Canvas implementation for Node.js. It provide a way use `WmCanvas` in Node.js environment. So you can use canvas-like object to do your own render task at server side just like on Web. Now, we just support Linux.
 
 
 ## Installation
@@ -13,7 +13,7 @@ Note: Node.js version >=10.0。
 
 ## Compiling
 
-Since GCanvas relies on OpenGL for graphics rendering, you need to install the dependency libraries needed for OpenGL operation on the corresponding system. Meanwhile, the GCanvas is built with CMake, so the system needs to install the CMake version >=3.8.0. The dependency libraries required to install the GCanvas run on each operating system are listed below.
+Since WmCanvas relies on OpenGL for graphics rendering, you need to install the dependency libraries needed for OpenGL operation on the corresponding system. Meanwhile, the WmCanvas is built with CMake, so the system needs to install the CMake version >=3.8.0. The dependency libraries required to install the WmCanvas run on each operating system are listed below.
 
 OS | Command
 ----- | -----
@@ -51,7 +51,7 @@ canvas.createPNG("demo1")
 
 ## API Documentation
 ### Standard APIs
-   * GCanvas benchmarking Web Canvas API implementation, as close as possible to the Web Canvas API. The API documentation, please visit the [Mozilla Web Canvas API] (https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D). (see this link for current API compatibility)
+   * WmCanvas benchmarking Web Canvas API implementation, as close as possible to the Web Canvas API. The API documentation, please visit the [Mozilla Web Canvas API] (https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D). (see this link for current API compatibility)
    * Standard API Supported
      * function
         - getContext()
@@ -139,7 +139,7 @@ img.onload = () => {
 img.onerror = err => {
 	console.log(err)
 }
-img.src = 'https://alibaba.github.io/GCanvas/assets/logo-gcanvas.png'
+img.src = 'https://alibaba.github.io/WmCanvas/assets/logo-gcanvas.png'
 ```   
   
 ```javascript
@@ -260,7 +260,7 @@ console.log(buffer)
 
 
 
-### Node-GCanvas Source Code Build & Test Running 
+### Node-WmCanvas Source Code Build & Test Running 
 If you want to build and develop based on source code, this document will show you how to build and run and test based on source code.
 
 Node-canvas USES node-addon's binding API and builds with cmake-js.

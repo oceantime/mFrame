@@ -11,6 +11,6 @@ else
     echo "remote build"
     sudo sudo npm install cmake-js -g
     mkdir -p ~/.gAssets/fonts/
-    git clone https://github.com/alibaba/GCanvas.git && cp  -R ./GCanvas/core ./core/  && npm run compile && cp ./third_party/font/wqy-microhei.ttc ~/.gAssets/fonts/wqy-microhei.ttc &&  cp ./third_party/font/.fontcache  ~/.gAssets/fonts/.fontcache
-    rm -rf ./GCanvas/
+    git clone https://github.com/alibaba/WmCanvas.git && cp  -R ./WmCanvas/core ./core/  && npm run compile && cp ./third_party/font/wqy-microhei.ttc ~/.gAssets/fonts/wqy-microhei.ttc &&  cp ./third_party/font/.fontcache  ~/.gAssets/fonts/.fontcache
+    rm -rf ./WmCanvas/
 fi

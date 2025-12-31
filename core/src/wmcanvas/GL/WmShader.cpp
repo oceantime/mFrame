@@ -123,7 +123,7 @@ GShader::~GShader()
 }
 
 
-void GShader::TraceErrorIfHas(GShader* shader, GCanvasHooks* hook, const std::string& contextId) {
+void GShader::TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::string& contextId) {
     if (shader == nullptr) {
         return;
     }

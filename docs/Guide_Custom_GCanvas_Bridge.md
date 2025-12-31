@@ -1,15 +1,15 @@
-# Create a custom GCanvas Bridge
+# Create a custom WmCanvas Bridge
 
-If you have known how GCanvas bridge worked in `Weex` or `ReactNative`, and you want to implement a GCanvas bridge by youself in other bridge(Cordva、WebViewJavascriptBridge etc.)
+If you have known how WmCanvas bridge worked in `Weex` or `ReactNative`, and you want to implement a WmCanvas bridge by youself in other bridge(Cordva、WebViewJavascriptBridge etc.)
 
 ### iOS
 - Add Cocoapods dependency
   Add this pod to your Podfile and run `pod install` to install:
 ```objective-c
-	pod 'GCanvas'
+	pod 'WmCanvas'
 ```
 
--  Export module and methods of GCanvas
+-  Export module and methods of WmCanvas
    * Implement  protocol `GCanvasModuleProtocol`  in your bridge which you used, such as [Cordova](https://cordova.apache.org/)
    * Implement protocol `GCanvasViewPortocol` in your bridge as a component which contains a `GLKView` as display view of OpenGL ES.
    * Export module to Javascript in your custom bridge
@@ -25,7 +25,7 @@ If you have known how GCanvas bridge worked in `Weex` or `ReactNative`, and you 
        `RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD` , synchronous method
        `RCT_EXPORT_METHOD`,  asynchornous method
 
-There may be different way in bridges. But you bridge must support export asynchornous and synchronous method both for javascript call native method. And you must implement [Export method list](#Export Method List)  to ensure `GCanvas` work well through your bridge .
+There may be different way in bridges. But you bridge must support export asynchornous and synchronous method both for javascript call native method. And you must implement [Export method list](#Export Method List)  to ensure `WmCanvas` work well through your bridge .
 
 ### Android
 
@@ -39,7 +39,7 @@ There may be different way in bridges. But you bridge must support export asynch
   compile project (':android:bridge_spec')
   ```
 
-* Implement `IGBridgeModule` interface. The interface should build bridge between GCanvas C++ rendering engine and your Javascript runtime environment. Check comments of the interface for more details. You can extend from an abstract class named 'AbsGBridgeModule'. We strongly recommend implements your bridge by composite implementation.
+* Implement `IGBridgeModule` interface. The interface should build bridge between WmCanvas C++ rendering engine and your Javascript runtime environment. Check comments of the interface for more details. You can extend from an abstract class named 'AbsGBridgeModule'. We strongly recommend implements your bridge by composite implementation.
 * Implement interfaces with prefix `IJSCallbackXXX`. These interfaces are used for data communicating between Javascript and native.
 * Inherit from `GTextureView`. This stage is optional, depending on how your runtime communicates between native and Javascript, but an OpenGL-renderable view is necessary.
 
@@ -53,7 +53,7 @@ About writing the javascript part, you can refer to[Custom Javascript Bridge](./
 | render(cmd, componentId)         | Async      | Both         | Execute render command                   |
 | preLoadImage(data, callback)     | Async      | Both         | Preload image with callback              |
 | bindImageTexture(data, callback) | Async      | Both         | Bind image to an OpenGL Texture with callback |
-| setContextType                   | Async      | Both         | Set GCanvas Context Type, 0-2d, 1-WebGL  |
+| setContextType                   | Async      | Both         | Set WmCanvas Context Type, 0-2d, 1-WebGL  |
 | setLogLevel                      | Async      | Both         | Set Native Log Level                     |
 | resetComponent                   | Async      | iOS only     | call the method while view disappear     |
 | extendCallNative                 | Sync       | iOS only     | method                                   |

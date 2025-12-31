@@ -11,7 +11,7 @@
 #include "../../gcanvas/GFontManager.h"
 #include "../../gcanvas/GCanvas2dContext.h"
 #include "../../support/Log.h"
-#include "../../GCanvas.hpp"
+#include "../../WmCanvas.hpp"
 #import "GCVFont.h"
 
 #include <assert.h>

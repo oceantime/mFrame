@@ -1,4 +1,4 @@
-## [GCanvas](https://alibaba.github.io/GCanvas/)
+## [WmCanvas](https://alibaba.github.io/WmCanvas/)
 
 ### Development
 

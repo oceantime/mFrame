@@ -5,15 +5,15 @@ Note: **At this moment, our publication is being reviewed by Maven. Once publish
 * Add bridge specification dependency
 * _Download gcanvas source_, add below line to your build.gradle:
   `compile project (':android:bridge\_spec')`
-* Implement `IGBridgeModule` interface. The interface should build bridge between GCanvas C++ rendering engine and your Javascript runtime environment. Check comments of the interface for more details. You can extend from an abstract class named 'AbsGBridgeModule'. We strongly recommend implements your bridge by composite implementation.
+* Implement `IGBridgeModule` interface. The interface should build bridge between WmCanvas C++ rendering engine and your Javascript runtime environment. Check comments of the interface for more details. You can extend from an abstract class named 'AbsGBridgeModule'. We strongly recommend implements your bridge by composite implementation.
 * Implement interfaces with prefix `IJSCallbackXXX`. These interfaces are used for data communicating between Javascript and native.
 * Inherit from `GTextureView`. This stage is optional, depending on how your runtime communicates between native and Javascript, but an OpenGL-renderable view is necessary.
 
 ### iOS
 
 * Add Cocoapods dependency Add this pod to your Podfile and run `pod install` to install:
-  `pod 'GCanvas'`
-* Export module and methods of GCanvas
+  `pod 'WmCanvas'`
+* Export module and methods of WmCanvas
   * Implement protocol `GCanvasModuleProtocol` in your bridge which you used, such as [Cordova](https://cordova.apache.org/)
   * Implement protocol `GCanvasViewPortocol` in your bridge as a component which contains a `GLKView`as display view of OpenGL ES.
   * Export module to Javascript in your custom bridge For export module, `Weex` and `ReactNative` supply the method `WX\_PlUGIN\_EXPORT\_MODULE` and `RCT\_EXPORT\_MODULE()`
@@ -21,7 +21,7 @@ Note: **At this moment, our publication is being reviewed by Maven. Once publish
     * Weex `WX\_EXPORT\_METHOD\_SYNC`, synchronous method `WX\_EXPORT\_METHOD`, asynchornous method
     * ReactNative `RCT\_EXPORT\_BLOCKING\_SYNCHRONOUS\_METHOD` , synchronous method`RCT\_EXPORT\_METHOD`, asynchornous method
 
-There may be different ways in bridges. But your bridge must support export asynchornous and synchronous method both for javascript call native method. And you must implement [Export native method list](#expot-native-apis-list) to ensure `GCanvas`works well with your bridge.
+There may be different ways in bridges. But your bridge must support export asynchornous and synchronous method both for javascript call native method. And you must implement [Export native method list](#expot-native-apis-list) to ensure `WmCanvas`works well with your bridge.
 
 
 ### Export Native APIs List
@@ -31,7 +31,7 @@ There may be different ways in bridges. But your bridge must support export asyn
 | render(cmd, componentId) | Async | Both | Execute render command |
 | preLoadImage(data, callback) | Async | Both | Preload image with callback |
 | bindImageTexture(data, callback) | Async | Both | Bind image to an OpenGL Texture with callback |
-| setContextType | Async | Both | Set GCanvas Context Type, 0-2d, 1-WebGL |
+| setContextType | Async | Both | Set WmCanvas Context Type, 0-2d, 1-WebGL |
 | setLogLevel | Async | Both | Set Native Log Level |
 | resetComponent | Async | iOS only | call the method while view disappear |
 | extendCallNative | Sync | iOS only | method |

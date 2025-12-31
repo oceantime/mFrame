@@ -26,13 +26,13 @@ public:
     GCanvasManager();
     virtual ~GCanvasManager();
 
-    GCanvas* NewCanvas(const std::string canvasId, GCanvasConfig config, GCanvasHooks *hooks = nullptr);
+    WmCanvas* NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks = nullptr);
 #ifdef WMCANVAS
     GCanvasWeex* NewCanvasWeex(const std::string canvasId, bool onScreen=true, bool useFbo = true);
 #endif
     void RemoveCanvas(const std::string canvasId);
-    GCanvas *GetCanvas(const std::string canvasId);
-    void AddCanvas(GCanvas *p);
+    WmCanvas *GetCanvas(const std::string canvasId);
+    void AddCanvas(WmCanvas *p);
     int CanvasCount();
     void Clear();
 #ifdef ANDROID
@@ -45,7 +45,7 @@ public:
     static void Release();
 
 protected:
-    std::map< std::string, GCanvas * > mCanvases;
+    std::map< std::string, WmCanvas * > mCanvases;
 #ifdef ANDROID
     std::map<std::string,std::queue<struct GCanvasCmd *> *> mCmdQueue;
 #endif

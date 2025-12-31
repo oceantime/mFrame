@@ -36,9 +36,9 @@ typedef void (*GWebGLTxtSubImage2DFunc)(GLenum target, GLint level, GLint xoffse
 typedef void (*GWebGLBindToGLKViewFunc)(std::string contextId);
 #endif
 
-class GCanvas;
+class WmCanvas;
 
-struct GCanvasConfig {
+struct WmCanvasConfig {
     bool flip;              //deafult is false,
     bool useFbo;            //default is true
     bool sharedFont;
@@ -84,7 +84,7 @@ public:
     static const int MAX_BLUE_RADIUS = 127;
 
 
-    GCanvasContext(short w, short h, const GCanvasConfig &config, GCanvasHooks *hooks = nullptr);
+    GCanvasContext(short w, short h, const WmCanvasConfig &config, WmCanvasHooks *hooks = nullptr);
 
 
     virtual ~GCanvasContext();
@@ -439,7 +439,7 @@ protected:
 
 
 public:
-    GCanvasConfig mConfig;
+    WmCanvasConfig mConfig;
     GCanvasState *mCurrentState;
     float mDevicePixelRatio;
     GTransform mProjectTransform;
@@ -462,7 +462,7 @@ public:
 
     GFontManager *mFontManager = nullptr;
 
-    GCanvasHooks *mHooks;
+    WmCanvasHooks *mHooks;
     
     //Weex
     int mContextType; // 0--2d;1--webgl

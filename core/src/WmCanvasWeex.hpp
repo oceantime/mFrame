@@ -117,11 +117,11 @@ struct ClipStruct
 };
 
 
-class GCanvasWeex : public GCanvas
+class GCanvasWeex : public WmCanvas
 {
 public:
     
-     GCanvasWeex(std::string contextId, const GCanvasConfig& config);
+     GCanvasWeex(std::string contextId, const WmCanvasConfig& config);
 
     virtual ~GCanvasWeex();
 
@@ -205,7 +205,7 @@ public:
     void setSyncResult(std::string result);
 
 protected:
-    //GCanvas Weex API
+    //WmCanvas Weex API
     void drawFBO(std::string fboName, WmCompositeOperation compositeOp = COMPOSITE_OP_SOURCE_OVER,
              float sx = 0, float sy = 0, float sw = 1, float sh = 1, float dx = 0, float dy = 0,
              float dw = 1, float dh = 1);

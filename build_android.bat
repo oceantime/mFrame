@@ -1,9 +1,9 @@
 @echo off
-REM GCanvas Android 编译脚本
+REM WmCanvas Android 编译脚本
 REM 用于编译生成 Android 所需的组件包
 
 echo ====================================
-echo GCanvas Android 编译工具
+echo WmCanvas Android 编译工具
 echo ====================================
 echo.
 

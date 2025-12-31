@@ -1,6 +1,6 @@
-# GCanvas Android 构建指南
+# WmCanvas Android 构建指南
 
-本指南将帮助你编译 GCanvas 项目并生成 Android 所需的组件包。
+本指南将帮助你编译 WmCanvas 项目并生成 Android 所需的组件包。
 
 ## 前提条件
 
@@ -12,7 +12,7 @@
 
 ## 项目结构说明
 
-GCanvas Android 包含以下主要模块：
+WmCanvas Android 包含以下主要模块：
 
 1. **gcanvas_library** (corelib) - 核心库
    - Group ID: `com.taobao.gcanvas`
@@ -192,6 +192,6 @@ dir %USERPROFILE%\.m2\repository\com\taobao\gcanvas\
 
 ## 参考资料
 
-- [GCanvas 官方文档](https://alibaba.github.io/GCanvas/)
+- [WmCanvas 官方文档](https://alibaba.github.io/WmCanvas/)
 - [Android 开发指南](docs/Guide_Android_Setup_Weex.md)
 - [CSDN 参考文章](https://blog.csdn.net/qq_33718648/article/details/82286559)

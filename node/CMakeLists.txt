@@ -44,7 +44,7 @@ set(SOURCE_FILES
         ./renderContext/GRenderContext.cc
         ./third_party/lodepng.cc
         ./util/NodeBindingUtil.cc
-        ${CORE_DIR}src/GCanvas.cpp        
+        ${CORE_DIR}src/WmCanvas.cpp        
         ${CORE_DIR}src/GCanvasManager.cpp
 
         # gcanvas srcs

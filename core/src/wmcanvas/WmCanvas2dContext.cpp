@@ -105,7 +105,7 @@ void GCanvasContext::FillText(const unsigned short *text, unsigned int text_leng
     }
 }
 
-GCanvasContext::GCanvasContext(short w, short h, const GCanvasConfig &config, GCanvasHooks *hooks) : mIsFboSupported(true), mWidth(w), mHeight(h), mIsContextReady(false),
+GCanvasContext::GCanvasContext(short w, short h, const WmCanvasConfig &config, WmCanvasHooks *hooks) : mIsFboSupported(true), mWidth(w), mHeight(h), mIsContextReady(false),
                                                                                                      mHasClipRegion(false), mHiQuality(false), mVertexBufferIndex(0),
                                                                                                      mSaveShader(nullptr),
                                                                                                      mClearColor(GColorTransparentWhite),
@@ -471,7 +471,7 @@ void GCanvasContext::ClearGeometryDataBuffers()
 }
 
 /**
- * reset gcanvas to default state£¬only called on init and dimension changed
+ * reset gcanvas to default stateï¿½ï¿½only called on init and dimension changed
  * states include: fillStyle/strokeStyle,lineJoin/miter,textAlign,font style,
  * shadow, globalCompositeOperation,clip, transform
 */
@@ -544,7 +544,7 @@ void GCanvasContext::SetTexture(int textureId)
     // LOG_E("SetTexture %i, current=%i", textureId, mCurrentState->mTextureId);
     if (mCurrentState->mTextureId != textureId)
     {
-        // FIXME optim: ÐÞ¸ÄÎÆÀí ²»Ó¦¸Ã´¥·¢flush
+        // FIXME optim: ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó¦ï¿½Ã´ï¿½ï¿½ï¿½flush
         // SendVertexBufferToGPU();
         SendVertexBufferToGPU();
         mCurrentState->mTextureId = textureId;
@@ -709,7 +709,7 @@ void GCanvasContext::SaveVertexShaderProperty(int offset, int count)
     //        int nextOffset = iter->vertexStartIndex + iter->vertexCount;
     //        // LOG_E("SaveVertexShaderProperty offset=%i, nextOffset=%i", offset, nextOffset);
     //        if (nextOffset == offset) {
-    //            // TODO ÊÇ·ñÏàÍ¬×´Ì¬£¬ÓÅ»¯shaderÅÐ¶Ï
+    //            // TODO ï¿½Ç·ï¿½ï¿½ï¿½Í¬×´Ì¬ï¿½ï¿½ï¿½Å»ï¿½shaderï¿½Ð¶ï¿½
     //            if (shaderType == iter->shaderType && textureId == iter->textureId) {
     //                iter->vertexCount = iter->vertexCount + count;
     //
@@ -829,7 +829,7 @@ void GCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
     }
     else
     {
-        // pushµ½vertexBuffer
+        // pushï¿½ï¿½vertexBuffer
         mVertexBufferIndex += 6;
         SaveVertexShaderProperty(mVertexBufferIndex - 6, 6);
     }
@@ -923,7 +923,7 @@ void GCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
     }
     else
     {
-        // pushµ½vertexBuffer
+        // pushï¿½ï¿½vertexBuffer
         mVertexBufferIndex += 6;
         SaveVertexShaderProperty(mVertexBufferIndex - 6, 6);
     }
@@ -2013,8 +2013,8 @@ void GCanvasContext::ClearScreen()
 }
 
 /**
- * ¸Ä±äcanvas »­²¼´óÐ¡(Ä¿Ç°Ö§¸¶±¦ÄÚ²¢Î´Ê¹ÓÃ)
- * reset×´Ì¬ÎªÄ¬ÈÏ£¬ÇÒ¸üÐÂOpenGL×´Ì¬ÎªÄ¬ÈÏ
+ * ï¿½Ä±ï¿½canvas ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡(Ä¿Ç°Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½Î´Ê¹ï¿½ï¿½)
+ * reset×´Ì¬ÎªÄ¬ï¿½Ï£ï¿½ï¿½Ò¸ï¿½ï¿½ï¿½OpenGL×´Ì¬ÎªÄ¬ï¿½ï¿½
  */
 void GCanvasContext::Resize(int width, int height)
 {
@@ -2544,7 +2544,7 @@ void GCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeigh
     }
 
     UseTextureRenderPipeline();
-    // FIXME »º´æblended white color, ±ÜÃâÖØ¸´blend¼ÆËã
+    // FIXME ï¿½ï¿½ï¿½ï¿½blended white color, ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½blendï¿½ï¿½ï¿½ï¿½
     GColorRGBA color = BlendWhiteColor(this);
     SetTexture(textureId);
 

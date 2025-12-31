@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
-#include <GCanvas.hpp>
+#include <WmCanvas.hpp>
 
 //using opengl es on linux
 #define GLFW_INCLUDE_ES2
@@ -84,7 +84,7 @@ int main(void) {
     printf("GL_RENDERER : %s\n", glGetString(GL_RENDERER) );
 
 
-   wmcanvas:: GCanvas c("id",{false,true},nullptr);
+   wmcanvas:: WmCanvas c("id",{false,true},nullptr);
    c.CreateContext();
    c.OnSurfaceChanged(0,0,WIDTH,HEIGHT);   
  

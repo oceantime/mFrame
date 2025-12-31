@@ -80,7 +80,7 @@ public:
     bool IsShaderCompleted() { return isCompleted; }
 
 
-    static void TraceErrorIfHas(GShader* shader, GCanvasHooks* hook, const std::string& contextId);
+    static void TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::string& contextId);
 
 
 protected:

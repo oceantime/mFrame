@@ -23,7 +23,7 @@
         
         <activity 
             android:name=".WebViewActivity"
-            android:label="GCanvas WebView Demo"
+            android:label="WmCanvas WebView Demo"
             android:exported="false" />
             
     </application>

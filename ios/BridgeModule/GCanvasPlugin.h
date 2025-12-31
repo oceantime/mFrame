@@ -42,8 +42,8 @@ typedef GCanvasPlugin* (^FetchPluginBlock)(NSString * componentId);
 
 + (void)setFetchPlugin:(FetchPluginBlock)block;
 /**
- *  @abstract   init GCanvas with componentId
- *  @param      componentId   unique instance bind GCanvas
+ *  @abstract   init WmCanvas with componentId
+ *  @param      componentId   unique instance bind WmCanvas
  */
 - (instancetype)initWithComponentId:(NSString*)componentId;
 
@@ -81,7 +81,7 @@ typedef GCanvasPlugin* (^FetchPluginBlock)(NSString * componentId);
 - (void)releaseManager;
 
 /**
- *  @abstract   fetch image texture id in this GCanvas context
+ *  @abstract   fetch image texture id in this WmCanvas context
  *
  *  @param  aid         id from js
  */
@@ -123,35 +123,35 @@ typedef GCanvasPlugin* (^FetchPluginBlock)(NSString * componentId);
 - (void)setDevicePixelRatio:(double)ratio;
 
 /**
- *  @abstract   set GCanvas context type
+ *  @abstract   set WmCanvas context type
  *
  *  @param contextType      see GCVContextType definiation
  */
 - (void)setContextType:(GCVContextType)contextType;
 
 /**
- *  @abstract   get GCanvas context type
+ *  @abstract   get WmCanvas context type
  *
  *  @return     current context type, see GCVContextType definiation
  */
 - (int)contextType;
 
 /**
- *  @abstract   get GCanvas fps
+ *  @abstract   get WmCanvas fps
  *
  *  @return     fps
  */
 - (CGFloat)fps;
 
 /**
- *  @abstract   get GCanvas textureId
+ *  @abstract   get WmCanvas textureId
  *
  *  @return     fbo textureId
  */
 - (GLuint)textureId;
 
 /**
- *  @abstract   explicit remove GCanvas
+ *  @abstract   explicit remove WmCanvas
  */
 - (void)removeGCanvas;
 

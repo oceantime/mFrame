@@ -37,12 +37,12 @@
     } LogLevel;
 
 
-    struct GCanvasHooks;
+    struct WmCanvasHooks;
 
-    typedef void (*GCanvasExceptionHandler)(const char *canvasId, const char *tag, const char *detail, GCanvasHooks* selfHooks);
+    typedef void (*GCanvasExceptionHandler)(const char *canvasId, const char *tag, const char *detail, WmCanvasHooks* selfHooks);
 
 
-    struct GCanvasHooks
+    struct WmCanvasHooks
     {
         GCanvasExceptionHandler GCanvasException;
     };
@@ -76,10 +76,10 @@
     LogLevel GetLogLevel();
 
 
-    API_EXPORT void LogException(GCanvasHooks *hooks, std::string contextId, const char *tag, const char *format, ...);
+    API_EXPORT void LogException(WmCanvasHooks *hooks, std::string contextId, const char *tag, const char *format, ...);
 
 
-    API_EXPORT void LogExceptionVector(GCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec);
+    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec);
 
 
     #ifndef DEBUG

@@ -1,4 +1,4 @@
-# GCanvas.js
+# WmCanvas.js
 
 This module provides a canvas-like object in hybrid enviroment (Weex and ReactNative), so you can use the canvsa-like object to do your own job, just like on Web. Besides canvas, it also provide an Image-like class, so you can use the it  instead of Image on Web.
 
@@ -97,7 +97,7 @@ ReactNativeBridge.GCanvasModule = NativeModules.GCanvasModule;
 ReactNativeBridge.Platform = Platform;
 ```
 
-Finally, you can use GCanvas in ReactNative App. Notice that before you `enable` GCanvas, convert`GCanvasView` reactTag to a string.
+Finally, you can use WmCanvas in ReactNative App. Notice that before you `enable` WmCanvas, convert`GCanvasView` reactTag to a string.
 ```
 export default class App extends Component<{}> {
 
@@ -162,4 +162,4 @@ Notice that we pass in the bridge object calling `enable`. Actually in this modu
 
 You can check `src/bridge/bridge-weex.js` for detail.
 
-This module is the javascript part of the js-native bridge. About writing the native part, you can refer to [Custom GCanvas Bridge](https://alibaba.github.io/GCanvas/docs/Custom%20Bridge.html).
+This module is the javascript part of the js-native bridge. About writing the native part, you can refer to [Custom WmCanvas Bridge](https://alibaba.github.io/WmCanvas/docs/Custom%20Bridge.html).

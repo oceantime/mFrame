@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GCanvas Demo"
+        android:text="WmCanvas Demo"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp" />
@@ -18,14 +18,14 @@
         android:id="@+id/btn_webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WebView + GCanvas Demo"
+        android:text="WebView + WmCanvas Demo"
         android:textSize="16sp"
         android:padding="16dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This demo shows how to use GCanvas in WebView to render HTML5 Canvas content."
+        android:text="This demo shows how to use WmCanvas in WebView to render HTML5 Canvas content."
         android:textSize="14sp"
         android:gravity="center"
         android:layout_marginTop="16dp"

@@ -3,7 +3,7 @@
 #include <cmath> 
 GBenchMark::GBenchMark(int width, int height) : mWidth(width), mHeight(height)
 {
-    std::shared_ptr<wmcanvas::GCanvas> p(new wmcanvas::GCanvas("benchMark", {true, true}, nullptr));
+    std::shared_ptr<wmcanvas::WmCanvas> p(new wmcanvas::WmCanvas("benchMark", {true, true}, nullptr));
     this->mCanvas = p;
 }
 
@@ -140,9 +140,9 @@ float GBenchMark::computeRatioWithW3C(std::string caseName)
     return 1.0f * correctCount / N;
 }
 
-void GBenchMark::run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::GCanvas> canvas, GCanvasContext *ctx, int width, int height)> drawFunc)
+void GBenchMark::run(std::string caseName, std::function<void(std::shared_ptr<wmcanvas::WmCanvas> canvas, GCanvasContext *ctx, int width, int height)> drawFunc)
 {
-    std::shared_ptr<wmcanvas::GCanvas> p(new wmcanvas::GCanvas("benchMark", {true, true}, nullptr));
+    std::shared_ptr<wmcanvas::WmCanvas> p(new wmcanvas::WmCanvas("benchMark", {true, true}, nullptr));
     p->CreateContext();
     p->OnSurfaceChanged(0, 0, mWidth, mHeight);
     p->Clear();

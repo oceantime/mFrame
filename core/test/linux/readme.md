@@ -1,4 +1,4 @@
-### GCanvas Linux BenchMark 套件说明文档
+### WmCanvas Linux BenchMark 套件说明文档
 
 #### 如何搭建环境？
    * 操作系统：Linux Ubuntu-18.04
@@ -23,7 +23,7 @@
   
   * 构建离屏环境
       ``` 
-        cd GCanvas/core/test/linux/ && mkdir build && cd build // 创建build 目录
+        cd WmCanvas/core/test/linux/ && mkdir build && cd build // 创建build 目录
         cmake ../ && make //使用cmake生成make文件，然后进行make
         ls -al | grep "gcanvasTest" //查看构建输出的可运行文件
       ``` 

@@ -20,8 +20,8 @@ namespace NodeBinding
     GRenderContext::GRenderContext(int width, int height)
         : mWidth(width), mHeight(height), mRatio(2.0), mEglDisplay(EGL_NO_DISPLAY)
     {
-        GCanvasConfig config = {true, false};
-        this->mCanvas = std::make_shared<gcanvas::GCanvas>("node-gcanvas", config, nullptr);
+        WmCanvasConfig config = {true, false};
+        this->mCanvas = std::make_shared<wmcanvas::WmCanvas>("node-gcanvas", config, nullptr);
         mCanvasWidth = width * mRatio;
         mCanvasHeight = height * mRatio;
     }
@@ -29,8 +29,8 @@ namespace NodeBinding
     GRenderContext::GRenderContext(int width, int height, int ratio)
         : mWidth(width), mHeight(height), mRatio(ratio), mEglDisplay(EGL_NO_DISPLAY)
     {
-        GCanvasConfig config = {true, true};
-        this->mCanvas = std::make_shared<gcanvas::GCanvas>("node-gcanvas", config, nullptr);
+        WmCanvasConfig config = {true, true};
+        this->mCanvas = std::make_shared<wmcanvas::WmCanvas>("node-gcanvas", config, nullptr);
         mCanvasWidth = width * mRatio;
         mCanvasHeight = height * mRatio;
     }

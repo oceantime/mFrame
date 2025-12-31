@@ -16,7 +16,7 @@ The steps are as follows:
 ```groovy
 compile project ':bridges:weex-bridge:android:weex_bridge'
 ```
-3. Register GCanvas Module and Component to your Weex Application.
+3. Register WmCanvas Module and Component to your Weex Application.
 ```java
 WXSDKEngine.registerModule("gcanvas", GCanvasWeexModule.class);
 WXSDKEngine.registerComponent("gcanvas", WXGCanvasWeexComponent.class);
@@ -39,4 +39,4 @@ pod 'WeexGcanvas'
 pod 'WeexPluginLoader'
 ```
 
-`WeexPluginLoader` would dynamic register Weex `Module` and `Component` of GCanvas, so we do not need to register manually.
+`WeexPluginLoader` would dynamic register Weex `Module` and `Component` of WmCanvas, so we do not need to register manually.

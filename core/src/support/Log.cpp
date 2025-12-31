@@ -121,7 +121,7 @@
 
 
 
-    void LogException(GCanvasHooks *hooks, std::string contextId, const char *tag, const char *format, ...)
+    void LogException(WmCanvasHooks *hooks, std::string contextId, const char *tag, const char *format, ...)
     {
         va_list va;
         char buffer[LOG_MSG_BUF_SIZE];
@@ -145,7 +145,7 @@
     }
 
 
-    API_EXPORT void LogExceptionVector(GCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec)
+    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec)
     {
         if (vec.size()) {
             for (int i = 0; i < vec.size(); i++) {

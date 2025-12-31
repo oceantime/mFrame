@@ -1,14 +1,14 @@
 Pod::Spec.new do |s|
 
-  s.name         = "GCanvas"
+  s.name         = "WmCanvas"
   s.version      = "1.1.1"
-  s.summary      = "GCanvas Source."
+  s.summary      = "WmCanvas Source."
 
   s.description  = <<-DESC
                    A cross-platform fast Canvas render engine.
                    DESC
 
-  s.homepage     = 'https://github.com/alibaba/GCanvas'
+  s.homepage     = 'https://github.com/alibaba/WmCanvas'
   s.license = {
     :type => 'Copyright',
     :text => <<-LICENSE
@@ -23,11 +23,11 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
 
  # s.source =  { :path => '.' }
-  s.source =  { :git => "https://github.com/alibaba/GCanvas.git", :tag => s.version }
+  s.source =  { :git => "https://github.com/alibaba/WmCanvas.git", :tag => s.version }
 
   s.source_files = 'ios/BridgeModule/*.{h,m,mm}',
                    'core/src/export.h',
-                   'core/src/GCanvas.{hpp,cpp}',
+                   'core/src/WmCanvas.{hpp,cpp}',
                    'core/src/GCanvasWeex.{hpp,cpp}',
                    'core/src/GCanvasManager.{h,cpp}',
                    'core/src/gcanvas/*.*',
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
                    
   s.public_header_files =  'ios/BridgeModule/*.h', 
                            'core/src/export.h',
-                           'core/src/GCanvas.hpp',
+                           'core/src/WmCanvas.hpp',
                            'core/src/GCanvasWeex.hpp',
                            'core/src/GCanvasManager.h',
                            'core/src/gcanvas/**/*.h',
@@ -53,8 +53,8 @@ Pod::Spec.new do |s|
                            'core/src/platform/iOS/*.h'
 
 
-  s.user_target_xcconfig  = { 'FRAMEWORK_SEARCH_PATHS' => "'$(PODS_ROOT)/GCanvas'",  
-                              'HEADER_SEARCH_PATHS' => "'$(PODS_ROOT)/GCanvas'"}
+  s.user_target_xcconfig  = { 'FRAMEWORK_SEARCH_PATHS' => "'$(PODS_ROOT)/WmCanvas'",  
+                              'HEADER_SEARCH_PATHS' => "'$(PODS_ROOT)/WmCanvas'"}
 
   s.requires_arc = true
 

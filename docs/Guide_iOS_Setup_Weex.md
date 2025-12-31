@@ -1,8 +1,8 @@
-# GCanvas Weex Bridge iOS Guide
+# WmCanvas Weex Bridge iOS Guide
 
-If your project use Weex, and want to integrate GCanvas, or you want to see how to run Weex sample with GCanvas. This guide is just for you.
+If your project use Weex, and want to integrate WmCanvas, or you want to see how to run Weex sample with WmCanvas. This guide is just for you.
 
-## Integrate GCanvas
+## Integrate WmCanvas
 
 #### Requirement
 
@@ -19,9 +19,9 @@ pod 'WeexGcanvas'
 pod 'WeexPluginLoader'
 ```
 
-`WeexPluginLoader` would dynamic register Weex `Module` and `Component` of GCanvas, so we do not need to register manually. dd
+`WeexPluginLoader` would dynamic register Weex `Module` and `Component` of WmCanvas, so we do not need to register manually. dd
 
-Now, you can use official sample  to test GCanvas, `sample.vue` file in path `./examples/2d/sammple.vue`. 
+Now, you can use official sample  to test WmCanvas, `sample.vue` file in path `./examples/2d/sammple.vue`. 
 
 You can also write a sample by youself. 
 

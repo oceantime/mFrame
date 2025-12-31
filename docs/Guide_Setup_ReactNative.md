@@ -10,7 +10,7 @@
 
 In XCode, in the project navigator, select your project. 
 
-1. Add `GCanvas.fromework` ( in the path `./node_modules/react-native-gcanvas/ios/GCanvas.framework`) to your project's `Build Phases` ➜ `Link Binary With Libraries`
+1. Add `WmCanvas.fromework` ( in the path `./node_modules/react-native-gcanvas/ios/WmCanvas.framework`) to your project's `Build Phases` ➜ `Link Binary With Libraries`
 2. Add `$(SRCROOT)/../node_modules/react-native-gcanvas/ios` to your project's `Build Settings` ➜ `Framework Search Path`
 
 ### Manual installation
@@ -22,16 +22,16 @@ In XCode, in the project navigator, select your project.
 
 2. Go to `node_modules` ➜ `react-native-gcanvas` and add `RCTGCanvas.xcodeproj`
 
-3. Go to `GCanvas/ios`  and add `GCanvas.xcodeproj`
+3. Go to `WmCanvas/ios`  and add `WmCanvas.xcodeproj`
 
-4. In XCode, in the project navigator, select your project. Add `libRCTGCanvas.a` and `GCanvas.fromework` ( in the path `./node_modules/react-native-gcanvas/ios/GCanvas.framework`) to your project's `Build Phases` ➜ `Link Binary With Libraries`
+4. In XCode, in the project navigator, select your project. Add `libRCTGCanvas.a` and `WmCanvas.fromework` ( in the path `./node_modules/react-native-gcanvas/ios/WmCanvas.framework`) to your project's `Build Phases` ➜ `Link Binary With Libraries`
 
    ​
 
 
 Also you can run the given sample `RNGCanvasSample`, follow steps below:
 
-1. Goto `GCanvas/bridges/react-native/bridge/examples/RNGCanvasSample` directory,  run `npm install ` install dependency library.
+1. Goto `WmCanvas/bridges/react-native/bridge/examples/RNGCanvasSample` directory,  run `npm install ` install dependency library.
 2. Run your project (`Cmd+R`)
 3. Run result same as below, congratuation.
    <img src='https://img.alicdn.com/tfs/TB1E4OoX1OSBuNjy0FdXXbDnVXa-1242-2208.png' width="60%">

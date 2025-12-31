@@ -1,13 +1,13 @@
 ### I. Install JS Library
 
-GCanvas requires a js library.  Install it from npm:
+WmCanvas requires a js library.  Install it from npm:
 
 `npm install weex-gcanvas --save`
 `npm install react-native-gcanvas --save`
 
 or find the .js fild in our project:
 
-`https://github.com/alibaba/GCanvas/tree/master/GCanvas/js/src`
+`https://github.com/alibaba/WmCanvas/tree/master/WmCanvas/js/src`
 
 ### II. Getting Context
 
@@ -15,7 +15,7 @@ To use gcanvas, you need to get a context(2d or 3d) before doing anything else. 
 
 #### weex
 
-For weex, a "gcanvas" element was added to weex runtime. `this.$refs.<canvas ref>` should return the element. Note for some techinal reason the element is not the GCanvas instance itself. We need to call `enable` with width and height on this element.
+For weex, a "gcanvas" element was added to weex runtime. `this.$refs.<canvas ref>` should return the element. Note for some techinal reason the element is not the WmCanvas instance itself. We need to call `enable` with width and height on this element.
 
 ```HTML5
 <template>
@@ -74,7 +74,7 @@ ReactNativeBridge.GCanvasModule = NativeModules.GCanvasModule;
 ReactNativeBridge.Platform = Platform;
 ```
 
-Finally, you can use GCanvas in ReactNative App. Notice that before you `enable` GCanvas, convert`GCanvasView` reactTag to a string.
+Finally, you can use WmCanvas in ReactNative App. Notice that before you `enable` WmCanvas, convert`GCanvasView` reactTag to a string.
 ```JavaScript
 export default class App extends Component<{}> {
 
@@ -118,7 +118,7 @@ export default class App extends Component<{}> {
 }
 ```
 
-### III. Using GCanvas 2d API
+### III. Using WmCanvas 2d API
 To know which API could be used on gcanvas, check [reference]().
 
 The following sample shows how we could use gcanvas.
@@ -152,7 +152,7 @@ image.onload = function(){
 };
 ```
 
-### IV. Using GCanvas WebGL
+### IV. Using WmCanvas WebGL
 To know which API could be used on gcanvas, check [reference]().
 
 The following sample shows how we could use gcanvas.

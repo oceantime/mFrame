@@ -37,7 +37,7 @@
 ```javascript
 {
     path: '/gcanvas',
-    name: 'GCanvas',
+    name: 'WmCanvas',
     component: GCanvasView
 }
 ```
@@ -47,7 +47,7 @@
 - 添加顶部导航栏，包含3个导航按钮
 - 📋 列表 → /list
 - 📷 相机 → /picture
-- 🎯 GCanvas → /gcanvas
+- 🎯 WmCanvas → /gcanvas
 
 ---
 

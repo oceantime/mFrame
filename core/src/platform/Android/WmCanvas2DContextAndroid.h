@@ -28,10 +28,10 @@ class WmCanvas2DContextAndroid : public GCanvasContext {
 public:
 
 
-    API_EXPORT  WmCanvas2DContextAndroid(uint32_t w, uint32_t h, GCanvasConfig &config);
+    API_EXPORT  WmCanvas2DContextAndroid(uint32_t w, uint32_t h, WmCanvasConfig &config);
 
 
-    API_EXPORT WmCanvas2DContextAndroid(uint32_t width, uint32_t h, GCanvasConfig &config, GCanvasHooks* hooks);
+    API_EXPORT WmCanvas2DContextAndroid(uint32_t width, uint32_t h, WmCanvasConfig &config, WmCanvasHooks* hooks);
 
 
     virtual ~WmCanvas2DContextAndroid();
