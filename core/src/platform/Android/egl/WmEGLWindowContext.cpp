@@ -13,7 +13,7 @@
 
 
 
-EGLint GEGLWindowContext::SwapBuffer() {
+EGLint WmEGLWindowContext::SwapBuffer() {
     if (!IsValid()) {
         // EGL_LOGI("swapBuffer:fail:EGL invalid");
         return false;
@@ -40,18 +40,18 @@ EGLint GEGLWindowContext::SwapBuffer() {
 }
 
 
-GEGLWindowContext::GEGLWindowContext() : nWindow(NULL),
+WmEGLWindowContext::WmEGLWindowContext() : nWindow(NULL),
                                          isGLESInit(false),
                                          isES3Supported(false) {}
 
-GEGLWindowContext::GEGLWindowContext(EGLDisplay sharedDisplay, EGLContext sharedContext) :
-                                                                                        GEGLContext(sharedDisplay, sharedContext),
+WmEGLWindowContext::WmEGLWindowContext(EGLDisplay sharedDisplay, EGLContext sharedContext) :
+                                                                                        WmEGLContext(sharedDisplay, sharedContext),
                                                                                         nWindow(NULL),
                                                                                            isGLESInit(false),
                                                                                            isES3Supported(
                                                                                                    false) {}
 
-bool GEGLWindowContext::Init(ANativeWindow *window) {
+bool WmEGLWindowContext::Init(ANativeWindow *window) {
     if (isEGLInit) {
         return true;
     }
@@ -68,7 +68,7 @@ bool GEGLWindowContext::Init(ANativeWindow *window) {
 }
 
 
-bool GEGLWindowContext::InitEGLSurface() {
+bool WmEGLWindowContext::InitEGLSurface() {
     if (eglDisplay == EGL_NO_DISPLAY) {
         eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     }
@@ -136,7 +136,7 @@ bool GEGLWindowContext::InitEGLSurface() {
 }
 
 
-bool GEGLWindowContext::InitEGLContext() {
+bool WmEGLWindowContext::InitEGLContext() {
     EGL_LOGI("InitEGLContext:start");
 
     EGLint targetVersion = 3;
@@ -169,7 +169,7 @@ bool GEGLWindowContext::InitEGLContext() {
 }
 
 
-bool GEGLWindowContext::Invalidate() {
+bool WmEGLWindowContext::Invalidate() {
     Terminate();
     isEGLInit = false;
     return true;
@@ -180,13 +180,13 @@ bool GEGLWindowContext::Invalidate() {
  * 暂停，将触发删除EGL Surface
  * FIXME 命名有点问题, 外部实际用来DestroyEGLSurface
  */
-void GEGLWindowContext::Pause() {
+void WmEGLWindowContext::Pause() {
     DestroyEGLSurfaceIf();
     nWindow = nullptr;
 }
 
 
-void GEGLWindowContext::DestroyEGLSurfaceIf() {
+void WmEGLWindowContext::DestroyEGLSurfaceIf() {
     // 1.先clear current，后续gl操作都不起作用(避免gl报错)
     ClearCurrent();
 
@@ -199,7 +199,7 @@ void GEGLWindowContext::DestroyEGLSurfaceIf() {
 }
 
 
-EGLint GEGLWindowContext::Resume(ANativeWindow *window) {
+EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
     EGL_LOGI("Resume:window=%p", window);
     if (!isEGLInit) {
         Init(window);
@@ -246,7 +246,7 @@ EGLint GEGLWindowContext::Resume(ANativeWindow *window) {
 }
 
 
-bool GEGLWindowContext::Resize(int32_t newWidth, int32_t newHeight) {
+bool WmEGLWindowContext::Resize(int32_t newWidth, int32_t newHeight) {
     // 只要是Resize调用，即使尺寸一样，也强制触发Resize逻辑(有可能Surface已经发生变化)
     EGL_LOGI("Resize:w=%i,h=%i", newWidth, newHeight);
     // 1.Destroy EGLSurface
@@ -267,13 +267,13 @@ bool GEGLWindowContext::Resize(int32_t newWidth, int32_t newHeight) {
 }
 
 
-bool GEGLWindowContext::MakeCurrent() {
+bool WmEGLWindowContext::MakeCurrent() {
     return MakeCurrentWithScene("Render") == EGL_SUCCESS;
 }
 
 
 // surface 状态变更
-EGLint GEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
+EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 //    if (eglContext != nullptr && currentEGLContext == eglContext) {
 //        return true;
 //    }
@@ -303,7 +303,7 @@ EGLint GEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 }
 
 
-EGLSurface GEGLWindowContext::CreateWindowSurface(std::string &scene) {
+EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
     if (nWindow == nullptr) { // 稳定性保护，避免nWindow为null时crash
         // TRACE_EXCEPTION("CreateWindowSurface_fail", "Scene=%s,window is null", scene.data());
         return EGL_NO_SURFACE;
@@ -344,7 +344,7 @@ EGLSurface GEGLWindowContext::CreateWindowSurface(std::string &scene) {
 }
 
 
-bool GEGLWindowContext::IsPreserveBackBuffer() {
+bool WmEGLWindowContext::IsPreserveBackBuffer() {
     EGLint value;
 
     eglGetError();
@@ -359,7 +359,7 @@ bool GEGLWindowContext::IsPreserveBackBuffer() {
 }
 
 
-void GEGLWindowContext::Terminate() {
+void WmEGLWindowContext::Terminate() {
     if (eglDisplay != EGL_NO_DISPLAY) {
         if (eglContext != EGL_NO_CONTEXT) {
             eglDestroyContext(eglDisplay, eglContext);
@@ -379,6 +379,6 @@ void GEGLWindowContext::Terminate() {
 }
 
 
-GEGLWindowContext::~GEGLWindowContext() {
+WmEGLWindowContext::~WmEGLWindowContext() {
     Terminate();
 }

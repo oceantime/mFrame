@@ -10,7 +10,7 @@
 EGLContext currentEGLContext = nullptr;
 
 
-GSharedEGLContext::GSharedEGLContext() {
+WmSharedEGLContext::WmSharedEGLContext() {
     eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     assert(eglDisplay != EGL_NO_DISPLAY);
     assert(eglInitialize(eglDisplay, NULL, NULL));
@@ -74,14 +74,14 @@ GSharedEGLContext::GSharedEGLContext() {
     }
 
     if (eglContext == EGL_NO_CONTEXT) {
-//        TRACE_EXCEPTION("eglCreateContext_fail", "GSharedEGLContext eglError=%x", eglGetError());
+//        TRACE_EXCEPTION("eglCreateContext_fail", "WmSharedEGLContext eglError=%x", eglGetError());
     }
 
     assert(eglContext != EGL_NO_CONTEXT);
 }
 
 
-bool GSharedEGLContext::MakeCurrent() {
+bool WmSharedEGLContext::MakeCurrent() {
 //    if (eglContext != nullptr && currentEGLContext == eglContext) {
 //        return true;
 //    }
@@ -105,7 +105,7 @@ bool GSharedEGLContext::MakeCurrent() {
 }
 
 
-GSharedEGLContext::~GSharedEGLContext() {
+WmSharedEGLContext::~WmSharedEGLContext() {
     if (eglDisplay != EGL_NO_DISPLAY) {
         ClearCurrent();
 
@@ -121,11 +121,12 @@ GSharedEGLContext::~GSharedEGLContext() {
 }
 
 
-EGLint GSharedEGLContext::SwapBuffer() {
-    // ignore
+EGLint WmSharedEGLContext::SwapBuffer() {
+    // ignore swap for shared context
+    return EGL_SUCCESS;
 }
 
 
-bool GSharedEGLContext::IsPreserveBackBuffer() {
+bool WmSharedEGLContext::IsPreserveBackBuffer() {
     return false;
 };

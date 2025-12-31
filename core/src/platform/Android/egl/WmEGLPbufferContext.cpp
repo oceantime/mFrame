@@ -10,15 +10,15 @@
 #include "WmEGLContext.h"
 
 
-GEGLPbufferContext::GEGLPbufferContext(EGLDisplay sharedDisplay, EGLContext sharedContext,
-                                       int w, int h) : GEGLContext(sharedDisplay, sharedContext),
+WmEGLPbufferContext::WmEGLPbufferContext(EGLDisplay sharedDisplay, EGLContext sharedContext,
+                                       int w, int h) : WmEGLContext(sharedDisplay, sharedContext),
                                                        isGLESInit(false),
                                                        isES3Supported(false) {
     width = w;
     height = h;
 }
 
-GEGLPbufferContext::GEGLPbufferContext(int w, int h) :
+WmEGLPbufferContext::WmEGLPbufferContext(int w, int h) :
         isGLESInit(false),
         isES3Supported(false) {
     width = w;
@@ -26,7 +26,7 @@ GEGLPbufferContext::GEGLPbufferContext(int w, int h) :
 }
 
 
-bool GEGLPbufferContext::Init(ANativeWindow *window) {
+bool WmEGLPbufferContext::Init(ANativeWindow *window) {
     if (isEGLInit) {
         return true;
     }
@@ -40,7 +40,7 @@ bool GEGLPbufferContext::Init(ANativeWindow *window) {
 }
 
 
-bool GEGLPbufferContext::InitEGLContext() {
+bool WmEGLPbufferContext::InitEGLContext() {
     EGLint version = 3;
 
     EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION,
@@ -77,7 +77,7 @@ bool GEGLPbufferContext::InitEGLContext() {
 }
 
 
-bool GEGLPbufferContext::InitEGLSurface() {
+bool WmEGLPbufferContext::InitEGLSurface() {
     if (eglDisplay == EGL_NO_DISPLAY) {
         eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     }
@@ -155,7 +155,7 @@ bool GEGLPbufferContext::InitEGLSurface() {
     return true;
 }
 
-void GEGLPbufferContext::InitGLES() {
+void WmEGLPbufferContext::InitGLES() {
     if (isGLESInit) {
         return;
     }
@@ -165,14 +165,14 @@ void GEGLPbufferContext::InitGLES() {
 }
 
 
-bool GEGLPbufferContext::Invalidate() {
+bool WmEGLPbufferContext::Invalidate() {
     Terminate();
     isEGLInit = false;
     return true;
 }
 
 
-void GEGLPbufferContext::Pause() {
+void WmEGLPbufferContext::Pause() {
     ClearCurrent();
 
     if (eglSurface != EGL_NO_SURFACE) {
@@ -182,7 +182,7 @@ void GEGLPbufferContext::Pause() {
 }
 
 
-bool GEGLPbufferContext::MakeCurrent() {
+bool WmEGLPbufferContext::MakeCurrent() {
 //    if (eglContext != nullptr && currentEGLContext == eglContext) {
 //        return true;
 //    }
@@ -197,7 +197,7 @@ bool GEGLPbufferContext::MakeCurrent() {
     EGLBoolean result = eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
     if (result != EGL_TRUE) {
         EGLint error = eglGetError();
-//        TRACE_EXCEPTION("eglMakeCurrent_fail", "GEGLPbufferContext, eglGetError=%x", error);
+//        TRACE_EXCEPTION("eglMakeCurrent_fail", "WmEGLPbufferContext, eglGetError=%x", error);
         return false;
     } else {
         currentEGLContext = eglContext;
@@ -209,13 +209,13 @@ bool GEGLPbufferContext::MakeCurrent() {
 /**
  * 离屏canavs 默认使用FBO，可提高drawCanvas效率
  */
-bool GEGLPbufferContext::IsPreserveBackBuffer() {
+bool WmEGLPbufferContext::IsPreserveBackBuffer() {
     return false;
 }
 
 
 
-void GEGLPbufferContext::Terminate() {
+void WmEGLPbufferContext::Terminate() {
     if (eglDisplay != EGL_NO_DISPLAY) {
         ClearCurrent();
 
@@ -240,6 +240,6 @@ void GEGLPbufferContext::Terminate() {
 
 
 
-GEGLPbufferContext::~GEGLPbufferContext() { Terminate(); }
+WmEGLPbufferContext::~WmEGLPbufferContext() { Terminate(); }
 
-EGLint GEGLPbufferContext::SwapBuffer() { return EGL_SUCCESS; }
+EGLint WmEGLPbufferContext::SwapBuffer() { return EGL_SUCCESS; }

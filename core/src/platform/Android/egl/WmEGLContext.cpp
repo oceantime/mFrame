@@ -9,7 +9,7 @@
 #include <string>
 
 
-EGLint GEGLContext::SwapBuffer() {
+EGLint WmEGLContext::SwapBuffer() {
     if (eglSurface == EGL_NO_SURFACE) {
         return false;
     }
@@ -31,7 +31,7 @@ EGLint GEGLContext::SwapBuffer() {
     return EGL_SUCCESS;
 }
 
-GEGLContext::GEGLContext() : nWindow(NULL),
+WmEGLContext::WmEGLContext() : nWindow(NULL),
                                          eglDisplay(EGL_NO_DISPLAY),
                                          eglSurface(EGL_NO_SURFACE),
                                          eglContext(EGL_NO_CONTEXT),
@@ -41,7 +41,7 @@ GEGLContext::GEGLContext() : nWindow(NULL),
                                          isGLESInit(false),
                                          isES3Supported(false) {}
 
-bool GEGLContext::Init(ANativeWindow *window) {
+bool WmEGLContext::Init(ANativeWindow *window) {
     if (isEGLInit) {
         return true;
     }
@@ -56,7 +56,7 @@ bool GEGLContext::Init(ANativeWindow *window) {
 }
 
 
-bool GEGLContext::CheckHasExtension(const char *extension) {
+bool WmEGLContext::CheckHasExtension(const char *extension) {
     if (extension == NULL) {
         return false;
     }
@@ -69,7 +69,7 @@ bool GEGLContext::CheckHasExtension(const char *extension) {
 
 }
 
-bool GEGLContext::InitEGLContext() {
+bool WmEGLContext::InitEGLContext() {
     const EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION,
                                       2,  // Request opengl ES2.0
                                       EGL_NONE};
@@ -84,7 +84,7 @@ bool GEGLContext::InitEGLContext() {
     return true;
 }
 
-bool GEGLContext::InitEGLSurface() {
+bool WmEGLContext::InitEGLSurface() {
     eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     eglInitialize(eglDisplay, 0, 0);
 
@@ -145,7 +145,7 @@ bool GEGLContext::InitEGLSurface() {
     return true;
 }
 
-void GEGLContext::InitGLES() {
+void WmEGLContext::InitGLES() {
     // Now we do not support GLES 3.0
     if (isGLESInit) {
         return;
@@ -157,21 +157,21 @@ void GEGLContext::InitGLES() {
     isES3Supported = false;
 }
 
-bool GEGLContext::Invalidate() {
+bool WmEGLContext::Invalidate() {
     Terminate();
 
     isEGLInit = false;
     return true;
 }
 
-void GEGLContext::Pause() {
+void WmEGLContext::Pause() {
     if (eglSurface != EGL_NO_SURFACE) {
         eglDestroySurface(eglDisplay, eglSurface);
         eglSurface = EGL_NO_SURFACE;
     }
 }
 
-EGLint GEGLContext::Resume(ANativeWindow *window) {
+EGLint WmEGLContext::Resume(ANativeWindow *window) {
     if (!isEGLInit) {
         Init(window);
         return EGL_SUCCESS;
@@ -213,7 +213,7 @@ EGLint GEGLContext::Resume(ANativeWindow *window) {
 }
 
 
-bool GEGLContext::Resize(int32_t width, int32_t height) {
+bool WmEGLContext::Resize(int32_t width, int32_t height) {
     if (this->width == width && this->height == height) {
         return true;
     }
@@ -238,18 +238,18 @@ bool GEGLContext::Resize(int32_t width, int32_t height) {
     return true;
 }
 
-bool GEGLContext::ClearCurrent() {
+bool WmEGLContext::ClearCurrent() {
     return eglMakeCurrent(eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE,
                           EGL_NO_CONTEXT) == EGL_TRUE;
 }
 
 
-bool GEGLContext::MakeCurrent() {
+bool WmEGLContext::MakeCurrent() {
     return eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext) == EGL_TRUE;
 }
 
 
-void GEGLContext::Terminate() {
+void WmEGLContext::Terminate() {
     if (eglDisplay != EGL_NO_DISPLAY) {
         eglMakeCurrent(eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (eglContext != EGL_NO_CONTEXT) {
@@ -269,4 +269,4 @@ void GEGLContext::Terminate() {
     isContextValid = false;
 }
 
-GEGLContext::~GEGLContext() { Terminate(); }
+WmEGLContext::~WmEGLContext() { Terminate(); }

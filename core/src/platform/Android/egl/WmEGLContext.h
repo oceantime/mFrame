@@ -2,8 +2,8 @@
 // Created by yuantong on 2018/4/16.
 //
 
-#ifndef GCANVAS_GRENDER_H
-#define GCANVAS_GRENDER_H
+#ifndef WMCANVAS_GRENDER_H
+#define WMCANVAS_GRENDER_H
 
 #include <EGL/egl.h>
 #include <android/native_window.h>
@@ -25,17 +25,17 @@ API_EXPORT extern EGLContext currentEGLContext;
 /**
  * A helper class for EGL resource management.
  */
-class GEGLContext {
+class WmEGLContext {
 
 public:
 
-    GEGLContext(EGLDisplay sharedDisplay, EGLContext  sharedContext):eglDisplay(sharedDisplay),
+    WmEGLContext(EGLDisplay sharedDisplay, EGLContext  sharedContext):eglDisplay(sharedDisplay),
         eglSharedContext(sharedContext), isEGLInit(false), width(0), height(0) {
     }
 
-    GEGLContext() {}
+    WmEGLContext() {}
 
-    virtual ~GEGLContext() {};
+    virtual ~WmEGLContext() {};
 
     virtual bool Init(ANativeWindow *window) { return true; };
 
@@ -163,7 +163,7 @@ protected:
 /**
  * A helper class for EGL resource management.
  */
-class GEGLWindowContext : public GEGLContext
+class WmEGLWindowContext : public WmEGLContext
 {
 protected:
     ANativeWindow *nWindow;
@@ -180,11 +180,11 @@ protected:
 
 public:
 
-    API_EXPORT GEGLWindowContext(EGLDisplay sharedDisplay, EGLContext sharedContext);
+    API_EXPORT WmEGLWindowContext(EGLDisplay sharedDisplay, EGLContext sharedContext);
 
-    API_EXPORT GEGLWindowContext();
+    API_EXPORT WmEGLWindowContext();
 
-    ~GEGLWindowContext();
+    ~WmEGLWindowContext();
 
 
     API_EXPORT EGLint SwapBuffer() override ;
@@ -228,7 +228,7 @@ private:
 /**
  * 离屏Context
  */
-class GEGLPbufferContext : public GEGLContext
+class WmEGLPbufferContext : public WmEGLContext
 {
 protected:
 
@@ -248,11 +248,11 @@ protected:
 
 public:
 
-    API_EXPORT GEGLPbufferContext(EGLDisplay sharedDisplay, EGLContext sharedContext, int w, int h);
+    API_EXPORT WmEGLPbufferContext(EGLDisplay sharedDisplay, EGLContext sharedContext, int w, int h);
 
-    API_EXPORT GEGLPbufferContext(int w, int h);
+    API_EXPORT WmEGLPbufferContext(int w, int h);
 
-    ~GEGLPbufferContext();
+    ~WmEGLPbufferContext();
 
 
     EGLint SwapBuffer() override ;
@@ -275,14 +275,14 @@ public:
 
 
 
-class GSharedEGLContext : public GEGLContext {
+class WmSharedEGLContext : public WmEGLContext {
 
 public:
 
-    API_EXPORT GSharedEGLContext();
+    API_EXPORT WmSharedEGLContext();
 
 
-    ~GSharedEGLContext();
+    ~WmSharedEGLContext();
 
 
     bool MakeCurrent() override;
@@ -297,4 +297,4 @@ public:
 };
 
 
-#endif //GCANVAS_GRENDER_H
+#endif //WMCANVAS_GRENDER_H
