@@ -12,18 +12,18 @@
 
 #define OES_PACKED_DEPTH_STENCIL "GL_OES_packed_depth_stencil"
 
-GFrameBufferObject::GFrameBufferObject()
+WmFrameBufferObject::WmFrameBufferObject()
 {
 
 }
 
 
-GFrameBufferObject::~GFrameBufferObject() {
+WmFrameBufferObject::~WmFrameBufferObject() {
     this->DeleteFBO();
 }
 
 
-GFrameBufferObject::GFrameBufferObject(GFrameBufferObject&& src) {
+WmFrameBufferObject::WmFrameBufferObject(WmFrameBufferObject&& src) {
     this->mIsFboSupported = src.mIsFboSupported;
 
     this->mFboTexture = src.mFboTexture;
@@ -45,7 +45,7 @@ GFrameBufferObject::GFrameBufferObject(GFrameBufferObject&& src) {
 /**
  * free fbo resource
  */
-void GFrameBufferObject::DeleteFBO() {
+void WmFrameBufferObject::DeleteFBO() {
     if (mFboFrame) {
         glDeleteFramebuffers(1, &mFboFrame);
         mFboFrame = 0;
@@ -65,13 +65,13 @@ void GFrameBufferObject::DeleteFBO() {
 }
 
 
-bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, std::vector<GCanvasLog> *errVec) {
+bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, std::vector<WmCanvasLog> *errVec) {
     return InitFBO(width, height, color, false, errVec);
 }
 
 #ifdef IOS
 
-bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec)
+bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<WmCanvasLog> *errVec)
 {
 
     mWidth = width;
@@ -80,7 +80,7 @@ bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool 
 
     glGenFramebuffers(1, &mFboFrame);
     if (mFboFrame <= 0 && errVec) {
-        GCanvasLog log;
+        WmCanvasLog log;
         fillLogInfo(log, "gen_framebuffer_fail", "<function:%s, glGetError:%x>", __FUNCTION__, glGetError());
         errVec->push_back(log);
     }
@@ -134,7 +134,7 @@ bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool 
               mFboTexture.GetWidth(), mFboTexture.GetHeight());
 
         if (errVec) {
-            GCanvasLog log;
+            WmCanvasLog log;
             fillLogInfo(log, "fbo_status_check_fail", "<function:%s, status:%d, glGetError:%x, width:%d, height:%d>", __FUNCTION__,  status, glGetError(), mWidth, mHeight);
             errVec->push_back(log);
         }
@@ -164,7 +164,7 @@ bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool 
 
 
 
-void GFrameBufferObject::BindFBO() {
+void WmFrameBufferObject::BindFBO() {
     if (!mIsFboSupported) {
         return;
     }
@@ -183,13 +183,13 @@ void GFrameBufferObject::BindFBO() {
     }
 }
 
-void GFrameBufferObject::GLClearScreen(WmColorRGBA color) {
+void WmFrameBufferObject::GLClearScreen(WmColorRGBA color) {
     glClearColor(color.rgba.r, color.rgba.g, color.rgba.b, color.rgba.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 
-void GFrameBufferObject::UnbindFBO() {
+void WmFrameBufferObject::UnbindFBO() {
     if (!mIsFboSupported) {
         return;
     }
@@ -197,13 +197,13 @@ void GFrameBufferObject::UnbindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, mSaveFboFrame);
 }
 
-int GFrameBufferObject::DetachTexture() {
+int WmFrameBufferObject::DetachTexture() {
     int id = mFboTexture.GetTextureID();
     mFboTexture.Detach();
     return id;
 }
 
-inline void GFrameBufferObjectDeleter(GFrameBufferObjectPool::Map *pool, GFrameBufferObject *fbo) {
+inline void WmFrameBufferObjectDeleter(GFrameBufferObjectPool::Map *pool, WmFrameBufferObject *fbo) {
     pool->insert(GFrameBufferObjectPool::Map::value_type(
             GFrameBufferObjectPool::Key(fbo->Width(), fbo->Height()), fbo));
 }
@@ -223,8 +223,8 @@ inline int GetNoSmall2PowNum(int num) {
 }
 
 
-GFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int height) {
-    auto deleter = std::bind(GFrameBufferObjectDeleter, &mPool, std::placeholders::_1);
+WmFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int height) {
+    auto deleter = std::bind(WmFrameBufferObjectDeleter, &mPool, std::placeholders::_1);
 
     int twoPowerWidth = GetNoSmall2PowNum(width);
     int twoPowerHeight = GetNoSmall2PowNum(height);
@@ -232,7 +232,7 @@ GFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int heig
     auto i = mPool.find(Key(twoPowerWidth, twoPowerHeight));
     if (i == mPool.end()) {
         // LOG_E("GFrameBufferObjectPool not hit");
-        GFrameBufferObjectPtr fbo(new GFrameBufferObject(), deleter);
+        WmFrameBufferObjectPtr fbo(new WmFrameBufferObject(), deleter);
         fbo->InitFBO(twoPowerWidth, twoPowerHeight, GColorTransparent);
         fbo->SetSize(width, height);
         // no save to pool ??
@@ -241,7 +241,7 @@ GFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int heig
         // LOG_E("GFrameBufferObjectPool hit, %p", i->second);
     }
 
-    GFrameBufferObjectPtr fbo(i->second, deleter);
+    WmFrameBufferObjectPtr fbo(i->second, deleter);
     fbo->SetSize(width, height);
     mPool.erase(i);
     return fbo;

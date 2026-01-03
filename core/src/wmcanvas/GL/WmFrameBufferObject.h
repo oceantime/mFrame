@@ -21,20 +21,22 @@
 
 struct GCanvasLog;
 
-class GFrameBufferObject
+using WmCanvasLog = GCanvasLog;
+
+class WmFrameBufferObject
 {
 public:
-    GFrameBufferObject();
+    WmFrameBufferObject();
 
-    ~GFrameBufferObject();
-
-
-    GFrameBufferObject(GFrameBufferObject&& src);
+    ~WmFrameBufferObject();
 
 
-    bool InitFBO(int width, int height, WmColorRGBA color, std::vector<GCanvasLog> *errVec = nullptr);
+    WmFrameBufferObject(WmFrameBufferObject&& src);
 
-    bool InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec = nullptr);
+
+    bool InitFBO(int width, int height, WmColorRGBA color, std::vector<WmCanvasLog> *errVec = nullptr);
+
+    bool InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<WmCanvasLog> *errVec = nullptr);
 
     void BindFBO();
 
@@ -85,14 +87,15 @@ public:
     int mHeight;
 };
 
-
-typedef std::shared_ptr<GFrameBufferObject> GFrameBufferObjectPtr;
+using GFrameBufferObject = WmFrameBufferObject;
+using WmFrameBufferObjectPtr = std::shared_ptr<WmFrameBufferObject>;
+using GFrameBufferObjectPtr = WmFrameBufferObjectPtr;
 
 class GFrameBufferObjectPool
 {
 public:
     typedef std::pair<int, int> Key;
-    typedef std::multimap<Key, GFrameBufferObject*> Map;
+    typedef std::multimap<Key, WmFrameBufferObject*> Map;
 
 public:
     GFrameBufferObjectPool() = default;
@@ -105,7 +108,7 @@ public:
         }
     }
 
-    GFrameBufferObjectPtr GetFrameBuffer(int width, int height);
+    WmFrameBufferObjectPtr GetFrameBuffer(int width, int height);
 
 private:
 

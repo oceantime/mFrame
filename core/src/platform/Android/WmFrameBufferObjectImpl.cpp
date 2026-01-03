@@ -40,7 +40,7 @@ bool extension_available(const char* extName)
 
 
 
-bool GFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<GCanvasLog> *errVec)
+bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool enableMsaa, std::vector<WmCanvasLog> *errVec)
 {
     mWidth = width;
     mHeight = height;

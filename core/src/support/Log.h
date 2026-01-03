@@ -57,6 +57,8 @@
     };
 
 
+    using WmCanvasLog = GCanvasLog;
+
 
     void fillLogInfo(GCanvasLog &log, const char *tag, const char *format, ...);
 
