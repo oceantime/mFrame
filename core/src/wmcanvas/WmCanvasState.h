@@ -70,7 +70,7 @@ public:
     
     //font style
     wmcanvas::WmFontStyle *mFont;
-    GTextAlign mTextAlign;
+    WmTextAlign mTextAlign;
     GTextBaseline mTextBaseline;
     
     //global alpha / composite

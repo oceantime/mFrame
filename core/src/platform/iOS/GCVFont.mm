@@ -483,19 +483,19 @@ static NSMutableDictionary *staticFontInstaceDict;
 }
 
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
-                   textAlign:(GTextAlign)textAlign
+                   textAlign:(WmTextAlign)textAlign
                     baseLine:(GTextBaseline)baseLine
                      metrics:(GTextMetrics)metrics
 {
     switch (textAlign) {
-        case GTextAlign::TEXT_ALIGN_START:
-        case GTextAlign::TEXT_ALIGN_LEFT:
+        case WmTextAlign::TEXT_ALIGN_START:
+        case WmTextAlign::TEXT_ALIGN_LEFT:
             break;
-        case GTextAlign::TEXT_ALIGN_CENTER:
+        case WmTextAlign::TEXT_ALIGN_CENTER:
             srcPoint.x -= metrics.width/2.0f;
             break;
-        case GTextAlign::TEXT_ALIGN_END:
-        case GTextAlign::TEXT_ALIGN_RIGHT:
+        case WmTextAlign::TEXT_ALIGN_END:
+        case WmTextAlign::TEXT_ALIGN_RIGHT:
             srcPoint.x -= metrics.width;
             break;
     }

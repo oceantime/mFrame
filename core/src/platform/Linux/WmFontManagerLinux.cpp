@@ -11,10 +11,10 @@
 
 WmFontManager *WmFontManager::NewInstance()
 {
-    return new GFontManagerImplementLinux(1024, 1024);
+    return new WmFontManagerImplementLinux(1024, 1024);
 }
 
-GFontManagerImplementLinux::GFontManagerImplementLinux(unsigned w, unsigned h) : WmFontManager(w, h)
+WmFontManagerImplementLinux::WmFontManagerImplementLinux(unsigned w, unsigned h) : WmFontManager(w, h)
 {
     this->mFontCache = new WmFontCache(*this);
     using NSFontTool::TypefaceLoader;
@@ -26,7 +26,7 @@ GFontManagerImplementLinux::GFontManagerImplementLinux(unsigned w, unsigned h) :
     ASSERT(tl->importFontCache(path));
 }
 
-void GFontManagerImplementLinux::DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
+void WmFontManagerImplementLinux::DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
                                      bool isStroke, WmCanvasContext *context, float scaleX, float scaleY)
 {
     if (text == nullptr || text_length == 0)
@@ -46,7 +46,7 @@ void GFontManagerImplementLinux::DrawText(const unsigned short *text, unsigned i
     }
 }
 
-float GFontManagerImplementLinux::MeasureText(const char *text,
+float WmFontManagerImplementLinux::MeasureText(const char *text,
                                          unsigned int textLength, wmcanvas::WmFontStyle *fontStyle)
 {
     if (text == nullptr || textLength == 0)
@@ -83,15 +83,15 @@ float GFontManagerImplementLinux::MeasureText(const char *text,
     return deltaX;
 }
 
-void GFontManagerImplementLinux::AdjustTextPenPoint(WmCanvasContext *context,const std::vector<WmFont *>&font,
+void WmFontManagerImplementLinux::AdjustTextPenPoint(WmCanvasContext *context,const std::vector<WmFont *>&font,
                                                const unsigned short *text,
                                                unsigned int textLength,
                                                bool isStroke,
                                                float &x, float &y, float sx, float sy)
 {
     wmcanvas::WmFontStyle *fontStyle = context->mCurrentState->mFont;
-    if (context->mCurrentState->mTextAlign != GTextAlign::TEXT_ALIGN_START &&
-        context->mCurrentState->mTextAlign != GTextAlign::TEXT_ALIGN_LEFT)
+    if (context->mCurrentState->mTextAlign != WmTextAlign::TEXT_ALIGN_START &&
+        context->mCurrentState->mTextAlign != WmTextAlign::TEXT_ALIGN_LEFT)
     {
         auto left_x = x;
         auto delta_x = 0.0f;
@@ -106,7 +106,7 @@ void GFontManagerImplementLinux::AdjustTextPenPoint(WmCanvasContext *context,con
             }
         }
 
-        if (context->mCurrentState->mTextAlign == GTextAlign::TEXT_ALIGN_CENTER)
+        if (context->mCurrentState->mTextAlign == WmTextAlign::TEXT_ALIGN_CENTER)
         {
             x = left_x - delta_x / 2.0f;
         }
@@ -147,14 +147,14 @@ void GFontManagerImplementLinux::AdjustTextPenPoint(WmCanvasContext *context,con
     }
 }
 
-WmFont *GFontManagerImplementLinux::GetFontByCharCode(wchar_t charCode, wmcanvas::WmFontStyle *fontStyle)
+WmFont *WmFontManagerImplementLinux::GetFontByCharCode(wchar_t charCode, wmcanvas::WmFontStyle *fontStyle)
 {
 
     float fontSize = fontStyle->GetSize();
     return mFontCache->GetOrCreateFont(fontStyle, charCode, fontSize);
 }
 
-GTexture *GFontManagerImplementLinux::GetOrCreateFontTexture()
+GTexture *WmFontManagerImplementLinux::GetOrCreateFontTexture()
 {
     if (mFontTexture == nullptr)
     {
@@ -167,7 +167,7 @@ GTexture *GFontManagerImplementLinux::GetOrCreateFontTexture()
     return mFontTexture;
 }
 
-void GFontManagerImplementLinux::DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t text,
+void WmFontManagerImplementLinux::DrawTextInternal(WmCanvasContext *context, WmFont *font, bool isStroke, wchar_t text,
                                              float &x, float y, float sx, float sy)
 {
     if (isStroke)

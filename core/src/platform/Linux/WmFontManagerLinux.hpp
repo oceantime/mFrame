@@ -8,12 +8,12 @@
 #include "support/CharacterSet.h"
 #include <stdlib.h>
 
-class GFontManagerImplementLinux : public WmFontManager
+class WmFontManagerImplementLinux : public WmFontManager
 {
 public:
-    GFontManagerImplementLinux(unsigned w, unsigned h);
+    WmFontManagerImplementLinux(unsigned w, unsigned h);
 
-    virtual ~GFontManagerImplementLinux()
+    virtual ~WmFontManagerImplementLinux()
     {
         delete mFontCache;
     };

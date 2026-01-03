@@ -206,8 +206,8 @@ public:
                                                   WmCompositeOperation alphaOp = COMPOSITE_OP_LIGHTER);
 
     //font
-    API_EXPORT GTextAlign TextAlign() const { return mCurrentState->mTextAlign; }
-    API_EXPORT void SetTextAlign(GTextAlign align);
+    API_EXPORT WmTextAlign TextAlign() const { return mCurrentState->mTextAlign; }
+    API_EXPORT void SetTextAlign(WmTextAlign align);
 
     API_EXPORT GTextBaseline TextBaseline() const { return mCurrentState->mTextBaseline; }
     API_EXPORT void SetTextBaseline(GTextBaseline baseLine);

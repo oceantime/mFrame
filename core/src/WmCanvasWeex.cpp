@@ -980,7 +980,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
                 //textAlign
                 float tokens[1] = {0};
                 p = parseTokens(p, tokens);
-                mCanvasContext->SetTextAlign(GTextAlign(tokens[0]));
+                mCanvasContext->SetTextAlign(WmTextAlign(tokens[0]));
                 break;
             }
             case 'E': {

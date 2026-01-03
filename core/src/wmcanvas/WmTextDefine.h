@@ -29,6 +29,6 @@ typedef enum {
     TEXT_ALIGN_CENTER, // The center of the text is placed at the specified
                         // position
     TEXT_ALIGN_RIGHT   // The text ends at the specified position
-} GTextAlign;
+} WmTextAlign;
 
 #endif /* GCANVAS_GTEXTDEFINE_H  */

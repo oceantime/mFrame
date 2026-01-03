@@ -111,14 +111,14 @@ class WmCanvasContext;
  * Adjust text source point
  *
  * @param srcPoint          source point to adjust
- * @param textAlign         see GTextAlign definition
+ * @param textAlign         see WmTextAlign definition
  * @param baseLine          see GTextBaseline definition
  * @param metrics           see GTextMetrics definition
  *
  * return  adjuested text source CGPoint
  */
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
-                   textAlign:(GTextAlign)textAlign
+                   textAlign:(WmTextAlign)textAlign
                     baseLine:(GTextBaseline)baseLine
                      metrics:(GTextMetrics)metrics;
 

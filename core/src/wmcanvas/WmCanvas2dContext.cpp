@@ -1766,7 +1766,7 @@ void WmCanvasContext::SetGlobalCompositeOperation(int op)
 }
 
 //font
-void WmCanvasContext::SetTextAlign(GTextAlign textAlign)
+void WmCanvasContext::SetTextAlign(WmTextAlign textAlign)
 {
     mCurrentState->mTextAlign = textAlign;
 }

@@ -198,8 +198,8 @@ void WmFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vec
                                              bool isStroke, float &x, float &y, float sx, float sy) {
     wmcanvas::WmFontStyle *fontStyle = context->mCurrentState->mFont;
 
-    if (context->mCurrentState->mTextAlign != GTextAlign::TEXT_ALIGN_START &&
-        context->mCurrentState->mTextAlign != GTextAlign::TEXT_ALIGN_LEFT) {
+    if (context->mCurrentState->mTextAlign != WmTextAlign::TEXT_ALIGN_START &&
+        context->mCurrentState->mTextAlign != WmTextAlign::TEXT_ALIGN_LEFT) {
         auto left_x = x;
         auto delta_x = 0.0f;
         for (unsigned int i = 0; i < textLength; ++i) {
@@ -210,7 +210,7 @@ void WmFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vec
             }
         }
 
-        if (context->mCurrentState->mTextAlign == GTextAlign::TEXT_ALIGN_CENTER) {
+        if (context->mCurrentState->mTextAlign == WmTextAlign::TEXT_ALIGN_CENTER) {
             x = left_x - delta_x / 2.0f;
         } else { // textAlign is "Right" or "End"
             x = left_x - delta_x;
