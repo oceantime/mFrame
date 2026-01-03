@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GCANVASANDROID_H
-#define GCANVAS_GCANVASANDROID_H
+#ifndef WMCANVAS_WMCANVASANDROID_H
+#define WMCANVAS_WMCANVASANDROID_H
 
 
 #include "WmCanvas.hpp"
@@ -33,4 +33,4 @@ public:
 };
 
 
-#endif //GCANVAS_GCANVASANDROID_H
+#endif //WMCANVAS_WMCANVASANDROID_H
