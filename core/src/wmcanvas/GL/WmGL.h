@@ -36,4 +36,7 @@
 #include <GLES2/gl2.h>
 #endif
 
+using WmLuint = GLuint;
+using WmLint = GLint;
+
 #endif /* GCANVAS_GGL_h */

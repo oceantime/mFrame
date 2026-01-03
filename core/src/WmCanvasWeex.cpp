@@ -138,7 +138,7 @@ void GCanvasWeex::drawFBO(std::string fboName, WmCompositeOperation compositeOp,
     glViewport(mCanvasContext->mX, mCanvasContext->mY, mCanvasContext->mWidth,
                mCanvasContext->mHeight);
 
-    GFrameBufferObject &fbo = mCanvasContext->mFboMap[fboName];
+    WmFrameBufferObject &fbo = mCanvasContext->mFboMap[fboName];
 
     mCanvasContext->UseDefaultRenderPipeline();
 

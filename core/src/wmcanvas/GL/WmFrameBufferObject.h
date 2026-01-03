@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GFRAMEBUFFEROBJECT_H
-#define GCANVAS_GFRAMEBUFFEROBJECT_H
+#ifndef WMCANVAS_WMFRAMEBUFFEROBJECT_H
+#define WMCANVAS_WMFRAMEBUFFEROBJECT_H
 
 #include "WmTexture.h"
 #include "WmPoint.h"
@@ -75,30 +75,28 @@ public:
 
     bool mIsFboSupported = true;
 
-    GTexture mFboTexture;
-    GLuint mFboFrame = 0;
-    GLuint mFboStencil = 0;
-    GLint mSaveFboFrame = 0;
-    GTransform mSavedTransform;
+    WmTexture mFboTexture;
+    WmLuint mFboFrame = 0;
+    WmLuint mFboStencil = 0;
+    WmLint mSaveFboFrame = 0;
+    WmTransform mSavedTransform;
 
     int mWidth;
     int mHeight;
 };
 
-using GFrameBufferObject = WmFrameBufferObject;
 using WmFrameBufferObjectPtr = std::shared_ptr<WmFrameBufferObject>;
-using GFrameBufferObjectPtr = WmFrameBufferObjectPtr;
 
-class GFrameBufferObjectPool
+class WmFrameBufferObjectPool
 {
 public:
     typedef std::pair<int, int> Key;
     typedef std::multimap<Key, WmFrameBufferObject*> Map;
 
 public:
-    GFrameBufferObjectPool() = default;
+    WmFrameBufferObjectPool() = default;
 
-    ~GFrameBufferObjectPool()
+    ~WmFrameBufferObjectPool()
     {
         for(auto& i : mPool)
         {
@@ -113,4 +111,4 @@ private:
     Map mPool;
 };
 
-#endif /* GCANVAS_GFRAMEBUFFEROBJECT_H */
+#endif /* WMCANVAS_WMFRAMEBUFFEROBJECT_H */

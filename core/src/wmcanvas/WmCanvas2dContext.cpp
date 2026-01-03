@@ -1186,7 +1186,7 @@ void WmCanvasContext::DoSetGlobalCompositeOperation(WmCompositeOperation op, WmC
 }
 #endif
 
-void WmCanvasContext::DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &dest)
+void WmCanvasContext::DrawFBOToFBO(WmFrameBufferObject &src, WmFrameBufferObject &dest)
 {
     int w = dest.ExpectedWidth();
     int h = dest.ExpectedHeight();
@@ -1207,7 +1207,7 @@ void WmCanvasContext::DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &
     mVertexBufferIndex = 0;
 }
 
-void WmCanvasContext::PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offsetX, float offsetY)
+void WmCanvasContext::PrepareDrawElemetToFBO(WmFrameBufferObject &fbo, float offsetX, float offsetY)
 {
     int w = fbo.ExpectedWidth();
     int h = fbo.ExpectedHeight();
@@ -1220,7 +1220,7 @@ void WmCanvasContext::PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offs
     ResetTransform();
 }
 
-void WmCanvasContext::DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y, float w, float h,
+void WmCanvasContext::DrawFBOToScreen(WmFrameBufferObject &fbo, float x, float y, float w, float h,
                                      WmColorRGBA color)
 {
     SetTexture(fbo.mFboTexture.GetTextureID());
@@ -1231,13 +1231,13 @@ void WmCanvasContext::DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y,
 }
 
 void WmCanvasContext::DoDrawBlur(const WmRectf &rect, float blur, std::function<void()> draw,
-                                GFrameBufferObjectPtr &inputFbo, GFrameBufferObjectPtr &outputFbo,
+                                WmFrameBufferObjectPtr &inputFbo, WmFrameBufferObjectPtr &outputFbo,
                                 float scale)
 {
     // const float Step = 5;
     // const float inverseStep = 0.2;
 
-    GFrameBufferObjectPtr &tmpFbo = inputFbo;
+    WmFrameBufferObjectPtr &tmpFbo = inputFbo;
     float scaleFactor = 1;
     // down sample blur (not effective, do not use it now)
     // float blurStep = blur * scale;
@@ -1287,7 +1287,7 @@ void WmCanvasContext::DrawBlur(const WmRectf &rect, float blur, std::function<vo
 {
     WmRectf shadowRect = rect;
     shadowRect.Enlarge(blur, blur);
-    GFrameBufferObjectPtr shadowFbo, blurFbo;
+    WmFrameBufferObjectPtr shadowFbo, blurFbo;
     // draw content image to shadow fbo
     DoDrawShadowToFBO(shadowFbo, 1, shadowRect, draw);
     // draw blur on shadow fbo
@@ -1296,7 +1296,7 @@ void WmCanvasContext::DrawBlur(const WmRectf &rect, float blur, std::function<vo
     DoDrawShadowFBOToScreen(blurFbo, shadowRect, clipPath);
 }
 
-void WmCanvasContext::DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float dpr, const WmRectf &rect,
+void WmCanvasContext::DoDrawShadowToFBO(WmFrameBufferObjectPtr &shadowFbo, float dpr, const WmRectf &rect,
                                        std::function<void()> draw)
 {
     // draw to fbo
@@ -1319,7 +1319,7 @@ void WmCanvasContext::DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float 
     shadowFbo->UnbindFBO();
 }
 
-void WmCanvasContext::DoDrawShadowFBOToScreen(GFrameBufferObjectPtr &shadowFbo, const WmRectf &rect,
+void WmCanvasContext::DoDrawShadowFBOToScreen(WmFrameBufferObjectPtr &shadowFbo, const WmRectf &rect,
                                              std::vector<WmPath *> *clipPath)
 {
     Save();
@@ -1358,7 +1358,7 @@ void WmCanvasContext::DrawShadow(const WmRectf &rect, std::function<void()> draw
 
     if (mCurrentState->mShadowBlur < 0.01)
     {
-        GFrameBufferObjectPtr shadowFbo;
+        WmFrameBufferObjectPtr shadowFbo;
         DoDrawShadowToFBO(shadowFbo, mDevicePixelRatio, rect, drawFun);
         DoDrawShadowFBOToScreen(shadowFbo, rect, &savedClipPaths);
     }

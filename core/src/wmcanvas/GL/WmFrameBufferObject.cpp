@@ -58,7 +58,7 @@ void WmFrameBufferObject::DeleteFBO() {
 
     if (mFboTexture.IsValidate()) {
         // mFboTexture析构方法内已经会deleteTextures, 这里不需要如此
-        GLuint textureId = mFboTexture.GetTextureID();
+        WmLuint textureId = mFboTexture.GetTextureID();
         glDeleteTextures(1, &textureId);
         mFboTexture.Unbind();
     }
@@ -203,9 +203,9 @@ int WmFrameBufferObject::DetachTexture() {
     return id;
 }
 
-inline void WmFrameBufferObjectDeleter(GFrameBufferObjectPool::Map *pool, WmFrameBufferObject *fbo) {
-    pool->insert(GFrameBufferObjectPool::Map::value_type(
-            GFrameBufferObjectPool::Key(fbo->Width(), fbo->Height()), fbo));
+inline void WmFrameBufferObjectDeleter(WmFrameBufferObjectPool::Map *pool, WmFrameBufferObject *fbo) {
+    pool->insert(WmFrameBufferObjectPool::Map::value_type(
+            WmFrameBufferObjectPool::Key(fbo->Width(), fbo->Height()), fbo));
 }
 
 inline int GetNoSmall2PowNum(int num) {
@@ -223,7 +223,7 @@ inline int GetNoSmall2PowNum(int num) {
 }
 
 
-WmFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int height) {
+WmFrameBufferObjectPtr WmFrameBufferObjectPool::GetFrameBuffer(int width, int height) {
     auto deleter = std::bind(WmFrameBufferObjectDeleter, &mPool, std::placeholders::_1);
 
     int twoPowerWidth = GetNoSmall2PowNum(width);
@@ -231,14 +231,14 @@ WmFrameBufferObjectPtr GFrameBufferObjectPool::GetFrameBuffer(int width, int hei
 
     auto i = mPool.find(Key(twoPowerWidth, twoPowerHeight));
     if (i == mPool.end()) {
-        // LOG_E("GFrameBufferObjectPool not hit");
+        // LOG_E("WmFrameBufferObjectPool not hit");
         WmFrameBufferObjectPtr fbo(new WmFrameBufferObject(), deleter);
         fbo->InitFBO(twoPowerWidth, twoPowerHeight, GColorTransparent);
         fbo->SetSize(width, height);
         // no save to pool ??
         return fbo;
     } else {
-        // LOG_E("GFrameBufferObjectPool hit, %p", i->second);
+        // LOG_E("WmFrameBufferObjectPool hit, %p", i->second);
     }
 
     WmFrameBufferObjectPtr fbo(i->second, deleter);
