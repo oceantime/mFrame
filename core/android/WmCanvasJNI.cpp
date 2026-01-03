@@ -25,7 +25,7 @@
 
 #ifdef WmCanvas
 
-#include <3d/gmanager.h>
+#include <3d/WmManager.h>
 #include "WmCanvasManager.h"
 #include "WmCanvasLinkNative.h"
 
@@ -427,7 +427,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setDevicePixelRatio(
     char *canvasId = jstringToString(je, contextId);
 
     LOG_D("Canvas JNI::setDevicePixelRatio");
-    WmRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(canvasId);
     if (render) {
         render->setDevicePixelRatio((const float) ratio);
     }
@@ -527,10 +527,10 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setContextType(
 
     char *canvasId = jstringToString(je, contextId);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(canvasId);
     if (!render) {
         LOG_D("start to create renderer.id=%s\n", canvasId);
-        render = GManager::getSingleton()->newRenderer(canvasId);
+        render = WmManager::getSingleton()->newRenderer(canvasId);
     } else {
         LOG_D("render is not null,id=%s\n", render->mContextId.c_str());
     }
@@ -603,7 +603,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_bindTexture(
 
     string cxx_string = string(str_chars);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         render->bindTexture(je, bitmap, id, target, level, internalformat, format, type);
     }
@@ -626,7 +626,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_texSubImage2D(
 
     string cxx_string = string(str_chars);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         render->texSubImage2D(je, bitmap, id, target, level, xoffset, yoffset, format, type);
     }
@@ -646,7 +646,7 @@ JNIEXPORT bool JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_sendEvent(
 
     string cxx_string = string(str_chars);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         return render->sendEvent();
     }

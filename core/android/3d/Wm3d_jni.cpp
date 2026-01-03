@@ -8,7 +8,7 @@
 #include <WmCanvasLinkNative.h>
 #include <dlfcn.h>
 #include <wmcanvas/GPoint.h>
-#include "Wmmanager.h"
+#include "WmManager.h"
 
 //using namespace wm::wm_engine::WmCanvas;
 using namespace std;
@@ -62,11 +62,11 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *
 
     string cxx_string = string(str_chars);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(cxx_string);
     LOG_D("onSurfaceChanged findRender : %s", str_chars);
     if (!render) {
         LOG_D("onSurfaceChanged new render : %s", str_chars);
-        render = GManager::getSingleton()->newRenderer(cxx_string);
+        render = WmManager::getSingleton()->newRenderer(cxx_string);
     }
 
     if (render) {
@@ -118,7 +118,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv
 
     string cxx_string = string(str_chars);
 
-    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = WmManager::getSingleton()->findRenderer(cxx_string);
     if (render) {
         render->surfaceDestroy();
     }
@@ -144,7 +144,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onRenderExit(JNIEnv *env,
 
     string cxx_string = string(str_chars);
 
-    GManager::getSingleton()->removeRenderer(cxx_string);
+    WmManager::getSingleton()->removeRenderer(cxx_string);
 
     env->ReleaseStringUTFChars(key, str_chars);
 }

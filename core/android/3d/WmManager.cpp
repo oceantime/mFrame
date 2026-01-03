@@ -2,32 +2,32 @@
 // Created by yuantong on 2017/8/1.
 //
 
-#include "Wmmanager.h"
+#include "WmManager.h"
 
 
 using namespace std;
 using namespace WmCanvas;
 
-AutoPtr<GManager> GManager::theManager;
+AutoPtr<WmManager> WmManager::theManager;
 
-GManager *GManager::getSingleton() {
+WmManager *WmManager::getSingleton() {
     if (theManager.IsNULL()) {
-        theManager = new GManager();
+        theManager = new WmManager();
     }
     return theManager.RawData();
 }
 
 
-void GManager::release() {
+void WmManager::release() {
     if (!theManager.IsNULL()) {
         theManager = nullptr;
     }
 }
 
-GManager::GManager() {
+WmManager::WmManager() {
 }
 
-GManager::~GManager() {
+WmManager::~WmManager() {
     map<string, WmRenderer*>::iterator it = m_renderMap.begin();
     for (; it != m_renderMap.end(); ++it) {
         if (it->second) {
@@ -39,7 +39,7 @@ GManager::~GManager() {
 }
 
 
-WmRenderer* GManager::findRenderer(const std::string& key) {
+WmRenderer* WmManager::findRenderer(const std::string& key) {
     map<string, WmRenderer*>::iterator it = m_renderMap.find(key);
     if(it != m_renderMap.end()){
         return it->second;
@@ -48,7 +48,7 @@ WmRenderer* GManager::findRenderer(const std::string& key) {
     return NULL;
 }
 
-void GManager::removeRenderer(const std::string& key) {
+void WmManager::removeRenderer(const std::string& key) {
     map<string, WmRenderer*>::iterator it = m_renderMap.find(key);
     if(it != m_renderMap.end()){
         it->second->stop();
@@ -59,7 +59,7 @@ void GManager::removeRenderer(const std::string& key) {
 }
 
 
-WmRenderer* GManager::newRenderer(const std::string& key) {
+WmRenderer* WmManager::newRenderer(const std::string& key) {
     WmRenderer* renderer = findRenderer(key);
     if(!renderer){
         renderer = new WmRenderer(key);
