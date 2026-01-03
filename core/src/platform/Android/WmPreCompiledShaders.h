@@ -13,8 +13,8 @@
 #include <string>
 #include <vector>
 #include <GLES2/gl2platform.h>
-#ifndef WML_GLEXT_PROTOTYPES
-#define WML_GLEXT_PROTOTYPES 1
+#ifndef GL_GLEXT_PROTOTYPES
+#define GL_GLEXT_PROTOTYPES 1
 #endif
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>

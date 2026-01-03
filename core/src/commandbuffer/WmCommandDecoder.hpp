@@ -19,39 +19,39 @@
 namespace wmcanvas
 {
 
-enum GResType
+enum WmResType
 {
-    GResType_NONE = 0,
-    GResType_NULL,
-    GResType_Bool,
-    GResType_Int32,
-    GResType_UInt32,
-    GResType_UInt32_CreateBuffer,
-    GResType_UInt32_CreateTexture,
-    GResType_UInt32_CreateFrameBuffer,
-    GResType_UInt32_CreateShader,
-    GResType_UInt32_CreateProgram,
-    GResType_UInt32_CreateRenderBuffer,
-    GResType_UInt32_CreateVertexArray,//extension
-    GResType_Float,
-    GResType_BoolPtr,
-    GResType_CharPtr,
-    GResType_Int32Ptr,
-    GResType_UInt32Ptr,
-    GResType_FloatPtr,
-    GResType_CharPtr_GetExtention,
-    GResType_CharPtr_GetSupportedExtention,
-    GResType_GetContextAttributes
+    WmResType_NONE = 0,
+    WmResType_NULL,
+    WmResType_Bool,
+    WmResType_Int32,
+    WmResType_UInt32,
+    WmResType_UInt32_CreateBuffer,
+    WmResType_UInt32_CreateTexture,
+    WmResType_UInt32_CreateFrameBuffer,
+    WmResType_UInt32_CreateShader,
+    WmResType_UInt32_CreateProgram,
+    WmResType_UInt32_CreateRenderBuffer,
+    WmResType_UInt32_CreateVertexArray,//extension
+    WmResType_Float,
+    WmResType_BoolPtr,
+    WmResType_CharPtr,
+    WmResType_Int32Ptr,
+    WmResType_UInt32Ptr,
+    WmResType_FloatPtr,
+    WmResType_CharPtr_GetExtention,
+    WmResType_CharPtr_GetSupportedExtention,
+    WmResType_GetContextAttributes
 
 };
 
 /**
-    `GDecodeRes` struct save the value of each batch render while has result
+    `WmDecodeRes` struct save the value of each batch render while has result
  */
-struct GDecodeRes
+struct WmDecodeRes
 {
     bool hasResult;
-    GResType type;
+    WmResType type;
     //result is a typed value
     union
     {
@@ -76,16 +76,16 @@ struct GDecodeRes
     
     size_t maxSize;
     
-    GDecodeRes()
+    WmDecodeRes()
     {
         maxSize = 2048;
         hasResult = false;
-        type = GResType_NONE;
+        type = WmResType_NONE;
         uintValue = 0;
         charPtrValue = new char[maxSize];
     }
     
-    ~GDecodeRes()
+    ~WmDecodeRes()
     {
         if( charPtrValue )
         {
@@ -110,15 +110,15 @@ struct GDecodeRes
     inline void reset()
     {
         hasResult = false;
-        type = GResType_NONE;
+        type = WmResType_NONE;
         uintValue = 0;
         length = byteSize = 0;
     }
 };
 
 //define WebGL API function
-//using GCommandFunc = std::function< void(WmCommandBuffer& buffer, GDecodeRes& res ) >;
-typedef void (*GCommandFuncPtr)(WmCommandBuffer& , GDecodeRes& );
+//using WmCommandFunc = std::function< void(WmCommandBuffer& buffer, WmDecodeRes& res ) >;
+typedef void (*WmCommandFuncPtr)(WmCommandBuffer& , WmDecodeRes& );
 
 //convert utf16 string to utf8 string
 std::string U16StrToU8Str( char16_t* u16char );
@@ -138,7 +138,7 @@ public:
     }
 
     virtual void InitCommands() = 0;
-    virtual bool Decode(WmCommandBuffer& buffer, GDecodeRes& res) = 0;
+    virtual bool Decode(WmCommandBuffer& buffer, WmDecodeRes& res) = 0;
     virtual bool IsSyncCommand(uint32_t commandId) = 0;
 
 protected:
