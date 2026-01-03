@@ -166,9 +166,9 @@ void WmCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
         UpdateProjectTransform();
 
         if (mCurrentState != nullptr) {
-            GTransform old = mCurrentState->mTransform;
-            mCurrentState->mTransform = GTransformIdentity;
-            if (!GTransformEqualToTransform(old, mCurrentState->mTransform)) {
+            WmTransform old = mCurrentState->mTransform;
+            mCurrentState->mTransform = WmTransformIdentity;
+            if (!WmTransformEqualToTransform(old, mCurrentState->mTransform)) {
                 // update shader transform
                 SetTransformOfShader(mProjectTransform);
             }
@@ -307,7 +307,7 @@ void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
     GLuint glID = BindImage(rgbaData, GL_RGBA, (GLuint) imgWidth, (GLuint) imgHeight);
     WmColorRGBA color = GColorWhite;
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);
-    mCurrentState->mShader->SetTransform(GTransformIdentity);
+    mCurrentState->mShader->SetTransform(WmTransformIdentity);
     glDrawArrays(GL_TRIANGLES, 0, mVertexBufferIndex);
     mVertexBufferIndex = 0;
 
@@ -348,7 +348,7 @@ DrawFBO(std::string fboName, WmCompositeOperation compositeOp, float sx, float s
     fbo.mFboTexture.Bind();
 
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);
-    mCurrentState->mShader->SetTransform(GTransformIdentity);
+    mCurrentState->mShader->SetTransform(WmTransformIdentity);
     glDrawArrays(GL_TRIANGLES, 0, mVertexBufferIndex);
     mVertexBufferIndex = 0;
 
@@ -380,7 +380,7 @@ void WmCanvas2DContextAndroid::ResetGLBeforeCopyFrame(int width, int height) {
 
     mCurrentState->mShader->SetOverideTextureColor(0);
     mCurrentState->mShader->SetHasTexture(1);
-    mCurrentState->mShader->SetTransform(GTransformIdentity);
+    mCurrentState->mShader->SetTransform(WmTransformIdentity);
 }
 
 

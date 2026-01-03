@@ -38,7 +38,7 @@ void GPath2D::ClearPath() {
 
 
 
-void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, GTransform* transform) {
+void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, WmTransform* transform) {
     for (int i = 0; i < otherCmds.size(); i++) {
         GPathCmd *item = otherCmds[i];
 
@@ -50,7 +50,7 @@ void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, GTransform* transform)
 
         memcpy(cmd->data, item->data, cmd->byteLen);
 
-        if (transform != nullptr && !GTransformIsIdentity(*transform)) {
+        if (transform != nullptr && !WmTransformIsIdentity(*transform)) {
             TransformPathCmd(cmd, *transform);
         }
 
@@ -58,7 +58,7 @@ void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, GTransform* transform)
     }
 }
 
-void GPath2D::AddPath(GPath2D &other, GTransform &transform) {
+void GPath2D::AddPath(GPath2D &other, WmTransform &transform) {
     AddPaths(other.cmds, &transform);
 }
 
@@ -249,6 +249,6 @@ void GPath2D::Rect(int x, int y, int w, int h) {
 /**
  * TODO
  */
-void GPath2D::TransformPathCmd(GPathCmd* cmd,  GTransform& transform) {
+void GPath2D::TransformPathCmd(GPathCmd* cmd,  WmTransform& transform) {
 
 }

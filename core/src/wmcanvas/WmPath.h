@@ -137,7 +137,7 @@ private:
 
 public:
     GFillRule mClipFillRule;
-    GTransform mTransform;
+    WmTransform mTransform;
 
 };
 

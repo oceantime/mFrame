@@ -65,7 +65,7 @@ public:
     API_EXPORT GPath2D(const GPath2D &other);
 
 
-    API_EXPORT void AddPath(GPath2D&, GTransform& transform);
+    API_EXPORT void AddPath(GPath2D&, WmTransform& transform);
 
 
     API_EXPORT void ClosePath();
@@ -105,10 +105,10 @@ private:
     void ClearPath();
 
 
-    void TransformPathCmd(GPathCmd* cmd,  GTransform& transform);
+    void TransformPathCmd(GPathCmd* cmd,  WmTransform& transform);
 
 
-    void AddPaths(std::vector<GPathCmd*>&, GTransform* transform = nullptr);
+    void AddPaths(std::vector<GPathCmd*>&, WmTransform* transform = nullptr);
 
 
 private:

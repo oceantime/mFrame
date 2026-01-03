@@ -153,7 +153,7 @@ void GCanvasWeex::drawFBO(std::string fboName, WmCompositeOperation compositeOp,
     fbo.mFboTexture.Bind();
 
     mCanvasContext->PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);
-    mCanvasContext->mCurrentState->mShader->SetTransform(GTransformIdentity);
+    mCanvasContext->mCurrentState->mShader->SetTransform(WmTransformIdentity);
     glDrawArrays(GL_TRIANGLES, 0, mCanvasContext->mVertexBufferIndex);
     mCanvasContext->mVertexBufferIndex = 0;
 
@@ -308,7 +308,7 @@ void GCanvasWeex::UsePatternRenderPipeline(int textureListId, int textureWidth, 
     mCanvasContext->SendVertexBufferToGPU();
 
 #ifdef IOS
-    mCanvasContext->mCurrentState->mShader = GShaderManager::getSingleton()->programForKey("PATTERN");
+    mCanvasContext->mCurrentState->mShader = WmShaderManager::getSingleton()->programForKey("PATTERN");
 #endif
 
 #ifdef ANDROID
@@ -350,7 +350,7 @@ void GCanvasWeex::UsePatternRenderPipeline(int textureListId,
     mCanvasContext->SendVertexBufferToGPU();
 
 #ifdef IOS
-    mCanvasContext->mCurrentState->mShader = GShaderManager::getSingleton()->programForKey("PATTERN");
+    mCanvasContext->mCurrentState->mShader = WmShaderManager::getSingleton()->programForKey("PATTERN");
 #endif
 
 #ifdef ANDROID

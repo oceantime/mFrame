@@ -104,7 +104,7 @@ public:
     GLuint PositionSlot();
     
     void UpdateProjectTransform();
-    GTransform CalculateProjectTransform(int width, int height, bool needFlipY = false);
+    WmTransform CalculateProjectTransform(int width, int height, bool needFlipY = false);
 
 
     //------------------Pipeline----------------------
@@ -127,19 +127,19 @@ public:
     
     //----------------Push Vertex------------------------
     void PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA color,
-                     GTransform transform, std::vector<WmVertex> *vec = NULL);
-    void PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4, WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec = NULL);
+                     WmTransform transform, std::vector<WmVertex> *vec = NULL);
+    void PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4, WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec = NULL);
     //fbo size same with texutre
     void PushRectangle(float x, float y, float w, float h, float tx, float ty, float tw, float th,
-                       WmColorRGBA color, GTransform transform = GTransformIdentity, bool flipY = false, std::vector<WmVertex> *vec = NULL);
+                       WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false, std::vector<WmVertex> *vec = NULL);
 
     void PushRectangleFormat(float x, float y, float w, float h, float tx, float ty, float tw, float th,
-                       WmColorRGBA color, GTransform transform = GTransformIdentity, bool flipY = false,
+                       WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false,
                        std::vector<WmVertex> *vec = NULL, bool formatIntVertex = false);
     //fbo size isn't with texutre, tw,th vaule is tw=fbo.w/texture.w, th=fbo.h/texture.h
     void PushRectangle4TextureArea(float x, float y, float w, float h,
                                    float tx, float ty, float tw, float th,WmColorRGBA color,
-                                   GTransform transform = GTransformIdentity, bool flipY = false);
+                                   WmTransform transform = WmTransformIdentity, bool flipY = false);
     void PushReverseRectangle(float x, float y, float w, float h, float tx, float ty,
                               float tw, float th, WmColorRGBA color);
     void PushPoints(const std::vector<GPoint> &points, WmColorRGBA color);
@@ -352,7 +352,7 @@ public:
 
 
     //----------------Other------------------------
-    API_EXPORT void SetTransformOfShader(const GTransform &trans);
+    API_EXPORT void SetTransformOfShader(const WmTransform &trans);
 
     void ClipRegion();
     void BeforeClip();
@@ -380,7 +380,7 @@ public:
 #ifdef WMCANVAS
     API_EXPORT void ApplyTransform(float m11, float m12, float m21, float m22,
                                    float dx, float dy);
-    API_EXPORT void ApplyTransform(GTransform t);
+    API_EXPORT void ApplyTransform(WmTransform t);
     
     GWebGLTxtImage2DFunc GetGWebGLTxtImage2DFunc() { return mWebGLTexImage2dFunc; }
     void SetGWebGLTxtImage2DFunc(GWebGLTxtImage2DFunc func) { mWebGLTexImage2dFunc = func; }
@@ -410,21 +410,21 @@ protected:
     
     void DrawTextWithLength(const char *text, int strLength, float x, float y, bool isStroke = false, float maxWidth = SHRT_MAX);
 
-    virtual GShaderManager *GetShaderManager();
+    virtual WmShaderManager *GetShaderManager();
 
-    virtual GShader *FindShader(const char *name);
+    virtual WmShader *FindShader(const char *name);
     
 
-    void DoDrawShadowToFBO(GFrameBufferObjectPtr &shadowFbo, float dpr, const WmRectf &rect, std::function<void()> draw);
-    void DoDrawShadowFBOToScreen(GFrameBufferObjectPtr &shadowFbo, const WmRectf &rect, std::vector<WmPath*>* recoveryClipPath);
+    void DoDrawShadowToFBO(WmFrameBufferObjectPtr &shadowFbo, float dpr, const WmRectf &rect, std::function<void()> draw);
+    void DoDrawShadowFBOToScreen(WmFrameBufferObjectPtr &shadowFbo, const WmRectf &rect, std::vector<WmPath*>* recoveryClipPath);
     void DrawBlur(const WmRectf &rect, float blur, std::function<void()> draw, std::vector<WmPath*>* recoveryClipPath);
     void DoDrawBlur(const WmRectf &rect, float blur, std::function<void()> draw,
-    GFrameBufferObjectPtr &inputFbo, GFrameBufferObjectPtr &outputFbo, float scale);
+    WmFrameBufferObjectPtr &inputFbo, WmFrameBufferObjectPtr &outputFbo, float scale);
     
     //FBO
-    void PrepareDrawElemetToFBO(GFrameBufferObject &fbo, float offsetX = 0, float offsetY = 0);
-    void DrawFBOToFBO(GFrameBufferObject &src, GFrameBufferObject &dest);
-    void DrawFBOToScreen(GFrameBufferObject &fbo, float x, float y, float w, float h,
+    void PrepareDrawElemetToFBO(WmFrameBufferObject &fbo, float offsetX = 0, float offsetY = 0);
+    void DrawFBOToFBO(WmFrameBufferObject &src, WmFrameBufferObject &dest);
+    void DrawFBOToScreen(WmFrameBufferObject &fbo, float x, float y, float w, float h,
                          WmColorRGBA color);
     
     //Vertex
@@ -442,7 +442,7 @@ public:
     WmCanvasConfig mConfig;
     GCanvasState *mCurrentState;
     float mDevicePixelRatio;
-    GTransform mProjectTransform;
+    WmTransform mProjectTransform;
 
     bool mIsFboSupported;
     WmColorRGBA mClearColor;
@@ -457,7 +457,7 @@ public:
 
     bool mIsContextReady;
     
-    std::map<std::string, GFrameBufferObject> mFboMap;
+    std::map<std::string, WmFrameBufferObject> mFboMap;
     static constexpr const char *DefaultFboName = "default";
 
     WmFontManager *mFontManager = nullptr;
@@ -483,7 +483,7 @@ protected:
     std::vector<GCanvasState*> mStateStack;
     bool mHasClipRegion;
 
-    GShader *mSaveShader;
+    WmShader *mSaveShader;
     bool mSaveIsStroke;
 
     // gl vertex
@@ -494,7 +494,7 @@ protected:
     
     bool mIsGLInited = false;
 
-    GFrameBufferObjectPool mFrameBufferPool;
+    WmFrameBufferObjectPool mFrameBufferPool;
 
     bool mHiQuality;
 

@@ -191,7 +191,7 @@ static NSMutableDictionary *staticFontInstaceDict;
     
     scale = 1.0;
     if (context) {
-        scale = GTransformGetMaxScale(context->mCurrentState->mTransform);
+        scale = WmTransformGetMaxScale(context->mCurrentState->mTransform);
     }
     
     curFontName = [self getFontNameWithCurrentScale:fontStyle context:context];
@@ -254,7 +254,7 @@ static NSMutableDictionary *staticFontInstaceDict;
     int offsetX = 0;
     WmColorRGBA color = self.isStroke ? BlendStrokeColor(context) : BlendFillColor(context);
 
-    float scale = GTransformGetMaxScale( context->mCurrentState->mTransform );
+    float scale = WmTransformGetMaxScale( context->mCurrentState->mTransform );
     
     NSInteger i,n = [string length];
     unichar c;
@@ -528,8 +528,8 @@ static NSMutableDictionary *staticFontInstaceDict;
     
     if (context) {
         GCanvasState *currentState = context->GetCurrentState();
-        scaleX = GTransformGetScaleX(currentState->mTransform);
-        scaleY = GTransformGetScaleY(currentState->mTransform);
+        scaleX = WmTransformGetScaleX(currentState->mTransform);
+        scaleY = WmTransformGetScaleY(currentState->mTransform);
     }
     return [NSString stringWithFormat:@"%@_%f_%f", fontName, scaleX, scaleY];
 }

@@ -6,40 +6,38 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GSHADERMANAGER_H
-#define GCANVAS_GSHADERMANAGER_H
+#ifndef WMCANVAS_WMSHADERMANAGER_H
+#define WMCANVAS_WMSHADERMANAGER_H
 
 #include <iostream>
 #include <map>
 
 #include "export.h"
 
-class GShader;
+class WmShader;
 
-class GShaderManager
+class WmShaderManager
 {
 public:
 
     // Android depend constructor, set it public
-    API_EXPORT GShaderManager();
-    ~GShaderManager();
+    API_EXPORT WmShaderManager();
+    ~WmShaderManager();
 
-    static GShaderManager *getSingleton();
+    static WmShaderManager *getSingleton();
     static void release();
 
-    void addProgram(const std::string &key, GShader *program);
-    GShader *programForKey(const std::string &key);
+    void addProgram(const std::string &key, WmShader *program);
+    WmShader *programForKey(const std::string &key);
     
     bool isAllShaderCompleted() { return allShaderCompleted; }
 
 private:
     void LoadDefaultShaders();
 
-    std::map< std::string, GShader * > mProgramCaches;
-    static GShaderManager *mShaderManager;
+    std::map< std::string, WmShader * > mProgramCaches;
+    static WmShaderManager *mShaderManager;
     bool allShaderCompleted;
 };
 
-using WmShaderManager = GShaderManager;
-
-#endif /* GCANVAS_GSHADERMANAGER_H */
+#endif /* WMCANVAS_WMSHADERMANAGER_H */

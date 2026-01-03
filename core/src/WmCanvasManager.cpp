@@ -98,7 +98,7 @@ void GCanvasManager::RemoveCanvas(const std::string canvasId)
     //release manager while remove last canvas
     if( mCanvases.size() == 0 )
     {
-        GShaderManager::release();
+        WmShaderManager::release();
         Release();
     }
 #endif

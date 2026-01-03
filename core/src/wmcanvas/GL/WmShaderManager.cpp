@@ -22,18 +22,18 @@ bool g_use_pre_compile = false;
 #endif
 
 
-GShaderManager *GShaderManager::mShaderManager = nullptr;
+WmShaderManager *WmShaderManager::mShaderManager = nullptr;
 
-GShaderManager *GShaderManager::getSingleton()
+WmShaderManager *WmShaderManager::getSingleton()
 {
     if (nullptr == mShaderManager)
     {
-        mShaderManager = new GShaderManager();
+        mShaderManager = new WmShaderManager();
     }
     return mShaderManager;
 }
 
-void GShaderManager::release()
+void WmShaderManager::release()
 {
     if (mShaderManager != nullptr)
     {
@@ -43,14 +43,14 @@ void GShaderManager::release()
 }
 
 
-void GShaderManager::addProgram(const std::string &key, GShader *program)
+void WmShaderManager::addProgram(const std::string &key, WmShader *program)
 {
-    std::map< std::string, GShader * >::iterator iter =
+    std::map< std::string, WmShader * >::iterator iter =
         mProgramCaches.find(key);
     if (iter == mProgramCaches.end())
     {
         mProgramCaches.insert(
-            std::pair< std::string, GShader * >(key, program));
+            std::pair< std::string, WmShader * >(key, program));
     }
     else if (iter->second != program)
     {
@@ -59,9 +59,9 @@ void GShaderManager::addProgram(const std::string &key, GShader *program)
     }
 }
 
-GShader *GShaderManager::programForKey(const std::string &key)
+WmShader *WmShaderManager::programForKey(const std::string &key)
 {
-    std::map< std::string, GShader * >::iterator iter =
+    std::map< std::string, WmShader * >::iterator iter =
         mProgramCaches.find(key);
     if (iter == mProgramCaches.end())
     {
@@ -71,7 +71,7 @@ GShader *GShaderManager::programForKey(const std::string &key)
     return iter->second;
 }
 
-GShaderManager::GShaderManager()
+WmShaderManager::WmShaderManager()
 {
 #ifdef ANDROID
     if (g_use_pre_compile)
@@ -102,9 +102,9 @@ GShaderManager::GShaderManager()
 #endif
 }
 
-GShaderManager::~GShaderManager()
+WmShaderManager::~WmShaderManager()
 {
-    std::map< std::string, GShader * >::iterator iter =
+    std::map< std::string, WmShader * >::iterator iter =
         mProgramCaches.begin();
     for (; iter != mProgramCaches.end(); ++iter)
     {
@@ -114,10 +114,10 @@ GShaderManager::~GShaderManager()
 }
 
 
-void GShaderManager::LoadDefaultShaders() {
+void WmShaderManager::LoadDefaultShaders() {
     allShaderCompleted = true;
     
-    GShader *program =
+    WmShader *program =
         new DefaultShader(DEFAULT_SHADER, DEFAULT_SHADER_VS, DEFAULT_SHADER_PS);
     addProgram(DEFAULT_SHADER, program);
     if (!program->IsShaderCompleted()) {

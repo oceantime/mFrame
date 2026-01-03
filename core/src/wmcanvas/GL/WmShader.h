@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GSHADER_H
-#define GCANVAS_GSHADER_H
+#ifndef WMCANVAS_WMSHADER_H
+#define WMCANVAS_WMSHADER_H
 
 #include "WmGL.h"
 #include "WmPoint.h"
@@ -16,13 +16,13 @@
 
 #include <vector>
 
-class GShader
+class WmShader
 {
 public:
-    GShader(const char *name, const char *vertexShaderSrc,
+    WmShader(const char *name, const char *vertexShaderSrc,
             const char *fragmentShaderSrc);
 
-    virtual ~GShader();
+    virtual ~WmShader();
 
 
 #ifdef ANDROID
@@ -45,13 +45,13 @@ public:
 
     virtual void SetOverideTextureColor(int value) {}
     
-    GLint GetTexcoordSlot() { return mTexcoordSlot; }
+    WmLint GetTexcoordSlot() { return mTexcoordSlot; }
     
-    GLint GetPositionSlot() { return mPositionSlot; }
+    WmLint GetPositionSlot() { return mPositionSlot; }
     
-    GLint GetColorSlot() { return mColorSlot; }
+    WmLint GetColorSlot() { return mColorSlot; }
     
-    GLint GetTransformSlot() { return mTransfromSlot; }
+    WmLint GetTransformSlot() { return mTransfromSlot; }
 
     virtual void SetRepeatMode(const std::string &pattern) {}
 
@@ -67,7 +67,7 @@ public:
 
     virtual void SetTextureSize(float width, float height) {}
 
-    void SetTransform(const GTransform &trans);
+    void SetTransform(const WmTransform &trans);
 
     virtual void SetDelta(float x, float y) {}
 
@@ -80,30 +80,30 @@ public:
     bool IsShaderCompleted() { return isCompleted; }
 
 
-    static void TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::string& contextId);
+    static void TraceErrorIfHas(WmShader* shader, WmCanvasHooks* hook, const std::string& contextId);
 
 
 protected:
     virtual void calculateAttributesLocations();
 
-    GLuint compileShader(const char *shader, GLenum shaderType);
+    WmLuint compileShader(const char *shader, GLenum shaderType);
 
-    GLuint mHandle;
+    WmLuint mHandle;
     std::string mName;
     
-    GLint mTexcoordSlot;
-    GLint mPositionSlot;
-    GLint mColorSlot;
+    WmLint mTexcoordSlot;
+    WmLint mPositionSlot;
+    WmLint mColorSlot;
     
-    GLint mTransfromSlot;
-    GTransform mShaderTransform;
+    WmLint mTransfromSlot;
+    WmTransform mShaderTransform;
     bool mIsFirstCommit;
 
     std::vector<WmCanvasLog> mErrVec;
     bool isCompleted;
 };
 
-class DefaultShader : public GShader
+class DefaultShader : public WmShader
 {
 public:
     DefaultShader(const char *name, const char *vertexShaderSrc,
@@ -142,15 +142,15 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    GLuint mTextureSamplerSlot;
-    GLuint mHasTextureSlot;
-    GLuint mOverrideTextureColorSlot;
+    WmLint mTextureSamplerSlot;
+    WmLint mHasTextureSlot;
+    WmLint mOverrideTextureColorSlot;
 
     bool mHasTextureFlag;
     bool mOverrideTextureColorFlag;
 };
 
-class TextureShader : public GShader
+class TextureShader : public WmShader
 {
 public:
     TextureShader(const char *name, const char *vertexShaderSrc,
@@ -172,11 +172,11 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    GLuint mTextureSamplerSlot;
-    GLuint mPremultipliedAlphaSlot;
+    WmLint mTextureSamplerSlot;
+    WmLint mPremultipliedAlphaSlot;
 };
 
-class ShadowShader : public GShader
+class ShadowShader : public WmShader
 {
 public:
     ShadowShader(const char *name, const char *vertexShaderSrc,
@@ -198,11 +198,11 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    GLuint mTextureSamplerSlot;
-    GLuint mShadowColorSlot;
+    WmLint mTextureSamplerSlot;
+    WmLint mShadowColorSlot;
 };
 
-class BlurShader : public GShader
+class BlurShader : public WmShader
 {
 public:
     BlurShader(const char *name, const char *vertexShaderSrc,
@@ -236,15 +236,15 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    GLuint mRadiusSlot;
-    GLuint mXDeltaSlot;
-    GLuint mYDeltaSlot;
-    GLuint mWeightSlot;
-    GLuint mSamplerSlot;
-    GLuint mOverrideTextureColorSlot;
+    WmLint mRadiusSlot;
+    WmLint mXDeltaSlot;
+    WmLint mYDeltaSlot;
+    WmLint mWeightSlot;
+    WmLint mSamplerSlot;
+    WmLint mOverrideTextureColorSlot;
 };
 
-class PatternShader : public GShader
+class PatternShader : public WmShader
 {
 public:
     PatternShader(const char *name, const char *vertexShaderSrc,
@@ -273,20 +273,20 @@ public:
         glUniform1f(mPatternAlphaSlot, patternAlpha);
     }
 
-    GLint GetTextureSamplerSlot() { return mTextureSamplerSlot; }
+    WmLint GetTextureSamplerSlot() { return mTextureSamplerSlot; }
 
 protected:
     void calculateAttributesLocations();
     
-    GLuint mTextureSamplerSlot;
-    GLuint mRepeatXSlot;
-    GLuint mRepeatYslot;
-    GLuint mTextureSizeSlot;
-    GLuint mPatternAlphaSlot;
+    WmLint mTextureSamplerSlot;
+    WmLint mRepeatXSlot;
+    WmLint mRepeatYslot;
+    WmLint mTextureSizeSlot;
+    WmLint mPatternAlphaSlot;
 };
 
 
-class GradientShader : public GShader
+class GradientShader : public WmShader
 {
 public:
     GradientShader(const char *name, const char *vertexShaderSrc, const char *fragmentShaderSrc);
@@ -307,8 +307,8 @@ public:
     
     void SetColorStop(float *color, float stop, int id)
     {
-        GLuint stopLoc;
-        GLuint colorLoc;
+        WmLint stopLoc;
+        WmLint colorLoc;
         if (id == 0)
         {
             stopLoc = mStop0Slot;
@@ -346,23 +346,23 @@ public:
 protected:
     void calculateAttributesLocations();
     
-    GLuint mTextureSamplerSlot;
+    WmLint mTextureSamplerSlot;
     
-    GLuint mStopCountSlot;
+    WmLint mStopCountSlot;
     
-    GLuint mStop0ColorSlot;
-    GLuint mStop1ColorSlot;
-    GLuint mStop2ColorSlot;
-    GLuint mStop3ColorSlot;
-    GLuint mStop4ColorSlot;
+    WmLint mStop0ColorSlot;
+    WmLint mStop1ColorSlot;
+    WmLint mStop2ColorSlot;
+    WmLint mStop3ColorSlot;
+    WmLint mStop4ColorSlot;
     
-    GLuint mStop0Slot;
-    GLuint mStop1Slot;
-    GLuint mStop2Slot;
-    GLuint mStop3Slot;
-    GLuint mStop4Slot;
+    WmLint mStop0Slot;
+    WmLint mStop1Slot;
+    WmLint mStop2Slot;
+    WmLint mStop3Slot;
+    WmLint mStop4Slot;
     
-    GLuint mHasTextureSlot;
+    WmLint mHasTextureSlot;
     bool mHasTextureFlag;
 };
 
@@ -380,8 +380,8 @@ public:
 
 protected:
     void calculateAttributesLocations();
-    GLuint mRangeStartSlot;
-    GLuint mRangeEndSlot;
+    WmLint mRangeStartSlot;
+    WmLint mRangeEndSlot;
 };
 
 class RadialGradientShader : public GradientShader
@@ -396,14 +396,14 @@ public:
         glUniform3f(mEndSlot, end[0], end[1], end[2]);
     }
     
-    void SetInvertTransform(const GTransform &trans);
+    void SetInvertTransform(const WmTransform &trans);
     
 protected:
     void calculateAttributesLocations();
-    GLuint mStartSlot;
-    GLuint mEndSlot;
-    GLuint mInvertTransformSlot;
+    WmLint mStartSlot;
+    WmLint mEndSlot;
+    WmLint mInvertTransformSlot;
 
 };
 
-#endif /* GCANVAS_GSHADER_H */
+#endif /* WMCANVAS_WMSHADER_H */

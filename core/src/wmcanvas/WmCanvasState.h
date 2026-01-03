@@ -41,7 +41,7 @@ public:
     void ClearClip();
     
     //transfrom
-    GTransform mTransform;
+    WmTransform mTransform;
     
     // Clip Paths
     std::vector<WmPath*> clipPaths;
@@ -79,7 +79,7 @@ public:
 
     // TODO manager shader pointer
     // shader & texture
-    GShader *mShader;
+    WmShader *mShader;
     int mTextureId = InvalidateTextureId;
 
 };

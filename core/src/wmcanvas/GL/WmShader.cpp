@@ -25,7 +25,7 @@
     } while (false)
 
 
-bool GShader::initWithPreCompiledProgramByteArray(
+bool WmShader::initWithPreCompiledProgramByteArray(
         const char *shaderName, const GLchar *vShaderByteArray,
         const GLchar *fShaderByteArray)
 {
@@ -41,9 +41,9 @@ extern bool g_use_pre_compile;
 
 #endif
 
-GShader::GShader(const char *name, const char *vertexShaderSrc,
+WmShader::WmShader(const char *name, const char *vertexShaderSrc,
                  const char *fragmentShaderSrc)
-        : mHandle(0), mName(name), mColorSlot(-1), mTexcoordSlot(-1), mPositionSlot(-1), mTransfromSlot(-1), mShaderTransform(GTransformIdentity), mIsFirstCommit(true)
+        : mHandle(0), mName(name), mColorSlot(-1), mTexcoordSlot(-1), mPositionSlot(-1), mTransfromSlot(-1), mShaderTransform(WmTransformIdentity), mIsFirstCommit(true)
 {
 #ifdef ANDROID
     std::string shaderName = SHADER_NAME_PREFIX + mName;
@@ -61,14 +61,14 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
 #endif
     
     isCompleted = true;
-    GLuint vertexShader = compileShader(vertexShaderSrc, GL_VERTEX_SHADER);
+    WmLuint vertexShader = compileShader(vertexShaderSrc, GL_VERTEX_SHADER);
     if (vertexShader == 0)
     {
         isCompleted = false;
         return;
     }
 
-    GLuint fragmentShader = compileShader(fragmentShaderSrc, GL_FRAGMENT_SHADER);
+    WmLuint fragmentShader = compileShader(fragmentShaderSrc, GL_FRAGMENT_SHADER);
     if (fragmentShader == 0)
     {
         isCompleted = false;
@@ -83,7 +83,7 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    GLint linkSuccess;
+    WmLint linkSuccess;
     glGetProgramiv(mHandle, GL_LINK_STATUS, &linkSuccess);
     if (linkSuccess == GL_FALSE)
     {
@@ -113,7 +113,7 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
 #endif
 }
 
-GShader::~GShader()
+WmShader::~WmShader()
 {
     if (mHandle != 0)
     {
@@ -123,7 +123,7 @@ GShader::~GShader()
 }
 
 
-void GShader::TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::string& contextId) {
+void WmShader::TraceErrorIfHas(WmShader* shader, WmCanvasHooks* hook, const std::string& contextId) {
     if (shader == nullptr) {
         return;
     }
@@ -133,19 +133,19 @@ void GShader::TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::s
 }
 
 
-GLuint GShader::compileShader(const char *shader, GLenum shaderType)
+WmLuint WmShader::compileShader(const char *shader, GLenum shaderType)
 {
-    GLuint shaderHandle = glCreateShader(shaderType);
+    WmLuint shaderHandle = glCreateShader(shaderType);
     if (shaderHandle == 0)
     {
         return 0;
     }
 
-    GLint shaderLength = (GLint) strlen(shader);
+    WmLint shaderLength = (WmLint) strlen(shader);
     glShaderSource(shaderHandle, 1, &shader, &shaderLength);
     glCompileShader(shaderHandle);
 
-    GLint compileResult;
+    WmLint compileResult;
     glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileResult);
 
     if (compileResult == GL_FALSE)
@@ -166,13 +166,13 @@ GLuint GShader::compileShader(const char *shader, GLenum shaderType)
     return shaderHandle;
 }
 
-void GShader::Bind()
+void WmShader::Bind()
 {
     glUseProgram(mHandle);
     RestoreShaderState();
 }
 
-void GShader::SetTransform(const GTransform &trans)
+void WmShader::SetTransform(const WmTransform &trans)
 {
     /**
         a   b   0   0
@@ -181,7 +181,7 @@ void GShader::SetTransform(const GTransform &trans)
         tx  ty  0   1
      */
     
-    if( !mIsFirstCommit && GTransformEqualToTransform(trans, mShaderTransform) ){
+    if( !mIsFirstCommit && WmTransformEqualToTransform(trans, mShaderTransform) ){
         return;
     }
     
@@ -202,11 +202,11 @@ void GShader::SetTransform(const GTransform &trans)
 
 }
 
-void GShader::calculateAttributesLocations() {}
+void WmShader::calculateAttributesLocations() {}
 
 DefaultShader::DefaultShader(const char *name, const char *vertexShaderSrc,
                              const char *fragmentShaderSrc)
-        : GShader(name, vertexShaderSrc, fragmentShaderSrc)
+        : WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -238,7 +238,7 @@ void DefaultShader::calculateAttributesLocations()
 
 TextureShader::TextureShader(const char *name, const char *vertexShaderSrc,
                              const char *fragmentShaderSrc)
-        : GShader(name, vertexShaderSrc, fragmentShaderSrc)
+        : WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -256,7 +256,7 @@ void TextureShader::calculateAttributesLocations()
 
 ShadowShader::ShadowShader(const char *name, const char *vertexShaderSrc,
                              const char *fragmentShaderSrc)
-        : GShader(name, vertexShaderSrc, fragmentShaderSrc)
+        : WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -274,7 +274,7 @@ void ShadowShader::calculateAttributesLocations()
 
 BlurShader::BlurShader(const char *name, const char *vertexShaderSrc,
                              const char *fragmentShaderSrc)
-        : GShader(name, vertexShaderSrc, fragmentShaderSrc)
+        : WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -304,7 +304,7 @@ void BlurShader::calculateAttributesLocations()
 
 PatternShader::PatternShader(const char *name, const char *vertexShaderSrc,
                              const char *fragmentShaderSrc)
-        : GShader(name, vertexShaderSrc, fragmentShaderSrc)
+        : WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -328,7 +328,7 @@ void PatternShader::calculateAttributesLocations()
 
 GradientShader::GradientShader(const char *name,
                                const char *vertexShaderSrc,
-                               const char *fragmentShaderSrc):GShader(name, vertexShaderSrc, fragmentShaderSrc)
+                               const char *fragmentShaderSrc):WmShader(name, vertexShaderSrc, fragmentShaderSrc)
 {
     calculateAttributesLocations();
 }
@@ -396,7 +396,7 @@ void RadialGradientShader::calculateAttributesLocations()
     GradientShader::calculateAttributesLocations();
 }
 
-void RadialGradientShader::SetInvertTransform(const GTransform &trans)
+void RadialGradientShader::SetInvertTransform(const WmTransform &trans)
 {
     GLfloat m[16] = {0.0f};
     m[0] = trans.a;

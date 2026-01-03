@@ -56,23 +56,23 @@ private:
 
 
     void DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
-                             WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vertexVec);
+                             WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vertexVec);
 
 
     void DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
                                            GPoint& center, GPoint& p1, GPoint& p2,
-                                           WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
+                                           WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                                            float samePointThreshold);
 
 
     void DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
                        const GPoint &center, const GPoint &p1, const GPoint &p2,
-                       WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec);
+                       WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec);
 
 
     void DrawLineCap(WmCanvasContext *context, float halfLineWidth,
                                    GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
-                                   WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
+                                   WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                                    float samePointThreshold = 0.001f);
 };
 

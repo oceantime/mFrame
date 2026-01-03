@@ -56,31 +56,31 @@ static void CalculateOutlinePoint(float halfLineWidthTrans, GPathOutLine& outlin
  */
 void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vector<WmVertex> *vertexVec) {
     WmColorRGBA color = BlendStrokeColor(context);
-    GTransform& transform = context->mCurrentState->mTransform;
-    bool isSimilarity = GTransformIsSimilarity(context->mCurrentState->mTransform);
+    WmTransform& transform = context->mCurrentState->mTransform;
+    bool isSimilarity = WmTransformIsSimilarity(context->mCurrentState->mTransform);
     bool drawCapFlag = context->LineCap() != LINE_CAP_BUTT;
 
     float lineWidth = context->LineWidth();
     float lineWidthTrans = lineWidth;
     if (isSimilarity) {
-        lineWidthTrans = lineWidth * GTransformGetScaleX(transform);
+        lineWidthTrans = lineWidth * WmTransformGetScaleX(transform);
         if (lineWidthTrans < 1) {
             return;
         }
     } else {
-        float lineWX = lineWidth * GTransformGetScaleX(transform);
-        float lineWY = lineWidth * GTransformGetScaleY(transform);
+        float lineWX = lineWidth * WmTransformGetScaleX(transform);
+        float lineWY = lineWidth * WmTransformGetScaleY(transform);
         if (lineWX < 1 && lineWY < 1) {
             return;
         }
     }
     float halfLineWidthTrans = 0.5f * lineWidthTrans;
 
-    GTransform inverseTransform;
+    WmTransform inverseTransform;
     if (!isSimilarity) {
-        inverseTransform = GTransformInvert(transform);
+        inverseTransform = WmTransformInvert(transform);
     }
-    GTransform outputTransform = isSimilarity ? GTransformIdentity : transform;
+    WmTransform outputTransform = isSimilarity ? WmTransformIdentity : transform;
 
     std::vector<GSubPath*>* pathStack = &(path->mPathStack);
     // first deal line dash if needed
@@ -102,7 +102,7 @@ void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vecto
 
         GPoint firstPoint = *(pts.begin());
         if (!isSimilarity) {
-            firstPoint = GPointApplyGTransform(firstPoint, inverseTransform);
+            firstPoint = GPointApplyWmTransform(firstPoint, inverseTransform);
         }
         GPoint secondPoint = {0, 0};
 
@@ -115,7 +115,7 @@ void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vecto
                 outline.from = firstPoint;
                 outline.to = *ptIter;
                 if (!isSimilarity) {
-                    outline.to = GPointApplyGTransform(outline.to, inverseTransform);
+                    outline.to = GPointApplyWmTransform(outline.to, inverseTransform);
                 }
                 secondPoint = outline.to;
 
@@ -155,7 +155,7 @@ void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vecto
             if (nextIter != pts.end()) {
                 nextCenter = *nextIter;
                 if (!isSimilarity) {
-                    nextCenter = GPointApplyGTransform(nextCenter, inverseTransform);
+                    nextCenter = GPointApplyWmTransform(nextCenter, inverseTransform);
                 }
             } else {
                 nextCenter = secondPoint;
@@ -200,7 +200,7 @@ void GPathStroker::FilterTooClosePoints(std::vector<GPoint> &pts) {
 
 
 void GPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
-                                WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vertexVec) {
+                                WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vertexVec) {
     // angle changed
     float nextAngle = wmcanvas::CalcPointAngle(lineTwo.to, lineTwo.from);
     float curAngle = wmcanvas::CalcPointAngle(lineOne.from, lineOne.to);
@@ -240,7 +240,7 @@ void GPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, G
 
 void GPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
                              GPoint& center, GPoint& p1, GPoint& p2,
-                             WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
+                             WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                              float samePointThreshold) {
     // filter invalid point
     bool fixAndroidCompatible = false;
@@ -317,7 +317,7 @@ void GPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineW
 
 void GPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
                 GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
-                WmColorRGBA color, GTransform& transform, std::vector<WmVertex> *vec,
+                WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                 float samePointThreshold) {
     if (context->LineCap() == LINE_CAP_SQUARE) {
         context->PushQuad(p1, p2, PointMake(p2.x + deltaX, p2.y + deltaY),
@@ -331,7 +331,7 @@ void GPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
 
 void GPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
                                  const GPoint &center, const GPoint &p1, const GPoint &p2,
-                                 WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec) {
+                                 WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec) {
     float angle1 = wmcanvas::CalcPointAngle(p1, center);
     float angle2 = wmcanvas::CalcPointAngle(p2, center);
 

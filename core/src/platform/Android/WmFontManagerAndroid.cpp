@@ -159,8 +159,8 @@ float *WmFontManagerAndroid::PreMeasureTextHeight(const char *text, unsigned int
     std::vector<WmFont*> fonts;
 
     wmcanvas::WmFontStyle* fontStyle = context->mCurrentState->mFont;
-    float sx = GTransformGetScaleX(context->mCurrentState->mTransform);
-    float sy = GTransformGetScaleY(context->mCurrentState->mTransform);
+    float sx = WmTransformGetScaleX(context->mCurrentState->mTransform);
+    float sy = WmTransformGetScaleY(context->mCurrentState->mTransform);
 
     for (unsigned int i = 0; i < text_length; ++i) {
         fonts.push_back(GetFontByCharCode(ucs[i], fontStyle));

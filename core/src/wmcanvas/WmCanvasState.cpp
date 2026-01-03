@@ -24,7 +24,7 @@ GCanvasState::GCanvasState() {
     
     mTextAlign = TEXT_ALIGN_START;
     mTextBaseline = TEXT_BASELINE_ALPHABETIC;
-    mTransform = GTransformIdentity;
+    mTransform = WmTransformIdentity;
     mShader = nullptr;
     mFillStyle = nullptr;
     mStrokeStyle = nullptr;

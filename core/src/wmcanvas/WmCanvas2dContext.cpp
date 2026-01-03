@@ -90,8 +90,8 @@ void WmCanvasContext::FillText(const unsigned short *text, unsigned int text_len
 
     // if current transform scaled, we load scaled font, increase display effect
     // get scale x, y from current transform
-    float sx = GTransformGetScaleX(mCurrentState->mTransform);
-    float sy = GTransformGetScaleY(mCurrentState->mTransform);
+    float sx = WmTransformGetScaleX(mCurrentState->mTransform);
+    float sy = WmTransformGetScaleY(mCurrentState->mTransform);
 
     SendVertexBufferToGPU();
     Save();
@@ -219,9 +219,9 @@ void WmCanvasContext::SetCanvasDimension(const int w, const int h, bool resetSta
 
     if (mCurrentState != nullptr)
     {
-        GTransform old = mCurrentState->mTransform;
-        mCurrentState->mTransform = GTransformIdentity;
-        if (!GTransformEqualToTransform(old, mCurrentState->mTransform))
+        WmTransform old = mCurrentState->mTransform;
+        mCurrentState->mTransform = WmTransformIdentity;
+        if (!WmTransformEqualToTransform(old, mCurrentState->mTransform))
         {
             // update shader transform
             SetTransformOfShader(mProjectTransform);
@@ -271,19 +271,19 @@ void WmCanvasContext::UpdateProjectTransform()
     mProjectTransform = CalculateProjectTransform(w, h);
 }
 
-GTransform WmCanvasContext::CalculateProjectTransform(int w, int h, bool needFlipY)
+WmTransform WmCanvasContext::CalculateProjectTransform(int w, int h, bool needFlipY)
 {
-    GTransform t = GTransformIdentity;
+    WmTransform t = WmTransformIdentity;
     if (mConfig.flip || needFlipY)
     {
-        t = GTransformTranslate(t, -1.f, -1.f);
-        t = GTransformScale(t, 2.f * mDevicePixelRatio / w,
+        t = WmTransformTranslate(t, -1.f, -1.f);
+        t = WmTransformScale(t, 2.f * mDevicePixelRatio / w,
                             2.f * mDevicePixelRatio / h);
     }
     else
     {
-        t = GTransformTranslate(t, -1.f, 1.f);
-        t = GTransformScale(t, 2.f * mDevicePixelRatio / w,
+        t = WmTransformTranslate(t, -1.f, 1.f);
+        t = WmTransformScale(t, 2.f * mDevicePixelRatio / w,
                             -2.f * mDevicePixelRatio / h);
     }
     return t;
@@ -395,7 +395,7 @@ void WmCanvasContext::CheckContextStatus()
         mIsContextReady = false;
     }
     // shader
-    GShaderManager *sm = GetShaderManager();
+    WmShaderManager *sm = GetShaderManager();
     if (sm == nullptr || !sm->isAllShaderCompleted())
     {
         mIsContextReady = false;
@@ -406,7 +406,7 @@ void WmCanvasContext::CheckContextStatus()
 bool WmCanvasContext::InitializeGLShader()
 {
     UsePatternRenderPipeline();
-    GShader::TraceErrorIfHas(FindShader("PATTERN"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("PATTERN"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -414,7 +414,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseLinearGradientPipeline();
-    GShader::TraceErrorIfHas(FindShader("LINEAR"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("LINEAR"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -422,7 +422,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseRadialGradientPipeline();
-    GShader::TraceErrorIfHas(FindShader("RADIAL"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("RADIAL"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -430,7 +430,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseTextureRenderPipeline();
-    GShader::TraceErrorIfHas(FindShader("TEXTURE"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("TEXTURE"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -438,7 +438,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseBlurRenderPipeline();
-    GShader::TraceErrorIfHas(FindShader("BLUR"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("BLUR"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -446,7 +446,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseShadowRenderPipeline();
-    GShader::TraceErrorIfHas(FindShader("SHADOW"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("SHADOW"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -454,7 +454,7 @@ bool WmCanvasContext::InitializeGLShader()
     BindVertexBuffer();
 
     UseDefaultRenderPipeline();
-    GShader::TraceErrorIfHas(FindShader("DEFAULT"), mHooks, mContextId);
+    WmShader::TraceErrorIfHas(FindShader("DEFAULT"), mHooks, mContextId);
     if (nullptr == mCurrentState->mShader)
     {
         return false;
@@ -608,7 +608,7 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
     }
 
     auto iter = mVertexShaderProperties.begin();
-    GShader *prevShader = nullptr;
+    WmShader *prevShader = nullptr;
     bool shaderChanged = false;
     // LOG_E("SendVertexBufferToGPU: vertex property count=%i", mVertexShaderProperties.size());
     for (; iter != mVertexShaderProperties.end(); ++iter)
@@ -616,7 +616,7 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
         //draw call
         mDrawCallCount++;
 
-        GShader *newShader = FindShader(iter->shaderType.data());
+        WmShader *newShader = FindShader(iter->shaderType.data());
         if (newShader != nullptr && prevShader != newShader)
         {
             prevShader = newShader;
@@ -653,7 +653,7 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
 }
 
 void WmCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA color,
-                                  GTransform transform, std::vector<WmVertex> *vec)
+                                  WmTransform transform, std::vector<WmVertex> *vec)
 {
     WmVertex *vb = NULL;
     WmVertex vertex[3];
@@ -669,11 +669,11 @@ void WmCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA 
     }
     GPoint p = {0, 0};
 
-    if (!GTransformIsIdentity(transform))
+    if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyGTransformInPlace(v1, transform);
-        GPointApplyGTransformInPlace(v2, transform);
-        GPointApplyGTransformInPlace(v3, transform);
+        GPointApplyWmTransformInPlace(v1, transform);
+        GPointApplyWmTransformInPlace(v2, transform);
+        GPointApplyWmTransformInPlace(v3, transform);
     }
 
     vb[0].pos = v1;
@@ -785,7 +785,7 @@ void WmCanvasContext::DrawTextureArray(int textureId, int count, float *vertexLi
 }
 
 void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
-                              WmColorRGBA color, GTransform transform, std::vector<WmVertex> *vec)
+                              WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec)
 {
     WmVertex *vb = NULL;
     WmVertex vertex[6];
@@ -801,12 +801,12 @@ void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
     }
     GPoint p = {0, 0};
 
-    if (!GTransformIsIdentity(transform))
+    if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyGTransformInPlace(v1, transform);
-        GPointApplyGTransformInPlace(v2, transform);
-        GPointApplyGTransformInPlace(v3, transform);
-        GPointApplyGTransformInPlace(v4, transform);
+        GPointApplyWmTransformInPlace(v1, transform);
+        GPointApplyWmTransformInPlace(v2, transform);
+        GPointApplyWmTransformInPlace(v3, transform);
+        GPointApplyWmTransformInPlace(v4, transform);
     }
 
     vb[0].pos = v1;
@@ -837,7 +837,7 @@ void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
 
 void WmCanvasContext::PushRectangle(float x, float y, float w, float h,
                                    float tx, float ty, float tw, float th,
-                                   WmColorRGBA color, GTransform transform, bool flipY,
+                                   WmColorRGBA color, WmTransform transform, bool flipY,
                                    std::vector<WmVertex> *vec)
 {
     PushRectangleFormat(x, y, w, h, tx, ty, tw, th, color, transform, flipY, vec, false);
@@ -845,7 +845,7 @@ void WmCanvasContext::PushRectangle(float x, float y, float w, float h,
 
 void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
                                          float tx, float ty, float tw, float th,
-                                         WmColorRGBA color, GTransform transform, bool flipY,
+                                         WmColorRGBA color, WmTransform transform, bool flipY,
                                          std::vector<WmVertex> *vec, bool formatIntVertex)
 {
     WmVertex *vb = NULL;
@@ -873,12 +873,12 @@ void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
     GPoint p12 = PointMake(x, y + h);
     GPoint p22 = PointMake(x + w, y + h);
 
-    if (!GTransformIsIdentity(transform))
+    if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyGTransformInPlace(p11, transform);
-        GPointApplyGTransformInPlace(p21, transform);
-        GPointApplyGTransformInPlace(p12, transform);
-        GPointApplyGTransformInPlace(p22, transform);
+        GPointApplyWmTransformInPlace(p11, transform);
+        GPointApplyWmTransformInPlace(p21, transform);
+        GPointApplyWmTransformInPlace(p12, transform);
+        GPointApplyWmTransformInPlace(p22, transform);
     }
 
     if (formatIntVertex)
@@ -931,7 +931,7 @@ void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
 
 void WmCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float h,
                                                float tx, float ty, float tw, float th, WmColorRGBA color,
-                                               GTransform transform, bool flipY)
+                                               WmTransform transform, bool flipY)
 {
     NeedSendVertexBufferToGPUWithSize(6);
 
@@ -946,12 +946,12 @@ void WmCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float
     GPoint p12 = PointMake(x, y + h);
     GPoint p22 = PointMake(x + w, y + h);
 
-    if (!GTransformIsIdentity(transform))
+    if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyGTransformInPlace(p11, transform);
-        GPointApplyGTransformInPlace(p21, transform);
-        GPointApplyGTransformInPlace(p12, transform);
-        GPointApplyGTransformInPlace(p22, transform);
+        GPointApplyWmTransformInPlace(p11, transform);
+        GPointApplyWmTransformInPlace(p21, transform);
+        GPointApplyWmTransformInPlace(p12, transform);
+        GPointApplyWmTransformInPlace(p22, transform);
     }
     GPoint t11 = PointMake(tx, ty);
     GPoint t21 = PointMake(tx + tw, ty);
@@ -1106,26 +1106,26 @@ void WmCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, W
 void WmCanvasContext::ApplyTransform(float m11, float m12, float m21, float m22,
                                     float dx, float dy)
 {
-    mCurrentState->mTransform = GTransformConcat(
-        mProjectTransform, GTransformMake(m11, m12, m21, m22, dx, dy));
+    mCurrentState->mTransform = WmTransformConcat(
+        mProjectTransform, WmTransformMake(m11, m12, m21, m22, dx, dy));
     SetTransformOfShader(mCurrentState->mTransform);
 }
 
-void WmCanvasContext::ApplyTransform(GTransform t)
+void WmCanvasContext::ApplyTransform(WmTransform t)
 {
-    mCurrentState->mTransform = GTransformConcat(mProjectTransform, t);
+    mCurrentState->mTransform = WmTransformConcat(mProjectTransform, t);
     SetTransformOfShader(mCurrentState->mTransform);
 }
 #endif
 
-GShaderManager *WmCanvasContext::GetShaderManager()
+WmShaderManager *WmCanvasContext::GetShaderManager()
 {
-    return GShaderManager::getSingleton();
+    return WmShaderManager::getSingleton();
 }
 
-GShader *WmCanvasContext::FindShader(const char *name)
+WmShader *WmCanvasContext::FindShader(const char *name)
 {
-    GShaderManager *s = GetShaderManager();
+    WmShaderManager *s = GetShaderManager();
     if (s == nullptr)
     {
         return nullptr;
@@ -1136,7 +1136,7 @@ GShader *WmCanvasContext::FindShader(const char *name)
     }
 }
 
-void WmCanvasContext::SetTransformOfShader(const GTransform &trans)
+void WmCanvasContext::SetTransformOfShader(const WmTransform &trans)
 {
     // emit the buffered geometry data
     // before the updating of transform matrix
@@ -1145,7 +1145,7 @@ void WmCanvasContext::SetTransformOfShader(const GTransform &trans)
     if (mCurrentState != nullptr && mCurrentState->mShader != nullptr)
     {
 
-        GShader *shader = mCurrentState->mShader;
+        WmShader *shader = mCurrentState->mShader;
         if (nullptr == shader)
         {
             LOG_I("SetTransformOfShader ===> shader is null");
@@ -1196,10 +1196,10 @@ void WmCanvasContext::DrawFBOToFBO(WmFrameBufferObject &src, WmFrameBufferObject
     PushRectangle4TextureArea(-1, -1, 2, 2, 0, 0,
                               static_cast<float>(src.ExpectedWidth()) / src.Width(),
                               static_cast<float>(src.ExpectedHeight()) / src.Height(),
-                              GColorWhite, GTransformIdentity);
+                              GColorWhite, WmTransformIdentity);
     if (mCurrentState->mShader)
     {
-        mCurrentState->mShader->SetTransform(GTransformIdentity);
+        mCurrentState->mShader->SetTransform(WmTransformIdentity);
     }
 
     glBindTexture(GL_TEXTURE_2D, src.mFboTexture.GetTextureID());
@@ -1214,7 +1214,7 @@ void WmCanvasContext::PrepareDrawElemetToFBO(WmFrameBufferObject &fbo, float off
 
     glViewport(0, 0, w, h);
     mProjectTransform = CalculateProjectTransform(w, h);
-    mProjectTransform = GTransformTranslate(mProjectTransform, offsetX, offsetY);
+    mProjectTransform = WmTransformTranslate(mProjectTransform, offsetX, offsetY);
 
     mCurrentState->mShader->SetTransform(mProjectTransform);
     ResetTransform();
@@ -1227,7 +1227,7 @@ void WmCanvasContext::DrawFBOToScreen(WmFrameBufferObject &fbo, float x, float y
     PushRectangle4TextureArea(x, y, w, h, 0, 0,
                               static_cast<float>(fbo.ExpectedWidth()) / fbo.Width(),
                               static_cast<float>(fbo.ExpectedHeight()) / fbo.Height(),
-                              color, GTransformIdentity, false);
+                              color, WmTransformIdentity, false);
 }
 
 void WmCanvasContext::DoDrawBlur(const WmRectf &rect, float blur, std::function<void()> draw,
@@ -1507,7 +1507,7 @@ void WmCanvasContext::RestoreRenderPipeline()
 
 void WmCanvasContext::UseDefaultRenderPipeline()
 {
-    GShader *newShader = FindShader("DEFAULT");
+    WmShader *newShader = FindShader("DEFAULT");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1521,7 +1521,7 @@ void WmCanvasContext::UseDefaultRenderPipeline()
 
 void WmCanvasContext::UseTextureRenderPipeline()
 {
-    GShader *newShader = FindShader("TEXTURE");
+    WmShader *newShader = FindShader("TEXTURE");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1553,7 +1553,7 @@ inline void WeightCalculate(double radius, float *weight, int lastIndex)
 
 void WmCanvasContext::UseShadowRenderPipeline()
 {
-    GShader *newShader = FindShader("SHADOW");
+    WmShader *newShader = FindShader("SHADOW");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1575,7 +1575,7 @@ void WmCanvasContext::UseShadowRenderPipeline()
 
 void WmCanvasContext::UseBlurRenderPipeline()
 {
-    GShader *newShader = FindShader("BLUR");
+    WmShader *newShader = FindShader("BLUR");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1587,7 +1587,7 @@ void WmCanvasContext::UseBlurRenderPipeline()
 
 void WmCanvasContext::UseBlurRenderPipeline(double radius)
 {
-    GShader *newShader = FindShader("BLUR");
+    WmShader *newShader = FindShader("BLUR");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1613,7 +1613,7 @@ void WmCanvasContext::UseBlurRenderPipeline(double radius)
 
 void WmCanvasContext::UsePatternRenderPipeline(bool isStroke)
 {
-    GShader *newShader = FindShader("PATTERN");
+    WmShader *newShader = FindShader("PATTERN");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1646,7 +1646,7 @@ void WmCanvasContext::UsePatternRenderPipeline(bool isStroke)
 
 void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
 {
-    GShader *newShader = FindShader("LINEAR");
+    WmShader *newShader = FindShader("LINEAR");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1659,8 +1659,8 @@ void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
     if (style != nullptr && style->IsLinearGradient() && mCurrentState->mShader)
     {
         FillStyleLinearGradient *grad = (FillStyleLinearGradient *)(style);
-        GPoint startPos = GPointApplyGTransform(grad->GetStartPos(), mCurrentState->mTransform);
-        GPoint endPos = GPointApplyGTransform(grad->GetEndPos(), mCurrentState->mTransform);
+        GPoint startPos = GPointApplyWmTransform(grad->GetStartPos(), mCurrentState->mTransform);
+        GPoint endPos = GPointApplyWmTransform(grad->GetEndPos(), mCurrentState->mTransform);
 
         mCurrentState->mShader->SetRange(startPos, endPos);
         mCurrentState->mShader->SetColorStopCount(grad->GetColorStopCount());
@@ -1677,7 +1677,7 @@ void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
 
 void WmCanvasContext::UseRadialGradientPipeline(bool isStroke)
 {
-    GShader *newShader = FindShader("RADIAL");
+    WmShader *newShader = FindShader("RADIAL");
 
     if (newShader != nullptr && mCurrentState->mShader != newShader)
     {
@@ -1699,7 +1699,7 @@ void WmCanvasContext::UseRadialGradientPipeline(bool isStroke)
         if (radialGradientShader)
         {
             //Use invert transform in shader
-            radialGradientShader->SetInvertTransform(GTransformInvert(mCurrentState->mTransform));
+            radialGradientShader->SetInvertTransform(WmTransformInvert(mCurrentState->mTransform));
         }
 
         const int count = grad->GetColorStopCount();
@@ -2040,20 +2040,20 @@ void WmCanvasContext::Resize(int width, int height)
 
 void WmCanvasContext::SetTransform(float a, float b, float c, float d, float tx, float ty)
 {
-    GTransform t = GTransform(a, b, c, d, tx, ty);
+    WmTransform t = WmTransform(a, b, c, d, tx, ty);
     mPath.mTransform = mCurrentState->mTransform = t;
 }
 
 void WmCanvasContext::Transfrom(float a, float b, float c, float d, float tx, float ty)
 {
-    GTransform t = GTransform(a, b, c, d, tx, ty);
-    mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform, t);
+    WmTransform t = WmTransform(a, b, c, d, tx, ty);
+    mCurrentState->mTransform = WmTransformConcat(mCurrentState->mTransform, t);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
 void WmCanvasContext::ResetTransform()
 {
-    mPath.mTransform = mCurrentState->mTransform = GTransformIdentity;
+    mPath.mTransform = mCurrentState->mTransform = WmTransformIdentity;
 }
 
 void WmCanvasContext::DoResetTransform()
@@ -2063,14 +2063,14 @@ void WmCanvasContext::DoResetTransform()
 
 void WmCanvasContext::Scale(float sx, float sy)
 {
-    mCurrentState->mTransform = GTransformScale(mCurrentState->mTransform, sx, sy);
+    mCurrentState->mTransform = WmTransformScale(mCurrentState->mTransform, sx, sy);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
 void WmCanvasContext::DoScale(float sx, float sy)
 {
-    mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform,
-                                                 GTransformMakeScale(sx, sy));
+    mCurrentState->mTransform = WmTransformConcat(mCurrentState->mTransform,
+                                                 WmTransformMakeScale(sx, sy));
 }
 
 void WmCanvasContext::Rotate(float angle)
@@ -2080,13 +2080,13 @@ void WmCanvasContext::Rotate(float angle)
         return;
     }
 
-    mCurrentState->mTransform = GTransformRotate(mCurrentState->mTransform, angle);
+    mCurrentState->mTransform = WmTransformRotate(mCurrentState->mTransform, angle);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
 void WmCanvasContext::DoRotate(float angle)
 {
-    mCurrentState->mTransform = GTransformRotate(mCurrentState->mTransform, angle);
+    mCurrentState->mTransform = WmTransformRotate(mCurrentState->mTransform, angle);
     SetTransformOfShader(mCurrentState->mTransform);
 }
 
@@ -2097,14 +2097,14 @@ void WmCanvasContext::Translate(float tx, float ty)
         return;
     }
 
-    mCurrentState->mTransform = GTransformTranslate(mCurrentState->mTransform, tx, ty);
+    mCurrentState->mTransform = WmTransformTranslate(mCurrentState->mTransform, tx, ty);
     mPath.mTransform = mCurrentState->mTransform;
 }
 
 void WmCanvasContext::DoTranslate(float tx, float ty)
 {
-    mCurrentState->mTransform = GTransformConcat(mCurrentState->mTransform,
-                                                 GTransformMakeTranslation(tx, ty));
+    mCurrentState->mTransform = WmTransformConcat(mCurrentState->mTransform,
+                                                 WmTransformMakeTranslation(tx, ty));
 }
 
 void WmCanvasContext::Save()
@@ -2128,7 +2128,7 @@ bool WmCanvasContext::Restore()
         return false;
     }
 
-    GShader *oldShader = mCurrentState->mShader;
+    WmShader *oldShader = mCurrentState->mShader;
     WmCompositeOperation oldCompositeOp = mCurrentState->mGlobalCompositeOp;
 
     // reset clip status

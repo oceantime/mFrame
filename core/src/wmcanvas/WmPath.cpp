@@ -52,7 +52,7 @@ static void NormalizeAngles(float& startAngle, float& endAngle, bool anticlockwi
 
 WmPath::WmPath() {
     Reset();
-    mTransform = GTransformIdentity;
+    mTransform = WmTransformIdentity;
 }
 
 
@@ -221,7 +221,7 @@ void WmPath::ArcTo(float x1, float y1, float x2, float y2, float radius) {
     GPoint cp1 = TransformPoint(x1, y1);
     EnsureSubPathAtPoint(cp1.x, cp1.y);
 
-    GPoint cp = GPointApplyGTransform(mCurrentPosition, GTransformInvert(mTransform));
+    GPoint cp = GPointApplyWmTransform(mCurrentPosition, WmTransformInvert(mTransform));
 
     float a1 = cp.y - y1;
     float b1 = cp.x - x1;
@@ -438,11 +438,11 @@ void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, 
     GPoint minPos = mMinPosition;
     GPoint maxPos = mMaxPosition;
     
-    GTransform transform = needTransform ? mTransform : GTransformIdentity;
+    WmTransform transform = needTransform ? mTransform : WmTransformIdentity;
     
     if(needTransform) {
-        minPos = GPointApplyGTransform(minPos, transform);
-        maxPos = GPointApplyGTransform(maxPos, transform);
+        minPos = GPointApplyWmTransform(minPos, transform);
+        maxPos = GPointApplyWmTransform(maxPos, transform);
     }
 
     context->PushRectangle(minPos.x, minPos.y, maxPos.x-minPos.x, maxPos.y-minPos.y, 0, 0, 0, 0, white);
@@ -466,7 +466,7 @@ void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, 
             // fillBlur need apply transform
             std::vector<GPoint> pointVector;
             for (auto it = path->points.begin() ; it != path->points.end(); ++it) {
-                GPoint pt = GPointApplyGTransform(*it, transform);
+                GPoint pt = GPointApplyWmTransform(*it, transform);
                 pointVector.push_back(pt);
             }
             if (context->mCurrentState->mShader) {
@@ -685,7 +685,7 @@ void WmPath::StencilRectForStroke(WmCanvasContext *context, std::vector<WmVertex
     glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
     WmColorRGBA white = {1,1,1,1};
     
-    float scale = GTransformGetScaleX(mTransform);
+    float scale = WmTransformGetScaleX(mTransform);
     float width = scale * context->LineWidth();
     float extend = context->MiterLimit() * width;
     if (extend < width * 0.5) {
@@ -819,8 +819,8 @@ void WmPath::SetStencilForClip() {
 
 
 GPoint WmPath::TransformPoint(float x, float y) {
-    if(!GTransformIsIdentity(mTransform) ){
-        return GPointApplyGTransform(PointMake(x, y), mTransform);
+    if(!WmTransformIsIdentity(mTransform) ){
+        return GPointApplyWmTransform(PointMake(x, y), mTransform);
     } else {
         return PointMake(x, y);
     }

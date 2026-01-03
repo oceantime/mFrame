@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GTRANSFORM_H
-#define GCANVAS_GTRANSFORM_H
+#ifndef WMCANVAS_WMTRANSFORM_H
+#define WMCANVAS_WMTRANSFORM_H
 
 #include "WmPoint.h"
 
@@ -23,21 +23,21 @@
 // --    Populates the vertexArr of a Quad
 // -----------------------------------------------------------
 
-struct GTransform
+struct WmTransform
 {
     float a, b, c, d, tx, ty;
 
-    GTransform() : a(1), b(0), c(0), d(1), tx(0), ty(0) {}
-    GTransform(float v1, float v2, float v3, float v4, float v5, float v6)
+    WmTransform() : a(1), b(0), c(0), d(1), tx(0), ty(0) {}
+    WmTransform(float v1, float v2, float v3, float v4, float v5, float v6)
         : a(v1), b(v2), c(v3), d(v4), tx(v5), ty(v6)
     {
     }
 };
 
 /* The identity transform: [ 1 0 0 1 0 0 ]. */
-//const GTransform GTransformIdentity(1, 0, 0, 1, 0, 0);
+//const WmTransform WmTransformIdentity(1, 0, 0, 1, 0, 0);
 
-#define  GTransformIdentity  GTransform(1, 0, 0, 1, 0, 0)
+#define  WmTransformIdentity  WmTransform(1, 0, 0, 1, 0, 0)
 
 /*
  * Return the transform [ a b c d tx ty ]
@@ -45,61 +45,61 @@ struct GTransform
  * [b   d   ty]
  * [0   0    1]
  * */
-static inline GTransform GTransformMake(float a, float b, float c, float d,
+static inline WmTransform WmTransformMake(float a, float b, float c, float d,
                                         float tx, float ty)
 {
-    GTransform trans(a, b, c, d, tx, ty);
+    WmTransform trans(a, b, c, d, tx, ty);
     return trans;
 }
 
 /* Return a transform which translates by `(tx, ty)':
  t' = [ 1 0 0 1 tx ty ] */
-static inline GTransform GTransformMakeTranslation(float tx, float ty)
+static inline WmTransform WmTransformMakeTranslation(float tx, float ty)
 {
-    GTransform trans(1, 0, 0, 1, tx, ty);
+    WmTransform trans(1, 0, 0, 1, tx, ty);
     return trans;
 }
 
 /* Return a transform which scales by `(sx, sy)':
  t' = [ sx 0 0 sy 0 0 ] */
-static inline GTransform GTransformMakeScale(float sx, float sy)
+static inline WmTransform WmTransformMakeScale(float sx, float sy)
 {
-    return GTransform(sx, 0, 0, sy, 0, 0);
+    return WmTransform(sx, 0, 0, sy, 0, 0);
 }
 
-static inline float GTransformGetScaleX(const GTransform& t)
+static inline float WmTransformGetScaleX(const WmTransform& t)
 {
     return sqrt(t.a*t.a+t.c*t.c);
 }
 
-static inline float GTransformGetScaleY(const GTransform& t)
+static inline float WmTransformGetScaleY(const WmTransform& t)
 {
     return sqrt(t.b*t.b+t.d*t.d);
 }
 
-static inline float GTransformGetScale(const GTransform& t)
+static inline float WmTransformGetScale(const WmTransform& t)
 {
-    float sx = GTransformGetScaleX(t);
-    float sy = GTransformGetScaleY(t);
+    float sx = WmTransformGetScaleX(t);
+    float sy = WmTransformGetScaleY(t);
     return std::max<float>(sx, sy);
 }
 
 //for font scale, min value is 1, max value is 72
-static inline float GTransformGetMaxScale(const GTransform& t)
+static inline float WmTransformGetMaxScale(const WmTransform& t)
 {
-    float sx = GTransformGetScaleX(t);
-    float sy = GTransformGetScaleY(t);
+    float sx = WmTransformGetScaleX(t);
+    float sy = WmTransformGetScaleY(t);
     return std::min<float>(72,std::max<float>(1, std::max<float>(sx, sy)) );
 }
 
 
 /* Return a transform which rotates by `angle' radians:
  t' = [ cos(angle) sin(angle) -sin(angle) cos(angle) 0 0 ] */
-static inline GTransform GTransformMakeRotation(float angle)
+static inline WmTransform WmTransformMakeRotation(float angle)
 {
     float cosAngle = cos(angle);
     float sinAngle = sin(angle);
-    GTransform trans;
+    WmTransform trans;
     trans.a = cosAngle;
     trans.b = sinAngle;
     trans.c = -sinAngle;
@@ -109,14 +109,14 @@ static inline GTransform GTransformMakeRotation(float angle)
 }
 
 /* Return true if `t' is the identity transform, false otherwise. */
-static inline bool GTransformIsIdentity(const GTransform& t)
+static inline bool WmTransformIsIdentity(const WmTransform& t)
 {
     return (t.a == 1 && t.b == 0 && t.c == 0 && t.d == 1 && t.tx == 0 &&
             t.ty == 0);
 }
 
 
-static inline bool GTransformIsSimilarity(const GTransform& t)
+static inline bool WmTransformIsSimilarity(const WmTransform& t)
 {
     // translate or equal scale (no rotation or skew)
     return (t.a == t.d && t.b == 0 && t.c == 0);
@@ -124,7 +124,7 @@ static inline bool GTransformIsSimilarity(const GTransform& t)
 
 
 /* Return true if `t1' and `t2' are equal, false otherwise. */
-static inline bool GTransformEqualToTransform(const GTransform& t1, const GTransform& t2)
+static inline bool WmTransformEqualToTransform(const WmTransform& t1, const WmTransform& t2)
 {
     return G_FLOAT_EQUAL(t1.a, t2.a) && G_FLOAT_EQUAL(t1.b, t2.b) &&
           G_FLOAT_EQUAL(t1.c, t2.c) && G_FLOAT_EQUAL(t1.d, t2.d) &&
@@ -133,9 +133,9 @@ static inline bool GTransformEqualToTransform(const GTransform& t1, const GTrans
 
 /* Translate `t' by `(tx, ty)' and return the result:
  t' = [ 1 0 0 1 tx ty ] * t */
-static inline GTransform GTransformTranslate(const GTransform & t, float tx, float ty)
+static inline WmTransform WmTransformTranslate(const WmTransform & t, float tx, float ty)
 {
-    GTransform result;
+    WmTransform result;
     result.a = t.a;
     result.b = t.b;
     result.c = t.c;
@@ -149,9 +149,9 @@ static inline GTransform GTransformTranslate(const GTransform & t, float tx, flo
 /* Scale `t' by `(sx, sy)' and return the result:
  t' = [ sx 0 0 sy 0 0 ] * t */
 
-static inline GTransform GTransformScale(const GTransform& t, float sx, float sy)
+static inline WmTransform WmTransformScale(const WmTransform& t, float sx, float sy)
 {
-    GTransform result = t;
+    WmTransform result = t;
     result.a *= sx;
     result.b *= sx;
     result.c *= sy;
@@ -163,12 +163,12 @@ static inline GTransform GTransformScale(const GTransform& t, float sx, float sy
 /* Rotate `t' by `angle' radians and return the result:
  t' =  [ cos(angle) sin(angle) -sin(angle) cos(angle) 0 0 ] * t */
 
-static inline GTransform GTransformRotate(const GTransform& t, float angle)
+static inline WmTransform WmTransformRotate(const WmTransform& t, float angle)
 {
     double cosAngle = cos(angle);
     double sinAngle = sin(angle);
 
-    GTransform result = t;
+    WmTransform result = t;
     result.a = t.a*cosAngle    + t.c*sinAngle;
     result.b = t.b*cosAngle    + t.d*sinAngle;
     result.c = t.a*(-sinAngle) + t.c*cosAngle;
@@ -179,9 +179,9 @@ static inline GTransform GTransformRotate(const GTransform& t, float angle)
 
 /* Concatenate `t2' to `t1' and return the result:
  t' = t1 * t2 */
-static inline GTransform GTransformConcat(const GTransform& t2, const GTransform& t1)
+static inline WmTransform WmTransformConcat(const WmTransform& t2, const WmTransform& t1)
 {
-    GTransform result;
+    WmTransform result;
     result.a = t1.a * t2.a + t1.b * t2.c;
     result.b = t1.a * t2.b + t1.b * t2.d;
     result.c = t1.c * t2.a + t1.d * t2.c;
@@ -194,9 +194,9 @@ static inline GTransform GTransformConcat(const GTransform& t2, const GTransform
 /* Transform `point' by `t' and return the result:
  p' = p * t
  where p = [ x y 1 ]. */
-static inline GPoint GPointApplyGTransform(const GPoint& point, const GTransform& t)
+static inline GPoint GPointApplyWmTransform(const GPoint& point, const WmTransform& t)
 {
-    if(GTransformIsIdentity(t)) {
+    if(WmTransformIsIdentity(t)) {
         return point;
     }
     GPoint p;
@@ -205,7 +205,7 @@ static inline GPoint GPointApplyGTransform(const GPoint& point, const GTransform
     return p;
 }
 
-static inline void GPointApplyGTransformInPlace(GPoint& point, const GTransform& t)
+static inline void GPointApplyWmTransformInPlace(GPoint& point, const WmTransform& t)
 {
     float oldX = point.x;
     float oldY = point.y;
@@ -217,7 +217,7 @@ static inline void GPointApplyGTransformInPlace(GPoint& point, const GTransform&
 /**
  * copy transform data to float array
  */
-static inline void GTransformCopy(GTransform& t, float out[])
+static inline void WmTransformCopy(WmTransform& t, float out[])
 {
     out[0] = t.a;
     out[1] = t.b;
@@ -227,9 +227,9 @@ static inline void GTransformCopy(GTransform& t, float out[])
     out[5] = t.ty;
 }
 
-static inline GTransform GTransformInvert(const GTransform& t)
+static inline WmTransform WmTransformInvert(const WmTransform& t)
 {
-    if( GTransformIsIdentity(t) ){
+    if( WmTransformIsIdentity(t) ){
         return t;
     }
     double k = t.a * t.d - t.b * t.c;
@@ -238,7 +238,7 @@ static inline GTransform GTransformInvert(const GTransform& t)
         return t;
     }
     
-    GTransform result;
+    WmTransform result;
     result.a = (float) ( t.d / k );
     result.b = (float) ( -t.b / k );
     result.c = (float) ( -t.c / k );
@@ -248,4 +248,4 @@ static inline GTransform GTransformInvert(const GTransform& t)
     return result;
 }
 
-#endif /* GCANVAS_GTRANSFORM_H */
+#endif /* WMCANVAS_WMTRANSFORM_H */
