@@ -99,11 +99,6 @@ set(SRC_FILES
         )
 
 if (WMCANVAS)
-    list(APPEND SRC_FILES ./src/WmCanvasWeex.cpp)
-endif()
-
-
-if (WMCANVAS)
     add_definitions(-DWMCANVAS)
     file(GLOB android_root_src "./android/*.cpp")
     file(GLOB native_png_src "./android/png/*.cpp")

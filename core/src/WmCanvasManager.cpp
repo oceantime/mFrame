@@ -7,7 +7,6 @@
  * the LICENSE file in the root directory of this source tree.
  */
 #include "WmCanvasManager.h"
-#include "WmCanvasWeex.hpp"
 #ifdef IOS
 #include "WmShaderManager.h"
 #endif
@@ -68,21 +67,6 @@ WmCanvas* WmCanvasManager::NewCanvas(const std::string canvasId, WmCanvasConfig 
     
     return c;
 }
-
-#ifdef WMCANVAS
-GCanvasWeex* WmCanvasManager::NewCanvasWeex(const std::string canvasId, bool onScreen, bool useFbo)
-{
-    WmCanvas *c = GetCanvas(canvasId);
-    if (!c)
-    {
-        WmCanvasConfig config = { !onScreen, useFbo };
-        c = new GCanvasWeex(canvasId, config);
-        c->CreateContext();
-        mCanvases[canvasId] = c;
-    }
-    return static_cast<GCanvasWeex*>(c);
-}
-#endif
 
 void WmCanvasManager::RemoveCanvas(const std::string canvasId)
 {

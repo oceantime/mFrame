@@ -11,7 +11,6 @@
 
 #include "WmGL.h"
 #include "WmCanvas.hpp"
-#include "WmCanvasWeex.hpp"
 #include "../support/Encode.h"
 #include "../support/Util.h"
 
@@ -583,7 +582,7 @@ namespace wmcanvas {
 //                  WEBGL 1.0 API
 // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext
 //////////////////////////////////////////////////////////////////////////
-    int activeTexture(GCanvasWeex *obj, const char *&p) {
+    int activeTexture(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
 
         LOG_D("[webgl::exec] glActiveTexture(%s)", GetMacroValDebug(tokens[0]));
@@ -591,7 +590,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int attachShader(GCanvasWeex *obj, const char *&p) {
+    int attachShader(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLuint program = tokens[0];
         GLuint shader = tokens[1];
@@ -601,7 +600,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindAttribLocation(GCanvasWeex *obj, const char *&p) {
+    int bindAttribLocation(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLuint program = tokens[0];
         GLuint index = tokens[1];
@@ -614,7 +613,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindBuffer(GCanvasWeex *obj, const char *&p) {
+    int bindBuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
 
         GLuint target = tokens[0];
@@ -625,7 +624,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindFramebuffer(GCanvasWeex *obj, const char *&p) {
+    int bindFramebuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLuint target = tokens[0];
         GLuint framebuffer = tokens[1];
@@ -648,7 +647,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindRenderbuffer(GCanvasWeex *obj, const char *&p) { // bindRenderbuffer0,81;
+    int bindRenderbuffer(WmCanvas *obj, const char *&p) { // bindRenderbuffer0,81;
         const int *tokens = ParseTokensInt(p, 2);
         GLuint target = tokens[0];
         GLuint renderbuffer = tokens[1];
@@ -659,7 +658,7 @@ namespace wmcanvas {
     }
 
 //new
-    int blendColor(GCanvasWeex *obj, const char *&p) { // blendColor0,81;
+    int blendColor(WmCanvas *obj, const char *&p) { // blendColor0,81;
         const float *tokens = ParseTokensFloat(p, 4);
         GLfloat red = tokens[0];
         GLfloat green = tokens[1];
@@ -671,7 +670,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindTexture(GCanvasWeex *obj, const char *&p) { // bindTexture0,4;
+    int bindTexture(WmCanvas *obj, const char *&p) { // bindTexture0,4;
         const int *tokens = ParseTokensInt(p, 2);
         GLuint target = tokens[0];
         GLuint texture = tokens[1];
@@ -681,7 +680,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int blendEquation(GCanvasWeex *obj, const char *&p) {
+    int blendEquation(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
 
         LOG_D("[webgl::exec] glBlendEquation(%s)", GetMacroValDebug(tokens[0]));
@@ -689,7 +688,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int blendEquationSeparate(GCanvasWeex *obj, const char *&p) {
+    int blendEquationSeparate(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
 
         LOG_D("[webgl::exec] glBlendEquationSeparate(%s, %s)", GetMacroValDebug(tokens[0]),
@@ -698,7 +697,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int blendFunc(GCanvasWeex *obj, const char *&p) { // blendFunc1,2;
+    int blendFunc(WmCanvas *obj, const char *&p) { // blendFunc1,2;
         const int *tokens = ParseTokensInt(p, 2);
 
         LOG_D("[webgl::exec] glBlendFunc(%s, %s)", GetMacroValDebug(tokens[0]),
@@ -707,7 +706,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int blendFuncSeparate(GCanvasWeex *obj, const char *&p) {
+    int blendFuncSeparate(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
 
         LOG_D("[webgl::exec] glBlendFuncSeparate(%s, %s, %s, %s)",
@@ -717,7 +716,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bufferData(GCanvasWeex *obj, const char *&p) { // bufferData0,4,AAEAAAAAAQEAAAAAAP8A/wAA,0;
+    int bufferData(WmCanvas *obj, const char *&p) { // bufferData0,4,AAEAAAAAAQEAAAAAAP8A/wAA,0;
         const int *tokens = ParseTokensInt(p, 2);
         GLenum target = tokens[0];
         int bytes = tokens[1];
@@ -745,7 +744,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bufferSubData(GCanvasWeex *obj,
+    int bufferSubData(WmCanvas *obj,
                       const char *&p) { //bufferSubData0, offset, bytes, AAEAAAAAAQEAAAAAAP8A/wAA
         const int *tokens = ParseTokensInt(p, 3);
         GLenum target = tokens[0];
@@ -768,7 +767,7 @@ namespace wmcanvas {
     }
 
 //new
-    int checkFramebufferStatus(GCanvasWeex *obj, const char *&p) {
+    int checkFramebufferStatus(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLenum target = tokens[0];
 
@@ -779,14 +778,14 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int clear(GCanvasWeex *obj, const char *&p) { // clear;
+    int clear(WmCanvas *obj, const char *&p) { // clear;
         const int mask = ParseTokensInt(p, 1)[0];
         glClear(mask);
         LOG_D("[webgl::exec] glClear(%d)", mask);
         return kContinue;
     }
 
-    int clearColor(GCanvasWeex *obj, const char *&p) { // clearColor0,0,0,1;
+    int clearColor(WmCanvas *obj, const char *&p) { // clearColor0,0,0,1;
         const float *tokens = ParseTokensFloat(p, 4);
         LOG_D("[webgl::exec] glClearColor(%f, %f, %f, %f)", tokens[0], tokens[1],
               tokens[2], tokens[3]);
@@ -794,21 +793,21 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int clearDepth(GCanvasWeex *obj, const char *&p) { // clearDepth1.0;
+    int clearDepth(WmCanvas *obj, const char *&p) { // clearDepth1.0;
         const float *tokens = ParseTokensFloat(p, 1);
         LOG_D("[webgl::exec] glClearDepthf(%f)", tokens[0]);
         glClearDepthf(tokens[0]);
         return kContinue;
     }
 
-    int clearStencil(GCanvasWeex *obj, const char *&p) { // clearStencil2;
+    int clearStencil(WmCanvas *obj, const char *&p) { // clearStencil2;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glClearStencil(%d)", tokens[0]);
         glClearStencil(tokens[0]);
         return kContinue;
     }
 
-    int colorMask(GCanvasWeex *obj, const char *&p) { // colorMask0,0,0,1;
+    int colorMask(WmCanvas *obj, const char *&p) { // colorMask0,0,0,1;
         const int *tokens = ParseTokensInt(p, 4);
         LOG_D("[webgl::exec] glColorMask(%d, %d, %d, %d)", tokens[0], tokens[1],
               tokens[2], tokens[3]);
@@ -816,7 +815,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int compileShader(GCanvasWeex *obj, const char *&p) { // compileShader1
+    int compileShader(WmCanvas *obj, const char *&p) { // compileShader1
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -826,7 +825,7 @@ namespace wmcanvas {
     }
 
 //new
-    int compressedTexImage2D(GCanvasWeex *obj, const char *&p) {
+    int compressedTexImage2D(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 7);
         GLenum target = tokens[0];
         GLuint level = tokens[1];
@@ -850,7 +849,7 @@ namespace wmcanvas {
     }
 
 //new
-    int compressedTexSubImage2D(GCanvasWeex *obj, const char *&p) {
+    int compressedTexSubImage2D(WmCanvas *obj, const char *&p) {
         const int *intTokens = ParseTokensInt(p, 8);
         GLenum target = intTokens[0];
         GLuint level = intTokens[1];
@@ -876,7 +875,7 @@ namespace wmcanvas {
     }
 
 
-    int copyTexImage2D(GCanvasWeex *obj,
+    int copyTexImage2D(WmCanvas *obj,
                        const char *&p) {//copyTexImage2D gl.copyTexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 0, 0, 512, 512, 0);
         const int *tokens = ParseTokensInt(p, 8);
         LOG_D("[webgl::exec] glCopyTexImage2D(%s, %d, %s, %d, %d, %d, %d)",
@@ -888,7 +887,7 @@ namespace wmcanvas {
     }
 
 //new
-    int copyTexSubImage2D(GCanvasWeex *obj, const char *&p) {
+    int copyTexSubImage2D(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 8);
         LOG_D("[webgl::exec] glCopyTexSubImage2D(%s, %d, %d, %d, %d, %d, %d)",
               GetMacroValDebug(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5],
@@ -898,7 +897,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createBuffer(GCanvasWeex *obj, const char *&p) { // createBuffer;
+    int createBuffer(WmCanvas *obj, const char *&p) { // createBuffer;
         GLuint buffer = 0;
         glGenBuffers(1, &buffer);
         ++p;
@@ -908,7 +907,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createFramebuffer(GCanvasWeex *obj, const char *&p) { // createFramebuffer;
+    int createFramebuffer(WmCanvas *obj, const char *&p) { // createFramebuffer;
         GLuint framebuffer = 0;
         glGenFramebuffers(1, &framebuffer);
         ++p;
@@ -918,7 +917,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createProgram(GCanvasWeex *obj, const char *&p) {//createProgram
+    int createProgram(WmCanvas *obj, const char *&p) {//createProgram
         GLuint program = glCreateProgram();
         ++p;
         LOG_D("[webgl::exec] glCreateProgram()=%d", program);
@@ -927,7 +926,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createRenderbuffer(GCanvasWeex *obj, const char *&p) { // createRenderbuffer;
+    int createRenderbuffer(WmCanvas *obj, const char *&p) { // createRenderbuffer;
         GLuint renderBuffer;
         glGenRenderbuffers(1, &renderBuffer);
         ++p;
@@ -937,7 +936,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createShader(GCanvasWeex *obj, const char *&p) { // createShader1;
+    int createShader(WmCanvas *obj, const char *&p) { // createShader1;
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = glCreateShader(tokens[0]);
         ++p;
@@ -947,7 +946,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int createTexture(GCanvasWeex *obj, const char *&p) { // createTexture
+    int createTexture(WmCanvas *obj, const char *&p) { // createTexture
         GLuint texture;
         glGenTextures(1, &texture);
         ++p;
@@ -957,14 +956,14 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int cullFace(GCanvasWeex *obj, const char *&p) { // cullFace1;
+    int cullFace(WmCanvas *obj, const char *&p) { // cullFace1;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glCullFace(%s)", GetMacroValDebug(tokens[0]));
         glCullFace(tokens[0]);
         return kContinue;
     }
 
-    int deleteBuffer(GCanvasWeex *obj, const char *&p) {
+    int deleteBuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint buffer = tokens[0];
 
@@ -973,7 +972,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteFramebuffer(GCanvasWeex *obj, const char *&p) {
+    int deleteFramebuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint framebuffer = tokens[0];
 
@@ -982,7 +981,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteProgram(GCanvasWeex *obj, const char *&p) {
+    int deleteProgram(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -991,7 +990,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteRenderbuffer(GCanvasWeex *obj, const char *&p) {
+    int deleteRenderbuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint renderbuffer = tokens[0];
 
@@ -1000,7 +999,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteShader(GCanvasWeex *obj, const char *&p) { // deleteShader;
+    int deleteShader(WmCanvas *obj, const char *&p) { // deleteShader;
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -1009,7 +1008,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteTexture(GCanvasWeex *obj, const char *&p) {
+    int deleteTexture(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint texture = tokens[0];
 
@@ -1018,21 +1017,21 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int depthFunc(GCanvasWeex *obj, const char *&p) { // depthFunc1;
+    int depthFunc(WmCanvas *obj, const char *&p) { // depthFunc1;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glDepthFunc(%s)", GetMacroValDebug(tokens[0]));
         glDepthFunc(tokens[0]);
         return kContinue;
     }
 
-    int depthMask(GCanvasWeex *obj, const char *&p) {
+    int depthMask(WmCanvas *obj, const char *&p) {
         const int flag = ParseTokensInt(p, 1)[0];
         LOG_D("[webgl::exec] glDepthMask(%d)", flag);
         glDepthMask((bool) flag);
         return kContinue;
     }
 
-    int depthRange(GCanvasWeex *obj, const char *&p) {
+    int depthRange(WmCanvas *obj, const char *&p) {
         const float *tokens = ParseTokensFloat(p, 2);
         LOG_D("[webgl::exec] glDepthRange(%f, %f)", tokens[0], tokens[1]);
         glDepthRangef(tokens[0], tokens[1]);
@@ -1040,21 +1039,21 @@ namespace wmcanvas {
     }
 
 //new
-    int detachShader(GCanvasWeex *obj, const char *&p) {
+    int detachShader(WmCanvas *obj, const char *&p) {
         const float *tokens = ParseTokensFloat(p, 2);
         LOG_D("[webgl::exec] glDetachShader(%d, %d)", tokens[0], tokens[1]);
         glDetachShader(tokens[0], tokens[1]);
         return kContinue;
     }
 
-    int disable(GCanvasWeex *obj, const char *&p) { // disable0;
+    int disable(WmCanvas *obj, const char *&p) { // disable0;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glDisable(%s)", GetMacroValDebug(tokens[0]));
         glDisable(tokens[0]);
         return kContinue;
     }
 
-    int disableVertexAttribArray(GCanvasWeex *obj, const char *&p) { // disableVertexAttribArray0;
+    int disableVertexAttribArray(WmCanvas *obj, const char *&p) { // disableVertexAttribArray0;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glDisableVertexAttribArray(%d)",
               tokens[0]);
@@ -1062,7 +1061,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int drawArrays(GCanvasWeex *obj, const char *&p) { // drawArrays4,0,3;
+    int drawArrays(WmCanvas *obj, const char *&p) { // drawArrays4,0,3;
         const int *tokens = ParseTokensInt(p, 3);
         LOG_D("[webgl::exec] glDrawArrays(%s, %d, %d)", GetMacroValDebug(tokens[0]),
               tokens[1], tokens[2]);
@@ -1071,7 +1070,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int drawElements(GCanvasWeex *obj, const char *&p) { // drawElements4,36,0,0;
+    int drawElements(WmCanvas *obj, const char *&p) { // drawElements4,36,0,0;
         const int *tokens = ParseTokensInt(p, 4);
         LOG_D("[webgl::exec] glDrawElements(%s, %d, %s, %d)",
               GetMacroValDebug(tokens[0]), tokens[1], GetMacroValDebug(tokens[2]),
@@ -1080,28 +1079,28 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int enable(GCanvasWeex *obj, const char *&p) { // enable0;
+    int enable(WmCanvas *obj, const char *&p) { // enable0;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glEnable(%s)", GetMacroValDebug(tokens[0]));
         glEnable(tokens[0]);
         return kContinue;
     }
 
-    int enableVertexAttribArray(GCanvasWeex *obj, const char *&p) { // enableVertexAttribArray10;
+    int enableVertexAttribArray(WmCanvas *obj, const char *&p) { // enableVertexAttribArray10;
         GLuint index = ParseTokensInt(p, 1)[0];
         LOG_D("[webgl::exec] glEnableVertexAttribArray(%d)", index);
         glEnableVertexAttribArray(index);
         return kContinue;
     }
 
-    int flush(GCanvasWeex *obj, const char *&p) { // flush;
+    int flush(WmCanvas *obj, const char *&p) { // flush;
         LOG_D("[webgl::exec] glFlush()");
         glFlush();
         ++p;
         return kContinue;
     }
 
-    int framebufferRenderbuffer(GCanvasWeex *obj, const char *&p) { // framebufferRenderbuffer0,1,0,81;
+    int framebufferRenderbuffer(WmCanvas *obj, const char *&p) { // framebufferRenderbuffer0,1,0,81;
         const int *tokens = ParseTokensInt(p, 4);
         LOG_D("[webgl::exec] glFramebufferRenderbuffer(GL_FRAMEBUFFER, %s, xGL_RENDERBUFFER, %d)",
               GetMacroValDebug(tokens[1]), tokens[3]);
@@ -1109,7 +1108,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int framebufferTexture2D(GCanvasWeex *obj, const char *&p) { // framebufferTexture2D0,0,0,40,0;
+    int framebufferTexture2D(WmCanvas *obj, const char *&p) { // framebufferTexture2D0,0,0,40,0;
         const int *tokens = ParseTokensInt(p, 5);
         LOG_D("[webgl::exec] glFramebufferTexture2D(GL_FRAMEBUFFER, %s, %s, %d, 0)",
               GetMacroValDebug(tokens[1]), GetMacroValDebug(tokens[2]), tokens[3], tokens[4]);
@@ -1117,21 +1116,21 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int frontFace(GCanvasWeex *obj, const char *&p) { // enable0;
+    int frontFace(WmCanvas *obj, const char *&p) { // enable0;
         const int *tokens = ParseTokensInt(p, 1);
         LOG_D("[webgl::exec] glFrontFace(%s)", GetMacroValDebug(tokens[0]));
         glFrontFace(tokens[0]);
         return kContinue;
     }
 
-    int generateMipmap(GCanvasWeex *obj, const char *&p) { // generateMipmap0;
+    int generateMipmap(WmCanvas *obj, const char *&p) { // generateMipmap0;
         GLenum target = ParseTokensInt(p, 1)[0];
         LOG_D("[webgl::exec] glGenerateMipmap(%s)", GetMacroValDebug(target));
         glGenerateMipmap(target);
         return kContinue;
     }
 
-    int getActiveAttrib(GCanvasWeex *obj, const char *&p) {//getActiveAttrib
+    int getActiveAttrib(WmCanvas *obj, const char *&p) {//getActiveAttrib
         const int *tokens = ParseTokensInt(p, 2);
 
         GLuint program = tokens[0];
@@ -1161,7 +1160,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int getActiveUniform(GCanvasWeex *obj, const char *&p) {
+    int getActiveUniform(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLuint program = tokens[0];
         GLuint index = tokens[1];
@@ -1191,7 +1190,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int getAttachedShaders(GCanvasWeex *obj, const char *&p) {
+    int getAttachedShaders(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
         GLsizei size = 0;
@@ -1211,7 +1210,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int getAttribLocation(GCanvasWeex *obj, const char *&p) { // getAttribLocation31,position;
+    int getAttribLocation(WmCanvas *obj, const char *&p) { // getAttribLocation31,position;
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
         std::string &name = obj->mTempStr;
@@ -1226,7 +1225,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getBufferParameter(GCanvasWeex *obj, const char *&p) {
+    int getBufferParameter(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLenum target = tokens[0];
         GLenum pname = tokens[1];
@@ -1249,13 +1248,13 @@ namespace wmcanvas {
     }
 
 //new OpenGL ES not Support
-//int getContextAttributes(GCanvasWeex *obj, const char *&p)
+//int getContextAttributes(WmCanvas *obj, const char *&p)
 //{ // getContextAttributes
 //    return kContinue;
 //}
 
 //new
-    int getError(GCanvasWeex *obj, const char *&p) {
+    int getError(WmCanvas *obj, const char *&p) {
         GLenum error = glGetError();
         ++p;
         LOG_D("[webgl::exec] glGetError()=%d", error);
@@ -1265,7 +1264,7 @@ namespace wmcanvas {
     }
 
 //new OpenGL ES not Support
-    int getExtension(GCanvasWeex *obj, const char *&p) {
+    int getExtension(WmCanvas *obj, const char *&p) {
         const char *extString = (const char *) glGetString(GL_EXTENSIONS);
         ++p;
         LOG_D("[webgl::exec] glGetString(GL_EXTENSIONS)=%s", extString);
@@ -1274,7 +1273,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getFramebufferAttachmentParameter(GCanvasWeex *obj, const char *&p) {
+    int getFramebufferAttachmentParameter(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 3);
         GLenum target = tokens[0];
         GLenum attachment = tokens[1];
@@ -1298,7 +1297,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getParameter(GCanvasWeex *obj, const char *&p) {
+    int getParameter(WmCanvas *obj, const char *&p) {
         //ref:https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGet.xml
         
         const int *tokens = ParseTokensInt(p, 1);
@@ -1611,7 +1610,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getProgramInfoLog(GCanvasWeex *obj, const char *&p) {
+    int getProgramInfoLog(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -1626,7 +1625,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getProgramParameter(GCanvasWeex *obj, const char *&p) {
+    int getProgramParameter(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLuint program = tokens[0];
         GLenum pname = tokens[1];
@@ -1673,7 +1672,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getRenderbufferParameter(GCanvasWeex *obj, const char *&p) {
+    int getRenderbufferParameter(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLenum target = tokens[0];
         GLenum pname = tokens[1];
@@ -1698,7 +1697,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getShaderInfoLog(GCanvasWeex *obj, const char *&p) {
+    int getShaderInfoLog(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -1716,7 +1715,7 @@ namespace wmcanvas {
     }
 
 
-    int getShaderParameter(GCanvasWeex *obj, const char *&p) { // getShaderParameter1;
+    int getShaderParameter(WmCanvas *obj, const char *&p) { // getShaderParameter1;
         const int *tokens = ParseTokensInt(p, 2);
         GLuint shader = tokens[0];
         GLenum pname = tokens[1];
@@ -1757,7 +1756,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getShaderPrecisionFormat(GCanvasWeex *obj, const char *&p) { // getShaderPrecisionFormat;
+    int getShaderPrecisionFormat(WmCanvas *obj, const char *&p) { // getShaderPrecisionFormat;
         const int *tokens = ParseTokensInt(p, 2);
         GLenum shadertype = tokens[0];
         GLenum precisiontype = tokens[1];
@@ -1787,7 +1786,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getShaderSource(GCanvasWeex *obj, const char *&p) {
+    int getShaderSource(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -1804,7 +1803,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getSupportedExtensions(GCanvasWeex *obj, const char *&p) {
+    int getSupportedExtensions(WmCanvas *obj, const char *&p) {
         const char *extString = (const char *) glGetString(GL_EXTENSIONS);
         ++p;
         LOG_D("[webgl::exec] glGetString(GL_EXTENSIONS)=%s", extString);
@@ -1814,7 +1813,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getTexParameter(GCanvasWeex *obj, const char *&p) {
+    int getTexParameter(WmCanvas *obj, const char *&p) {
         //https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glGetTexParameter.xml
         
         //WebGL 1.0 only support glGetTexParameteriv
@@ -1839,7 +1838,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getUniform(GCanvasWeex *obj, const char *&p) {
+    int getUniform(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLint program = tokens[0];
         GLint location = tokens[1];
@@ -1955,7 +1954,7 @@ namespace wmcanvas {
     }
 
 
-    int getUniformLocation(GCanvasWeex *obj, const char *&p) { // getUniformLocation1,s_texture;
+    int getUniformLocation(WmCanvas *obj, const char *&p) { // getUniformLocation1,s_texture;
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
         std::string &name = obj->mTempStr;
@@ -1972,7 +1971,7 @@ namespace wmcanvas {
     }
 
 //new
-    int getVertexAttrib(GCanvasWeex *obj,
+    int getVertexAttrib(WmCanvas *obj,
                         const char *&p) { //https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getVertexAttrib
         const int *tokens = ParseTokensInt(p, 2);
         GLuint index = tokens[0];
@@ -2032,7 +2031,7 @@ namespace wmcanvas {
 
 
 //new
-    int getVertexAttribOffset(GCanvasWeex *obj, const char *&p) { // getVertexAttribOffset;
+    int getVertexAttribOffset(WmCanvas *obj, const char *&p) { // getVertexAttribOffset;
         const int *tokens = ParseTokensInt(p, 2);
         GLuint index = tokens[0];
 //    GLenum pname = tokens[1];
@@ -2046,7 +2045,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isBuffer(GCanvasWeex *obj, const char *&p) {
+    int isBuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint buffer = tokens[0];
 
@@ -2058,7 +2057,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isEnabled(GCanvasWeex *obj, const char *&p) {
+    int isEnabled(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLenum cap = tokens[0];
 
@@ -2070,7 +2069,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isFramebuffer(GCanvasWeex *obj, const char *&p) {
+    int isFramebuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint framebuffer = tokens[0];
 
@@ -2082,7 +2081,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isProgram(GCanvasWeex *obj, const char *&p) {
+    int isProgram(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -2094,7 +2093,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isRenderbuffer(GCanvasWeex *obj, const char *&p) {
+    int isRenderbuffer(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint renderbuffer = tokens[0];
 
@@ -2106,7 +2105,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isShader(GCanvasWeex *obj, const char *&p) {
+    int isShader(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -2118,7 +2117,7 @@ namespace wmcanvas {
     }
 
 //new
-    int isTexture(GCanvasWeex *obj, const char *&p) {
+    int isTexture(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint texture = tokens[0];
 
@@ -2129,14 +2128,14 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int lineWidth(GCanvasWeex *obj, const char *&p) { // lineWidth1;
+    int lineWidth(WmCanvas *obj, const char *&p) { // lineWidth1;
         const GLfloat *tokens = ParseTokensFloat(p, 1);
         LOG_D("[webgl::exec] glLineWidth(%f)", tokens[0]);
         glLineWidth(tokens[0]);
         return kContinue;
     }
 
-    int linkProgram(GCanvasWeex *obj, const char *&p) { // linkProgram1
+    int linkProgram(WmCanvas *obj, const char *&p) { // linkProgram1
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -2145,7 +2144,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int pixelStorei(GCanvasWeex *obj, const char *&p) { // pixelStorei2,1
+    int pixelStorei(WmCanvas *obj, const char *&p) { // pixelStorei2,1
         const int *tokens = ParseTokensInt(p, 2);
         GLenum pname = tokens[0];
         GLint param = tokens[1];
@@ -2155,7 +2154,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int polygonOffset(GCanvasWeex *obj, const char *&p) { // polygonOffset1.0,1.0);
+    int polygonOffset(WmCanvas *obj, const char *&p) { // polygonOffset1.0,1.0);
         const float *tokens = ParseTokensFloat(p, 2);
         GLfloat factor = tokens[0];
         GLfloat units = tokens[1];
@@ -2165,7 +2164,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int readPixels(GCanvasWeex *obj, const char *&p) {
+    int readPixels(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 6);
         float ratio = obj->GetDevicePixelRatio();
         GLint x = tokens[0] * ratio;
@@ -2196,7 +2195,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int renderbufferStorage(GCanvasWeex *obj, const char *&p) { // renderbufferStorage0,3,512,512;
+    int renderbufferStorage(WmCanvas *obj, const char *&p) { // renderbufferStorage0,3,512,512;
         const int *tokens = ParseTokensInt(p, 4);
         GLenum target = tokens[0];
         GLenum internalformat = tokens[1];
@@ -2211,7 +2210,7 @@ namespace wmcanvas {
     }
 
 //new
-    int sampleCoverage(GCanvasWeex *obj, const char *&p) {
+    int sampleCoverage(WmCanvas *obj, const char *&p) {
         const float *fTokens = ParseTokensFloat(p, 1);
         GLfloat value = fTokens[0];
 
@@ -2224,7 +2223,7 @@ namespace wmcanvas {
     }
 
 //new
-    int scissor(GCanvasWeex *obj, const char *&p) {
+    int scissor(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
         float ratio = obj->GetDevicePixelRatio();
         GLint x = tokens[0] * ratio;
@@ -2238,7 +2237,7 @@ namespace wmcanvas {
     }
 
 
-    int shaderSource(GCanvasWeex *obj, const char *&p) { // shaderSource1,CiAgICAgICAgYXR0
+    int shaderSource(WmCanvas *obj, const char *&p) { // shaderSource1,CiAgICAgICAgYXR0
         const int *tokens = ParseTokensInt(p, 1);
         GLuint shader = tokens[0];
 
@@ -2267,7 +2266,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int stencilFunc(GCanvasWeex *obj, const char *&p) {//glStencilFunc(GL_LESS, 0x1, 0x1);
+    int stencilFunc(WmCanvas *obj, const char *&p) {//glStencilFunc(GL_LESS, 0x1, 0x1);
 
         const int *tokens = ParseTokensInt(p, 3);
         GLenum func = tokens[0];
@@ -2281,7 +2280,7 @@ namespace wmcanvas {
     }
 
 //new
-    int stencilFuncSeparate(GCanvasWeex *obj, const char *&p) {
+    int stencilFuncSeparate(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
         GLenum face = tokens[0];
         GLenum func = tokens[1];
@@ -2295,7 +2294,7 @@ namespace wmcanvas {
     }
 
 //new
-    int stencilMask(GCanvasWeex *obj, const char *&p) {
+    int stencilMask(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint mask = tokens[0];
 
@@ -2305,7 +2304,7 @@ namespace wmcanvas {
     }
 
 //new
-    int stencilMaskSeparate(GCanvasWeex *obj, const char *&p) {
+    int stencilMaskSeparate(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLenum face = tokens[0];
         GLuint mask = tokens[1];
@@ -2315,7 +2314,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int stencilOp(GCanvasWeex *obj, const char *&p) {
+    int stencilOp(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 3);
         GLenum fail = tokens[0];
         GLenum zfail = tokens[1];
@@ -2327,7 +2326,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int stencilOpSeparate(GCanvasWeex *obj, const char *&p) {
+    int stencilOpSeparate(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
         GLenum face = tokens[0];
         GLenum fail = tokens[1];
@@ -2341,11 +2340,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    extern int (*g_webglFuncMap[WEBGL_API_COUNT])(GCanvasWeex *, const char *&);
+    extern int (*g_webglFuncMap[WEBGL_API_COUNT])(WmCanvas *, const char *&);
 
-    extern int (*g_webglExtFuncMap[WEBGL_EXT_API_COUNT])(GCanvasWeex *, const char *&);
+    extern int (*g_webglExtFuncMap[WEBGL_EXT_API_COUNT])(WmCanvas *, const char *&);
 
-    int texImage2D(GCanvasWeex *obj, const char *&p) { //  texImage2D0,0,3,3,0,a.bmp;
+    int texImage2D(WmCanvas *obj, const char *&p) { //  texImage2D0,0,3,3,0,a.bmp;
         const int args = ParseTokensInt(p, 1)[0];
         if (6 == args) {
             const int *tokens = ParseTokensInt(p, 5);
@@ -2358,7 +2357,7 @@ namespace wmcanvas {
             std::string &src = obj->mTempStr;
             if (strncmp(p, "data:image", 10) == 0) //eg: data:image/png;base64,xxxxxx;
             {
-                strncpy((char *) src.c_str(), p, strlen(p) - 1); //È¥µô×îºó·ÖºÅ
+                strncpy((char *) src.c_str(), p, strlen(p) - 1); //È¥ï¿½ï¿½ï¿½ï¿½ï¿½Öºï¿½
                 LOG_D("[texImage2D] src=data:image, base64");
             } else {
                 ParseTokensString(p, src);
@@ -2428,7 +2427,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int texParameterf(GCanvasWeex *obj, const char *&p) {
+    int texParameterf(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         GLenum target = tokens[0];
         GLenum pname = tokens[1];
@@ -2442,7 +2441,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int texParameteri(GCanvasWeex *obj, const char *&p) { // texParameteri0,undefined,undefined;
+    int texParameteri(WmCanvas *obj, const char *&p) { // texParameteri0,undefined,undefined;
 
         const int *tokens = ParseTokensInt(p, 3);
         GLenum target = tokens[0];
@@ -2456,7 +2455,7 @@ namespace wmcanvas {
     }
 
 
-    int texSubImage2D(GCanvasWeex *obj, const char *&p) {
+    int texSubImage2D(WmCanvas *obj, const char *&p) {
         const int args = ParseTokensInt(p, 1)[0];
         if (7 == args) {
             const int *tokens = ParseTokensInt(p, 6);
@@ -2511,7 +2510,7 @@ namespace wmcanvas {
     }
 
 
-    int uniformXfv(GCanvasWeex *obj, const char *&p, int type) { // uniform3fv_53,/////wj/////
+    int uniformXfv(WmCanvas *obj, const char *&p, int type) { // uniform3fv_53,/////wj/////
         const int *tokens = ParseTokensInt(p, 2);
         GLint location = tokens[0];
 
@@ -2540,7 +2539,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniformXiv(GCanvasWeex *obj, const char *&p, int type) { // uniform3fv_53,/////wj/////
+    int uniformXiv(WmCanvas *obj, const char *&p, int type) { // uniform3fv_53,/////wj/////
         const int *tokens = ParseTokensInt(p, 2);
         GLint location = tokens[0];
 
@@ -2574,7 +2573,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform1f(GCanvasWeex *obj, const char *&p) { // uniform1f_4,0
+    int uniform1f(WmCanvas *obj, const char *&p) { // uniform1f_4,0
         const int *intTokens = ParseTokensInt(p, 1);
         GLint location = intTokens[0];
 
@@ -2584,11 +2583,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform1fv(GCanvasWeex *obj, const char *&p) { // uniform1fv_53,/////wj/////
+    int uniform1fv(WmCanvas *obj, const char *&p) { // uniform1fv_53,/////wj/////
         return uniformXfv(obj, p, 1);
     }
 
-    int uniform1i(GCanvasWeex *obj, const char *&p) { // uniform1i_4,0
+    int uniform1i(WmCanvas *obj, const char *&p) { // uniform1i_4,0
         const int *tokens = ParseTokensInt(p, 2);
         GLint location = tokens[0];
         GLint x = tokens[1];
@@ -2598,11 +2597,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform1iv(GCanvasWeex *obj, const char *&p) { // uniform1fv_53,/////wj/////
+    int uniform1iv(WmCanvas *obj, const char *&p) { // uniform1fv_53,/////wj/////
         return uniformXiv(obj, p, 1);
     }
 
-    int uniform2f(GCanvasWeex *obj, const char *&p) { // uniform2f_51,344,154;
+    int uniform2f(WmCanvas *obj, const char *&p) { // uniform2f_51,344,154;
         const int *intTokens = ParseTokensInt(p, 1);
         GLint location = intTokens[0];
 
@@ -2615,11 +2614,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform2fv(GCanvasWeex *obj, const char *&p) { // uniform2fv_53,/////wj/////
+    int uniform2fv(WmCanvas *obj, const char *&p) { // uniform2fv_53,/////wj/////
         return uniformXfv(obj, p, 2);
     }
 
-    int uniform2i(GCanvasWeex *obj, const char *&p) {
+    int uniform2i(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 3);
         GLint location = tokens[0];
         GLint x = tokens[1];
@@ -2630,9 +2629,9 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform2iv(GCanvasWeex *obj, const char *&p) { return uniformXiv(obj, p, 2); }
+    int uniform2iv(WmCanvas *obj, const char *&p) { return uniformXiv(obj, p, 2); }
 
-    int uniform3f(GCanvasWeex *obj, const char *&p) { // uniform3f_51,0,0,1
+    int uniform3f(WmCanvas *obj, const char *&p) { // uniform3f_51,0,0,1
         const int *intTokens = ParseTokensInt(p, 1);
         GLint location = intTokens[0];
 
@@ -2646,11 +2645,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform3fv(GCanvasWeex *obj, const char *&p) { // uniform3fv_53,/////wj/////
+    int uniform3fv(WmCanvas *obj, const char *&p) { // uniform3fv_53,/////wj/////
         return uniformXfv(obj, p, 3);
     }
 
-    int uniform3i(GCanvasWeex *obj, const char *&p) {
+    int uniform3i(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
         GLint location = tokens[0];
         GLint x = tokens[1];
@@ -2662,9 +2661,9 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform3iv(GCanvasWeex *obj, const char *&p) { return uniformXiv(obj, p, 3); }
+    int uniform3iv(WmCanvas *obj, const char *&p) { return uniformXiv(obj, p, 3); }
 
-    int uniform4f(GCanvasWeex *obj, const char *&p) { // uniform4f_83,0,0,1,1
+    int uniform4f(WmCanvas *obj, const char *&p) { // uniform4f_83,0,0,1,1
         const int *intTokens = ParseTokensInt(p, 1);
         GLint location = intTokens[0];
 
@@ -2680,11 +2679,11 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform4fv(GCanvasWeex *obj, const char *&p) { // uniform3fv_53,/////wj/////
+    int uniform4fv(WmCanvas *obj, const char *&p) { // uniform3fv_53,/////wj/////
         return uniformXfv(obj, p, 4);
     }
 
-    int uniform4i(GCanvasWeex *obj, const char *&p) {
+    int uniform4i(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 5);
         GLint location = tokens[0];
         GLint x = tokens[1];
@@ -2698,9 +2697,9 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniform4iv(GCanvasWeex *obj, const char *&p) { return uniformXiv(obj, p, 4); }
+    int uniform4iv(WmCanvas *obj, const char *&p) { return uniformXiv(obj, p, 4); }
 
-    int uniformMatrixXfv(GCanvasWeex *obj, const char *&p,
+    int uniformMatrixXfv(WmCanvas *obj, const char *&p,
                          int type) { // uniformMatrix3fv52,0,so9wP0Qdrz4AAAAAAAAAAEQdr76yj3A/AAAAAAAAA
         const int *tokens = ParseTokensInt(p, 3);
         GLint location = tokens[0];
@@ -2742,22 +2741,22 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int uniformMatrix2fv(GCanvasWeex *obj,
+    int uniformMatrix2fv(WmCanvas *obj,
                          const char *&p) { // uniformMatrix3fv52,0,so9wP0Qdrz4AAAAAAAAAAEQdr76yj3A/AAAAAAAAA
         return uniformMatrixXfv(obj, p, 2);
     }
 
-    int uniformMatrix3fv(GCanvasWeex *obj,
+    int uniformMatrix3fv(WmCanvas *obj,
                          const char *&p) { // uniformMatrix3fv52,0,so9wP0Qdrz4AAAAAAAAAAEQdr76yj3A/AAAAAAAAA
         return uniformMatrixXfv(obj, p, 3);
     }
 
-    int uniformMatrix4fv(GCanvasWeex *obj,
+    int uniformMatrix4fv(WmCanvas *obj,
                          const char *&p) { // uniformMatrix4fv52,0,so9wP0Qdrz4AAAAAAAAAAEQdr76yj3A/AAAAAAAAA
         return uniformMatrixXfv(obj, p, 4);
     }
 
-    int useProgram(GCanvasWeex *obj, const char *&p) { // useProgram1
+    int useProgram(WmCanvas *obj, const char *&p) { // useProgram1
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -2767,7 +2766,7 @@ namespace wmcanvas {
     }
 
 //new
-    int validateProgram(GCanvasWeex *obj, const char *&p) { // validateProgram
+    int validateProgram(WmCanvas *obj, const char *&p) { // validateProgram
         const int *tokens = ParseTokensInt(p, 1);
         GLuint program = tokens[0];
 
@@ -2777,7 +2776,7 @@ namespace wmcanvas {
     }
 
 //new
-    int vertexAttrib1f(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib1f(WmCanvas *obj, const char *&p) {
         int index = ParseTokensInt(p, 1)[0];
         GLfloat x = ParseTokensFloat(p, 1)[0];
 
@@ -2790,7 +2789,7 @@ namespace wmcanvas {
     }
 
 //new
-    int vertexAttrib2f(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib2f(WmCanvas *obj, const char *&p) {
         int index = ParseTokensInt(p, 1)[0];
         const float *tokens = ParseTokensFloat(p, 2);
         GLfloat x = tokens[0];
@@ -2802,7 +2801,7 @@ namespace wmcanvas {
     }
 
 //new
-    int vertexAttrib3f(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib3f(WmCanvas *obj, const char *&p) {
         int index = ParseTokensInt(p, 1)[0];
         const float *tokens = ParseTokensFloat(p, 3);
         GLfloat x = tokens[0];
@@ -2815,7 +2814,7 @@ namespace wmcanvas {
     }
 
 //new
-    int vertexAttrib4f(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib4f(WmCanvas *obj, const char *&p) {
         int index = ParseTokensInt(p, 1)[0];
         const float *tokens = ParseTokensFloat(p, 4);
         GLfloat x = tokens[0];
@@ -2828,7 +2827,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int vertexAttribXfv(GCanvasWeex *obj, const char *&p, int type) {
+    int vertexAttribXfv(WmCanvas *obj, const char *&p, int type) {
         const int *tokens = ParseTokensInt(p, 2);
         GLint index = tokens[0];
 
@@ -2862,26 +2861,26 @@ namespace wmcanvas {
     }
 
 //new
-    int vertexAttrib1fv(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib1fv(WmCanvas *obj, const char *&p) {
         return vertexAttribXfv(obj, p, 1);
     }
 
 //new
-    int vertexAttrib2fv(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib2fv(WmCanvas *obj, const char *&p) {
         return vertexAttribXfv(obj, p, 2);
     }
 
 //new
-    int vertexAttrib3fv(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib3fv(WmCanvas *obj, const char *&p) {
         return vertexAttribXfv(obj, p, 3);
     }
 
 //new
-    int vertexAttrib4fv(GCanvasWeex *obj, const char *&p) {
+    int vertexAttrib4fv(WmCanvas *obj, const char *&p) {
         return vertexAttribXfv(obj, p, 4);
     }
 
-    int vertexAttribPointer(GCanvasWeex *obj, const char *&p) { // vertexAttribPointer10,3,22,0,0,0;
+    int vertexAttribPointer(WmCanvas *obj, const char *&p) { // vertexAttribPointer10,3,22,0,0,0;
         const int *tokens = ParseTokensInt(p, 6);
         GLint index = tokens[0];
         GLint size = tokens[1];
@@ -2896,7 +2895,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int viewport(GCanvasWeex *obj, const char *&p) { // viewport0,0,600,450;
+    int viewport(WmCanvas *obj, const char *&p) { // viewport0,0,600,450;
         const float *tokens = ParseTokensFloat(p, 4);
         float ratio = obj->GetDevicePixelRatio();
         LOG_D("[webgl::exec] glViewport(%f, %f, %f, %f)",
@@ -2911,7 +2910,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int (*g_webglFuncMap[WEBGL_API_COUNT])(GCanvasWeex *, const char *&) = {
+    int (*g_webglFuncMap[WEBGL_API_COUNT])(WmCanvas *, const char *&) = {
             NULL,   //0
             activeTexture,
             attachShader,
@@ -3057,7 +3056,7 @@ namespace wmcanvas {
 // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext
 //////////////////////////////////////////////////////////////////////////
 #ifdef IOS
-    int drawArraysInstancedANGLE(GCanvasWeex *obj, const char *&p) {
+    int drawArraysInstancedANGLE(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 4);
         glDrawArraysInstancedEXT(tokens[0], tokens[1], tokens[2], tokens[3]);
         LOG_D("[webgl::exec] glDrawArraysInstancedEXT(%d, %d, %d, %d)",
@@ -3065,7 +3064,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int drawElementsInstancedANGLE(GCanvasWeex *obj, const char *&p) {
+    int drawElementsInstancedANGLE(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 5);
         glDrawElementsInstancedEXT(tokens[0], tokens[1], tokens[2], G_BUFFER_OFFSET(tokens[3]), tokens[4]);
         LOG_D("[webgl::exec] glDrawElementsInstancedEXT(%d, %d, %d, %d, %d)",
@@ -3073,14 +3072,14 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int vertexAttribDivisorANGLE(GCanvasWeex *obj, const char *&p) {
+    int vertexAttribDivisorANGLE(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 2);
         glVertexAttribDivisorEXT(tokens[0], tokens[1]);
         LOG_D("[webgl::exec] glVertexAttribDivisorEXT(%d, %d)", tokens[0], tokens[1]);
         return kContinue;
     }
 
-    int createVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int createVertexArrayOES(WmCanvas *obj, const char *&p) {
         ++p;
         GLuint array;
         glGenVertexArraysOES(1, &array);
@@ -3089,7 +3088,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int deleteVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int deleteVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
         glDeleteVertexArraysOES(1, &array);
@@ -3097,7 +3096,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int isVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int isVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
         GLuint value = glIsVertexArrayOES(array);
@@ -3106,7 +3105,7 @@ namespace wmcanvas {
         return kContinue;
     }
 
-    int bindVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int bindVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
         glBindVertexArrayOES(array);
@@ -3114,19 +3113,19 @@ namespace wmcanvas {
         return kContinue;
     }
 #else  //Android Extension
-    int drawArraysInstancedANGLE(GCanvasWeex *obj, const char *&p) {
+    int drawArraysInstancedANGLE(WmCanvas *obj, const char *&p) {
         return kContinue;
     }
     
-    int drawElementsInstancedANGLE(GCanvasWeex *obj, const char *&p) {
+    int drawElementsInstancedANGLE(WmCanvas *obj, const char *&p) {
         return kContinue;
     }
     
-    int vertexAttribDivisorANGLE(GCanvasWeex *obj, const char *&p) {
+    int vertexAttribDivisorANGLE(WmCanvas *obj, const char *&p) {
         return kContinue;
     }
     
-    int createVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int createVertexArrayOES(WmCanvas *obj, const char *&p) {
         ++p;
         GLuint array;
         if (glGenVertexArraysOESv) {
@@ -3136,7 +3135,7 @@ namespace wmcanvas {
         return kContinue;
     }
     
-    int deleteVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int deleteVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
 
@@ -3146,7 +3145,7 @@ namespace wmcanvas {
         return kContinue;
     }
     
-    int isVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int isVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
         if (glIsVertexArrayOESv) {
@@ -3156,7 +3155,7 @@ namespace wmcanvas {
         return kContinue;
     }
     
-    int bindVertexArrayOES(GCanvasWeex *obj, const char *&p) {
+    int bindVertexArrayOES(WmCanvas *obj, const char *&p) {
         const int *tokens = ParseTokensInt(p, 1);
         GLuint array = tokens[0];
         if (glBindVertexArrayOESv) {
@@ -3168,7 +3167,7 @@ namespace wmcanvas {
 #endif
 
 
-    int (*g_webglExtFuncMap[WEBGL_EXT_API_COUNT])(GCanvasWeex *, const char *&) = {
+    int (*g_webglExtFuncMap[WEBGL_EXT_API_COUNT])(WmCanvas *, const char *&) = {
             //extension method for ANGLE_instanced_arrays
             drawArraysInstancedANGLE,
             drawElementsInstancedANGLE,
@@ -3185,51 +3184,5 @@ namespace wmcanvas {
 
 
 using namespace wmcanvas;
-
-int GCanvasWeex::executeWebGLCommands(const char *&cmd, int length) {
-    const char *end = cmd + length;
-    while (cmd < end) {
-        int index = atoi(cmd);
-        if (index >= 1 && index < WEBGL_API_COUNT) //webgl
-        {
-            ParseTokensSkip(cmd);
-            if (NULL == g_webglFuncMap[index]) {
-                return -1;
-            };
-            g_webglFuncMap[index](this, cmd);
-        } else if (index >= WEBGL_EXT_API_OFFSET && index < WEBGL_EXT_API_MAX_INDEX) //extension
-        {
-            ParseTokensSkip(cmd);
-            int extFuncIndex = index - WEBGL_EXT_API_OFFSET;
-            if (NULL == g_webglExtFuncMap[extFuncIndex]) {
-                LOG_W("[executeWebGLCommands] uncomplete ext cmd index:%d", index);
-                return -1;
-            }
-
-            g_webglExtFuncMap[extFuncIndex](this, cmd);
-        } else {
-            return -1;
-        }
-    }
-    return 0;
-}
-
-void GCanvasWeex::GetAllParameter(std::string &ret) {
-
-}
-
-#ifdef ANDROID
-
-void GCanvasWeex::initWebglExt() {
-    glGenVertexArraysOESv = (PFNGLGENVERTEXARRAYSOESPROC) eglGetProcAddress("glGenVertexArraysOES");
-    glBindVertexArrayOESv = (PFNGLBINDVERTEXARRAYOESPROC) eglGetProcAddress("glBindVertexArrayOES");
-    glDeleteVertexArraysOESv = (PFNGLDELETEVERTEXARRAYSOESPROC) eglGetProcAddress(
-            "glDeleteVertexArraysOES");
-    glIsVertexArrayOESv = (PFNGLISVERTEXARRAYOESPROC) eglGetProcAddress("glIsVertexArrayOES");
-}
-
-#endif
-
-
 
 #endif

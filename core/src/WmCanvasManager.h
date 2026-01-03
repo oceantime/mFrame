@@ -11,9 +11,6 @@
 #define WMCANVAS_WMCANVASMANAGER_H
 
 #include "WmCanvas.hpp"
-#ifdef WMCANVAS
-#include "WmCanvasWeex.hpp"
-#endif
 
 #include <map>
 #include <queue>
@@ -27,9 +24,6 @@ public:
     virtual ~WmCanvasManager();
 
     WmCanvas* NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks = nullptr);
-#ifdef WMCANVAS
-    GCanvasWeex* NewCanvasWeex(const std::string canvasId, bool onScreen=true, bool useFbo = true);
-#endif
     void RemoveCanvas(const std::string canvasId);
     WmCanvas *GetCanvas(const std::string canvasId);
     void AddCanvas(WmCanvas *p);
