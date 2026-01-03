@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __GCanvas_GSystemFontInformation__
-#define __GCanvas_GSystemFontInformation__
+#ifndef __WmCanvas_WmSystemFontInformation__
+#define __WmCanvas_WmSystemFontInformation__
 
 #include "WmFontFamily.h"
 #include "support/Lesser.h"
@@ -65,4 +65,4 @@ namespace wmcanvas {
     };
 }
 
-#endif
+#endif // __WmCanvas_WmSystemFontInformation__
