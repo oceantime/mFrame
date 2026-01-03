@@ -2,8 +2,8 @@
 // Created by yuantong on 2017/8/1.
 //
 
-#ifndef WM_CANVAS_GRENDER_H
-#define WM_CANVAS_GRENDER_H
+#ifndef WM_CANVAS_WMRENDER_H
+#define WM_CANVAS_WMRENDER_H
 
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
@@ -15,9 +15,9 @@
 
 using namespace WmCanvas;
 
-class GRenderer {
+class WmRenderer {
 public:
-    GRenderer(std::string key);
+    WmRenderer(std::string key);
 
     void start();
 
@@ -25,7 +25,7 @@ public:
 
     void destroy();
 
-    virtual ~GRenderer();
+    virtual ~WmRenderer();
 
     void setNativeWindow(ANativeWindow *window);
 
@@ -99,4 +99,4 @@ public:
 };
 
 
-#endif //WM_CANVAS_GRENDER_H
+#endif //WM_CANVAS_WMRENDER_H

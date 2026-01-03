@@ -427,7 +427,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setDevicePixelRatio(
     char *canvasId = jstringToString(je, contextId);
 
     LOG_D("Canvas JNI::setDevicePixelRatio");
-    GRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
     if (render) {
         render->setDevicePixelRatio((const float) ratio);
     }
@@ -527,7 +527,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setContextType(
 
     char *canvasId = jstringToString(je, contextId);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(canvasId);
     if (!render) {
         LOG_D("start to create renderer.id=%s\n", canvasId);
         render = GManager::getSingleton()->newRenderer(canvasId);
@@ -603,7 +603,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_bindTexture(
 
     string cxx_string = string(str_chars);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         render->bindTexture(je, bitmap, id, target, level, internalformat, format, type);
     }
@@ -626,7 +626,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_texSubImage2D(
 
     string cxx_string = string(str_chars);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         render->texSubImage2D(je, bitmap, id, target, level, xoffset, yoffset, format, type);
     }
@@ -646,7 +646,7 @@ JNIEXPORT bool JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_sendEvent(
 
     string cxx_string = string(str_chars);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
     if (render != nullptr) {
         return render->sendEvent();
     }

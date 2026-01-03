@@ -6,15 +6,15 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __WMGL_PRECOMPILED_SHADERS_H__
-#define __WMGL_PRECOMPILED_SHADERS_H__
+#ifndef __WML_PRECOMPILED_SHADERS_H__
+#define __WML_PRECOMPILED_SHADERS_H__
 
 #include <map>
 #include <string>
 #include <vector>
 #include <GLES2/gl2platform.h>
-#ifndef GL_GLEXT_PROTOTYPES
-#define GL_GLEXT_PROTOTYPES 1
+#ifndef WML_GLEXT_PROTOTYPES
+#define WML_GLEXT_PROTOTYPES 1
 #endif
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
@@ -72,4 +72,4 @@ protected:
     static GLenum sProgramBinaryFormat;
 };
 
-#endif // __WMGL_PRECOMPILED_SHADERS_H__
+#endif // __WML_PRECOMPILED_SHADERS_H__

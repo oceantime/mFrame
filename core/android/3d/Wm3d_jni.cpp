@@ -62,7 +62,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *
 
     string cxx_string = string(str_chars);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
     LOG_D("onSurfaceChanged findRender : %s", str_chars);
     if (!render) {
         LOG_D("onSurfaceChanged new render : %s", str_chars);
@@ -118,7 +118,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv
 
     string cxx_string = string(str_chars);
 
-    GRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
+    WmRenderer *render = GManager::getSingleton()->findRenderer(cxx_string);
     if (render) {
         render->surfaceDestroy();
     }

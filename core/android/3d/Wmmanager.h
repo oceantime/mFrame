@@ -5,7 +5,7 @@
 #ifndef WM_CANVAS_GMANAGER_H
 #define WM_CANVAS_GMANAGER_H
 
-#include "view/grenderer.h"
+#include "view/WmRenderer.h"
 #include "util/auto_ptr.h"
 #include <map>
 #include <string>
@@ -15,15 +15,15 @@ using namespace WmCanvas;
 
 class GManager{
 public:
-    GRenderer* findRenderer(const std::string& key);
+    WmRenderer* findRenderer(const std::string& key);
     void removeRenderer(const std::string& key);
-    GRenderer* newRenderer(const std::string& key);
+    WmRenderer* newRenderer(const std::string& key);
     GManager();
     virtual ~GManager();
 
 private:
     static AutoPtr<GManager> theManager;
-    std::map<std::string, GRenderer*> m_renderMap;
+    std::map<std::string, WmRenderer*> m_renderMap;
 
 public:
     static GManager* getSingleton();

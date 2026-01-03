@@ -5,11 +5,11 @@
 #include <WmCanvasManager.h>
 #include <android/bitmap.h>
 #include <support/Util.h>
-#include "Wmrenderer.h"
+#include "WmRenderer.h"
 
 
 
-GRenderer::GRenderer(std::string key) : m_egl_context(0),
+WmRenderer::WmRenderer(std::string key) : m_egl_context(0),
                                         m_egl_display(0),
                                         m_egl_surface(0),
                                         m_window(0) {
@@ -19,20 +19,20 @@ GRenderer::GRenderer(std::string key) : m_egl_context(0),
     this->mContextId = key;
 }
 
-GRenderer::~GRenderer() {
-    LOG_D("~GRenderer.");
+WmRenderer::~WmRenderer() {
+    LOG_D("~WmRenderer.");
     pthread_mutex_destroy(&m_mutex);
 }
 
-void GRenderer::setNativeWindow(ANativeWindow *window) {
+void WmRenderer::setNativeWindow(ANativeWindow *window) {
     m_window = window;
 }
 
-ANativeWindow *GRenderer::getNativeWindow() {
+ANativeWindow *WmRenderer::getNativeWindow() {
     return m_window;
 }
 
-bool GRenderer::initialize() {
+bool WmRenderer::initialize() {
     const EGLint attribs[] = {
             EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
             EGL_BLUE_SIZE, 8,
@@ -138,14 +138,14 @@ bool GRenderer::initialize() {
     return true;
 }
 
-void GRenderer::start() {
+void WmRenderer::start() {
     m_requestExit = false;
     pthread_create(&m_thread_id, 0, threadStartCallback, this);
 }
 
-void GRenderer::stop() {
+void WmRenderer::stop() {
 
-    LOG_D("start to stop grenderer thread.");
+    LOG_D("start to stop wmrenderer thread.");
     m_requestExit = true;
     pthread_cond_signal(&m_cond);
 
@@ -171,7 +171,7 @@ void GRenderer::stop() {
     LOG_D("finish stop thread.");
 }
 
-void GRenderer::destroy() {
+void WmRenderer::destroy() {
     WmCanvasManager *m = WmCanvasManager::GetManager();
     m->RemoveCanvas(mContextId);
     mProxy = nullptr;
@@ -197,7 +197,7 @@ void GRenderer::destroy() {
     }
 }
 
-void GRenderer::surfaceExit() {
+void WmRenderer::surfaceExit() {
     LOG_D("surface destroy in thread.");
     if (m_egl_display != EGL_NO_DISPLAY && m_egl_surface != EGL_NO_SURFACE) {
         LOG_D("surface destroy start in thread.");
@@ -207,14 +207,14 @@ void GRenderer::surfaceExit() {
     }
 }
 
-void GRenderer::drawFrame() {
+void WmRenderer::drawFrame() {
     if (mProxy != nullptr) {
         LOG_D("start to linkNativeGLProc.");
         mProxy->LinkNativeGLProc();
     }
 }
 
-void GRenderer::renderLoop() {
+void WmRenderer::renderLoop() {
     while (!m_requestExit) {
 
         pthread_mutex_lock(&m_mutex);
@@ -311,8 +311,8 @@ void GRenderer::renderLoop() {
     }
 }
 
-void *GRenderer::threadStartCallback(void *myself) {
-    GRenderer *renderer = (GRenderer *) myself;
+void *WmRenderer::threadStartCallback(void *myself) {
+    WmRenderer *renderer = (WmRenderer *) myself;
 
     renderer->m_started = true;
     renderer->renderLoop();
@@ -321,17 +321,17 @@ void *GRenderer::threadStartCallback(void *myself) {
     pthread_exit(0);
 }
 
-void GRenderer::signalUpGLthread() {
+void WmRenderer::signalUpGLthread() {
     pthread_mutex_lock(&m_mutex);
     pthread_cond_signal(&m_cond);
     pthread_mutex_unlock(&m_mutex);
 }
 
-void GRenderer::setRefreshFlag(bool refresh) {
+void WmRenderer::setRefreshFlag(bool refresh) {
     m_refresh = refresh;
 }
 
-void GRenderer::requestCreateCanvas(const std::string contextid) {
+void WmRenderer::requestCreateCanvas(const std::string contextid) {
     mContextId = contextid;
 
     if (!m_createCanvas) {
@@ -354,14 +354,14 @@ void GRenderer::requestCreateCanvas(const std::string contextid) {
     }
 }
 
-void GRenderer::requestViewportChanged() {
+void WmRenderer::requestViewportChanged() {
     LOG_D("requestViewportChanged");
     m_viewportchanged = true;
     pthread_cond_signal(&m_cond);
     waitUtilTimeout(&m_SyncSem, WmCanvas_TIMEOUT);
 }
 
-void GRenderer::bindTexture(JNIEnv *env, jobject bitmap, int id, int target, int level,
+void WmRenderer::bindTexture(JNIEnv *env, jobject bitmap, int id, int target, int level,
                             int internalformat,
                             int format, int type) {
 
@@ -428,7 +428,7 @@ void GRenderer::bindTexture(JNIEnv *env, jobject bitmap, int id, int target, int
 }
 
 void
-GRenderer::texSubImage2D(JNIEnv *env, jobject bitmap, int id, int target, int level, int xoffset,
+WmRenderer::texSubImage2D(JNIEnv *env, jobject bitmap, int id, int target, int level, int xoffset,
                          int yoffset,
                          int format, int type) {
 
@@ -480,20 +480,20 @@ GRenderer::texSubImage2D(JNIEnv *env, jobject bitmap, int id, int target, int le
     }
 }
 
-void GRenderer::surfaceDestroy() {
-    LOG_D("surface destroy request in grenderer.");
+void WmRenderer::surfaceDestroy() {
+    LOG_D("surface destroy request in wmrenderer.");
     m_requestSurfaceDestroy = true;
     pthread_cond_signal(&m_cond);
 
 }
 
-bool GRenderer::sendEvent() {
+bool WmRenderer::sendEvent() {
     bool ret = m_sendEvent;
     m_sendEvent = false;
     return ret;
 }
 
-void GRenderer::setDevicePixelRatio(const float ratio) {
+void WmRenderer::setDevicePixelRatio(const float ratio) {
     this->m_device_pixel_ratio = ratio;
     if (mProxy) {
         mProxy->SetDevicePixelRatio(ratio);

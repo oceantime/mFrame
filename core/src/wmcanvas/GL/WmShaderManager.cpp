@@ -82,7 +82,7 @@ GShaderManager::GShaderManager()
 
         if (isPreCompileSupported)
         {
-            GPreCompiledShaders::getInstance()->SetSupportPreCompiledShaders(
+            WmPreCompiledShaders::getInstance()->SetSupportPreCompiledShaders(
                     true);
         }
     }
@@ -93,10 +93,10 @@ GShaderManager::GShaderManager()
 #ifdef ANDROID
     if (g_use_pre_compile)
     {
-        if (GPreCompiledShaders::getInstance()
+        if (WmPreCompiledShaders::getInstance()
                 ->GetSupportPreCompiledShaders())
         {
-            GPreCompiledShaders::getInstance()->SavePreCompiledShaders();
+            WmPreCompiledShaders::getInstance()->SavePreCompiledShaders();
         }
     }
 #endif

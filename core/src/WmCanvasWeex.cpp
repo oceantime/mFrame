@@ -1408,7 +1408,7 @@ void GCanvasWeex::bindTexture(GTexture *texture) {
 }
 
 void GCanvasWeex::texSubImage2D(struct BitmapCmd cmd) {
-    LOG_D("start to texSubImage2D in grenderer.");
+    LOG_D("start to texSubImage2D in wmrenderer.");
     glTexSubImage2D(cmd.target, cmd.level, cmd.xoffset, cmd.yoffset,
                     cmd.width, cmd.height,
                     cmd.format,
