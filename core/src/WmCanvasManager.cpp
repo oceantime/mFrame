@@ -15,31 +15,31 @@
 namespace wmcanvas
 {
 typedef struct {
-    std::shared_ptr<GCanvasManager> sCanvasMgr;
-} GCanvasManagerWrapStruct;
+    std::shared_ptr<WmCanvasManager> sCanvasMgr;
+} WmCanvasManagerWrapStruct;
 
 
-GCanvasManagerWrapStruct StaticManager()
+WmCanvasManagerWrapStruct StaticManager()
 {
-    static GCanvasManagerWrapStruct s;
+    static WmCanvasManagerWrapStruct s;
     if( s.sCanvasMgr.get() == nullptr )
     {
-        s.sCanvasMgr = std::shared_ptr<GCanvasManager>(new GCanvasManager());
+        s.sCanvasMgr = std::shared_ptr<WmCanvasManager>(new WmCanvasManager());
     }
     return s;
 }
 
 /*static*/
-GCanvasManager *GCanvasManager::GetManager()
+WmCanvasManager *WmCanvasManager::GetManager()
 {
-    GCanvasManagerWrapStruct s = StaticManager();
+    WmCanvasManagerWrapStruct s = StaticManager();
     return s.sCanvasMgr.get();
 }
 
 /*static*/
-void GCanvasManager::Release()
+void WmCanvasManager::Release()
 {
-    GCanvasManagerWrapStruct s = StaticManager();
+    WmCanvasManagerWrapStruct s = StaticManager();
 
     if ( s.sCanvasMgr.get() != nullptr)
     {
@@ -47,16 +47,16 @@ void GCanvasManager::Release()
     }
 }
 
-GCanvasManager::GCanvasManager()
+WmCanvasManager::WmCanvasManager()
 {
 }
 
-GCanvasManager::~GCanvasManager()
+WmCanvasManager::~WmCanvasManager()
 {
     Clear();
 }
 
-WmCanvas* GCanvasManager::NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks)
+WmCanvas* WmCanvasManager::NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks)
 {
     WmCanvas *c = GetCanvas(canvasId);
     if (!c)
@@ -70,7 +70,7 @@ WmCanvas* GCanvasManager::NewCanvas(const std::string canvasId, WmCanvasConfig c
 }
 
 #ifdef WMCANVAS
-GCanvasWeex* GCanvasManager::NewCanvasWeex(const std::string canvasId, bool onScreen, bool useFbo)
+GCanvasWeex* WmCanvasManager::NewCanvasWeex(const std::string canvasId, bool onScreen, bool useFbo)
 {
     WmCanvas *c = GetCanvas(canvasId);
     if (!c)
@@ -84,7 +84,7 @@ GCanvasWeex* GCanvasManager::NewCanvasWeex(const std::string canvasId, bool onSc
 }
 #endif
 
-void GCanvasManager::RemoveCanvas(const std::string canvasId)
+void WmCanvasManager::RemoveCanvas(const std::string canvasId)
 {
     std::map< std::string, WmCanvas * >::iterator it = mCanvases.find(canvasId);
     if (it != mCanvases.end())
@@ -104,7 +104,7 @@ void GCanvasManager::RemoveCanvas(const std::string canvasId)
 #endif
 
 }
-WmCanvas *GCanvasManager::GetCanvas(const std::string canvasId)
+WmCanvas *WmCanvasManager::GetCanvas(const std::string canvasId)
 {
     std::map< std::string, WmCanvas * >::iterator it = mCanvases.find(canvasId);
     if (it != mCanvases.end())
@@ -114,7 +114,7 @@ WmCanvas *GCanvasManager::GetCanvas(const std::string canvasId)
     return 0;
 }
 
-void GCanvasManager::Clear()
+void WmCanvasManager::Clear()
 {
     std::map< std::string, WmCanvas * >::iterator it = mCanvases.begin();
     for (; it != mCanvases.end(); ++it)
@@ -144,12 +144,12 @@ void GCanvasManager::Clear()
 }
 
 
-void GCanvasManager::AddCanvas(WmCanvas *p)
+void WmCanvasManager::AddCanvas(WmCanvas *p)
 {
     mCanvases[p->mContextId] = p;
 }
 
-int GCanvasManager::CanvasCount()
+int WmCanvasManager::CanvasCount()
 {
     return (int)mCanvases.size();
 }

@@ -1245,7 +1245,7 @@ const char *GCanvasWeex::CallNative(int type, const std::string &args) {
 
 void GCanvasWeex::clearCmdQueue() {
 
-    GCanvasManager *theManager = GCanvasManager::GetManager();
+    WmCanvasManager *theManager = WmCanvasManager::GetManager();
     theManager->clearQueueByContextId(mContextId);
     while (!mCmdQueue.empty()) {
         struct GCanvasCmd *p = reinterpret_cast<struct GCanvasCmd *> (mCmdQueue.front());
@@ -1318,7 +1318,7 @@ void GCanvasWeex::LinkNativeGLProc() {
         return;
     }
 
-    GCanvasManager *theManager = GCanvasManager::GetManager();
+    WmCanvasManager *theManager = WmCanvasManager::GetManager();
     std::queue<struct GCanvasCmd *> *queue = theManager->getQueueByContextId(
             mContextId);
     if (queue != nullptr) {

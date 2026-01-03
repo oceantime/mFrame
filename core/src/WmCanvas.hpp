@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GCANVAS_H
-#define GCANVAS_GCANVAS_H
+#ifndef WMCANVAS_WMCANVAS_H
+#define WMCANVAS_WMCANVAS_H
 
 #include "wmcanvas/WmCanvas2dContext.h"
 #include "support/Log.h"

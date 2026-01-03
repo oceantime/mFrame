@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GCANVASMANAGER_H
-#define GCANVAS_GCANVASMANAGER_H
+#ifndef WMCANVAS_WMCANVASMANAGER_H
+#define WMCANVAS_WMCANVASMANAGER_H
 
 #include "WmCanvas.hpp"
 #ifdef WMCANVAS
@@ -20,11 +20,11 @@
 
 namespace wmcanvas
 {
-class GCanvasManager
+class WmCanvasManager
 {
 public:
-    GCanvasManager();
-    virtual ~GCanvasManager();
+    WmCanvasManager();
+    virtual ~WmCanvasManager();
 
     WmCanvas* NewCanvas(const std::string canvasId, WmCanvasConfig config, WmCanvasHooks *hooks = nullptr);
 #ifdef WMCANVAS
@@ -41,7 +41,7 @@ public:
     void clearQueueByContextId(const std::string contextId);
     void clearQueue(std::queue<struct GCanvasCmd *> *queue);
 #endif
-    static GCanvasManager *GetManager();
+    static WmCanvasManager *GetManager();
     static void Release();
 
 protected:
@@ -51,6 +51,9 @@ protected:
 #endif
     
 };
+
+using GCanvasManager = WmCanvasManager;
+
 }
 
-#endif /* GCANVAS_GCANVASMANAGER_H */
+#endif /* WMCANVAS_WMCANVASMANAGER_H */

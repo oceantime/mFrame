@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_EXPORT_H
-#define GCANVAS_EXPORT_H
+#ifndef WMCANVAS_EXPORT_H
+#define WMCANVAS_EXPORT_H
 
 #ifdef __GNUC__// it means the compiler is GCC version 4.0 or later
     #ifdef ANDROID
@@ -22,4 +22,4 @@
     #error "##### requires gcc version >= 4.0 #####"
 #endif
 
-#endif /* GCANVAS_EXPORT_H */
+#endif /* WMCANVAS_EXPORT_H */
