@@ -23,7 +23,9 @@ class WmCanvasContext;
 typedef struct {
     std::vector<WmPoint> points;
     bool isClosed;
-} GSubPath;
+} WmSubPath;
+
+using GSubPath = WmSubPath;
 
 
 
@@ -90,7 +92,7 @@ public:
 private:
 
 
-    std::vector<GSubPath*> *CreateLineDashPath(WmCanvasContext *context);
+    std::vector<WmSubPath*> *CreateLineDashPath(WmCanvasContext *context);
 
 
     void PushPoint(WmPoint pt);
@@ -108,10 +110,10 @@ private:
     void NewSubPath(float x, float y);
 
 
-    GPoint TransformPoint(float x, float y);
+    WmPoint TransformPoint(float x, float y);
 
 
-    GSubPath* GetCurPath();
+    WmSubPath* GetCurPath();
 
 //    void PushTriangleFanPoints(WmCanvasContext *context, tSubPath* subPath, WmColorRGBA color);
 
@@ -121,22 +123,22 @@ private:
 
 
 private:
-    GPoint mStartPosition;
-    GPoint mCurrentPosition;
+    WmPoint mStartPosition;
+    WmPoint mCurrentPosition;
 
-    std::vector<GSubPath*> mPathStack;
+    std::vector<WmSubPath*> mPathStack;
 
-    GPoint mMinPosition;
-    GPoint mMaxPosition;
+    WmPoint mMinPosition;
+    WmPoint mMaxPosition;
 
     bool needNewSubPath;
 
-    GPathStroker stroker;
+    WmPathStroker stroker;
 
-    friend GPathStroker;
+    friend WmPathStroker;
 
 public:
-    GFillRule mClipFillRule;
+    WmFillRule mClipFillRule;
     WmTransform mTransform;
 
 };

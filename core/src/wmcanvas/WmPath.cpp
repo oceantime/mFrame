@@ -1,4 +1,4 @@
-ï»¿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -70,8 +70,8 @@ WmPath::WmPath(const WmPath &other) {
     ClearSubPath();
 
     for (int i = 0; i < other.mPathStack.size(); i++) {
-        GSubPath* tt = other.mPathStack[i];
-        GSubPath* nitem = new GSubPath();
+        WmSubPath* tt = other.mPathStack[i];
+        WmSubPath* nitem = new WmSubPath();
         nitem->points = tt->points;
         nitem->isClosed = tt->isClosed;
         mPathStack.push_back(nitem);
@@ -318,7 +318,7 @@ void WmPath::Arc(float cx, float cy, float radius, float startAngle,
 
 void WmPath::NewSubPath(float x, float y) {
     GPoint pos = PointMake(x, y);
-    GSubPath* subPath = new GSubPath();
+    WmSubPath* subPath = new WmSubPath();
     subPath->isClosed = false;
     mPathStack.push_back(subPath);
 
@@ -327,7 +327,7 @@ void WmPath::NewSubPath(float x, float y) {
 }
 
 
-GSubPath* WmPath::GetCurPath() {
+WmSubPath* WmPath::GetCurPath() {
     return mPathStack[mPathStack.size() - 1];
 }
 
@@ -339,7 +339,7 @@ void WmPath::PushPoint(GPoint pt) { PushPoint(pt.x, pt.y); }
 void WmPath::PushPoint(float x, float y) {
     GPoint p = PointMake(x, y);
 
-    GSubPath* curPath = GetCurPath();
+    WmSubPath* curPath = GetCurPath();
     if (!curPath->points.empty()) {
         if (mCurrentPosition.x == x && mCurrentPosition.y == y) {
             return;
@@ -409,7 +409,7 @@ void WmPath::ClipRegion(WmCanvasContext *context) {
 //}
 
 
-void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, bool needTransform) {
+void WmPath::Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target, bool needTransform) {
     context->SendVertexBufferToGPU();
     
     WmColorRGBA color = BlendColor(context, context->mCurrentState->mFillColor);
@@ -456,7 +456,7 @@ void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, 
     }
     
     for (auto iter = mPathStack.begin(); iter != mPathStack.end(); ++iter) {
-        GSubPath* path = (*iter);
+        WmSubPath* path = (*iter);
         // ignore not valid subPath (less 2 points)
         if (path->points.size() <= 2) {
              continue;
@@ -517,7 +517,7 @@ void WmPath::Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target, 
 }
 
 
-std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
+std::vector<WmSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
     std::vector<float> lineDash = context->LineDash();
     std::vector<float> firstLineDash = context->LineDash();
     bool firstNeedDraw = true;
@@ -555,7 +555,7 @@ std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
         }
     }
 
-    std::vector<GSubPath*> *tmpPathStack = new std::vector<GSubPath*>;
+    std::vector<WmSubPath*> *tmpPathStack = new std::vector<WmSubPath*>;
     for (auto iter = mPathStack.begin(); iter != mPathStack.end(); ++iter) {
         const std::vector<GPoint> &pts = (*iter)->points;
         GPoint startPoint, stopPoint;
@@ -570,7 +570,7 @@ std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
         bool isFirst = true;
 
         // new tmp path
-        GSubPath tmpPath;
+        WmSubPath tmpPath;
         tmpPath.isClosed = false;
         float currentWidth = 0;
         stopPoint = *(pts.begin());
@@ -594,7 +594,7 @@ std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
                 tmpPath.points.push_back(interPoint);
 
                 if (needDraw) {
-                    GSubPath* rsubPath = new GSubPath();
+                    WmSubPath* rsubPath = new WmSubPath();
                     rsubPath->points = tmpPath.points;
                     tmpPathStack->push_back(rsubPath);
                 }
@@ -626,9 +626,9 @@ std::vector<GSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
                 tmpPath.points.push_back(stopPoint);
                 currentWidth += length;
                 if (ptIter == pts.end() - 1) {
-                    // finishedï¼Œpush vertex
+                    // finished£¬push vertex
                     if (needDraw) {
-                        GSubPath* rsubPath = new GSubPath();
+                        WmSubPath* rsubPath = new WmSubPath();
                         rsubPath->points = tmpPath.points;
                         tmpPathStack->push_back(rsubPath);
                     }

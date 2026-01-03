@@ -2328,14 +2328,14 @@ void WmCanvasContext::ClearRect(float x, float y, float w, float h)
  * Open subpaths must be implicitly closed when computing the clipping region, without affecting the actual subpaths.
  * The new clipping region replaces the current clipping region.
  */
-void WmCanvasContext::Clip(GFillRule rule)
+void WmCanvasContext::Clip(WmFillRule rule)
 {
     mPath.Close();
     WmPath *newPath = new WmPath(mPath);
     DoClipPath(newPath, rule);
 }
 
-void WmCanvasContext::Clip(GPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Clip(WmPath2D &path2d, GFillRule rule)
 {
     WmPath *path = new WmPath();
     path->mTransform = mPath.mTransform;
@@ -2364,7 +2364,7 @@ void WmCanvasContext::ClipRegion()
     AfterClip();
 }
 
-//void WmCanvasContext::ClipRegionNew(GFillRule rule) {
+//void WmCanvasContext::ClipRegionNew(WmFillRule rule) {
 //    mPath.Close();
 //
 //    WmPath* newPath = new WmPath(mPath);
@@ -2431,7 +2431,7 @@ void WmCanvasContext::Stroke()
     DoStrokeWithPath(mPath);
 }
 
-void WmCanvasContext::Stroke(GPath2D &path2d)
+void WmCanvasContext::Stroke(WmPath2D &path2d)
 {
     WmPath path;
     path.mTransform = mPath.mTransform;
@@ -2440,12 +2440,12 @@ void WmCanvasContext::Stroke(GPath2D &path2d)
     DoStrokeWithPath(path);
 }
 
-void WmCanvasContext::Fill(GFillRule rule)
+void WmCanvasContext::Fill(WmFillRule rule)
 {
     DoFillWithPath(mPath, rule);
 }
 
-void WmCanvasContext::Fill(GPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Fill(WmPath2D &path2d, GFillRule rule)
 {
     WmPath path;
     path.mTransform = mPath.mTransform;

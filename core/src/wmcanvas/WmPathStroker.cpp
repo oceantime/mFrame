@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -54,7 +54,7 @@ static void CalculateOutlinePoint(float halfLineWidthTrans, GPathOutLine& outlin
  * 1.similarity transform can directly draw
  * 2.not similarity transform should first inverse transform handle lineWidth, then transform back
  */
-void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vector<WmVertex> *vertexVec) {
+void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vector<WmVertex> *vertexVec) {
     WmColorRGBA color = BlendStrokeColor(context);
     WmTransform& transform = context->mCurrentState->mTransform;
     bool isSimilarity = WmTransformIsSimilarity(context->mCurrentState->mTransform);
@@ -82,14 +82,14 @@ void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vecto
     }
     WmTransform outputTransform = isSimilarity ? WmTransformIdentity : transform;
 
-    std::vector<GSubPath*>* pathStack = &(path->mPathStack);
+    std::vector<WmSubPath*>* pathStack = &(path->mPathStack);
     // first deal line dash if needed
     if (context->LineDash().size() > 0) {
         pathStack = path->CreateLineDashPath(context);
     }
 
     for (auto iter = pathStack->begin(); iter != pathStack->end(); ++iter) {
-        std::vector<GPoint> &pts = (std::vector<GPoint>&)(*iter)->points;
+        std::vector<WmPoint> &pts = (std::vector<WmPoint>&)(*iter)->points;
 
         if (pts.size() <= 1) {
             continue;
@@ -178,7 +178,7 @@ void GPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vecto
 }
 
 
-void GPathStroker::FilterTooClosePoints(std::vector<GPoint> &pts) {
+void WmPathStroker::FilterTooClosePoints(std::vector<WmPoint> &pts) {
     float minValidValue = PATH_MIN_VALID;
     GPoint stopPoint = *(pts.begin());
 
@@ -199,7 +199,7 @@ void GPathStroker::FilterTooClosePoints(std::vector<GPoint> &pts) {
 
 
 
-void GPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
+void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
                                 WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vertexVec) {
     // angle changed
     float nextAngle = wmcanvas::CalcPointAngle(lineTwo.to, lineTwo.from);
@@ -238,8 +238,8 @@ void GPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, G
 
 
 
-void GPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
-                             GPoint& center, GPoint& p1, GPoint& p2,
+void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
+                             WmPoint& center, WmPoint& p1, WmPoint& p2,
                              WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                              float samePointThreshold) {
     // filter invalid point
@@ -315,7 +315,7 @@ void GPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineW
 }
 
 
-void GPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
+void WmPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
                 GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
                 WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                 float samePointThreshold) {
@@ -329,8 +329,8 @@ void GPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
 
 
 
-void GPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
-                                 const GPoint &center, const GPoint &p1, const GPoint &p2,
+void WmPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
+                                 const WmPoint &center, const WmPoint &p1, const WmPoint &p2,
                                  WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec) {
     float angle1 = wmcanvas::CalcPointAngle(p1, center);
     float angle2 = wmcanvas::CalcPointAngle(p2, center);

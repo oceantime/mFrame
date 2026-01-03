@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GFONTSTYLE_H
-#define GCANVAS_GFONTSTYLE_H
+#ifndef WMCANVAS_WMFONTSTYLE_H
+#define WMCANVAS_WMFONTSTYLE_H
 
 #include <iostream>
 #include <list>

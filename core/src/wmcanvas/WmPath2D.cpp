@@ -24,13 +24,13 @@ WmPath2D::~WmPath2D() {
 WmPath2D::WmPath2D(const WmPath2D &other) {
     ClearPath();
 
-    AddPaths(const_cast<std::vector<GPathCmd *>&>(other.cmds));
+    AddPaths(const_cast<std::vector<WmPathCmd *>&>(other.cmds));
 }
 
 
 void WmPath2D::ClearPath() {
     for (int i = 0; i < cmds.size(); i++) {
-        GPathCmd *cmd = cmds[i];
+        WmPathCmd *cmd = cmds[i];
         delete cmd;
     }
     cmds.clear();
@@ -38,12 +38,12 @@ void WmPath2D::ClearPath() {
 
 
 
-void WmPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, WmTransform* transform) {
+void WmPath2D::AddPaths(std::vector<WmPathCmd*>& otherCmds, WmTransform* transform) {
     for (int i = 0; i < otherCmds.size(); i++) {
-        GPathCmd *item = otherCmds[i];
+        WmPathCmd *item = otherCmds[i];
 
         // copy cmd
-        GPathCmd *cmd = new GPathCmd();
+        WmPathCmd *cmd = new WmPathCmd();
         cmd->cmdType = item->cmdType;
         cmd->byteLen = item->byteLen;
         cmd->data = new uint8_t[cmd->byteLen];
@@ -65,7 +65,7 @@ void WmPath2D::AddPath(WmPath2D &other, WmTransform &transform) {
 
 void WmPath2D::WriteToPath(WmPath &path) {
     for (int i = 0; i < cmds.size(); i++) {
-        GPathCmd *item = cmds[i];
+        WmPathCmd *item = cmds[i];
         // decode and fill
         if (item->cmdType == MOVE_TO) {
             float *data = (float *) item->data;
@@ -100,14 +100,14 @@ void WmPath2D::WriteToPath(WmPath &path) {
 
 
 void WmPath2D::ClosePath() {
-    GPathCmd *cmd = new GPathCmd();
+    WmPathCmd *cmd = new WmPathCmd();
     cmd->cmdType = CLOSE_PATH;
     cmds.push_back(cmd);
 }
 
 
 void WmPath2D::MoveTo(float x, float y) {
-    GPathCmd *cmd = new GPathCmd();
+    WmPathCmd *cmd = new WmPathCmd();
     cmd->cmdType = MOVE_TO;
     cmd->byteLen = sizeof(float) * 2;
 
@@ -121,8 +121,8 @@ void WmPath2D::MoveTo(float x, float y) {
 
 
 void WmPath2D::LineTo(float x, float y) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::LINE_TO;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::LINE_TO;
     cmd->byteLen = sizeof(float) * 2;
 
     float *data = new float[2];
@@ -135,8 +135,8 @@ void WmPath2D::LineTo(float x, float y) {
 
 
 void WmPath2D::QuadraticCurveTo(float cpx, float cpy, float x, float y, float scale) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::QUADRATIC_CURVE_TO;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::QUADRATIC_CURVE_TO;
     cmd->byteLen = sizeof(float) * 5;
 
     float *data = new float[5];
@@ -153,8 +153,8 @@ void WmPath2D::QuadraticCurveTo(float cpx, float cpy, float x, float y, float sc
 
 void WmPath2D::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y, float x,
                             float y, float scale) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::BEZIER_CURVE_TO;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::BEZIER_CURVE_TO;
     cmd->byteLen = sizeof(float) * 7;
 
     float *data = new float[7];
@@ -172,8 +172,8 @@ void WmPath2D::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y, flo
 
 
 void WmPath2D::ArcTo(float x1, float y1, float x2, float y2, float radius) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::ARC_TO;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::ARC_TO;
     cmd->byteLen = sizeof(float) * 5;
 
     float *data = new float[5];
@@ -190,8 +190,8 @@ void WmPath2D::ArcTo(float x1, float y1, float x2, float y2, float radius) {
 
 void WmPath2D::Arc(float x, float y, float radius, float startAngle, float endAngle,
                   bool antiClockwise2) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::ARC;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::ARC;
     cmd->byteLen = sizeof(float) * 6;
 
     float *data = new float[6];
@@ -211,8 +211,8 @@ void WmPath2D::Arc(float x, float y, float radius, float startAngle, float endAn
 void
 WmPath2D::Ellipse(float x, float y, float radiusX, float radiusY, float rotation, float startAngle,
                  float endAngle, bool antiClockwise) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::ELLIPSE;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::ELLIPSE;
     cmd->byteLen = sizeof(float) * 8;
 
     float *data = new float[8];
@@ -232,8 +232,8 @@ WmPath2D::Ellipse(float x, float y, float radiusX, float radiusY, float rotation
 
 
 void WmPath2D::Rect(int x, int y, int w, int h) {
-    GPathCmd *cmd = new GPathCmd();
-    cmd->cmdType = GPathCmdType::RECT;
+    WmPathCmd *cmd = new WmPathCmd();
+    cmd->cmdType = WmPathCmdType::RECT;
     cmd->byteLen = sizeof(float) * 4;
 
     int *data = new int[4];
@@ -249,6 +249,6 @@ void WmPath2D::Rect(int x, int y, int w, int h) {
 /**
  * TODO
  */
-void WmPath2D::TransformPathCmd(GPathCmd* cmd,  WmTransform& transform) {
+void WmPath2D::TransformPathCmd(WmPathCmd* cmd,  WmTransform& transform) {
 
 }

@@ -42,7 +42,7 @@ struct GPathOutLine {
 
 
 
-class GPathStroker {
+class WmPathStroker {
 
 public:
 
@@ -52,7 +52,7 @@ public:
 private:
 
 
-    void FilterTooClosePoints(std::vector<GPoint> &pts);
+    void FilterTooClosePoints(std::vector<WmPoint> &pts);
 
 
     void DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
@@ -60,23 +60,24 @@ private:
 
 
     void DrawArcForCapOrJoin(WmCanvasContext *context, float halfLineWidth,
-                                           GPoint& center, GPoint& p1, GPoint& p2,
+                                           WmPoint& center, WmPoint& p1, WmPoint& p2,
                                            WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                                            float samePointThreshold);
 
 
     void DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
-                       const GPoint &center, const GPoint &p1, const GPoint &p2,
+                       const WmPoint &center, const WmPoint &p1, const WmPoint &p2,
                        WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec);
 
 
     void DrawLineCap(WmCanvasContext *context, float halfLineWidth,
-                                   GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
+                                   WmPoint &center, WmPoint &p1, WmPoint &p2, float deltaX, float deltaY,
                                    WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                                    float samePointThreshold = 0.001f);
 };
 
+using GPathStroker = WmPathStroker;
 
 
 
-#endif //GCANVAS_GPATHSTROKER_H
+#endif //WMCANVAS_WMPATHSTROKER_H

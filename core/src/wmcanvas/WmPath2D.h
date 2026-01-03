@@ -16,7 +16,7 @@
 #include <vector>
 
 
-enum GPathCmdType {
+enum WmPathCmdType {
     MOVE_TO,
     LINE_TO,
     QUADRATIC_CURVE_TO,
@@ -28,24 +28,28 @@ enum GPathCmdType {
     CLOSE_PATH
 };
 
+using GPathCmdType = WmPathCmdType;
 
-struct GPathCmd {
 
-    GPathCmd () {
+struct WmPathCmd {
+
+    WmPathCmd () {
         byteLen = 0;
         data = nullptr;
     }
 
-    ~GPathCmd() {
+    ~WmPathCmd() {
         if (data != nullptr) {
             free (data);
         }
     }
 
-    GPathCmdType cmdType;
+    WmPathCmdType cmdType;
     size_t byteLen;
     void* data;
 };
+
+using GPathCmd = WmPathCmd;
 
 
 
@@ -105,16 +109,16 @@ private:
     void ClearPath();
 
 
-    void TransformPathCmd(GPathCmd* cmd,  WmTransform& transform);
+    void TransformPathCmd(WmPathCmd* cmd,  WmTransform& transform);
 
 
-    void AddPaths(std::vector<GPathCmd*>&, WmTransform* transform = nullptr);
+    void AddPaths(std::vector<WmPathCmd*>&, WmTransform* transform = nullptr);
 
 
 private:
 
 
-    std::vector<GPathCmd*> cmds;
+    std::vector<WmPathCmd*> cmds;
 
 
 };
