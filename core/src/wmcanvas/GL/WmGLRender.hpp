@@ -7,16 +7,16 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#ifndef GGLRender_hpp
-#define GGLRender_hpp
+#ifndef WmGLRender_hpp
+#define WmGLRender_hpp
 
 #include <stdio.h>
 
-class GGLRender
+class WmGLRender
 {
 public:
-    GGLRender();
-    ~GGLRender();
+    WmGLRender();
+    ~WmGLRender();
 
 protected:
     
@@ -26,4 +26,4 @@ private:
     
 };
 
-#endif /* GGLRender_hpp */
+#endif /* WmGLRender_hpp */

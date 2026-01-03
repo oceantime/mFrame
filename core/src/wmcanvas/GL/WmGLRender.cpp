@@ -9,12 +9,12 @@
 
 #include "WmGLRender.hpp"
 
-GGLRender::GGLRender()
+WmGLRender::WmGLRender()
 {
     
 }
 
-GGLRender::~GGLRender()
+WmGLRender::~WmGLRender()
 {
     
 }
