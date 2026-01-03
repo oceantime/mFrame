@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -10,11 +10,11 @@
 #include "WmTreemap.h"
 
 
-GTreemap::GTreemap(unsigned int w, unsigned int h) : mWidth(w), mHeight(h), mLineLast(w), mVerticalLast(h), mCurrentLineHeight(0) {
+WmTreemap::WmTreemap(unsigned int w, unsigned int h) : mWidth(w), mHeight(h), mLineLast(w), mVerticalLast(h), mCurrentLineHeight(0) {
 
 }
 
-bool GTreemap::Add(const GSize &size, GRect &rect) {
+bool WmTreemap::Add(const WmSize &size, WmRect &rect) {
     rect.SetSize(size);
     if (size.width > mLineLast) {
         if (size.width > mWidth) {
@@ -48,7 +48,7 @@ bool GTreemap::Add(const GSize &size, GRect &rect) {
     return true;
 }
 
-void GTreemap::Clear() {
+void WmTreemap::Clear() {
     mLineLast = mWidth;
     mVerticalLast = mHeight;
     mCurrentLineHeight = 0;

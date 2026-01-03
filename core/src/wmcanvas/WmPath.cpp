@@ -692,7 +692,7 @@ void WmPath::StencilRectForStroke(WmCanvasContext *context, std::vector<WmVertex
         extend = width * 0.5;
     }
     
-    GRect rect;
+    WmRect rect;
     rect.x = mMinPosition.x - extend;
     rect.y = mMinPosition.y - extend;
     rect.width = mMaxPosition.x - mMinPosition.x + extend * 2;

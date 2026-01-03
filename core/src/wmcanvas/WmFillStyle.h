@@ -7,12 +7,12 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GFILLSTYLE_H
-#define GCANVAS_GFILLSTYLE_H
+#ifndef WMCANVAS_WMFILLSTYLE_H
+#define WMCANVAS_WMFILLSTYLE_H
 
 #include "WmConvert.h"
 
-class GFillStyle
+class WmFillStyle
 {
 public:
     enum Style
@@ -23,10 +23,10 @@ public:
         STYLE_UNDEFINED
     };
 
-    GFillStyle(Style style) : mStyle(style) {}
+    WmFillStyle(Style style) : mStyle(style) {}
 
     virtual int GetTextureListID() { return -1; }
-    virtual GFillStyle *Clone() { return nullptr; }
+    virtual WmFillStyle *Clone() { return nullptr; }
     virtual bool AddColorStop(float pos, const std::string &color_name){ return false;}
 
     bool IsPattern() { return mStyle == STYLE_PATTERN; }
@@ -34,22 +34,22 @@ public:
     bool IsRadialGradient() { return mStyle == STYLE_RADIAL_GRADIENT; }
     bool IsDefault() { return mStyle == STYLE_UNDEFINED; }
 
-    virtual ~GFillStyle(){};
+    virtual ~WmFillStyle(){};
 
 private:
     Style mStyle;
 };
 
-class FillStylePattern : public GFillStyle
+class FillStylePattern : public WmFillStyle
 {
 public:
     FillStylePattern(int texture_list_id, const std::string &pattern)
-        : GFillStyle(STYLE_PATTERN), mPattern(pattern), mTextureListId(texture_list_id)
+        : WmFillStyle(STYLE_PATTERN), mPattern(pattern), mTextureListId(texture_list_id)
     {
     }
     
     FillStylePattern(int texture_list_id, short textureWidth, short textHeight, const std::string &pattern)
-    : GFillStyle(STYLE_PATTERN),mTextureWidth(textureWidth), mTextureHeight(textHeight),
+    : WmFillStyle(STYLE_PATTERN),mTextureWidth(textureWidth), mTextureHeight(textHeight),
     mPattern(pattern), mTextureListId(texture_list_id)
     {
     }
@@ -62,7 +62,7 @@ public:
     short GetTextureHeight() { return mTextureHeight; }
 
 
-    GFillStyle *Clone()
+    WmFillStyle *Clone()
     {
         FillStylePattern *ptr =
             new FillStylePattern(mTextureListId, mPattern);
@@ -76,7 +76,7 @@ private:
     short mTextureHeight;
 };
 
-class FillStyleLinearGradient : public GFillStyle
+class FillStyleLinearGradient : public WmFillStyle
 {
 public:
     static const int MAX_STOP_NUM = 5;
@@ -86,8 +86,8 @@ public:
         WmColorRGBA color;
     };
 
-    FillStyleLinearGradient(const GPoint &start_pos, const GPoint &end_pos)
-        : GFillStyle(STYLE_LINEAR_GRADIENT), mStartPos(start_pos),
+    FillStyleLinearGradient(const WmPoint &start_pos, const WmPoint &end_pos)
+        : WmFillStyle(STYLE_LINEAR_GRADIENT), mStartPos(start_pos),
           mEndPos(end_pos), mStopCount(0)
     {
     }
@@ -104,7 +104,7 @@ public:
         return false;
     }
 
-    GFillStyle *Clone()
+    WmFillStyle *Clone()
     {
         FillStyleLinearGradient *ptr =
             new FillStyleLinearGradient(mStartPos, mEndPos);
@@ -112,8 +112,8 @@ public:
         return ptr;
     }
 
-    const GPoint &GetStartPos() { return mStartPos; }
-    const GPoint &GetEndPos() { return mEndPos; }
+    const WmPoint &GetStartPos() { return mStartPos; }
+    const WmPoint &GetEndPos() { return mEndPos; }
     int GetColorStopCount() const { return mStopCount; }
     const ColorStop *GetColorStop(int id)
     {
@@ -125,12 +125,12 @@ public:
     }
 
 private:
-    GPoint mStartPos, mEndPos;
+    WmPoint mStartPos, mEndPos;
     int mStopCount;
     ColorStop mStops[MAX_STOP_NUM];
 };
 
-class FillStyleRadialGradient : public GFillStyle
+class FillStyleRadialGradient : public WmFillStyle
 {
 public:
     static const int MAX_STOP_NUM = 5;
@@ -141,7 +141,7 @@ public:
     };
 
     FillStyleRadialGradient(const float *start, const float *end)
-        : GFillStyle(STYLE_RADIAL_GRADIENT), mStopCount(0)
+        : WmFillStyle(STYLE_RADIAL_GRADIENT), mStopCount(0)
     {
         mStart[0] = start[0];
         mStart[1] = start[1];
@@ -175,7 +175,7 @@ public:
         return nullptr;
     }
 
-    GFillStyle *Clone()
+    WmFillStyle *Clone()
     {
         FillStyleRadialGradient *ptr =
             new FillStyleRadialGradient(mStart, mEnd);
@@ -189,4 +189,6 @@ private:
     ColorStop mStops[MAX_STOP_NUM];
 };
 
-#endif /* GCANVAS_GFILLSTYLE_H */
+using GFillStyle = WmFillStyle;
+
+#endif /* WMCANVAS_WMFILLSTYLE_H */

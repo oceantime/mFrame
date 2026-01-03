@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GFONTMANAGER_H
-#define GCANVAS_GFONTMANAGER_H
+#ifndef WMCANVAS_WMFONTMANAGER_H
+#define WMCANVAS_WMFONTMANAGER_H
 
 #include "WmPoint.h"
 #include "WmTexture.h"
@@ -35,14 +35,14 @@ public:
     static WmFontManager *NewInstance();
     virtual  ~WmFontManager();
 
-    bool PrepareGlyphTexture(int w, int h, GRect& rect);
+    bool PrepareGlyphTexture(int w, int h, WmRect& rect);
 
     bool AddGlyph(std::string& fontFileName, std::string& glyphKey, WmGlyphs& glyph, bool isStroke);
 
     bool LoadGlyphToTexture(WmGlyphs& glyph);
 
     
-    virtual GTexture* GetOrCreateFontTexture();
+    virtual WmTexture* GetOrCreateFontTexture();
         
     virtual void DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
                           bool isStroke, WmCanvasContext* context, float scaleX=1, float scaleY=1)=0;
@@ -65,10 +65,10 @@ protected:
 
 public:
 
-    GTexture* mFontTexture;
+    WmTexture* mFontTexture;
 
     WmGlyphCache mGlyphCache;
-    GTreemap mTreemap;
+    WmTreemap mTreemap;
 };
 
-#endif /* GCANVAS_GFONTMANAGER_H */
+#endif /* WMCANVAS_WMFONTMANAGER_H */

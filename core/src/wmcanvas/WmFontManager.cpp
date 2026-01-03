@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by zhanqu on 2020/3/25.
 //
 
@@ -18,7 +18,7 @@ WmFontManager::~WmFontManager() {
 }
 
 
-GTexture *WmFontManager::GetOrCreateFontTexture() {
+WmTexture *WmFontManager::GetOrCreateFontTexture() {
     if (mFontTexture == nullptr) {
         std::vector<WmCanvasLog> logVec;
         mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
@@ -56,8 +56,8 @@ void WmFontManager::ClearFontBuffer() {
 
 
 bool WmFontManager::LoadGlyphToTexture(WmGlyphs &glyph) {
-    GTexture *texture = GetOrCreateFontTexture();
-    GRect rect;
+    WmTexture *texture = GetOrCreateFontTexture();
+    WmRect rect;
     bool flag = PrepareGlyphTexture((int)glyph.width, (int)glyph.height, rect);
     if (!flag) {
         ClearFontBuffer();
@@ -105,8 +105,8 @@ bool WmFontManager::AddGlyph(std::string& fontFileName, std::string& glyphKey, W
 }
 
 
-bool WmFontManager::PrepareGlyphTexture(int w, int h, GRect& rect) {
-    GSize size(w, h);
+bool WmFontManager::PrepareGlyphTexture(int w, int h, WmRect& rect) {
+    WmSize size(w, h);
     return mTreemap.Add(size, rect);
 }
 

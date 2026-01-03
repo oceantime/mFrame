@@ -7,14 +7,14 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GTREEMAP_H
-#define GCANVAS_GTREEMAP_H
+#ifndef WMCANVAS_WMTREEMAP_H
+#define WMCANVAS_WMTREEMAP_H
 
 #include <new>
 
-struct GSize
+struct WmSize
 {
-    GSize(int w, int h) : width(w), height(h)
+    WmSize(int w, int h) : width(w), height(h)
     {
 
     }
@@ -23,21 +23,25 @@ struct GSize
     int height;
 };
 
-struct GRect
+using GSize = WmSize;
+
+using GSize = WmSize;
+
+struct WmRect
 {
-    GRect(int x = 0, int y = 0, int w = 0, int h = 0) : x(x), y(y), width(w), height(h)
+    WmRect(int x = 0, int y = 0, int w = 0, int h = 0) : x(x), y(y), width(w), height(h)
     {
 
     }
 
-    GRect(int x, int y, const GSize &size) : x(x), y(y), width(size.width), height(size.height)
+    WmRect(int x, int y, const WmSize &size) : x(x), y(y), width(size.width), height(size.height)
     {
 
     }
 
-    void Set(int x, int y, const GSize &size)
+    void Set(int x, int y, const WmSize &size)
     {
-        new (this) GRect(x, y, size);
+        new (this) WmRect(x, y, size);
     }
 
     void SetPosition(int x, int y)
@@ -46,7 +50,7 @@ struct GRect
         this->y = y;
     }
 
-    void SetSize(const GSize &size)
+    void SetSize(const WmSize &size)
     {
         width = size.width;
         height = size.height;
@@ -58,13 +62,16 @@ struct GRect
     int height;
 };
 
+using GRect = WmRect;
+using GRect = WmRect;
 
-class GTreemap
+
+class WmTreemap
 {
 public:
-    GTreemap(unsigned int w, unsigned int h);
+    WmTreemap(unsigned int w, unsigned int h);
 
-    ~GTreemap()
+    ~WmTreemap()
     {};
 
     inline unsigned int GetWidth()
@@ -73,7 +80,7 @@ public:
     inline unsigned int GetHeight()
     { return mHeight; };
 
-    bool Add(const GSize &size, GRect &rect);
+    bool Add(const WmSize &size, WmRect &rect);
 
     void Clear();
 
@@ -85,4 +92,6 @@ private:
     int mCurrentLineHeight;
 };
 
-#endif /* GCANVAS_GTREEMAP_H */
+using GTreemap = WmTreemap;
+
+#endif /* WMCANVAS_WMTREEMAP_H */
