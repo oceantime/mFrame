@@ -1,13 +1,3 @@
-ï»¿/**
-* Created by G-Canvas Open Source Team.
-* Copyright (c) 2017, Alibaba, Inc. All rights reserved.
-*
-* This source code is licensed under the Apache Licence 2.0.
-* For the full copyright and license information, please view
-* the LICENSE file in the root directory of this source tree.
-*/
-
-
 #ifndef WM_CANVAS_COMMANDBUFFER_H
 #define WM_CANVAS_COMMANDBUFFER_H
 
@@ -19,10 +9,10 @@
 namespace wmcanvas {
 
 /**
- commandbufferç¼–ç å…·ä½“æ ¼å¼:
-    meta: 2ä¸ªuint32
-        meta[0] - 4å­—èŠ‚é•¿åº¦
-        meta[1] - ä¿ç•™å­—æ®µ
+ commandbuffer±àÂë¾ßÌå¸ñÊ½:
+    meta: 2¸öuint32
+        meta[0] - 4×Ö½Ú³¤¶È
+        meta[1] - ±£Áô×Ö¶Î
 
     funcId+param+...+funcId+param
  */
@@ -58,8 +48,8 @@ namespace wmcanvas {
 
         uint32_t mMeta[2];              //meta
         int8_t *mBufferData;
-        size_t mBufferSize;             //å­—èŠ‚é•¿åº¦
-        size_t mBufferFourByteSize;     //4å­—èŠ‚é•¿åº¦
+        size_t mBufferSize;             //×Ö½Ú³¤¶È
+        size_t mBufferFourByteSize;     //4×Ö½Ú³¤¶È
         size_t mCurrentPos;
 
     };

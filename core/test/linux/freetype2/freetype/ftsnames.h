@@ -1,9 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftsnames.h                                                             */
-/*                                                                         */
-/*    Simple interface to access SFNT `name' tables (which are used        */
-/*    to hold font names, copyright info, notices, etc.) (specification).  */
 /*                                                                         */
 /*    This is _not_ used to retrieve glyph names!                          */
 /*                                                                         */

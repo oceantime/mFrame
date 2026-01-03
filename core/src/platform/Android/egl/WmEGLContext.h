@@ -1,4 +1,4 @@
-Ôªø//
+//
 // Created by yuantong on 2018/4/16.
 //
 
@@ -226,7 +226,7 @@ private:
 
 
 /**
- * Á¶ªÂ±èContext
+ * ¿Î∆¡Context
  */
 class WmEGLPbufferContext : public WmEGLContext
 {

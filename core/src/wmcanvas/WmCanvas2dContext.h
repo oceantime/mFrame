@@ -1,11 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #ifndef WMCANVAS_WMCANVASCONTEXT_H
 #define WMCANVAS_WMCANVASCONTEXT_H
 
@@ -358,7 +350,6 @@ public:
     void BeforeClip();
     void AfterClip();
 
-//    void ClipRegionNew(GFillRule rule = FILL_RULE_NONZERO);
 
     void DrawClip();
     void DrawClipPath(WmPath* path);

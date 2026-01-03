@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftadvanc.h                                                             */
-/*                                                                         */
-/*    Quick computation of advance widths (specification only).            */
-/*                                                                         */
-/*  Copyright 2008-2017 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

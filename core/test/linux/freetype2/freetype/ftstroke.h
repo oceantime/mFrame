@@ -1,10 +1,3 @@
-ï»¿/***************************************************************************/
-/*                                                                         */
-/*  ftstroke.h                                                             */
-/*                                                                         */
-/*    FreeType path stroker (specification).                               */
-/*                                                                         */
-/*  Copyright 2002-2017 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */
@@ -466,7 +459,7 @@ FT_BEGIN_HEADER
    *   FT_Stroker_ConicTo
    *
    * @description:
-   *   `Draw' a single quadratic BÃ©zier in the stroker's current sub-path,
+   *   `Draw' a single quadratic B¨¦zier in the stroker's current sub-path,
    *   from the last position.
    *
    * @input:
@@ -474,7 +467,7 @@ FT_BEGIN_HEADER
    *     The target stroker handle.
    *
    *   control ::
-   *     A pointer to a BÃ©zier control point.
+   *     A pointer to a B¨¦zier control point.
    *
    *   to ::
    *     A pointer to the destination point.
@@ -498,7 +491,7 @@ FT_BEGIN_HEADER
    *   FT_Stroker_CubicTo
    *
    * @description:
-   *   `Draw' a single cubic BÃ©zier in the stroker's current sub-path,
+   *   `Draw' a single cubic B¨¦zier in the stroker's current sub-path,
    *   from the last position.
    *
    * @input:
@@ -506,10 +499,10 @@ FT_BEGIN_HEADER
    *     The target stroker handle.
    *
    *   control1 ::
-   *     A pointer to the first BÃ©zier control point.
+   *     A pointer to the first B¨¦zier control point.
    *
    *   control2 ::
-   *     A pointer to second BÃ©zier control point.
+   *     A pointer to second B¨¦zier control point.
    *
    *   to ::
    *     A pointer to the destination point.

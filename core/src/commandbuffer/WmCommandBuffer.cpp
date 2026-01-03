@@ -1,13 +1,3 @@
-Ôªø/**
-* Created by G-Canvas Open Source Team.
-* Copyright (c) 2017, Alibaba, Inc. All rights reserved.
-*
-* This source code is licensed under the Apache Licence 2.0.
-* For the full copyright and license information, please view
-* the LICENSE file in the root directory of this source tree.
-*/
-
-
 #include "WmCommandBuffer.hpp"
 #include "../support/Log.h"
 namespace wmcanvas
@@ -22,12 +12,11 @@ namespace wmcanvas
     WmCommandBuffer::WmCommandBuffer(int8_t* buffer, size_t size):
             mCurrentPos(0), mBufferData(buffer), mBufferSize(size)
     {
-        //Ëß£Êûêmeta‰ø°ÊÅØ
+        //Ω‚Œˆmeta–≈œ¢
         parseArray<uint32_t>(mMeta, 2);
 
-        //ËÆ°ÁÆóbuffersize
+        //º∆À„buffersize
         mBufferSize = mMeta[0] * 4;
-//    LOG_E("mBufferSize is %d",mBufferSize);
     }
 
     WmCommandBuffer::~WmCommandBuffer()
@@ -39,12 +28,11 @@ namespace wmcanvas
     {
         mBufferData = bufffer, mBufferSize = size, mCurrentPos = 0;
 
-        //Ëß£Êûêmeta‰ø°ÊÅØ
+        //Ω‚Œˆmeta–≈œ¢
         parseArray<uint32_t>(mMeta, 2);
 
-        //ËÆ°ÁÆóbuffersize
+        //º∆À„buffersize
         mBufferSize = mMeta[0] * 4;
-//    LOG_E("mBufferSize is %d",mBufferSize);
 
     }
 

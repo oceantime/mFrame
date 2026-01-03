@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftmac.h                                                                */
-/*                                                                         */
-/*    Additional Mac-specific API.                                         */
-/*                                                                         */
-/*  Copyright 1996-2017 by                                                 */
 /*  Just van Rossum, David Turner, Robert Wilhelm, and Werner Lemberg.     */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

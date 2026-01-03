@@ -1,11 +1,3 @@
-Ôªø/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include <iostream>
 #include <sstream>
 #include <cassert>
@@ -87,7 +79,6 @@ WmFont::~WmFont() {
         mFace = nullptr;
     }
     mLibrary = nullptr;
-    // LOG_E("WmFont(%p):Clear %s", this, mFontFileName.data());
 }
 
 
@@ -139,7 +130,6 @@ void WmFont::DrawGlyph(WmCanvasContext *context, const WmGlyphs *glyph, float x,
     float s1 = glyph->s1;
     float t1 = glyph->t1;
 
-    // LOG_E("DrawGlyph post: x0=%f, y0=%f, x=%f, y=%f", x0, y0, x, y);
     // context->PushRectangleFormat(x0,
     //         y0, w, h, s0, t0, s1 - s0, t1 - t0, color,
     //         context->mCurrentState->mTransform, false, nullptr, true);
@@ -261,7 +251,7 @@ void WmFont::LoadGlyphs(wmcanvas::WmFontStyle* fontStyle, const wchar_t *charcod
         int ft_glyph_top = 0;
         int ft_glyph_left = 0;
         FT_UInt glyph_index = FT_Get_Char_Index(face, charcodes[i]);
-        // TODO glyph_index‰∏çÂ≠òÂú®Ôºü
+        // TODO glyph_index≤ª¥Ê‘⁄£ø
         FT_Error error = FT_Load_Glyph(face, glyph_index, flags);
         if (error) {
             return;
@@ -382,7 +372,6 @@ void WmFont::LoadGlyphs(wmcanvas::WmFontStyle* fontStyle, const wchar_t *charcod
 
         mFontManager.AddGlyph(mFontFileName, glyphKey, glyph, isStroke);
 
-//        LOG_E("LoadGlyphs:%s, char=%i, WmFont=%p, face=%p, bw=%i, bh=%i",
 //              glyphKey.data(), charcodes[i],
 //              this, mFace, ft_bitmap_width, ft_bitmap_rows);
 

@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftotval.h                                                              */
-/*                                                                         */
-/*    FreeType API for validating OpenType tables (specification).         */
-/*                                                                         */
-/*  Copyright 2004-2017 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

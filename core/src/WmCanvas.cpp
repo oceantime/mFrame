@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include <errno.h>
 #include <sstream>
 
@@ -44,7 +36,6 @@ void WmCanvas::Clear() {
 
 
 WmCanvas::~WmCanvas() {
-    // LOG_D("Canvas clear");
     if (mCanvasContext != NULL) {
         delete mCanvasContext;
         mCanvasContext = NULL;
@@ -54,14 +45,11 @@ WmCanvas::~WmCanvas() {
 
 
 /**
- * Viewå¤§å°å˜åŒ–å›è°ƒ(GCanvasåˆ›å»ºæ—¶ä¼šä¸»åŠ¨è°ƒä¸€æ¬¡)
+ * View´óĞ¡±ä»¯»Øµ÷(GCanvas´´½¨Ê±»áÖ÷¶¯µ÷Ò»´Î)
  */
 void WmCanvas::OnSurfaceChanged(int x, int y, int width, int height) {
     GLint maxRenderbufferSize;
     glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &maxRenderbufferSize);
-    // if ((maxRenderbufferSize <= width) || (maxRenderbufferSize <= height)) {
-    //     LOG_E("GL_MAX_RENDERBUFFER_SIZE error maxRenderbufferSize is %d width is %d height is %d ",maxRenderbufferSize,width,height);
-    //     LOG_EXCEPTION(mHooks, mContextId, "surfacesize_exceed_max",
     //                       "<function:%s, maxSize:%d, width:%d, height:%d>", __FUNCTION__,
     //                       maxRenderbufferSize, width, height);
     //     return;

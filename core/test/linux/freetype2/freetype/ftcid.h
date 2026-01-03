@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftcid.h                                                                */
-/*                                                                         */
-/*    FreeType API for accessing CID font information (specification).     */
-/*                                                                         */
-/*  Copyright 2007-2017 by                                                 */
 /*  Dereg Clegg and Michael Toftdal.                                       */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

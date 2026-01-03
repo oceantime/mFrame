@@ -1,12 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #include "WmTexture.h"
 #include "../../support/Log.h"
 #include "../../support/Util.h"
@@ -67,8 +58,6 @@ WmLubyte *WmTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
                                       unsigned int *ph)
 {
     unsigned char *buffer = nullptr;
-//    int res = PngLoader::Instance().DecodePng(path, &buffer, pw, ph);
-//    if (res != 0) return nullptr;
     return buffer;
 }
 
@@ -90,8 +79,8 @@ void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec
     }
 
     // FIXME
-    // 1.textureSizeæ— éœ€æ¯æ¬¡getï¼Œåªéœ€è¦getä¸€æ¬¡å³å¯
-    // 2.æœ‰å¯èƒ½get textureSizeæ—¶æœªmakeCurrent or currentå¤±è´¥ï¼Œå¯¼è‡´æœªå–åˆ°textureSize, æ­¤æ—¶åº”è¯¥é»˜è®¤textureSizeä¸º2048,èƒ½å¤„ç†å¤§éƒ¨åˆ†çº¹ç†å°ºå¯¸
+    // 1.textureSizeÎŞĞèÃ¿´Îget£¬Ö»ĞèÒªgetÒ»´Î¼´¿É
+    // 2.ÓĞ¿ÉÄÜget textureSizeÊ±Î´makeCurrent or currentÊ§°Ü£¬µ¼ÖÂÎ´È¡µ½textureSize, ´ËÊ±Ó¦¸ÃÄ¬ÈÏtextureSizeÎª2048,ÄÜ´¦Àí´ó²¿·ÖÎÆÀí³ß´ç
     GLint maxTextureSize;
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
 
@@ -112,7 +101,7 @@ void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec
 
     glGenTextures(1, &mTextureID);
     if (mTextureID <= 0 && errVec) {
-        // æœ‰å¯èƒ½OOMå¯¼è‡´ç”Ÿæˆçº¹ç†å¤±è´¥
+        // ÓĞ¿ÉÄÜOOMµ¼ÖÂÉú³ÉÎÆÀíÊ§°Ü
         WmCanvasLog log;
         FillLogInfo(log, "gen_texture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                     glGetError());
@@ -269,13 +258,9 @@ bool TextureMgr::AppendPng(const unsigned char *buffer, unsigned int size, int t
 //
 //    bool success = false;
 //    unsigned char *srcPixels = nullptr;
-//    int error = PngLoader::Instance().DecodePng(
 //        buffer, size, &srcPixels, &srcWidth, &srcHeight);
-//    if (error)
 //    {
-//        LOG_E("[TextureMgr::AppendPng] error %d", error);
 //    }
-//    else
 //    {
 //        TextureGroup &textureGroup = mTextureGroupPool[textureGroupId];
 //        textureGroup.Clear();
@@ -294,27 +279,22 @@ bool TextureMgr::AppendPng(const unsigned char *buffer, unsigned int size, int t
 //        textureGroup.mTileWidth = destWidth;
 //        textureGroup.mTileHeight = destHeight;
 //
-//        if (srcWidth <= maxTextureSize)
 //        {
 //            for (unsigned int y = 0; y < srcHeight; y += destHeight)
 //            {
-//                int h = std::min(srcHeight - y, destHeight);
 //
 //                GLuint glID = CreateTexture(srcPixels + (y * 4), srcWidth, h);
 //                Texture *texture = new Texture(glID, srcWidth, h);
 //                textureGroup.mVecTexture.push_back(texture);
 //            }
 //        }
-//        else
 //        {
 //            GLubyte *destPixels = new GLubyte[4 * destWidth * destHeight];
 //
 //            for (unsigned int y = 0; y < srcHeight; y += destHeight)
 //            {
-//                int h = std::min(srcHeight - y, destHeight);
 //                for (unsigned int x = 0; x < srcWidth; x += destWidth)
 //                {
-//                    int w = std::min(srcWidth - x, destWidth);
 //
 //                    wmcanvas::GetSegmentPixel(srcPixels, srcWidth, x, y, w, h,
 //                                             destPixels);
@@ -329,10 +309,8 @@ bool TextureMgr::AppendPng(const unsigned char *buffer, unsigned int size, int t
 //        success = true;
 //    }
 //
-//    if (srcPixels)
 //    {
 //        free(srcPixels);
 //    }
 //
-//    return success;
 }

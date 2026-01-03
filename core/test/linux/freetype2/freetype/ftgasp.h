@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftgasp.h                                                               */
-/*                                                                         */
-/*    Access of TrueType's `gasp' table (specification).                   */
-/*                                                                         */
-/*  Copyright 2007-2017 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

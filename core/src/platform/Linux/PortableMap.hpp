@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Portable Anymap Format Utility.
  *
  * Utility for loading and saving Portable Anymap Format (PNM) file,
@@ -265,7 +265,6 @@ public:
     }
     // SizeType t = getAsciiSize();
     // SizeType width = _width;
-    // if ( _identifier == P3 || _identifier == P6 ) width *= 3;
     // for ( SizeType i=0; i < t; i++ )
     //{
     // printf("%ld%c", _ascii[i], (((i+1)%width)?' ':'\n'));

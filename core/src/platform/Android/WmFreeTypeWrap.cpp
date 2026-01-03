@@ -1,12 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #include <string>
 #include <support/Log.h>
 #include "WmFreeTypeWrap.h"
@@ -89,7 +80,7 @@ const struct
                             (int)((0.0) * 0x10000L), (int)((1.0) * 0x10000L)};
 
         FT_Error error;
-        // å¦‚æœèµ°çš„æ˜¯è¿™ä¸ªé»˜è®¤å­—ä½“ï¼Œé‚£ä¹ˆé»˜è®¤0é‡‡ç”¨çš„æ˜¯æ—¥æ–‡JP(ä¼šå¯¼è‡´ã€å¤/å…³ã€‘ç­‰ä¸æ­£å¸¸)ï¼Œå¼ºåˆ¶æ”¹ä¸ºèµ°ä¸­æ–‡SCæ‰å¯ä»¥
+        // Èç¹û×ßµÄÊÇÕâ¸öÄ¬ÈÏ×ÖÌå£¬ÄÇÃ´Ä¬ÈÏ0²ÉÓÃµÄÊÇÈÕÎÄJP(»áµ¼ÖÂ¡¾¸´/¹Ø¡¿µÈ²»Õı³£)£¬Ç¿ÖÆ¸ÄÎª×ßÖĞÎÄSC²Å¿ÉÒÔ
         FT_Long faceIndex = 0;
         if (strstr(filename, "NotoSansCJK-Regular.ttc"))
         {
@@ -109,7 +100,7 @@ const struct
 
             for (i = 0; i < num_faces; i++)
             {
-                FT_Done_Face(tmpFace); //è¿™é‡Œé‡Šæ”¾çš„æ˜¯å‰ä¸€æ¬¡ï¼ˆæˆ–å¾ªç¯å¤–çš„ç¬¬ä¸€æ¬¡ï¼‰
+                FT_Done_Face(tmpFace); //ÕâÀïÊÍ·ÅµÄÊÇÇ°Ò»´Î£¨»òÑ­»·ÍâµÄµÚÒ»´Î£©
                 error = FT_Open_Face(library, &args, i, &tmpFace);
                 if (error)
                 {
@@ -125,7 +116,7 @@ const struct
                     }
                 }
             }
-            FT_Done_Face(tmpFace); //è¿™é‡Œé‡Šæ”¾æ˜¯å½“å¾ªç¯çš„æœ€åä¸€æ¬¡ï¼ˆæˆ–æ²¡è¿›å…¥å¾ªç¯è¿‡çš„ç¬¬ä¸€æ¬¡ï¼‰
+            FT_Done_Face(tmpFace); //ÕâÀïÊÍ·ÅÊÇµ±Ñ­»·µÄ×îºóÒ»´Î£¨»òÃ»½øÈëÑ­»·¹ıµÄµÚÒ»´Î£©
         }
 
         error = FT_New_Face(library, filename, faceIndex, face);

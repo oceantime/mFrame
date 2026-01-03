@@ -1,13 +1,3 @@
-/**
-* Created by G-Canvas Open Source Team.
-* Copyright (c) 2017, Alibaba, Inc. All rights reserved.
-*
-* This source code is licensed under the Apache Licence 2.0.
-* For the full copyright and license information, please view
-* the LICENSE file in the root directory of this source tree.
-*/
-
-
 #include "WmCommandDecoderWebGL.hpp"
 #include "WmWebGLRenderContextInner.hpp"
 #include "../webgl/WmWebGLRenderContext.hpp"
@@ -698,7 +688,7 @@ void WmCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDec
         if( mRenderContext->mBindFramebufferNullFunc ){
             mRenderContext->BindFramebufferNull();
         } else {
-            //todo ��ʱ��������-1�����
+            //todo ��ʱ��������-1�����?
             if(v[1] < 0){
                 v[1] = 0;
             }
@@ -1212,14 +1202,12 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
     uint32_t pname = *(buffer.parseValue<uint32_t>());
     switch (pname)
     {
-        //return type - Int32Array 0 element
         case GL_COMPRESSED_TEXTURE_FORMATS:
         {
             //TODO ����
             LOG_E("getParameter not support GL_COMPRESSED_TEXTURE_FORMATS");
             return;
         }
-        //return type - Float32Array 2 element
         case GL_ALIASED_LINE_WIDTH_RANGE:
         case GL_ALIASED_POINT_SIZE_RANGE:
         case GL_DEPTH_RANGE:
@@ -1233,7 +1221,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), fv[0], fv[1], getError());
             break;
         }
-        //return type - Float32Array 4 element
         case GL_BLEND_COLOR:
         case GL_COLOR_CLEAR_VALUE:
         {
@@ -1246,7 +1233,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), fv[0], fv[1], fv[2], fv[3], getError());
             break;
         }
-        //return type - Int32Array 2 element
         case GL_MAX_VIEWPORT_DIMS:
         {
             res.type = WmResType_Int32Ptr;
@@ -1258,7 +1244,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), iv[0], iv[1], getError());
             break;
         }
-        //return type - Int32Array 4 element
         case GL_SCISSOR_BOX:
         case GL_VIEWPORT:
         {
@@ -1271,7 +1256,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), iv[0], iv[1], iv[2], iv[3], getError());
             break;
         }
-        //return type - boolean[4] element
         case GL_COLOR_WRITEMASK:
         {
             res.type = WmResType_BoolPtr;
@@ -1284,7 +1268,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), iv[0], iv[1], iv[2], iv[3], getError());
             break;
         }
-        //return type - string
         case GL_RENDERER:
         case GL_SHADING_LANGUAGE_VERSION:
         case GL_VENDOR:
@@ -1300,7 +1283,6 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
                   WebGL_CONST(pname), charStr, getError());
             break;
         }
-        // return type - float
         case GL_DEPTH_CLEAR_VALUE:
         case GL_LINE_WIDTH:
         case GL_POLYGON_OFFSET_FACTOR:
@@ -1995,7 +1977,6 @@ void WmCommandDecoderWebGL::WebGL_texImage2D_pixels(WmCommandBuffer& buffer, WmD
             data = buffer.parseBuffer(size);
         }
         texImage2D(v[0],v[1],v[2],v[3],v[4],v[5],v[6],type,data);
-        // LOG_E("WebGL_texImage2D_pixels:%i,%i,%i,%i,%i,%i,%i,%i", v[0],v[1],v[2],v[3],v[4],v[5],v[6], type);
         LOG_D("[webgl::exec] texImage2D_pixels(%s,%d,%d,%d,%d,%d,%s,%s,%d), error=%d",
               WebGL_CONST(v[0]), v[1], v[2], v[3], v[4], v[5], WebGL_CONST(v[6]),WebGL_CONST(type), size, getError());
     }

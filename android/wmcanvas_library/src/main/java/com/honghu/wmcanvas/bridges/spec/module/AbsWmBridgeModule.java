@@ -401,7 +401,6 @@ public abstract class AbsWmBridgeModule<JSCallback> implements IWmBridgeModule<J
         // approximate output length
         int length = len / 4 * 3;
 
-        // return an empty array on empty or short input without padding
         if (length == 0) {
             return new byte[0];
         }

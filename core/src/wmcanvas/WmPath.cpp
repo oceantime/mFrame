@@ -1,11 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "WmPath.h"
 #include "WmCanvas2dContext.h"
 #include <cassert>
@@ -395,9 +387,7 @@ void WmPath::ClipRegion(WmCanvasContext *context) {
 }
 
 
-//void WmPath::PushTriangleFanPoints(WmCanvasContext *context, tSubPath* subPath, WmColorRGBA color) {
 //    std::vector<GPoint> &pts = subPath->points;
-//    if (subPath->isClosed) {
 //        context->PushTriangleFanPoints(pts, color);
 //    } else {
 //        // push head point
@@ -796,8 +786,6 @@ void WmPath::GetRectCoverVertex(WmRectf &rect, std::vector<WmVertex> &vertexVec)
 }
 
 
-//void WmPath::RestoreStencilForClip(WmCanvasContext *context) {
-//    if (context->HasClipRegion()) {
 //        // reset stencil
 //        glClear(GL_STENCIL_BUFFER_BIT);
 //        SetStencilForClip();

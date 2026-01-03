@@ -1,11 +1,3 @@
-﻿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "WmGlyphCache.h"
 #include "WmCanvas2dContext.h"
 
@@ -31,7 +23,6 @@ const WmGlyphs *WmGlyphCache::GetGlyph(const std::string& fontName,
         }
         return &(iter->second);
     } else { // no glyph cache
-        // LOG_E("GetGlyph query null:fontName=%s,glyphKey=%s, char=%i, stroke=%i",
         //        fontName.data(), glyphKey.data(), charCode, isStroke);
     }
     return nullptr;

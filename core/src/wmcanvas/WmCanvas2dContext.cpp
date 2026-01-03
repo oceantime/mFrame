@@ -1,12 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #include "WmCanvas2dContext.h"
 #include "WmShaderManager.h"
 #include "../WmCanvas.hpp"
@@ -374,7 +365,6 @@ bool WmCanvasContext::InitializeGLEnvironment()
     // gl initialize
     if (!mIsGLInited)
     {
-        // LOG_E("mIsGLInited");
         ResetStateStack();
         DoSetGlobalCompositeOperation(COMPOSITE_OP_SOURCE_OVER, COMPOSITE_OP_SOURCE_OVER);
         InitializeGLShader();
@@ -541,7 +531,6 @@ void WmCanvasContext::BindPositionVertexBuffer()
 
 void WmCanvasContext::SetTexture(int textureId)
 {
-    // LOG_E("SetTexture %i, current=%i", textureId, mCurrentState->mTextureId);
     if (mCurrentState->mTextureId != textureId)
     {
         // FIXME optim: �޸����� ��Ӧ�ô���flush
@@ -610,7 +599,6 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
     auto iter = mVertexShaderProperties.begin();
     WmShader *prevShader = nullptr;
     bool shaderChanged = false;
-    // LOG_E("SendVertexBufferToGPU: vertex property count=%i", mVertexShaderProperties.size());
     for (; iter != mVertexShaderProperties.end(); ++iter)
     {
         //draw call
@@ -702,15 +690,11 @@ void WmCanvasContext::SaveVertexShaderProperty(int offset, int count)
 {
     // comment out for unvery optim
     //    std::string shaderType = mCurrentState->mShader->GetName();
-    //    int textureId = mCurrentState->mTextureId;
     //    bool merged = false;
     //    auto iter = mVertexShaderProperties.begin();
     //    for (; iter != mVertexShaderProperties.end(); ++iter) {
-    //        int nextOffset = iter->vertexStartIndex + iter->vertexCount;
     //        // LOG_E("SaveVertexShaderProperty offset=%i, nextOffset=%i", offset, nextOffset);
-    //        if (nextOffset == offset) {
     //            // TODO �Ƿ���ͬ״̬���Ż�shader�ж�
-    //            if (shaderType == iter->shaderType && textureId == iter->textureId) {
     //                iter->vertexCount = iter->vertexCount + count;
     //
     //                merged = true;
@@ -720,7 +704,6 @@ void WmCanvasContext::SaveVertexShaderProperty(int offset, int count)
     //        }
     //    }
     //
-    //    if (!merged) {
     //        GCanvasVertexShaderProperty property;
     //        property.shaderType = shaderType;
     //        property.textureId = textureId;
@@ -1070,7 +1053,6 @@ void WmCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, W
 
         if (mVertexBufferIndex + segmentStride >= (WMCANVAS_VERTEX_BUFFER_SIZE - 1))
         {
-            //LOG_D("SendVertexBufferToGPU, vertex count=%d, i=%d, segmentSize=%d", mVertexBufferIndex,
             //    i, segmentSize);
 
             // first add head and SendVertexBufferToGPU
@@ -1242,7 +1224,6 @@ void WmCanvasContext::DoDrawBlur(const WmRectf &rect, float blur, std::function<
     // down sample blur (not effective, do not use it now)
     // float blurStep = blur * scale;
     //   float subBlur = (blur /= 2.5f);
-    //    if ((subBlur * scale) > Step) {
     //        scaleFactor = inverseStep;
     //        DoDrawBlur(rect * inverseStep, subBlur, draw, inputFbo, tmpFbo, scale * inverseStep);
     //    }
@@ -1300,7 +1281,6 @@ void WmCanvasContext::DoDrawShadowToFBO(WmFrameBufferObjectPtr &shadowFbo, float
                                        std::function<void()> draw)
 {
     // draw to fbo
-    // LOG_E("DoDrawShadowToFBO %f, %f", rect.Width() * dpr, rect.Height() * dpr);
     shadowFbo = mFrameBufferPool.GetFrameBuffer(rect.Width() * dpr, rect.Height() * dpr);
     shadowFbo->BindFBO();
 
@@ -1855,7 +1835,6 @@ void WmCanvasContext::SetStrokeStyle(const WmColorRGBA &c)
 
     mCurrentState->mStrokeColor = c;
     //    UseDefaultRenderPipeline();
-    //    if (mCurrentState->mShader != nullptr) {
     //        mCurrentState->mShader->SetHasTexture(0);
     //    }
 }
@@ -2109,7 +2088,6 @@ void WmCanvasContext::DoTranslate(float tx, float ty)
 
 void WmCanvasContext::Save()
 {
-    // LOG_I("call save and the mstatestack size is %d\n", mStateStack.size());
     WmCanvasState *newState = new WmCanvasState(*mCurrentState);
     mStateStack.push_back(newState);
     mCurrentState = newState;
@@ -2364,7 +2342,6 @@ void WmCanvasContext::ClipRegion()
     AfterClip();
 }
 
-//void WmCanvasContext::ClipRegionNew(WmFillRule rule) {
 //    mPath.Close();
 //
 //    WmPath* newPath = new WmPath(mPath);
@@ -2548,7 +2525,6 @@ void WmCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeig
     WmColorRGBA color = BlendWhiteColor(this);
     SetTexture(textureId);
 
-    // if (NeedDrawShadow())
     // {
     //     std::vector<WmVertex> vec;
     //     PushRectangle(dx, dy, dw, dh, sx / textureWidth, sy / textureHeight, sw / textureWidth,
@@ -2561,7 +2537,6 @@ void WmCanvasContext::DrawImage(int textureId, int textureWidth, int textureHeig
     //     });
     //     PushVertexs(vec);
     // }
-    // else
     // {
     PushRectangle(dx, dy, dw, dh, sx / textureWidth, sy / textureHeight, sw / textureWidth,
                   sh / textureHeight, color, mCurrentState->mTransform, flipY);

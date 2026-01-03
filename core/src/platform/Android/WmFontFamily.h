@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #ifndef __WmCanvas_WmFontFamily__
 #define __WmCanvas_WmFontFamily__
 
@@ -19,7 +11,7 @@ namespace wmcanvas
 
 
     /**
-     * font familyå†…çš„å•ä¸ªå­—ä½“
+     * font familyÄÚµÄµ¥¸ö×ÖÌå
      */
     struct WmFontFamilyItem {
 
@@ -50,7 +42,6 @@ public:
 private:
     void InitFontFamily(std::list<const char *> &fontFamily);
 
-//    void matchFontFamilyLegacy(std::list<const char *> &fontFamily);
 
     // @depreated
 //    const char *mFontNormal= nullptr;

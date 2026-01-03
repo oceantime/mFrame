@@ -1,11 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include <GLES/gl.h>
 #include <stdlib.h>
 #include <list>
@@ -360,14 +352,12 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_surfaceChanged(
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_captureGLLayer(
         JNIEnv *je, jclass jc, jstring contextId, jstring callbackId, jint x,
         jint y, jint w, jint h, jstring fileName) {
-//    LOG_D("Canvas JNI::captureGLLayer");
 //
 //    WmCanvasManager *theManager = WmCanvasManager::GetManager();
 //    char *cid = jstringToString(je, contextId);
 //    string canvasId = cid;
 //    free(cid);
 //    WmCanvas *theCanvas = theManager->GetCanvas(canvasId);
-//    if (theCanvas) {
 //        const char *callback = je->GetStringUTFChars(callbackId, 0);
 //        const char *fn = je->GetStringUTFChars(fileName, 0);
 //        theCanvas->QueueCaptureGLLayer(x, y, w, h, callback, fn);

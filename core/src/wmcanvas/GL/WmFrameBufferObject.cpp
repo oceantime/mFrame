@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "WmFrameBufferObject.h"
 #include "../../support/Log.h"
 #include "WmConvert.h"
@@ -35,7 +27,7 @@ WmFrameBufferObject::WmFrameBufferObject(WmFrameBufferObject&& src) {
     this->mWidth = src.mWidth;
     this->mHeight = src.mHeight;
 
-    // æ¸…ç©ºsrcæ•°æ®
+    // Çå¿ÕsrcÊý¾Ý
     src.mFboFrame = 0;
     src.mFboStencil = 0;
     src.mFboTexture.Detach();
@@ -57,7 +49,7 @@ void WmFrameBufferObject::DeleteFBO() {
     }
 
     if (mFboTexture.IsValidate()) {
-        // mFboTextureæžæž„æ–¹æ³•å†…å·²ç»ä¼šdeleteTextures, è¿™é‡Œä¸éœ€è¦å¦‚æ­¤
+        // mFboTextureÎö¹¹·½·¨ÄÚÒÑ¾­»ádeleteTextures, ÕâÀï²»ÐèÒªÈç´Ë
         WmLuint textureId = mFboTexture.GetTextureID();
         glDeleteTextures(1, &textureId);
         mFboTexture.Unbind();
@@ -231,14 +223,12 @@ WmFrameBufferObjectPtr WmFrameBufferObjectPool::GetFrameBuffer(int width, int he
 
     auto i = mPool.find(Key(twoPowerWidth, twoPowerHeight));
     if (i == mPool.end()) {
-        // LOG_E("WmFrameBufferObjectPool not hit");
         WmFrameBufferObjectPtr fbo(new WmFrameBufferObject(), deleter);
         fbo->InitFBO(twoPowerWidth, twoPowerHeight, GColorTransparent);
         fbo->SetSize(width, height);
         // no save to pool ??
         return fbo;
     } else {
-        // LOG_E("WmFrameBufferObjectPool hit, %p", i->second);
     }
 
     WmFrameBufferObjectPtr fbo(i->second, deleter);

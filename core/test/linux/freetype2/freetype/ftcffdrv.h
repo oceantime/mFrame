@@ -1,10 +1,3 @@
-﻿/***************************************************************************/
-/*                                                                         */
-/*  ftcffdrv.h                                                             */
-/*                                                                         */
-/*    FreeType API for controlling the CFF driver (specification only).    */
-/*                                                                         */
-/*  Copyright 2013-2017 by                                                 */
 /*  David Turner, Robert Wilhelm, and Werner Lemberg.                      */
 /*                                                                         */
 /*  This file is part of the FreeType project, and may only be used,       */

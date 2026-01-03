@@ -1,12 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #include "WmSystemFontInformation.h"
 #include "WmFont.h"
 #include "WmCanvas2dContext.h"
@@ -114,7 +105,7 @@ namespace wmcanvas {
             return false;
         }
 
-        //å­—ä½“åè½¬ä¸ºå°å†™ï¼Œé˜²æ­¢ç”¨æˆ·ä¼ å…¥å¤§å°å†™æ··åˆå­—ç¬¦ä¸²
+        //×ÖÌåÃû×ªÎªĞ¡Ğ´£¬·ÀÖ¹ÓÃ»§´«Èë´óĞ¡Ğ´»ìºÏ×Ö·û´®
         int length = strlen(fontName);
         char *newFontName = new char[length + 1];
         strcpy(newFontName, fontName);

@@ -1,4 +1,4 @@
-﻿#define CONTEXT_ES20
+#define CONTEXT_ES20
 #ifndef GBENCHMARK_H
 #define GBENCHMARK_H
 #include <iostream>

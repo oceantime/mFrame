@@ -1,4 +1,4 @@
-﻿#ifndef __FONT_TOOL_HPP__
+#ifndef __FONT_TOOL_HPP__
 #define __FONT_TOOL_HPP__
 
 #include "utils.hpp"
@@ -521,7 +521,6 @@ namespace NSFontTool
     {
       ASSERT(mTypefaceLoader);
 
-      // return typefaces if already in cache
       auto it = mTypefacesCache.find(key);
 
       if (it != mTypefacesCache.end())
@@ -567,7 +566,6 @@ namespace NSFontTool
         return mTypefacesCache[key];
       }
 
-      // return empty result
       return cEmptyFaces;
     }
 

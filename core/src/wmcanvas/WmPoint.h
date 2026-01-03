@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #ifndef WMCANVAS_WMPOINT_H
 #define WMCANVAS_WMPOINT_H
 
@@ -63,7 +55,6 @@ static inline WmPoint PointSub(WmPoint a, WmPoint b)
 //static inline WmPoint PointMultiply(WmPoint a, WmPoint b)
 //{
 //    WmPoint p = {a.x * b.x, a.y * b.y};
-//    return p;
 //}
 
 
@@ -82,7 +73,7 @@ static inline WmPoint PointNormalize(WmPoint v)
 
 struct WmRectf
 {
-    bool isTransformed = false; //åæ ‡æ˜¯å¦ç»è¿‡transformå˜æ¢
+    bool isTransformed = false; //×ø±êÊÇ·ñ¾­¹ıtransform±ä»»
     WmPoint leftTop = {0, 0};
     WmPoint bottomRight = {0, 0};
 

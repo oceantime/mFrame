@@ -1,11 +1,3 @@
-﻿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #ifndef WMCANVAS_UTIL_H
 #define WMCANVAS_UTIL_H
 
@@ -14,8 +6,6 @@
 
 #include <sys/types.h>
 #include <semaphore.h>
-//#include <wmcanvas/GContext2dType.h>
-//#include <wmcanvas/GPoint.h>
 #include <string>
 
 #endif
@@ -52,7 +42,6 @@ namespace wmcanvas {
 
 
 //    inline float Determinate(float a, float b, float c, float d) {
-//        return a*d - b*c;
 //    }
 //
 //

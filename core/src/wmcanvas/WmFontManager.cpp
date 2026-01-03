@@ -24,7 +24,6 @@ WmTexture *WmFontManager::GetOrCreateFontTexture() {
         mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
                                     &logVec);
         // FIXME
-        // LOG_EXCEPTION_VECTOR(mHooks, mContextId.c_str(), logVec);
     }
     return mFontTexture;
 }
@@ -80,7 +79,6 @@ bool WmFontManager::LoadGlyphToTexture(WmGlyphs &glyph) {
             glyph.s1 = (float) (rect.x + rect.width) / texWidth;
             glyph.t1 = (float) (rect.y + rect.height) / texHeight;
 //
-//            LOG_E("LoadGlyphToTexture: s0=%f, t0=%f, s1=%f, s2=%f, textur=%p, bitmapBuffer=%p",
 //                glyph.s0, glyph.t0, glyph.s1, glyph.t1, texture, glyph.bitmapBuffer);
 
             delete[] glyph.bitmapBuffer;

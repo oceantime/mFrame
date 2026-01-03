@@ -1,11 +1,3 @@
-﻿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "Util.h"
 #include "Log.h"
 #include "WmGL.h"
@@ -135,16 +127,13 @@ namespace wmcanvas {
 //        if(denom == 0.0) {  //Lines don't seem to cross
 //            output.x = NAN;
 //            output.y = NAN;
-//            return false;
 //        }
 //
 //        output.x = xnom / denom;
 //        output.y = ynom / denom;
 //        if(!isfinite(output.x) || !isfinite(output.y)) { //Probably a numerical issue
-//            return false;
 //        }
 //
-//        return true; //All OK
 //    }
 
 

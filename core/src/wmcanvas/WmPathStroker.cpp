@@ -1,11 +1,3 @@
-/**
-* Created by G-Canvas Open Source Team.
-* Copyright (c) 2017, Alibaba, Inc. All rights reserved.
-*
-* This source code is licensed under the Apache Licence 2.0.
-* For the full copyright and license information, please view
-* the LICENSE file in the root directory of this source tree.
-*/
 #include "WmPathStroker.h"
 #include "WmPath.h"
 #include "WmCanvas2dContext.h"
@@ -17,8 +9,6 @@
 #define PATH_MIN_VALID 0.01f
 
 
-//void LoWmPathOutLine(const char* prefix, WmPathOutLine& outline) {
-//    LOG_E("%s:from(%f,%f),to(%f,%f),fromIn(%f,%f),fromOut(%f,%f),toIn(%f,%f),toOut(%f,%f)",
 //          prefix, outline.from.x, outline.from.y, outline.to.x, outline.to.y,
 //          outline.fromIn.x, outline.fromIn.y, outline.fromOut.x, outline.fromOut.y,
 //          outline.toIn.x, outline.toIn.y, outline.toOut.x, outline.toOut.y);
@@ -208,7 +198,6 @@ void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, 
     if (angleDiff < 0) {
         angleDiff += PI_1 * 2;
     }
-    // LOG_E("angle check:next=%f, curAngle=%f, diff=%f", nextAngle, curAngle, angleDiff);
     // resolve use which side outline points
     GPoint joinP1,  joinP2;
     if (angleDiff > PI_1) {
@@ -219,7 +208,6 @@ void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, 
         joinP2 = lineTwo.fromIn;
     }
 
-    // LOG_E("choose join point:startNear(%f,%f), endNear(%f,%f)",
     //      joinP1.x, joinP1.y, joinP2.x, joinP2.y);
     if (context->LineJoin() == LINE_JOIN_ROUND) {
         DrawArcForCapOrJoin(context, halfLineWidth, lineTwo.from, joinP1, joinP2, color,
@@ -249,10 +237,8 @@ void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLine
 #endif
 
     float minValue = samePointThreshold;
-    // LOG_E("DrawArcForCapOrJoin p1(%f,%f),center(%f,%f),p3(%f,%f)", p1.x, p1.y, center.x,center.y, p2.x, p2.y);
     if (fixAndroidCompatible && (wmcanvas::IsSamePoint(center, p1, minValue) ||
             wmcanvas::IsSamePoint(p1, p2, minValue) || wmcanvas::IsSamePoint(center, p2, minValue))) {
-        // LOG_E("DrawArcForCapOrJoin ignore by samePoint");
         return;
     }
 
@@ -308,7 +294,6 @@ void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLine
             context->PushTriangle(arcP1, center, arcP2, color, transform, vec);
             arcP1 = arcP2;
 
-            // LOG_E("drawArc Join triangle:p1(%f,%f),center(%f,%f),p2(%f,%f)",
             //        arcP1.x, arcP1.x, center.x, center.y, arcP2.x, arcP2.y);
         }
     }
@@ -341,7 +326,6 @@ void WmPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
     }
     angleGap /= 2;
     float miterLen = fabsf(1 / cosf(angleGap));
-    //LOG_E("miterLen:%f, angleGap=%f", miterLen, angleGap);
     if (miterLen > context->MiterLimit()) {
         context->PushTriangle(center, p1, p2, color, transform);
         return;
@@ -351,7 +335,6 @@ void WmPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
     GPoint miterPoint = { center.x + cosf(miterAngle) * miterLen * halfLineWidth,
             center.y + sinf(miterAngle) * miterLen * halfLineWidth};
 
-    //LOG_E("DrawMiterJoin PushQuad=center(%f,%f),p1(%f,%f) miter(%f,%f),p2(%f,%f)",
     //        center.x, center.y, p1.x, p1.y, miterPoint.x, miterPoint.y, p2.x, p2.y);
     // filter opengl invalid point( eg:oppo a59 )
     if (wmcanvas::IsNanPoint(p1) || wmcanvas::IsNanPoint(p2) ||

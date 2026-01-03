@@ -1,12 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #include "WmFontManagerLinux.hpp"
 
 WmFontManager *WmFontManager::NewInstance()
@@ -22,7 +13,7 @@ WmFontManagerImplementLinux::WmFontManagerImplementLinux(unsigned w, unsigned h)
     ASSERT(tl);
     std::string home(getenv("HOME"));
     std::string path = home + FONT_PATH ".fontcache";
-    //åŠ è½½fontcache
+    //¼ÓÔØfontcache
     ASSERT(tl->importFontCache(path));
 }
 
@@ -162,7 +153,6 @@ GTexture *WmFontManagerImplementLinux::GetOrCreateFontTexture()
         mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
                                     &logVec);
         // FIXME
-        // LOG_EXCEPTION_VECTOR(mHooks, mContextId.c_str(), logVec);
     }
     return mFontTexture;
 }

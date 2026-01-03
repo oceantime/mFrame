@@ -1,4 +1,4 @@
-package com.honghu.wmcanvas.demo;
+﻿package com.honghu.wmcanvas.demo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -42,7 +42,7 @@ public class WebViewActivity extends AppCompatActivity {
     private HandlerThread mCameraThread;
     private boolean mCameraRunning = false;
     
-    // Camera2 相关
+    
     private CameraManager mCameraManager;
     private CameraDevice mCameraDevice;
     private CameraCaptureSession mCaptureSession;
@@ -58,34 +58,34 @@ public class WebViewActivity extends AppCompatActivity {
 
         mWebView = findViewById(R.id.webview);
 
-        // 配置WebView设置
+        
         WebSettings webSettings = mWebView.getSettings();
         
-        // 启用JavaScript
+        
         webSettings.setJavaScriptEnabled(true);
         
-        // 设置支持缩放
+        
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
         
-        // 自适应屏幕
+        
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         
-        // 允许访问文件
+        
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
         
-        // 缓存配置
+        
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         webSettings.setDomStorageEnabled(true);
         
-        // 硬件加�?
+        
         webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         
-        // 设置WebViewClient
+        
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -99,7 +99,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        // 设置WebChromeClient以支持alert等JS对话�?
+        
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -107,12 +107,12 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        // 添加JavaScript接口
+        
         mWebView.addJavascriptInterface(new JsInterface(), "AndroidBridge");
         mWebView.addJavascriptInterface(new WMCanvasBridge(), "WMCanvasAndroid");
 
-        // 加载Canvas Test Suite (CTS) - 支持多种Canvas演示模式切换
-        // CTS提供三种模式：WMCanvas加速列表、GCanvas原生演示、Vue完整应用
+        
+        
         mWebView.loadUrl("file:///android_asset/index.html");
     }
 
@@ -143,20 +143,20 @@ public class WebViewActivity extends AppCompatActivity {
     public class WMCanvasBridge {
         @JavascriptInterface
         public void sendCommands(String commands) {
-            // Canvas命令处理 - 可以在这里实现Native层的Canvas渲染
-            // 目前先记录日志，后续可以扩展为真正的Native渲染
+            
+            
             android.util.Log.d("WMCanvas", "Received commands: " + commands);
         }
 
         @JavascriptInterface
         public void flush() {
-            // 刷新Canvas缓冲�?
+            
             android.util.Log.d("WMCanvas", "Flush canvas buffer");
         }
 
         @JavascriptInterface
         public String start(int width, int height) {
-            // 启动真实相机
+            
             android.util.Log.d("WMCanvas", "Camera start request: " + width + "x" + height);
             runOnUiThread(new Runnable() {
                 @Override
@@ -165,13 +165,13 @@ public class WebViewActivity extends AppCompatActivity {
                     startRealCamera();
                 }
             });
-            // 返回成功的JSON响应
+            
             return "{\"success\":true,\"message\":\"Camera starting\"}";
         }
 
         @JavascriptInterface
         public String stop() {
-            // 停止真实相机
+            
             android.util.Log.d("WMCanvas", "Camera stop request");
             runOnUiThread(new Runnable() {
                 @Override
@@ -179,19 +179,19 @@ public class WebViewActivity extends AppCompatActivity {
                     stopRealCamera();
                 }
             });
-            // 返回成功的JSON响应
+            
             return "{\"success\":true,\"message\":\"Camera stopped\"}";
         }
 
         @JavascriptInterface
         public void setFrameEnabled(boolean enabled) {
-            // 设置帧传输开�?
+            
             android.util.Log.d("WMCanvas", "Frame enabled: " + enabled);
         }
 
         @JavascriptInterface
         public String takePicture() {
-            // 拍照功能
+            
             android.util.Log.d("WMCanvas", "Take picture");
             runOnUiThread(new Runnable() {
                 @Override
@@ -199,13 +199,13 @@ public class WebViewActivity extends AppCompatActivity {
                     Toast.makeText(WebViewActivity.this, "📸 拍照!", Toast.LENGTH_SHORT).show();
                 }
             });
-            // 返回成功的JSON响应
+            
             return "{\"success\":true,\"message\":\"Picture taken\",\"path\":\"/sdcard/picture.jpg\"}";
         }
 
         @JavascriptInterface
         public String getCapabilities() {
-            // 返回WMCanvas支持的功�?
+            
             return "{\"camera\":true,\"canvas2d\":true,\"webgl\":false}";
         }
     }
@@ -214,7 +214,7 @@ public class WebViewActivity extends AppCompatActivity {
      * 启动真实相机
      */
     private void startRealCamera() {
-        // 检查相机权�?
+        
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST);
             return;
@@ -224,15 +224,15 @@ public class WebViewActivity extends AppCompatActivity {
             return;
         }
         
-        // 启动相机线程
+        
         mCameraThread = new HandlerThread("CameraThread");
         mCameraThread.start();
         mCameraHandler = new Handler(mCameraThread.getLooper());
         
-        // 初始化相�?
+        
         mCameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
         try {
-            // 获取后置摄像头ID
+            
             for (String cameraId : mCameraManager.getCameraIdList()) {
                 CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(cameraId);
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
@@ -246,7 +246,7 @@ public class WebViewActivity extends AppCompatActivity {
                 mCameraId = mCameraManager.getCameraIdList()[0];
             }
             
-            // 创建ImageReader用于接收相机�?
+            
             mImageReader = ImageReader.newInstance(
                 mPreviewSize.getWidth(),
                 mPreviewSize.getHeight(),
@@ -271,7 +271,7 @@ public class WebViewActivity extends AppCompatActivity {
                 }
             }, mCameraHandler);
             
-            // 打开相机
+            
             mCameraManager.openCamera(mCameraId, new CameraDevice.StateCallback() {
                 @Override
                 public void onOpened(@NonNull CameraDevice camera) {
@@ -375,7 +375,7 @@ public class WebViewActivity extends AppCompatActivity {
         }
         
         try {
-            // 将YUV_420_888转换为RGB
+            
             ByteBuffer yBuffer = image.getPlanes()[0].getBuffer();
             ByteBuffer uBuffer = image.getPlanes()[1].getBuffer();
             ByteBuffer vBuffer = image.getPlanes()[2].getBuffer();
@@ -389,7 +389,7 @@ public class WebViewActivity extends AppCompatActivity {
             vBuffer.get(nv21, ySize, vSize);
             uBuffer.get(nv21, ySize + vSize, uSize);
             
-            // 转换为Bitmap
+            
             android.graphics.YuvImage yuvImage = new android.graphics.YuvImage(
                 nv21,
                 ImageFormat.NV21,
@@ -409,7 +409,7 @@ public class WebViewActivity extends AppCompatActivity {
             final String base64Image = "data:image/jpeg;base64," + 
                 android.util.Base64.encodeToString(imageBytes, android.util.Base64.NO_WRAP);
             
-            // 发送到JavaScript
+            
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

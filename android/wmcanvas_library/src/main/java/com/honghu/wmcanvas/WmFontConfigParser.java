@@ -1,11 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 package com.honghu.wmcanvas;
 
 import android.os.Build;
@@ -242,7 +234,6 @@ public class WmFontConfigParser {
                 // Get the node list.
                 NodeList nameset = namesetNode.getChildNodes();
                 NodeList fileset = filesetNode.getChildNodes();
-                // Return if no node is found
                 if (nameset == null || fileset == null) {
                     WmLog.w("WmFontConfigParser", "nameset or fileset is empty.");
                     return;

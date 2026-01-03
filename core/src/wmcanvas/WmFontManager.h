@@ -1,11 +1,3 @@
-﻿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #ifndef WMCANVAS_WMFONTMANAGER_H
 #define WMCANVAS_WMFONTMANAGER_H
 
@@ -52,7 +44,6 @@ public:
     // deprecated, use MeasureTextMetrics
     virtual float* MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle)=0;
 
-    //return float[4]，0：top，1：height，2：ascender，3：descender
     float* MeasureTextMetrics(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle);
 
     virtual float* PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext* context);

@@ -1,13 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
-
 #include "WmCanvas2dContext.h"
 #include "CharacterSet.h"
 #include "wmcanvas/WmCanvas2dContext.h"
@@ -24,7 +14,7 @@ void WmCanvasContext::DrawTextWithLength(const char *text, int strLength, float 
     // scaleWidth
     float scaleWidth = 1.0;
     if (fabs(maxWidth - SHRT_MAX) > 1) {
-        // å¯¹maxwidthè¿›è¡Œåˆ¤æ–­ï¼Œé¿å…é»˜è®¤å€¼å¯¼è‡´çš„æ¯æ¬¡measureæ“ä½œ
+        // ¶Ômaxwidth½øÐÐÅÐ¶Ï£¬±ÜÃâÄ¬ÈÏÖµµ¼ÖÂµÄÃ¿´Îmeasure²Ù×÷
         float measureWidth = MeasureTextWidth(text);
         if (measureWidth > maxWidth) {
             scaleWidth = maxWidth / measureWidth;

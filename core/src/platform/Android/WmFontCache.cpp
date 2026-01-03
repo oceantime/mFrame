@@ -1,11 +1,3 @@
-﻿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include <sstream>
 #include <assert.h>
 
@@ -90,17 +82,14 @@ WmFont *WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
     if (fontFamily != nullptr) {
         currentFontFile = fontFamily->MatchFamilyStyle(*fontStyle);
         currentFontFileCopy = currentFontFile;
-        // LOG_E("TrySpecFont MatchFamilyStyle  %s", currentFontFile);
     }
 
     // try match specific font
-    // LOG_E("TrySpecFont defaultSystemLocation");
     if (nullptr != currentFontFile) {
         currentFontFile = TrySpecFont(charCode, currentFontLocation, currentFontFile);
     }
 
     // external font logic
-    // LOG_E("TrySpecFont GetExtraFontLocation");
     const char *extraFontLocation = systemFontInformation->GetExtraFontLocation();
     if (currentFontFile == nullptr && currentFontFileCopy != nullptr && extraFontLocation != nullptr) {
         currentFontFile = TrySpecFont(charCode, extraFontLocation, currentFontFileCopy);
@@ -109,13 +98,11 @@ WmFont *WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
         }
     }
 
-    // LOG_E("TrySpecFont TryDefaultFont");
     if (currentFontFile == nullptr) {
         currentFontFile = TryDefaultFont(charCode, currentFontLocation);
         if (nullptr == currentFontFile) {
             currentFontFile = TryDefaultFallbackFont(charCode, currentFontLocation);
             if (nullptr == currentFontFile) {
-                // LOG_E("TrySpecFont GetClosestFontFamily");
                 currentFontFile = systemFontInformation->GetClosestFontFamily(mFtLibrary, currentFontLocation, charCode,
                                                12, 12, *fontStyle);
             }
@@ -146,7 +133,6 @@ WmFont *WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
         fontKeySet.fontFileName = font->GetFontFileName();
     }
 
-    // LOG_E("GetOrCreateFont: style=%s, font=%s", fontStyleKey.data(), font->GetFontFileName().data());
     return font;
 }
 
@@ -154,7 +140,6 @@ WmFont *WmFontCache::GetOrCreateFont(WmFontStyle *fontStyle, wchar_t charCode) {
 char *WmFontCache::TrySpecFont(const wchar_t charCode,
                               const char *currentFontLocation,
                               const char *specFontFile) {
-    // LOG_E("TrySpecFont: %s, %s", currentFontLocation, specFontFile);
     std::string fontFileFullPath = currentFontLocation;
     if (specFontFile[0] == '/') {
         fontFileFullPath = specFontFile;
@@ -214,7 +199,6 @@ char * WmFontCache::TryFontFile(const wchar_t charCode, const char *fileFullPath
         }
     }
     if (result != nullptr) {
-        // LOG_E("TryFontFile:match, charCode=%i, fontFile=%s", charCode, fileFullPath);
     }
     return result;
 }
@@ -225,7 +209,6 @@ WmFont* WmFontCache::LoadAndSaveFont(const char* fontFileName) {
     font->SetFtLibrary(mFtLibrary);
     // save to font map
     mFontMap.insert(std::pair<std::string, WmFont*>(fontFileName, font));
-    // LOG_E("LoadAndSaveFont:%s, font=%p", fontFileName, font);
     return font;
 }
 

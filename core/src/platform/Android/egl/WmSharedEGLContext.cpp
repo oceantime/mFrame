@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by yuantong on 2018/10/26.
 //
 
@@ -82,8 +82,6 @@ WmSharedEGLContext::WmSharedEGLContext() {
 
 
 bool WmSharedEGLContext::MakeCurrent() {
-//    if (eglContext != nullptr && currentEGLContext == eglContext) {
-//        return true;
 //    }
 
     if (eglContext != nullptr) {

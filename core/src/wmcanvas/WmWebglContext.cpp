@@ -1,12 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
-
 #ifdef WMCANVAS
 
 #include "WmGL.h"
@@ -1248,9 +1239,7 @@ namespace wmcanvas {
     }
 
 //new OpenGL ES not Support
-//int getContextAttributes(WmCanvas *obj, const char *&p)
 //{ // getContextAttributes
-//    return kContinue;
 //}
 
 //new
@@ -1304,7 +1293,6 @@ namespace wmcanvas {
         GLenum pname = tokens[0];
 
         switch (pname) {
-            //return type - GLboolean
             case GL_BLEND:
             case GL_CULL_FACE:
             case GL_DEPTH_TEST:
@@ -1328,7 +1316,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - GLenum
             case GL_ACTIVE_TEXTURE:
             case GL_BLEND_DST_ALPHA:
             case GL_BLEND_DST_RGB:
@@ -1351,7 +1338,6 @@ namespace wmcanvas {
             case GL_STENCIL_PASS_DEPTH_FAIL:
             case GL_STENCIL_PASS_DEPTH_PASS:
 
-                //return type - GLuint
             case GL_STENCIL_BACK_VALUE_MASK:
             case GL_STENCIL_BACK_WRITEMASK:
             case GL_STENCIL_VALUE_MASK:
@@ -1370,7 +1356,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - GLint
             case GL_ALPHA_BITS:
             case GL_BLUE_BITS:
             case GL_DEPTH_BITS:
@@ -1398,7 +1383,6 @@ namespace wmcanvas {
 
             case GL_NUM_COMPRESSED_TEXTURE_FORMATS:
 
-                //return type - Buffer & Program & Texture
             case GL_ARRAY_BUFFER_BINDING:
             case GL_CURRENT_PROGRAM:
             case GL_ELEMENT_ARRAY_BUFFER_BINDING:
@@ -1420,7 +1404,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - GLFloat
             case GL_DEPTH_CLEAR_VALUE:
             case GL_LINE_WIDTH:
             case GL_POLYGON_OFFSET_FACTOR:
@@ -1440,7 +1423,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - IntArray 2 element
             case GL_MAX_VIEWPORT_DIMS: //	Int32Array (with 2 elements)
             {
                 GLint values[2];
@@ -1461,7 +1443,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - IntArray 4 element
             case GL_SCISSOR_BOX: //Int32Array (with 4 elements)
             case GL_VIEWPORT:    //Int32Array (with 4 elements)
             {
@@ -1508,7 +1489,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - FloatArray 2 element
             case GL_ALIASED_LINE_WIDTH_RANGE: //Float32Array (with 2 elements)
             case GL_ALIASED_POINT_SIZE_RANGE: //Float32Array (with 2 elements)
             case GL_DEPTH_RANGE: {
@@ -1529,7 +1509,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - FloatArray 4 element
             case GL_BLEND_COLOR:              //Float32Array (with 4 values)
             case GL_COLOR_CLEAR_VALUE:        //Float32Array (with 4 values)
             {
@@ -1551,7 +1530,6 @@ namespace wmcanvas {
                 break;
             }
 
-                //return type - String
             case GL_RENDERER:
             case GL_SHADING_LANGUAGE_VERSION:
             case GL_VENDOR:
@@ -2374,12 +2352,10 @@ namespace wmcanvas {
 #endif
 
 #ifdef ANDROID
-//        int next_cmd = atoi(p);
 //        jint flush_flag = 1;
 //
 //        // if next cmd still is texImage2D, can unflush load cmd with
 //        // java.primise has the same  param num .
-//        if ((next_cmd >= 1) && (next_cmd <= WEBGL_API_COUNT) &&
 //            (g_webglFuncMap[next_cmd] == texImage2D))
 //        {
 //            flush_flag = 0;
@@ -2393,7 +2369,6 @@ namespace wmcanvas {
 //        jstring jparam = je->NewStringUTF(src.c_str());
 //        jint jflipy = obj->mPixelFlipY;
 //
-//        LOG_D("[webgl::exec] glTexImage2D(%s, 0, %s, 0)", target, src.c_str());
 //        je->CallVoidMethod(jCanvasRender, jmid, jparam, target, jflipy,
 //                           flush_flag);
 

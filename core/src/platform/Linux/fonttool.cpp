@@ -1,4 +1,4 @@
-﻿#include "FontTool.hpp"
+#include "FontTool.hpp"
 #include "utils.hpp"
 #include "argh.h"
 #include <codecvt>

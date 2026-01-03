@@ -1,11 +1,3 @@
-/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 package com.honghu.wmcanvas.util;
 
 public final class WmCanvasBase64 {
@@ -18,7 +10,6 @@ public final class WmCanvasBase64 {
     // approximate output length
     int length = len / 4 * 3;
 
-    // return an empty array on empty or short input without padding
     if (length == 0) {
       return new byte[0];
     }

@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include <ctype.h>
 #include <support/Log.h>
 
@@ -36,8 +28,8 @@ namespace wmcanvas
         WmFontStyle::Weight weight = fontStyle.GetWeight();
         WmFontStyle::Variant variant = fontStyle.GetVariant();
 
-        // webå±æ€§æ”¶æ•›
-        // Androidå†…obliqueä¸italicä¸€æ ·
+        // webÊôĞÔÊÕÁ²
+        // AndroidÄÚobliqueÓëitalicÒ»Ñù
         if (style == WmFontStyle::Style::OBLIQUE) {
             style = WmFontStyle::Style::ITALIC;
         }
@@ -52,14 +44,13 @@ namespace wmcanvas
         WmFontFamilyItem* closetItem = nullptr;
         for (auto it = fontItems.begin(); it != fontItems.end(); ++it) {
             WmFontFamilyItem* item = &(*it);
-            // LOG_E("match fontStyle: familyt item=%s, style=%i, weight=%i", item->font_file_name, item->style, item->weight);
             if (item != nullptr) {
                 closetItem = item;
                 if (item->style == style) {
-                    if (closetItem == nullptr) { // é€‰æ‹©é¦–ä¸ªstyleåŒ¹é…çš„item
+                    if (closetItem == nullptr) { // Ñ¡ÔñÊ×¸östyleÆ¥ÅäµÄitem
                         closetItem = item;
                     }
-                    if (item->weight == weight) { // style & weight éƒ½åŒ¹é…çš„item
+                    if (item->weight == weight) { // style & weight ¶¼Æ¥ÅäµÄitem
                         closetItem = item;
                         if (item->variant == variant) {
                             break;
@@ -70,16 +61,14 @@ namespace wmcanvas
         }
 
         if (closetItem != nullptr) {
-            // LOG_E("match fontStyle (%s) = file (%s) ", fontStyle.GetFullFontStyle().data(), closetItem->font_file_name);
             return closetItem->font_file_name;
         }
-        // LOG_E("match fontStyle (%s) = file empty ", fontStyle.GetFullFontStyle().data());
         return "";
     }
 
 
     /**
-     * å°†xmlä¸­çš„fontåç§° è½¬åŒ–ä¸ºfont family item
+     * ½«xmlÖĞµÄfontÃû³Æ ×ª»¯Îªfont family item
      */
     void WmFontFamily::InitFontFamily(std::list<const char *> &fontFamily) {
         fontItems.clear();
@@ -91,7 +80,7 @@ namespace wmcanvas
         // variant
         const char *var_smallcaps = "smallcaps";
 
-        // weightï¼ˆlighter,bolder,extra-light,extra-boldç­‰ä¸æ”¯æŒ)
+        // weight£¨lighter,bolder,extra-light,extra-boldµÈ²»Ö§³Ö)
         const char *weight_thin = "thin";
         const char *weight_light = "light";
         const char *weight_regular = "regular";

@@ -1,4 +1,4 @@
-ï»¿//
+//
 // Created by yuantong on 2018/4/17.
 //
 
@@ -59,7 +59,7 @@ bool WmEGLPbufferContext::InitEGLContext() {
     isES3Supported = is3;
 
 
-    // åˆ‡æ¢åˆ°ésharedæ¨¡å¼ï¼Œå› ä¸ºéƒ¨åˆ†è®¾å¤‡åˆ›å»ºçš„åŸºäºsharedContextçš„Pbufferæ•°é‡è¾ƒå°‘
+    // ÇĞ»»µ½·ÇsharedÄ£Ê½£¬ÒòÎª²¿·ÖÉè±¸´´½¨µÄ»ùÓÚsharedContextµÄPbufferÊıÁ¿½ÏÉÙ
     if (eglContext == EGL_NO_CONTEXT) {
         eglSharedContext = nullptr;
         eglContext = eglCreateContext(eglDisplay, eglConfig, nullptr, context_attribs);
@@ -100,7 +100,7 @@ bool WmEGLPbufferContext::InitEGLSurface() {
                               24,
                               EGL_STENCIL_SIZE,
                                   8,
-            // å¼€å¯msaa
+            // ¿ªÆômsaa
             EGL_SAMPLE_BUFFERS, 1,
             EGL_SAMPLES, 4,
                               EGL_NONE};
@@ -183,8 +183,6 @@ void WmEGLPbufferContext::Pause() {
 
 
 bool WmEGLPbufferContext::MakeCurrent() {
-//    if (eglContext != nullptr && currentEGLContext == eglContext) {
-//        return true;
 //    }
 
     if (eglContext != nullptr) {
@@ -207,7 +205,7 @@ bool WmEGLPbufferContext::MakeCurrent() {
 
 
 /**
- * ç¦»å±canavs é»˜è®¤ä½¿ç”¨FBOï¼Œå¯æé«˜drawCanvasæ•ˆç‡
+ * ÀëÆÁcanavs Ä¬ÈÏÊ¹ÓÃFBO£¬¿ÉÌá¸ßdrawCanvasĞ§ÂÊ
  */
 bool WmEGLPbufferContext::IsPreserveBackBuffer() {
     return false;

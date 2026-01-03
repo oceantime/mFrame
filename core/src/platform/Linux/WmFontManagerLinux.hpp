@@ -1,4 +1,4 @@
-ï»¿#include "WmFontManager.h"
+#include "WmFontManager.h"
 #include "WmCanvas2dContext.h"
 #include <assert.h>
 #include "support/Log.h"
@@ -23,13 +23,13 @@ public:
 
     float MeasureText(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override;
 
-    //ç©ºå®žçŽ°
+    //¿ÕÊµÏÖ
     float *MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override
     {
         return nullptr;
     }
 
-    //ç©ºå®žçŽ°
+    //¿ÕÊµÏÖ
     float *PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext *context) override
     {
         return nullptr;

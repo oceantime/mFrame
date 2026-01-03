@@ -10,7 +10,6 @@
 #include <wmcanvas/GPoint.h>
 #include "WmManager.h"
 
-//using namespace wm::wm_engine::WmCanvas;
 using namespace std;
 using namespace WmCanvas;
 

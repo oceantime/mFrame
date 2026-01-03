@@ -1,11 +1,3 @@
-ï»¿/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "WmFont.h"
 #include "WmCanvas.hpp"
 #include "WmFontCache.h"
@@ -46,7 +38,6 @@ WmTexture* WmFontManagerAndroid::GetOrCreateFontTexture() {
         mFontTexture = new WmTexture(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE,
                 GL_ALPHA, nullptr, &logVec);
         // FIXME
-        // LOG_EXCEPTION_VECTOR(mHooks, "SharedFontTexture", logVec);
     }
     return mFontTexture;
 }
@@ -107,12 +98,12 @@ float *WmFontManagerAndroid::MeasureTextWidthHeight(const char *text, unsigned i
     }
 
     if (fonts.size() > 0) {
-        //æ–‡æœ¬é«˜åº¦æœ¬æ¥åº”è¯¥åŽ»é™¤ä¸Šä¸‹ç©ºç™½çš„ï¼Œä½†æ˜¯laya1ï¼Œè¿˜æ˜¯æœ‰ç‚¹é—®é¢˜ï¼Œæ‰€ä»¥è¿™ä¸ªé«˜åº¦ï¼Œè¿˜æ˜¯ç”¨è€çš„é«˜åº¦ascender+descenderç»å¯¹å€¼
+        //ÎÄ±¾¸ß¶È±¾À´Ó¦¸ÃÈ¥³ýÉÏÏÂ¿Õ°×µÄ£¬µ«ÊÇlaya1£¬»¹ÊÇÓÐµãÎÊÌâ£¬ËùÒÔÕâ¸ö¸ß¶È£¬»¹ÊÇÓÃÀÏµÄ¸ß¶Èascender+descender¾ø¶ÔÖµ
         maxHeight = fabs(fonts[0]->GetMetrics()->ascender / sy) +
                     fabs(fonts[0]->GetMetrics()->descender / sy);
     }
 
-    // å¦‚æžœæ»¡è¶³æ¡ä»¶åˆ™ï¼Œè¿”å›žä¸å¸¦ç©ºç™½çš„æ–‡å­—é«˜åº¦
+    // Èç¹ûÂú×ãÌõ¼þÔò£¬·µ»Ø²»´ø¿Õ°×µÄÎÄ×Ö¸ß¶È
     float m_ascender = fontStyle->GetAscender();
     float m_descender = fontStyle->GetDescender();
     if (m_ascender > 0 && m_descender > 0) {
@@ -229,7 +220,7 @@ void WmFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vec
     auto ascender = font_metrics->ascender / sy;
     auto descender = font_metrics->descender / sy;
 
-    //m_ascenderï¼Œm_descenderä¸èƒ½é™¤scaleï¼Œå› ä¸ºåœ¨PreMeasureTextHeightèŽ·å–è¿™ä¸¤ä¸ªå€¼æ—¶ï¼Œå·²ç»é™¤è¿‡äº†
+    //m_ascender£¬m_descender²»ÄÜ³ýscale£¬ÒòÎªÔÚPreMeasureTextHeight»ñÈ¡ÕâÁ½¸öÖµÊ±£¬ÒÑ¾­³ý¹ýÁË
     float m_ascender = fontStyle->GetAscender();
     float m_descender = fontStyle->GetDescender();
 

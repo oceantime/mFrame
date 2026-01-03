@@ -1,11 +1,3 @@
-Ôªø/**
- * Created by G-Canvas Open Source Team.
- * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
- *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information, please view
- * the LICENSE file in the root directory of this source tree.
- */
 #include "WmConvert.h"
 #include <ctype.h>
 #include <map>
@@ -408,7 +400,7 @@ namespace wmcanvas {
                           (hex >> 16) / 255.0f, 1.0};
             }
         } else {
-            // ÊåâÂêçÁß∞query
+            // ∞¥√˚≥∆query
         //     std::string colorVal = value;
         //     colorVal.erase(std::remove(colorVal.begin(), colorVal.end(), ' '), colorVal.end());
         //     std::transform(colorVal.begin(), colorVal.end(), colorVal.begin(),
@@ -420,7 +412,7 @@ namespace wmcanvas {
                 return iter->second;
             }
 
-            // TODO rgba Ê†ºÂºè
+            // TODO rgba ∏Ò Ω
             int length = (int) strlen(value);
             if (strncmp(value, "rgb(", 4) == 0 || strncmp(value, "rgba(", 5) == 0) {
                 int current = 0;
@@ -819,7 +811,7 @@ namespace wmcanvas {
         }
 
 
-        // ÊåâÂêçÁß∞query
+        // ∞¥√˚≥∆query
         std::string colorVal = value;
         colorVal.erase(std::remove(colorVal.begin(), colorVal.end(), ' '), colorVal.end());
         std::transform(colorVal.begin(), colorVal.end(), colorVal.begin(),

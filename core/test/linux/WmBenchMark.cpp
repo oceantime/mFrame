@@ -1,4 +1,4 @@
-﻿#include "WmBenchMark.h"
+#include "WmBenchMark.h"
 #include <fstream>
 #include <cmath> 
 GBenchMark::GBenchMark(int width, int height) : mWidth(width), mHeight(height)
