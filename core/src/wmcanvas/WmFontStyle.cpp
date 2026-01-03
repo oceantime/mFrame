@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -53,7 +53,7 @@ namespace wmcanvas {
         }
 
         std::string newFont(font);
-        GStrSeparator sepStr;
+        WmStrSeparator sepStr;
         short ct = sepStr.SepStrBySpace((char *) newFont.c_str(), 5);
         char **parts = sepStr.GetSepArray();
         int index = 0;

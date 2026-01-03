@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -13,9 +13,9 @@
 
 namespace wmcanvas
 {
-GStrSeparator::GStrSeparator() { memset(mPointers, 0, sizeof(mPointers)); }
+WmStrSeparator::WmStrSeparator() { memset(mPointers, 0, sizeof(mPointers)); }
 
-short GStrSeparator::SepStrByCharArray(char *str, const char *byteArray,
+short WmStrSeparator::SepStrByCharArray(char *str, const char *byteArray,
                                         short byteCount, short maxCount)
 {
     if (maxCount < 0)
@@ -49,7 +49,7 @@ short GStrSeparator::SepStrByCharArray(char *str, const char *byteArray,
     return sepCount;
 };
 
-short GStrSeparator::SepStrBySpace(char *str, short maxCount)
+short WmStrSeparator::SepStrBySpace(char *str, short maxCount)
 {
     if (maxCount < 0)
     {

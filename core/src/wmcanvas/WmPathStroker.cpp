@@ -17,7 +17,7 @@
 #define PATH_MIN_VALID 0.01f
 
 
-//void LogPathOutline(const char* prefix, GPathOutLine& outline) {
+//void LoWmPathOutLine(const char* prefix, WmPathOutLine& outline) {
 //    LOG_E("%s:from(%f,%f),to(%f,%f),fromIn(%f,%f),fromOut(%f,%f),toIn(%f,%f),toOut(%f,%f)",
 //          prefix, outline.from.x, outline.from.y, outline.to.x, outline.to.y,
 //          outline.fromIn.x, outline.fromIn.y, outline.fromOut.x, outline.fromOut.y,
@@ -25,7 +25,7 @@
 //}
 
 
-static void CalculateOutlinePoint(GPathOutLine& outline, float outOffsetX, float outOffsetY) {
+static void CalculateOutlinePoint(WmPathOutLine& outline, float outOffsetX, float outOffsetY) {
     outline.fromIn.x = outline.from.x - outOffsetX;
     outline.fromIn.y = outline.from.y + outOffsetY;
     outline.fromOut.x = outline.from.x + outOffsetX;
@@ -38,7 +38,7 @@ static void CalculateOutlinePoint(GPathOutLine& outline, float outOffsetX, float
 }
 
 
-static void CalculateOutlinePoint(float halfLineWidthTrans, GPathOutLine& outline) {
+static void CalculateOutlinePoint(float halfLineWidthTrans, WmPathOutLine& outline) {
     float deltaX = outline.to.x - outline.from.x;
     float deltaY = outline.to.y - outline.from.y;
     float length = sqrtf(deltaX * deltaX + deltaY * deltaY);
@@ -97,8 +97,8 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
 
         bool subPathIsClosed = (*iter)->isClosed;
         bool firstInSub = true;
-        GPathOutLine outline;
-        GPathOutLine nextOutline;
+        WmPathOutLine outline;
+        WmPathOutLine nextOutline;
 
         GPoint firstPoint = *(pts.begin());
         if (!isSimilarity) {
@@ -125,7 +125,7 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
             // step1: draw line
             context->PushQuad(outline.fromIn, outline.toIn, outline.toOut, outline.fromOut, color,
                               outputTransform, vertexVec);
-            // LogPathOutline("pushquad outline: ", outline);
+            // LoWmPathOutLine("pushquad outline: ", outline);
 
             // step2: draw head cap
             if (firstInSub) {
@@ -199,7 +199,7 @@ void WmPathStroker::FilterTooClosePoints(std::vector<WmPoint> &pts) {
 
 
 
-void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
+void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, WmPathOutLine& lineOne, WmPathOutLine& lineTwo,
                                 WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vertexVec) {
     // angle changed
     float nextAngle = wmcanvas::CalcPointAngle(lineTwo.to, lineTwo.from);

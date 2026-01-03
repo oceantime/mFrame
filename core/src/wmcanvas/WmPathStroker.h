@@ -26,7 +26,7 @@ class WmCanvasContext;
  *     |              |
  *    [in]            [in]
  */
-struct GPathOutLine {
+struct WmPathOutLine {
     WmPoint from;
     WmPoint to;
 
@@ -39,6 +39,8 @@ struct GPathOutLine {
     WmPoint toIn;
     WmPoint toOut;
 };
+
+using GPathOutLine = WmPathOutLine;
 
 
 
@@ -55,7 +57,7 @@ private:
     void FilterTooClosePoints(std::vector<WmPoint> &pts);
 
 
-    void DrawLineJoin(WmCanvasContext* context, float halfLineWidth, GPathOutLine& lineOne, GPathOutLine& lineTwo,
+    void DrawLineJoin(WmCanvasContext* context, float halfLineWidth, WmPathOutLine& lineOne, WmPathOutLine& lineTwo,
                              WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vertexVec);
 
 

@@ -117,4 +117,4 @@ inline WmRectf operator *(const WmRectf &rect, float factor )
 
 
 
-#endif /* GCANVAS_GPOINT_H */
+#endif /* WMCANVAS_WMPOINT_H */
