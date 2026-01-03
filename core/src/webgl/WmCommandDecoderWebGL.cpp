@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -29,23 +29,23 @@ using WebGL::isVertexArrayOES;
 using WebGL::bindVertexArrayOES;
 
 //#define WEBGL_FUNC_ARRAY_ASSIGN(NAME) \
-//mWebGLFuncs[GWEBGL_FUNC_##NAME] = std::bind(&GCommandDecoderWebGL::WebGL_##NAME, this, std::placeholders::_1, std::placeholders::_2);
+//mWebGLFuncs[WMWEBGL_FUNC_##NAME] = std::bind(&WmCommandDecoderWebGL::WebGL_##NAME, this, std::placeholders::_1, std::placeholders::_2);
 
 
 #define WEBGL_SYNC_FUNC_ID_INSERT(NAME) \
-mWebGLSyncFuncSet.insert(GWEBGL_FUNC_##NAME);
+mWebGLSyncFuncSet.insert(WMWEBGL_FUNC_##NAME);
 
-//无返回值的，参数0个
+//�޷���ֵ�ģ�����0��
 #define WEBGL_FUNC_IMP_PARAM_0(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     NAME(); \
     LOG_D("[webgl::exec] %s(), error=%d", #NAME,getError()); \
 }
 
-//无返回值的，参数1个int
+//�޷���ֵ�ģ�����1��int
 #define WEBGL_FUNC_IMP_PARAM_1_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t *v = buffer.parseValue<uint32_t>(); \
     if( !v ) return; \
@@ -54,7 +54,7 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
 }
 
 #define WEBGL_FUNC_IMP_PARAM_1_INT_VALUE(NAME, FUNC) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t *v = buffer.parseValue<uint32_t>(); \
     if( !v ) return; \
@@ -62,9 +62,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%d), error=%d", #NAME,*v,getError()); \
 }
 
-//无返回值的，参数2个int
+//�޷���ֵ�ģ�����2��int
 #define WEBGL_FUNC_IMP_PARAM_2_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t v[2]; \
     bool ret = buffer.parseArray<uint32_t>(v, 2); \
@@ -73,9 +73,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%d,%d), error=%d", #NAME,v[0],v[1],getError()); \
 }
 
-//无返回值的，参数3个int
+//�޷���ֵ�ģ�����3��int
 #define WEBGL_FUNC_IMP_PARAM_3_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t v[3]; \
     bool ret = buffer.parseArray<uint32_t>(v, 3); \
@@ -84,9 +84,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],getError()); \
 }
 
-//无返回值的，参数4个int
+//�޷���ֵ�ģ�����4��int
 #define WEBGL_FUNC_IMP_PARAM_4_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t v[4]; \
     bool ret = buffer.parseArray<uint32_t>(v, 4); \
@@ -95,9 +95,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%d,%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],v[3],getError()); \
 }
 
-//无返回值的，参数5个int
+//�޷���ֵ�ģ�����5��int
 #define WEBGL_FUNC_IMP_PARAM_5_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t v[5]; \
     bool ret = buffer.parseArray<uint32_t>(v, 5); \
@@ -106,9 +106,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%d,%d,%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],v[3],v[4],getError()); \
 }
 
-//无返回值的，参数8个int
+//�޷���ֵ�ģ�����8��int
 #define WEBGL_FUNC_IMP_PARAM_8_INT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     uint32_t v[8]; \
     bool ret = buffer.parseArray<uint32_t>(v, 8); \
@@ -118,9 +118,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
 }
 
 
-//无返回值的，参数1个float
+//�޷���ֵ�ģ�����1��float
 #define WEBGL_FUNC_IMP_PARAM_1_FLOAT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     float *v = buffer.parseValue<float>(); \
     if( !v ) return; \
@@ -129,7 +129,7 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
 }
 
 #define WEBGL_FUNC_IMP_PARAM_1_FLOAT_VALUE(NAME, FUNC) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     float *v = buffer.parseValue<float>(); \
     if( !v ) return; \
@@ -137,9 +137,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%f), error=%d", #NAME,v[0],,getError()); \
 }
 
-//无返回值的，参数2个float
+//�޷���ֵ�ģ�����2��float
 #define WEBGL_FUNC_IMP_PARAM_2_FLOAT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     float v[2]; \
     bool ret = buffer.parseArray<float>(v, 2); \
@@ -149,7 +149,7 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
 }
 
 #define WEBGL_FUNC_IMP_PARAM_2_FLOAT_VALUE(NAME, FUNC) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     float v[2]; \
     bool ret = buffer.parseArray<float>(v, 2); \
@@ -158,9 +158,9 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%f,%f,%f), error=%d", #NAME,v[0],v[1],v[2],getError()); \
 }
 
-//无返回值的，参数4个float
+//�޷���ֵ�ģ�����4��float
 #define WEBGL_FUNC_IMP_PARAM_4_FLOAT(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     float v[4]; \
     bool ret = buffer.parseArray<float>(v, 4); \
@@ -169,17 +169,17 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
     LOG_D("[webgl::exec] %s(%f,%f,%f,%f), error=%d", #NAME,v[0],v[1],v[2],v[3],getError()); \
 }
 
-//错误E
+//����E
 #define DECODER_PARSE_ERROR LOG_E("%s parse failed !!", __FUNCTION__);
 
 
-//static GCommandFuncNew mWebGLFuncs[GWEBGL_FUNC_COUNT] = { nullptr };
+//static WmCommandFuncPtr mWebGLFuncs[WMWEBGL_FUNC_COUNT] = { nullptr };
 
 
-//std::unordered_set<unsigned int> GCommandDecoderWebGL::mWebGLSyncFuncSet = {};
-static WebGL::GWebGLRenderContext* mRenderContext;
+//std::unordered_set<unsigned int> WmCommandDecoderWebGL::mWebGLSyncFuncSet = {};
+static WebGL::WmWebGLRenderContext* mRenderContext;
 
-GCommandDecoderWebGL::GCommandDecoderWebGL(WebGL::GWebGLRenderContext* renderContext)
+WmCommandDecoderWebGL::WmCommandDecoderWebGL(WebGL::WmWebGLRenderContext* renderContext)
 {
     mRenderContext = renderContext;
 #ifdef DEBUG
@@ -190,12 +190,12 @@ GCommandDecoderWebGL::GCommandDecoderWebGL(WebGL::GWebGLRenderContext* renderCon
     InitCommands();
 }
 
-GCommandDecoderWebGL::~GCommandDecoderWebGL()
+WmCommandDecoderWebGL::~WmCommandDecoderWebGL()
 {
 
 }
 
-void GCommandDecoderWebGL::InitCommands()
+void WmCommandDecoderWebGL::InitCommands()
 {
     //init WebGL1.0 API
 //    WEBGL_FUNC_ARRAY_ASSIGN(activeTexture);
@@ -397,154 +397,152 @@ void GCommandDecoderWebGL::InitCommands()
 }
 
 
-bool GCommandDecoderWebGL::Decode(WmCommandBuffer& buffer, WmDecodeRes& res)
+bool WmCommandDecoderWebGL::Decode(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
-    static WmCommandFuncPtr mWebGLFuncs[GWEBGL_FUNC_COUNT] = {
+    static WmCommandFuncPtr mWebGLFuncs[WMWEBGL_FUNC_COUNT] = {
         nullptr,
-        &GCommandDecoderWebGL::WebGL_activeTexture,
-        &GCommandDecoderWebGL::WebGL_attachShader,
-        &GCommandDecoderWebGL::WebGL_bindAttribLocation,
-        &GCommandDecoderWebGL::WebGL_bindBuffer,
-        &GCommandDecoderWebGL::WebGL_bindFramebuffer,
-        &GCommandDecoderWebGL::WebGL_bindRenderbuffer,
-        &GCommandDecoderWebGL::WebGL_bindTexture,
-        &GCommandDecoderWebGL::WebGL_blendColor,
-        &GCommandDecoderWebGL::WebGL_blendEquation,
-        &GCommandDecoderWebGL::WebGL_blendEquationSeparate,
-        &GCommandDecoderWebGL::WebGL_blendFunc,
-        &GCommandDecoderWebGL::WebGL_blendFuncSeparate,
-        &GCommandDecoderWebGL::WebGL_bufferData_size,
-        &GCommandDecoderWebGL::WebGL_bufferData_buffer,
-        &GCommandDecoderWebGL::WebGL_bufferSubData,
-        &GCommandDecoderWebGL::WebGL_checkFramebufferStatus,
-        &GCommandDecoderWebGL::WebGL_clear,
-        &GCommandDecoderWebGL::WebGL_clearColor,
-        &GCommandDecoderWebGL::WebGL_clearDepth,
-        &GCommandDecoderWebGL::WebGL_clearStencil,
-        &GCommandDecoderWebGL::WebGL_colorMask,
-        &GCommandDecoderWebGL::WebGL_commit,
-        &GCommandDecoderWebGL::WebGL_compileShader,
-        &GCommandDecoderWebGL::WebGL_compressedTexImage2D,
-        &GCommandDecoderWebGL::WebGL_compressedTexSubImage2D,
-        &GCommandDecoderWebGL::WebGL_copyTexImage2D,
-        &GCommandDecoderWebGL::WebGL_copyTexSubImage2D,
-        &GCommandDecoderWebGL::WebGL_createBuffer,
-        &GCommandDecoderWebGL::WebGL_createFramebuffer,
-        &GCommandDecoderWebGL::WebGL_createProgram,
-        &GCommandDecoderWebGL::WebGL_createRenderbuffer,
-        &GCommandDecoderWebGL::WebGL_createShader,
-        &GCommandDecoderWebGL::WebGL_createTexture,
-        &GCommandDecoderWebGL::WebGL_cullFace,
-        &GCommandDecoderWebGL::WebGL_deleteBuffer,
-        &GCommandDecoderWebGL::WebGL_deleteFramebuffer,
-        &GCommandDecoderWebGL::WebGL_deleteProgram,
-        &GCommandDecoderWebGL::WebGL_deleteRenderbuffer,
-        &GCommandDecoderWebGL::WebGL_deleteShader,
-        &GCommandDecoderWebGL::WebGL_deleteTexture,
-        &GCommandDecoderWebGL::WebGL_depthFunc,
-        &GCommandDecoderWebGL::WebGL_depthMask,
-        &GCommandDecoderWebGL::WebGL_depthRange,
-        &GCommandDecoderWebGL::WebGL_detachShader,
-        &GCommandDecoderWebGL::WebGL_disable,
-        &GCommandDecoderWebGL::WebGL_disableVertexAttribArray,
-        &GCommandDecoderWebGL::WebGL_drawArrays,
-        &GCommandDecoderWebGL::WebGL_drawElements,
-        &GCommandDecoderWebGL::WebGL_enable,
-        &GCommandDecoderWebGL::WebGL_enableVertexAttribArray,
-        &GCommandDecoderWebGL::WebGL_finish,
-        &GCommandDecoderWebGL::WebGL_flush,
-        &GCommandDecoderWebGL::WebGL_framebufferRenderbuffer,
-        &GCommandDecoderWebGL::WebGL_framebufferTexture2D,
-        &GCommandDecoderWebGL::WebGL_frontFace,
-        &GCommandDecoderWebGL::WebGL_generateMipmap,
-        &GCommandDecoderWebGL::WebGL_getActiveAttrib,
-        &GCommandDecoderWebGL::WebGL_getActiveUniform,
-        &GCommandDecoderWebGL::WebGL_getAttachedShaders,
-        &GCommandDecoderWebGL::WebGL_getAttribLocation,
-        &GCommandDecoderWebGL::WebGL_getBufferParameter,
-        &GCommandDecoderWebGL::WebGL_getContextAttributes,
-        &GCommandDecoderWebGL::WebGL_getError,
-        &GCommandDecoderWebGL::WebGL_getExtension,
-        &GCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter,
-        &GCommandDecoderWebGL::WebGL_getParameter,
-        &GCommandDecoderWebGL::WebGL_getProgramInfoLog,
-        &GCommandDecoderWebGL::WebGL_getProgramParameter,
-        &GCommandDecoderWebGL::WebGL_getRenderbufferParameter,
-        &GCommandDecoderWebGL::WebGL_getShaderInfoLog,
-        &GCommandDecoderWebGL::WebGL_getShaderParameter,
-        &GCommandDecoderWebGL::WebGL_getShaderPrecisionFormat,
-        &GCommandDecoderWebGL::WebGL_getShaderSource,
-        &GCommandDecoderWebGL::WebGL_getSupportedExtensions,
-        &GCommandDecoderWebGL::WebGL_getTexParameter,
-        &GCommandDecoderWebGL::WebGL_getUniform,
-        &GCommandDecoderWebGL::WebGL_getUniformLocation,
-        &GCommandDecoderWebGL::WebGL_getVertexAttrib,
-        &GCommandDecoderWebGL::WebGL_getVertexAttribOffset,
-        &GCommandDecoderWebGL::WebGL_hint,
-        &GCommandDecoderWebGL::WebGL_isBuffer,
-        &GCommandDecoderWebGL::WebGL_isContextLost,
-        &GCommandDecoderWebGL::WebGL_isEnabled,
-        &GCommandDecoderWebGL::WebGL_isFramebuffer,
-        &GCommandDecoderWebGL::WebGL_isProgram,
-        &GCommandDecoderWebGL::WebGL_isRenderbuffer,
-        &GCommandDecoderWebGL::WebGL_isShader,
-        &GCommandDecoderWebGL::WebGL_isTexture,
-        &GCommandDecoderWebGL::WebGL_lineWidth,
-        &GCommandDecoderWebGL::WebGL_linkProgram,
-        &GCommandDecoderWebGL::WebGL_pixelStorei,
-        &GCommandDecoderWebGL::WebGL_polygonOffset,
-        &GCommandDecoderWebGL::WebGL_readPixels,
-        &GCommandDecoderWebGL::WebGL_renderbufferStorage,
-        &GCommandDecoderWebGL::WebGL_sampleCoverage,
-        &GCommandDecoderWebGL::WebGL_scissor,
-        &GCommandDecoderWebGL::WebGL_shaderSource,
-        &GCommandDecoderWebGL::WebGL_stencilFunc,
-        &GCommandDecoderWebGL::WebGL_stencilFuncSeparate,
-        &GCommandDecoderWebGL::WebGL_stencilMask,
-        &GCommandDecoderWebGL::WebGL_stencilMaskSeparate,
-        &GCommandDecoderWebGL::WebGL_stencilOp,
-        &GCommandDecoderWebGL::WebGL_stencilOpSeparate,
-        &GCommandDecoderWebGL::WebGL_texImage2D,
-        &GCommandDecoderWebGL::WebGL_texImage2D_null,
-        &GCommandDecoderWebGL::WebGL_texImage2D_pixels,
-        &GCommandDecoderWebGL::WebGL_texParameterf,
-        &GCommandDecoderWebGL::WebGL_texParameteri,
-        &GCommandDecoderWebGL::WebGL_texSubImage2D,
-        &GCommandDecoderWebGL::WebGL_texSubImage2D_null,
-        &GCommandDecoderWebGL::WebGL_texSubImage2D_pixels,
-        &GCommandDecoderWebGL::WebGL_uniform1f,
-        &GCommandDecoderWebGL::WebGL_uniform2f,
-        &GCommandDecoderWebGL::WebGL_uniform3f,
-        &GCommandDecoderWebGL::WebGL_uniform4f,
-        &GCommandDecoderWebGL::WebGL_uniform1i,
-        &GCommandDecoderWebGL::WebGL_uniform2i,
-        &GCommandDecoderWebGL::WebGL_uniform3i,
-        &GCommandDecoderWebGL::WebGL_uniform4i,
-        &GCommandDecoderWebGL::WebGL_uniform1fv,
-        &GCommandDecoderWebGL::WebGL_uniform2fv,
-        &GCommandDecoderWebGL::WebGL_uniform3fv,
-        &GCommandDecoderWebGL::WebGL_uniform4fv,
-        &GCommandDecoderWebGL::WebGL_uniform1iv,
-        &GCommandDecoderWebGL::WebGL_uniform2iv,
-        &GCommandDecoderWebGL::WebGL_uniform3iv,
-        &GCommandDecoderWebGL::WebGL_uniform4iv,
-        &GCommandDecoderWebGL::WebGL_uniformMatrix2fv,
-        &GCommandDecoderWebGL::WebGL_uniformMatrix3fv,
-        &GCommandDecoderWebGL::WebGL_uniformMatrix4fv,
-        &GCommandDecoderWebGL::WebGL_useProgram,
-        &GCommandDecoderWebGL::WebGL_validateProgram,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib1f,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib2f,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib3f,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib4f,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib1fv,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib2fv,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib3fv,
-        &GCommandDecoderWebGL::WebGL_vertexAttrib4fv,
-        &GCommandDecoderWebGL::WebGL_vertexAttribPointer,
-        &GCommandDecoderWebGL::WebGL_viewport,
-        nullptr,
-        nullptr,
+        &WmCommandDecoderWebGL::WebGL_activeTexture,
+        &WmCommandDecoderWebGL::WebGL_attachShader,
+        &WmCommandDecoderWebGL::WebGL_bindAttribLocation,
+        &WmCommandDecoderWebGL::WebGL_bindBuffer,
+        &WmCommandDecoderWebGL::WebGL_bindFramebuffer,
+        &WmCommandDecoderWebGL::WebGL_bindRenderbuffer,
+        &WmCommandDecoderWebGL::WebGL_bindTexture,
+        &WmCommandDecoderWebGL::WebGL_blendColor,
+        &WmCommandDecoderWebGL::WebGL_blendEquation,
+        &WmCommandDecoderWebGL::WebGL_blendEquationSeparate,
+        &WmCommandDecoderWebGL::WebGL_blendFunc,
+        &WmCommandDecoderWebGL::WebGL_blendFuncSeparate,
+        &WmCommandDecoderWebGL::WebGL_bufferData_size,
+        &WmCommandDecoderWebGL::WebGL_bufferData_buffer,
+        &WmCommandDecoderWebGL::WebGL_bufferSubData,
+        &WmCommandDecoderWebGL::WebGL_checkFramebufferStatus,
+        &WmCommandDecoderWebGL::WebGL_clear,
+        &WmCommandDecoderWebGL::WebGL_clearColor,
+        &WmCommandDecoderWebGL::WebGL_clearDepth,
+        &WmCommandDecoderWebGL::WebGL_clearStencil,
+        &WmCommandDecoderWebGL::WebGL_colorMask,
+        &WmCommandDecoderWebGL::WebGL_commit,
+        &WmCommandDecoderWebGL::WebGL_compileShader,
+        &WmCommandDecoderWebGL::WebGL_compressedTexImage2D,
+        &WmCommandDecoderWebGL::WebGL_compressedTexSubImage2D,
+        &WmCommandDecoderWebGL::WebGL_copyTexImage2D,
+        &WmCommandDecoderWebGL::WebGL_copyTexSubImage2D,
+        &WmCommandDecoderWebGL::WebGL_createBuffer,
+        &WmCommandDecoderWebGL::WebGL_createFramebuffer,
+        &WmCommandDecoderWebGL::WebGL_createProgram,
+        &WmCommandDecoderWebGL::WebGL_createRenderbuffer,
+        &WmCommandDecoderWebGL::WebGL_createShader,
+        &WmCommandDecoderWebGL::WebGL_createTexture,
+        &WmCommandDecoderWebGL::WebGL_cullFace,
+        &WmCommandDecoderWebGL::WebGL_deleteBuffer,
+        &WmCommandDecoderWebGL::WebGL_deleteFramebuffer,
+        &WmCommandDecoderWebGL::WebGL_deleteProgram,
+        &WmCommandDecoderWebGL::WebGL_deleteRenderbuffer,
+        &WmCommandDecoderWebGL::WebGL_deleteShader,
+        &WmCommandDecoderWebGL::WebGL_deleteTexture,
+        &WmCommandDecoderWebGL::WebGL_depthFunc,
+        &WmCommandDecoderWebGL::WebGL_depthMask,
+        &WmCommandDecoderWebGL::WebGL_depthRange,
+        &WmCommandDecoderWebGL::WebGL_detachShader,
+        &WmCommandDecoderWebGL::WebGL_disable,
+        &WmCommandDecoderWebGL::WebGL_disableVertexAttribArray,
+        &WmCommandDecoderWebGL::WebGL_drawArrays,
+        &WmCommandDecoderWebGL::WebGL_drawElements,
+        &WmCommandDecoderWebGL::WebGL_enable,
+        &WmCommandDecoderWebGL::WebGL_enableVertexAttribArray,
+        &WmCommandDecoderWebGL::WebGL_finish,
+        &WmCommandDecoderWebGL::WebGL_flush,
+        &WmCommandDecoderWebGL::WebGL_framebufferRenderbuffer,
+        &WmCommandDecoderWebGL::WebGL_framebufferTexture2D,
+        &WmCommandDecoderWebGL::WebGL_frontFace,
+        &WmCommandDecoderWebGL::WebGL_generateMipmap,
+        &WmCommandDecoderWebGL::WebGL_getActiveAttrib,
+        &WmCommandDecoderWebGL::WebGL_getActiveUniform,
+        &WmCommandDecoderWebGL::WebGL_getAttachedShaders,
+        &WmCommandDecoderWebGL::WebGL_getAttribLocation,
+        &WmCommandDecoderWebGL::WebGL_getBufferParameter,
+        &WmCommandDecoderWebGL::WebGL_getContextAttributes,
+        &WmCommandDecoderWebGL::WebGL_getError,
+        &WmCommandDecoderWebGL::WebGL_getExtension,
+        &WmCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter,
+        &WmCommandDecoderWebGL::WebGL_getParameter,
+        &WmCommandDecoderWebGL::WebGL_getProgramInfoLog,
+        &WmCommandDecoderWebGL::WebGL_getProgramParameter,
+        &WmCommandDecoderWebGL::WebGL_getRenderbufferParameter,
+        &WmCommandDecoderWebGL::WebGL_getShaderInfoLog,
+        &WmCommandDecoderWebGL::WebGL_getShaderParameter,
+        &WmCommandDecoderWebGL::WebGL_getShaderPrecisionFormat,
+        &WmCommandDecoderWebGL::WebGL_getShaderSource,
+        &WmCommandDecoderWebGL::WebGL_getSupportedExtensions,
+        &WmCommandDecoderWebGL::WebGL_getTexParameter,
+        &WmCommandDecoderWebGL::WebGL_getUniform,
+        &WmCommandDecoderWebGL::WebGL_getUniformLocation,
+        &WmCommandDecoderWebGL::WebGL_getVertexAttrib,
+        &WmCommandDecoderWebGL::WebGL_getVertexAttribOffset,
+        &WmCommandDecoderWebGL::WebGL_hint,
+        &WmCommandDecoderWebGL::WebGL_isBuffer,
+        &WmCommandDecoderWebGL::WebGL_isContextLost,
+        &WmCommandDecoderWebGL::WebGL_isEnabled,
+        &WmCommandDecoderWebGL::WebGL_isFramebuffer,
+        &WmCommandDecoderWebGL::WebGL_isProgram,
+        &WmCommandDecoderWebGL::WebGL_isRenderbuffer,
+        &WmCommandDecoderWebGL::WebGL_isShader,
+        &WmCommandDecoderWebGL::WebGL_isTexture,
+        &WmCommandDecoderWebGL::WebGL_lineWidth,
+        &WmCommandDecoderWebGL::WebGL_linkProgram,
+        &WmCommandDecoderWebGL::WebGL_pixelStorei,
+        &WmCommandDecoderWebGL::WebGL_polygonOffset,
+        &WmCommandDecoderWebGL::WebGL_readPixels,
+        &WmCommandDecoderWebGL::WebGL_renderbufferStorage,
+        &WmCommandDecoderWebGL::WebGL_sampleCoverage,
+        &WmCommandDecoderWebGL::WebGL_scissor,
+        &WmCommandDecoderWebGL::WebGL_shaderSource,
+        &WmCommandDecoderWebGL::WebGL_stencilFunc,
+        &WmCommandDecoderWebGL::WebGL_stencilFuncSeparate,
+        &WmCommandDecoderWebGL::WebGL_stencilMask,
+        &WmCommandDecoderWebGL::WebGL_stencilMaskSeparate,
+        &WmCommandDecoderWebGL::WebGL_stencilOp,
+        &WmCommandDecoderWebGL::WebGL_stencilOpSeparate,
+        &WmCommandDecoderWebGL::WebGL_texImage2D,
+        &WmCommandDecoderWebGL::WebGL_texImage2D_null,
+        &WmCommandDecoderWebGL::WebGL_texImage2D_pixels,
+        &WmCommandDecoderWebGL::WebGL_texParameterf,
+        &WmCommandDecoderWebGL::WebGL_texParameteri,
+        &WmCommandDecoderWebGL::WebGL_texSubImage2D,
+        &WmCommandDecoderWebGL::WebGL_texSubImage2D_null,
+        &WmCommandDecoderWebGL::WebGL_texSubImage2D_pixels,
+        &WmCommandDecoderWebGL::WebGL_uniform1f,
+        &WmCommandDecoderWebGL::WebGL_uniform2f,
+        &WmCommandDecoderWebGL::WebGL_uniform3f,
+        &WmCommandDecoderWebGL::WebGL_uniform4f,
+        &WmCommandDecoderWebGL::WebGL_uniform1i,
+        &WmCommandDecoderWebGL::WebGL_uniform2i,
+        &WmCommandDecoderWebGL::WebGL_uniform3i,
+        &WmCommandDecoderWebGL::WebGL_uniform4i,
+        &WmCommandDecoderWebGL::WebGL_uniform1fv,
+        &WmCommandDecoderWebGL::WebGL_uniform2fv,
+        &WmCommandDecoderWebGL::WebGL_uniform3fv,
+        &WmCommandDecoderWebGL::WebGL_uniform4fv,
+        &WmCommandDecoderWebGL::WebGL_uniform1iv,
+        &WmCommandDecoderWebGL::WebGL_uniform2iv,
+        &WmCommandDecoderWebGL::WebGL_uniform3iv,
+        &WmCommandDecoderWebGL::WebGL_uniform4iv,
+        &WmCommandDecoderWebGL::WebGL_uniformMatrix2fv,
+        &WmCommandDecoderWebGL::WebGL_uniformMatrix3fv,
+        &WmCommandDecoderWebGL::WebGL_uniformMatrix4fv,
+        &WmCommandDecoderWebGL::WebGL_useProgram,
+        &WmCommandDecoderWebGL::WebGL_validateProgram,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib1f,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib2f,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib3f,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib4f,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib1fv,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib2fv,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib3fv,
+        &WmCommandDecoderWebGL::WebGL_vertexAttrib4fv,
+        &WmCommandDecoderWebGL::WebGL_vertexAttribPointer,
+        &WmCommandDecoderWebGL::WebGL_viewport,
         nullptr,
         nullptr,
         nullptr,
@@ -600,13 +598,15 @@ bool GCommandDecoderWebGL::Decode(WmCommandBuffer& buffer, WmDecodeRes& res)
         nullptr,
         nullptr,
         nullptr,
-        &GCommandDecoderWebGL::WebGL_drawArraysInstancedANGLE,  //200
-        &GCommandDecoderWebGL::WebGL_drawElementsInstancedANGLE,
-        &GCommandDecoderWebGL::WebGL_vertexAttribDivisorANGLE,
-        &GCommandDecoderWebGL::WebGL_createVertexArrayOES,
-        &GCommandDecoderWebGL::WebGL_deleteVertexArrayOES,
-        &GCommandDecoderWebGL::WebGL_isVertexArrayOES,
-        &GCommandDecoderWebGL::WebGL_bindVertexArrayOES,
+        nullptr,
+        nullptr,
+        &WmCommandDecoderWebGL::WebGL_drawArraysInstancedANGLE,  //200
+        &WmCommandDecoderWebGL::WebGL_drawElementsInstancedANGLE,
+        &WmCommandDecoderWebGL::WebGL_vertexAttribDivisorANGLE,
+        &WmCommandDecoderWebGL::WebGL_createVertexArrayOES,
+        &WmCommandDecoderWebGL::WebGL_deleteVertexArrayOES,
+        &WmCommandDecoderWebGL::WebGL_isVertexArrayOES,
+        &WmCommandDecoderWebGL::WebGL_bindVertexArrayOES,
     };
 
     uint32_t *v;
@@ -615,7 +615,7 @@ bool GCommandDecoderWebGL::Decode(WmCommandBuffer& buffer, WmDecodeRes& res)
     {
         uint32_t funcId = *v;
 
-        if( funcId < 0 || funcId >= GWEBGL_FUNC_COUNT )
+        if( funcId < 0 || funcId >= WMWEBGL_FUNC_COUNT )
         {
             LOG_E("[Error] Command buffer with wrong WebGL API ID:%d", funcId);
             return false;
@@ -644,7 +644,7 @@ bool GCommandDecoderWebGL::Decode(WmCommandBuffer& buffer, WmDecodeRes& res)
 /////////////////////////////////////////
 ///      WebGL API
 /////////////////////////////////////////
-void GCommandDecoderWebGL::WebGL_activeTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_activeTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -654,7 +654,7 @@ void GCommandDecoderWebGL::WebGL_activeTexture(WmCommandBuffer& buffer, WmDecode
           *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_attachShader(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_attachShader(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -663,7 +663,7 @@ void GCommandDecoderWebGL::WebGL_attachShader(WmCommandBuffer& buffer, WmDecodeR
     LOG_D("[webgl::exec] attachShader(%d,%d), error=%d",v[0],v[1],getError());
 }
 
-void GCommandDecoderWebGL::WebGL_bindAttribLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_bindAttribLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray<uint32_t>(v, 3);
@@ -682,7 +682,7 @@ void GCommandDecoderWebGL::WebGL_bindAttribLocation(WmCommandBuffer& buffer, WmD
 }
 
 WEBGL_FUNC_IMP_PARAM_2_INT(bindBuffer)
-void GCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     int32_t v[2];
     bool ret = buffer.parseArray<int32_t>(v, 2);
@@ -698,7 +698,7 @@ void GCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDeco
         if( mRenderContext->mBindFramebufferNullFunc ){
             mRenderContext->BindFramebufferNull();
         } else {
-            //todo 暂时处理参数-1的情况
+            //todo ��ʱ��������-1�����
             if(v[1] < 0){
                 v[1] = 0;
             }
@@ -711,7 +711,7 @@ void GCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDeco
 WEBGL_FUNC_IMP_PARAM_2_INT(bindRenderbuffer)
 WEBGL_FUNC_IMP_PARAM_2_INT(bindTexture)
 
-void GCommandDecoderWebGL::WebGL_blendColor(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_blendColor(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     float v[4];
     bool ret = buffer.parseArray<float>(v, 4);
@@ -726,7 +726,7 @@ WEBGL_FUNC_IMP_PARAM_2_INT(blendEquationSeparate)
 WEBGL_FUNC_IMP_PARAM_2_INT(blendFunc)
 WEBGL_FUNC_IMP_PARAM_4_INT(blendFuncSeparate)
 
-void GCommandDecoderWebGL::WebGL_bufferData_size(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_bufferData_size(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -740,7 +740,7 @@ void GCommandDecoderWebGL::WebGL_bufferData_size(WmCommandBuffer& buffer, WmDeco
           WebGL_CONST(v[0]), size, WebGL_CONST(v[1]), getError());
 }
 
-void GCommandDecoderWebGL::WebGL_bufferData_buffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_bufferData_buffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray<uint32_t>(v, 3);
@@ -760,7 +760,7 @@ void GCommandDecoderWebGL::WebGL_bufferData_buffer(WmCommandBuffer& buffer, WmDe
     }
 }
 
-void GCommandDecoderWebGL::WebGL_bufferSubData(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_bufferSubData(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray<uint32_t>(v, 3);
@@ -781,7 +781,7 @@ void GCommandDecoderWebGL::WebGL_bufferSubData(WmCommandBuffer& buffer, WmDecode
 }
 
 
-void GCommandDecoderWebGL::WebGL_checkFramebufferStatus(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_checkFramebufferStatus(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -800,7 +800,7 @@ WEBGL_FUNC_IMP_PARAM_1_INT(clearStencil)
 
 WEBGL_FUNC_IMP_PARAM_4_INT(colorMask)
 
-void GCommandDecoderWebGL::WebGL_commit(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_commit(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     flush();
     LOG_D("[webgl::exec] commit(), error=%d", getError());
@@ -809,7 +809,7 @@ void GCommandDecoderWebGL::WebGL_commit(WmCommandBuffer& buffer, WmDecodeRes& re
 
 WEBGL_FUNC_IMP_PARAM_1_INT(compileShader)
 
-void GCommandDecoderWebGL::WebGL_compressedTexImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_compressedTexImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[7];
     bool ret = buffer.parseArray<uint32_t>(v, 7);
@@ -827,7 +827,7 @@ void GCommandDecoderWebGL::WebGL_compressedTexImage2D(WmCommandBuffer& buffer, W
     }
 }
 
-void GCommandDecoderWebGL::WebGL_compressedTexSubImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_compressedTexSubImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[8];
     bool ret = buffer.parseArray<uint32_t>(v, 7);
@@ -849,7 +849,7 @@ WEBGL_FUNC_IMP_PARAM_8_INT(copyTexImage2D)
 WEBGL_FUNC_IMP_PARAM_8_INT(copyTexSubImage2D)
 
 //Sync API
-void GCommandDecoderWebGL::WebGL_createBuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createBuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = WebGL::createBuffer();
     LOG_D("[webgl::exec] createBuffer()=%d, error=%d", v, getError());
@@ -861,7 +861,7 @@ void GCommandDecoderWebGL::WebGL_createBuffer(WmCommandBuffer& buffer, WmDecodeR
     }
 }
 
-void GCommandDecoderWebGL::WebGL_clear(WmCommandBuffer& buffer, WmDecodeRes& res){
+void WmCommandDecoderWebGL::WebGL_clear(WmCommandBuffer& buffer, WmDecodeRes& res){
     uint32_t *p = buffer.parseValue<uint32_t>();
     uint32_t bitmask=*p;
     WebGL::clear((GLbitfield)bitmask);
@@ -869,7 +869,7 @@ void GCommandDecoderWebGL::WebGL_clear(WmCommandBuffer& buffer, WmDecodeRes& res
     mRenderContext->mNeed_draw = true;
 }
 
-void GCommandDecoderWebGL::WebGL_createFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = WebGL::createFrameBuffer();
     LOG_D("[webgl::exec] createFrameBuffer()=%d, error=%d", v, getError());
@@ -881,7 +881,7 @@ void GCommandDecoderWebGL::WebGL_createFramebuffer(WmCommandBuffer& buffer, WmDe
     }
 }
 
-void GCommandDecoderWebGL::WebGL_createProgram(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createProgram(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = createProgram();
     LOG_D("[webgl::exec] createProgram()=%d, error=%d", v, getError());
@@ -893,7 +893,7 @@ void GCommandDecoderWebGL::WebGL_createProgram(WmCommandBuffer& buffer, WmDecode
     }
 }
 
-void GCommandDecoderWebGL::WebGL_createRenderbuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createRenderbuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = WebGL::createRenderbuffer();
     LOG_D("[webgl::exec] createRenderbuffer()=%d, error=%d", v, getError());
@@ -905,7 +905,7 @@ void GCommandDecoderWebGL::WebGL_createRenderbuffer(WmCommandBuffer& buffer, WmD
     }
 }
 
-void GCommandDecoderWebGL::WebGL_createShader(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createShader(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *type = buffer.parseValue<uint32_t>();
     GLuint v = createShader(*type);
@@ -918,7 +918,7 @@ void GCommandDecoderWebGL::WebGL_createShader(WmCommandBuffer& buffer, WmDecodeR
     }
 }
 
-void GCommandDecoderWebGL::WebGL_createTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = WebGL::createTexture();
     LOG_D("[webgl::exec] createTexture()=%d, error=%d", v, getError());
@@ -932,7 +932,7 @@ void GCommandDecoderWebGL::WebGL_createTexture(WmCommandBuffer& buffer, WmDecode
 
 WEBGL_FUNC_IMP_PARAM_1_INT(cullFace)
 
-void GCommandDecoderWebGL::WebGL_deleteBuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteBuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -941,7 +941,7 @@ void GCommandDecoderWebGL::WebGL_deleteBuffer(WmCommandBuffer& buffer, WmDecodeR
     LOG_D("[webgl::exec] deleteBuffer(%d), error=%d", *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteFramebuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -950,7 +950,7 @@ void GCommandDecoderWebGL::WebGL_deleteFramebuffer(WmCommandBuffer& buffer, WmDe
     LOG_D("[webgl::exec] deleteFramebuffer(%d), error=%d", *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteProgram(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteProgram(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -959,7 +959,7 @@ void GCommandDecoderWebGL::WebGL_deleteProgram(WmCommandBuffer& buffer, WmDecode
     LOG_D("[webgl::exec] deleteProgram(%d), error=%d", *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteRenderbuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteRenderbuffer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -968,7 +968,7 @@ void GCommandDecoderWebGL::WebGL_deleteRenderbuffer(WmCommandBuffer& buffer, WmD
     LOG_D("[webgl::exec] deleteRenderbuffer(%d), error=%d", *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteShader(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteShader(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -977,7 +977,7 @@ void GCommandDecoderWebGL::WebGL_deleteShader(WmCommandBuffer& buffer, WmDecodeR
     LOG_D("[webgl::exec] deleteShader(%d), error=%d", *v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteTexture(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -994,7 +994,7 @@ WEBGL_FUNC_IMP_PARAM_2_INT(detachShader)
 WEBGL_FUNC_IMP_PARAM_1_INT(disable)
 WEBGL_FUNC_IMP_PARAM_1_INT(disableVertexAttribArray)
 
-void GCommandDecoderWebGL::WebGL_drawArrays(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_drawArrays(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray<uint32_t>(v, 3);
@@ -1005,7 +1005,7 @@ void GCommandDecoderWebGL::WebGL_drawArrays(WmCommandBuffer& buffer, WmDecodeRes
     mRenderContext->mDrawCall++;
 }
 
-void GCommandDecoderWebGL::WebGL_drawElements(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_drawElements(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[4];
     bool ret = buffer.parseArray<uint32_t>(v, 4);
@@ -1023,14 +1023,14 @@ WEBGL_FUNC_IMP_PARAM_4_INT(framebufferRenderbuffer);
 WEBGL_FUNC_IMP_PARAM_5_INT(framebufferTexture2D);
 WEBGL_FUNC_IMP_PARAM_1_INT(frontFace)
 WEBGL_FUNC_IMP_PARAM_1_INT(generateMipmap)
-void GCommandDecoderWebGL::WebGL_finish(WmCommandBuffer& buffer, WmDecodeRes& res){
+void WmCommandDecoderWebGL::WebGL_finish(WmCommandBuffer& buffer, WmDecodeRes& res){
     finish();
     LOG_D("[webgl::exec] finish(), error=%d", getError());
     mRenderContext->mNeed_draw = true;
 }
 
 //Sync API
-void GCommandDecoderWebGL::WebGL_getActiveAttrib(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getActiveAttrib(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1046,7 +1046,7 @@ void GCommandDecoderWebGL::WebGL_getActiveAttrib(WmCommandBuffer& buffer, WmDeco
     {
         res.hasResult = true;
 
-        //格式化"type,size,name"
+        //��ʽ��"type,size,name"
         std::ostringstream ostr;
         ostr << type << "," << size << "," << name;
         std::string strValue = ostr.str();
@@ -1061,7 +1061,7 @@ void GCommandDecoderWebGL::WebGL_getActiveAttrib(WmCommandBuffer& buffer, WmDeco
 }
 
 
-void GCommandDecoderWebGL::WebGL_getActiveUniform(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getActiveUniform(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1077,7 +1077,7 @@ void GCommandDecoderWebGL::WebGL_getActiveUniform(WmCommandBuffer& buffer, WmDec
     {
         res.hasResult = true;
 
-        //格式化"type,size,name"
+        //��ʽ��"type,size,name"
         std::ostringstream ostr;
         ostr << type << "," << size << "," << name;
         std::string strValue = ostr.str();
@@ -1090,13 +1090,13 @@ void GCommandDecoderWebGL::WebGL_getActiveUniform(WmCommandBuffer& buffer, WmDec
     }
 }
 
-void GCommandDecoderWebGL::WebGL_flush(WmCommandBuffer& buffer, WmDecodeRes& res){
+void WmCommandDecoderWebGL::WebGL_flush(WmCommandBuffer& buffer, WmDecodeRes& res){
     flush();
     LOG_D("[webgl::exec] finish(), error=%d", getError());
     mRenderContext->mNeed_draw=true;
 }
 
-void GCommandDecoderWebGL::WebGL_getAttachedShaders(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getAttachedShaders(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -1107,7 +1107,7 @@ void GCommandDecoderWebGL::WebGL_getAttachedShaders(WmCommandBuffer& buffer, WmD
     {
         res.hasResult = true;
 
-        //格式化"id,id,id"
+        //��ʽ��"id,id,id"
         std::ostringstream ostr;
         for (int i=0; i<count; ++i)
         {
@@ -1127,7 +1127,7 @@ void GCommandDecoderWebGL::WebGL_getAttachedShaders(WmCommandBuffer& buffer, WmD
     }
 }
 
-void GCommandDecoderWebGL::WebGL_getAttribLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getAttribLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1146,7 +1146,7 @@ void GCommandDecoderWebGL::WebGL_getAttribLocation(WmCommandBuffer& buffer, WmDe
     }
 }
 
-void GCommandDecoderWebGL::WebGL_getBufferParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getBufferParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     buffer.parseArray<uint32_t>(v, 2);
@@ -1159,21 +1159,21 @@ void GCommandDecoderWebGL::WebGL_getBufferParameter(WmCommandBuffer& buffer, WmD
     res.type = ret > 0 ? WmResType_Int32 : WmResType_NULL;
 }
 
-void GCommandDecoderWebGL::WebGL_getContextAttributes(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getContextAttributes(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     res.hasResult = true;
     res.type = WmResType_GetContextAttributes;
 }
 
-void GCommandDecoderWebGL::WebGL_getError(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getError(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     res.hasResult = true;
     res.uintValue = getError();
     res.type = WmResType_UInt32;
 }
 
-//WebGL_getExtension 直接返回扩展的函数的名字给上层,由上层直接处理
-void GCommandDecoderWebGL::WebGL_getExtension(WmCommandBuffer &buffer, WmDecodeRes &res) {
+//WebGL_getExtension ֱ�ӷ�����չ�ĺ��������ָ��ϲ�,���ϲ�ֱ�Ӵ���
+void WmCommandDecoderWebGL::WebGL_getExtension(WmCommandBuffer &buffer, WmDecodeRes &res) {
     uint32_t v[1];
     bool ret = buffer.parseArray<uint32_t>(v, 1);
     if( !ret ) return;
@@ -1190,7 +1190,7 @@ void GCommandDecoderWebGL::WebGL_getExtension(WmCommandBuffer &buffer, WmDecodeR
 
     }
 }
-void GCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray<uint32_t>(v, 3);
@@ -1204,9 +1204,9 @@ void GCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter(WmCommandBuff
     res.type = WmResType_UInt32;
 }
 
-void GCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
-    /** 不支持类型
+    /** ��֧������
         GL_COMPRESSED_TEXTURE_FORMATS
      */
     uint32_t pname = *(buffer.parseValue<uint32_t>());
@@ -1215,7 +1215,7 @@ void GCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecodeR
         //return type - Int32Array 0 element
         case GL_COMPRESSED_TEXTURE_FORMATS:
         {
-            //TODO 返回
+            //TODO ����
             LOG_E("getParameter not support GL_COMPRESSED_TEXTURE_FORMATS");
             return;
         }
@@ -1381,7 +1381,7 @@ void GCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecodeR
     res.hasResult = true;
 }
 
-void GCommandDecoderWebGL::WebGL_getProgramInfoLog(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getProgramInfoLog(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -1398,7 +1398,7 @@ void GCommandDecoderWebGL::WebGL_getProgramInfoLog(WmCommandBuffer& buffer, WmDe
           *v, programInfoLog.c_str(), getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getProgramParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getProgramParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1411,7 +1411,7 @@ void GCommandDecoderWebGL::WebGL_getProgramParameter(WmCommandBuffer& buffer, Wm
           v[0], WebGL_CONST(v[1]), res.intValue, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getRenderbufferParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getRenderbufferParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1424,7 +1424,7 @@ void GCommandDecoderWebGL::WebGL_getRenderbufferParameter(WmCommandBuffer& buffe
         WebGL_CONST(v[0]), WebGL_CONST(v[1]), res.intValue, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getShaderInfoLog(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getShaderInfoLog(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *v = buffer.parseValue<uint32_t>();
     if( !v ) return;
@@ -1441,7 +1441,7 @@ void GCommandDecoderWebGL::WebGL_getShaderInfoLog(WmCommandBuffer& buffer, WmDec
           *v, shaderInfoLog.c_str(), getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getShaderParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getShaderParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1455,7 +1455,7 @@ void GCommandDecoderWebGL::WebGL_getShaderParameter(WmCommandBuffer& buffer, WmD
         v[0], WebGL_CONST(v[1]), res.intValue, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getShaderPrecisionFormat(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getShaderPrecisionFormat(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1464,7 +1464,7 @@ void GCommandDecoderWebGL::WebGL_getShaderPrecisionFormat(WmCommandBuffer& buffe
     GLint precision = 0;
     GLint range[2] = {0, 0};
     getShaderPrecisionFormat(v[0], v[1], range, &precision);
-    //格式化"rangeMin,rangeMax,precision"
+    //��ʽ��"rangeMin,rangeMax,precision"
     std::ostringstream ostr;
     ostr << range[0] << "," << range[1] << "," << precision;
     std::string strValue = ostr.str();
@@ -1480,7 +1480,7 @@ void GCommandDecoderWebGL::WebGL_getShaderPrecisionFormat(WmCommandBuffer& buffe
          WebGL_CONST(v[0]), WebGL_CONST(v[1]), strValue.c_str(), getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getShaderSource(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getShaderSource(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *shaderPtr = buffer.parseValue<uint32_t>();
     if( !shaderPtr ) return;
@@ -1497,22 +1497,22 @@ void GCommandDecoderWebGL::WebGL_getShaderSource(WmCommandBuffer& buffer, WmDeco
 }
 
 
-// 直接返回一个 WmResType_CharPtr_GetSupportedExtention的枚举，由jsbinding层处理
-void GCommandDecoderWebGL::WebGL_getSupportedExtensions(WmCommandBuffer& buffer, WmDecodeRes& res)
+// ֱ�ӷ���һ�� WmResType_CharPtr_GetSupportedExtention��ö�٣���jsbinding�㴦��
+void WmCommandDecoderWebGL::WebGL_getSupportedExtensions(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     res.hasResult = true;
     res.type = WmResType_CharPtr_GetSupportedExtention;
 }
 
 
-void GCommandDecoderWebGL::WebGL_getTexParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getTexParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
     if( !ret ) return;
 
     int32_t params;
-    getTexParameteriv(v[0], v[1], &params);  //webgl1.0获取整数类型即可
+    getTexParameteriv(v[0], v[1], &params);  //webgl1.0��ȡ�������ͼ���
     res.hasResult = true;
     res.intValue = params;
     res.type = WmResType_Int32;
@@ -1521,7 +1521,7 @@ void GCommandDecoderWebGL::WebGL_getTexParameter(WmCommandBuffer& buffer, WmDeco
           WebGL_CONST(v[0]), WebGL_CONST(v[1]), res.intValue, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_getUniform(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getUniform(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1619,7 +1619,7 @@ void GCommandDecoderWebGL::WebGL_getUniform(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_getUniformLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getUniformLocation(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1638,7 +1638,7 @@ void GCommandDecoderWebGL::WebGL_getUniformLocation(WmCommandBuffer& buffer, WmD
     }
 }
 
-void GCommandDecoderWebGL::WebGL_getVertexAttrib(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getVertexAttrib(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1682,7 +1682,7 @@ void GCommandDecoderWebGL::WebGL_getVertexAttrib(WmCommandBuffer& buffer, WmDeco
     }
 }
 
-void GCommandDecoderWebGL::WebGL_getVertexAttribOffset(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_getVertexAttribOffset(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1703,7 +1703,7 @@ WEBGL_FUNC_IMP_PARAM_2_INT(hint)
 
 //Sync API
 #define WEBGL_FUNC_IMP_IS_API(NAME) \
-void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
+void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
     GLuint v = *(buffer.parseValue<GLuint>()); \
     bool ret = NAME(v); \
@@ -1714,7 +1714,7 @@ void GCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& re
 
 WEBGL_FUNC_IMP_IS_API(isBuffer)
 
-void GCommandDecoderWebGL::WebGL_isContextLost(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_isContextLost(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     res.hasResult = true;
     res.boolValue = false;
@@ -1732,7 +1732,7 @@ WEBGL_FUNC_IMP_IS_API(isTexture)
 WEBGL_FUNC_IMP_PARAM_1_FLOAT(lineWidth)
 WEBGL_FUNC_IMP_PARAM_1_INT(linkProgram)
 
-void GCommandDecoderWebGL::WebGL_pixelStorei(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_pixelStorei(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1766,12 +1766,12 @@ void GCommandDecoderWebGL::WebGL_pixelStorei(WmCommandBuffer& buffer, WmDecodeRe
 
 WEBGL_FUNC_IMP_PARAM_2_FLOAT(polygonOffset)
 
-void GCommandDecoderWebGL::WebGL_readPixels(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_readPixels(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
-    //TODO 直接调binding接口
+    //TODO ֱ�ӵ�binding�ӿ�
 }
 
-void GCommandDecoderWebGL::WebGL_renderbufferStorage(WmCommandBuffer &buffer, WmDecodeRes &res)
+void WmCommandDecoderWebGL::WebGL_renderbufferStorage(WmCommandBuffer &buffer, WmDecodeRes &res)
 {
     uint32_t v[4];
     bool ret = buffer.parseArray<uint32_t>(v, 4);
@@ -1783,7 +1783,7 @@ void GCommandDecoderWebGL::WebGL_renderbufferStorage(WmCommandBuffer &buffer, Wm
     LOG_D("[webgl::exec] renderbufferStorage(%d,%d,%d,%d), error=%d", v[0],v[1],v[2],v[3],getError());
 }
 
-void GCommandDecoderWebGL::WebGL_sampleCoverage(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_sampleCoverage(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     float *fv = buffer.parseValue<float>();
     uint32_t *iv = buffer.parseValue<uint32_t>();
@@ -1796,7 +1796,7 @@ void GCommandDecoderWebGL::WebGL_sampleCoverage(WmCommandBuffer& buffer, WmDecod
 
 WEBGL_FUNC_IMP_PARAM_4_INT(scissor)
 
-void GCommandDecoderWebGL::WebGL_shaderSource(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_shaderSource(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -1848,12 +1848,12 @@ WEBGL_FUNC_IMP_PARAM_4_INT(stencilOpSeparate)
 
 
 /**
-//6个参数
+//6������
 texImage2D(target, level, internalformat, format, type, ImageData? pixels);
-//9个参数
+//9������
 texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView? pixels);
  */
-void GCommandDecoderWebGL::WebGL_texImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[5];
     bool ret = buffer.parseArray<uint32_t>(v, 5);
@@ -1940,7 +1940,7 @@ void GCommandDecoderWebGL::WebGL_texImage2D(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_texImage2D_null(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texImage2D_null(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[8];
     bool ret = buffer.parseArray<uint32_t>(v, 8);
@@ -1962,7 +1962,7 @@ void GCommandDecoderWebGL::WebGL_texImage2D_null(WmCommandBuffer& buffer, WmDeco
           WebGL_CONST(v[0]), v[1], v[2], v[3], v[4], v[5], WebGL_CONST(v[6]),WebGL_CONST(v[7]),getError());
 }
 
-void GCommandDecoderWebGL::WebGL_texImage2D_pixels(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texImage2D_pixels(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[9];
     bool ret = buffer.parseArray<uint32_t>(v, 9);
@@ -2001,7 +2001,7 @@ void GCommandDecoderWebGL::WebGL_texImage2D_pixels(WmCommandBuffer& buffer, WmDe
     }
 }
 
-void GCommandDecoderWebGL::WebGL_texParameterf(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texParameterf(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2018,12 +2018,12 @@ void GCommandDecoderWebGL::WebGL_texParameterf(WmCommandBuffer& buffer, WmDecode
 WEBGL_FUNC_IMP_PARAM_3_INT(texParameteri)
 
 /**
-7个参数
+7������
 texSubImage2D(target, level, xoffset, yoffset, format, type, ImageData? pixels);
-9个参数
+9������
 texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, ArrayBufferView? pixels);
  */
-void GCommandDecoderWebGL::WebGL_texSubImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texSubImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[6];
     bool ret = buffer.parseArray<uint32_t>(v, 6);
@@ -2084,7 +2084,7 @@ void GCommandDecoderWebGL::WebGL_texSubImage2D(WmCommandBuffer& buffer, WmDecode
     }
 }
 
-void GCommandDecoderWebGL::WebGL_texSubImage2D_null(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texSubImage2D_null(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[8];
     bool ret = buffer.parseArray<uint32_t>(v, 8);
@@ -2095,7 +2095,7 @@ void GCommandDecoderWebGL::WebGL_texSubImage2D_null(WmCommandBuffer& buffer, WmD
           WebGL_CONST(v[0]), v[1], v[2], v[3], v[4], v[5], WebGL_CONST(v[6]),WebGL_CONST(v[7]),getError());
 }
 
-void GCommandDecoderWebGL::WebGL_texSubImage2D_pixels(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_texSubImage2D_pixels(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[9];
     bool ret = buffer.parseArray<uint32_t>(v, 9);
@@ -2121,7 +2121,7 @@ void GCommandDecoderWebGL::WebGL_texSubImage2D_pixels(WmCommandBuffer& buffer, W
               WebGL_CONST(v[0]), v[1], v[2], v[3], v[4], v[5], WebGL_CONST(v[6]),WebGL_CONST(type), size, getError());
     }
 }
-void GCommandDecoderWebGL::WebGL_uniform1f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform1f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
     float *fv = buffer.parseValue<float>();
@@ -2131,7 +2131,7 @@ void GCommandDecoderWebGL::WebGL_uniform1f(WmCommandBuffer& buffer, WmDecodeRes&
     LOG_D("[webgl::exec] uniform1f(%d,%f), error=%d", *iv, *fv, getError());
 
 }
-void GCommandDecoderWebGL::WebGL_uniform2f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform2f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
     if( !iv ) return;
@@ -2144,7 +2144,7 @@ void GCommandDecoderWebGL::WebGL_uniform2f(WmCommandBuffer& buffer, WmDecodeRes&
     LOG_D("[webgl::exec] uniform2f(%d,%f,%f), error=%d", *iv, v[0], v[1], getError());
 }
 
-void GCommandDecoderWebGL::WebGL_uniform3f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform3f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
     if( !iv ) return;
@@ -2155,7 +2155,7 @@ void GCommandDecoderWebGL::WebGL_uniform3f(WmCommandBuffer& buffer, WmDecodeRes&
     LOG_D("[webgl::exec] uniform3f(%d,%f,%f,%f), error=%d", *iv, v[0], v[1], v[2], getError());
 }
 
-void GCommandDecoderWebGL::WebGL_uniform4f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform4f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
     if( !iv ) return;
@@ -2171,7 +2171,7 @@ WEBGL_FUNC_IMP_PARAM_3_INT(uniform2i)
 WEBGL_FUNC_IMP_PARAM_4_INT(uniform3i)
 WEBGL_FUNC_IMP_PARAM_5_INT(uniform4i)
 
-void GCommandDecoderWebGL::WebGL_uniform1fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform1fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2187,7 +2187,7 @@ void GCommandDecoderWebGL::WebGL_uniform1fv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2203,7 +2203,7 @@ void GCommandDecoderWebGL::WebGL_uniform2fv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2219,7 +2219,7 @@ void GCommandDecoderWebGL::WebGL_uniform3fv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2235,7 +2235,7 @@ void GCommandDecoderWebGL::WebGL_uniform4fv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform1iv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform1iv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2251,7 +2251,7 @@ void GCommandDecoderWebGL::WebGL_uniform1iv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform2iv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform2iv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2267,7 +2267,7 @@ void GCommandDecoderWebGL::WebGL_uniform2iv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform3iv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform3iv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2283,7 +2283,7 @@ void GCommandDecoderWebGL::WebGL_uniform3iv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniform4iv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniform4iv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2299,7 +2299,7 @@ void GCommandDecoderWebGL::WebGL_uniform4iv(WmCommandBuffer& buffer, WmDecodeRes
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniformMatrix2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniformMatrix2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray(v, 3);
@@ -2316,7 +2316,7 @@ void GCommandDecoderWebGL::WebGL_uniformMatrix2fv(WmCommandBuffer& buffer, WmDec
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniformMatrix3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniformMatrix3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray(v, 3);
@@ -2332,7 +2332,7 @@ void GCommandDecoderWebGL::WebGL_uniformMatrix3fv(WmCommandBuffer& buffer, WmDec
     }
 }
 
-void GCommandDecoderWebGL::WebGL_uniformMatrix4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_uniformMatrix4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[3];
     bool ret = buffer.parseArray(v, 3);
@@ -2351,7 +2351,7 @@ void GCommandDecoderWebGL::WebGL_uniformMatrix4fv(WmCommandBuffer& buffer, WmDec
 WEBGL_FUNC_IMP_PARAM_1_INT(useProgram)
 WEBGL_FUNC_IMP_PARAM_1_INT(validateProgram)
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib1f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib1f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
     float *fv = buffer.parseValue<float>();
@@ -2359,7 +2359,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib1f(WmCommandBuffer& buffer, WmDecod
         return;
     vertexAttrib1f(*iv, *fv);
 }
-void GCommandDecoderWebGL::WebGL_vertexAttrib2f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib2f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
 
@@ -2372,7 +2372,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib2f(WmCommandBuffer& buffer, WmDecod
     vertexAttrib2f(*iv, fv[0], fv[1]);
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib3f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib3f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
 
@@ -2385,7 +2385,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib3f(WmCommandBuffer& buffer, WmDecod
     vertexAttrib3f(*iv, fv[0], fv[1], fv[2]);
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib4f(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib4f(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t *iv = buffer.parseValue<uint32_t>();
 
@@ -2398,7 +2398,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib4f(WmCommandBuffer& buffer, WmDecod
     vertexAttrib4f(*iv, fv[0], fv[1], fv[2], fv[3]);
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib1fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib1fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2411,7 +2411,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib1fv(WmCommandBuffer& buffer, WmDeco
     }
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib2fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2424,7 +2424,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib2fv(WmCommandBuffer& buffer, WmDeco
     }
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib3fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2437,7 +2437,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib3fv(WmCommandBuffer& buffer, WmDeco
     }
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttrib4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttrib4fv(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray<uint32_t>(v, 2);
@@ -2450,7 +2450,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttrib4fv(WmCommandBuffer& buffer, WmDeco
     }
 }
 
-void GCommandDecoderWebGL::WebGL_vertexAttribPointer(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttribPointer(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[6];
     bool ret = buffer.parseArray<uint32_t>(v, 6);
@@ -2467,7 +2467,7 @@ WEBGL_FUNC_IMP_PARAM_4_INT(viewport)
 /////////////////////////////////////////
 ///      WebGL Extnsions API
 /////////////////////////////////////////
-void GCommandDecoderWebGL::WebGL_drawArraysInstancedANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_drawArraysInstancedANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[4];
     bool ret = buffer.parseArray(v, 4);
@@ -2482,7 +2482,7 @@ void GCommandDecoderWebGL::WebGL_drawArraysInstancedANGLE(WmCommandBuffer& buffe
           v[0],v[1],v[2],v[3], getError());
 }
 
-void GCommandDecoderWebGL::WebGL_drawElementsInstancedANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_drawElementsInstancedANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[5];
     bool ret = buffer.parseArray(v, 5);
@@ -2497,7 +2497,7 @@ void GCommandDecoderWebGL::WebGL_drawElementsInstancedANGLE(WmCommandBuffer& buf
     LOG_D("[webgl::exec] drawElementsInstancedANGLE(%d,%d,%d,%d,%d), error=%d",
           v[0],v[1],v[2],v[3],v[4], getError());
 }
-void GCommandDecoderWebGL::WebGL_vertexAttribDivisorANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_vertexAttribDivisorANGLE(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[2];
     bool ret = buffer.parseArray(v, 2);
@@ -2510,7 +2510,7 @@ void GCommandDecoderWebGL::WebGL_vertexAttribDivisorANGLE(WmCommandBuffer& buffe
           v[0],v[1], getError());
 }
 
-void GCommandDecoderWebGL::WebGL_createVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_createVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     GLuint v = WebGL::createVertexArrayOES();
     res.hasResult = true;
@@ -2520,7 +2520,7 @@ void GCommandDecoderWebGL::WebGL_createVertexArrayOES(WmCommandBuffer& buffer, W
           v, getError());
 }
 
-void GCommandDecoderWebGL::WebGL_deleteVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_deleteVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[1];
     buffer.parseArray(v, 1);
@@ -2530,7 +2530,7 @@ void GCommandDecoderWebGL::WebGL_deleteVertexArrayOES(WmCommandBuffer& buffer, W
           v[0], getError());
 }
 
-void GCommandDecoderWebGL::WebGL_isVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
+void WmCommandDecoderWebGL::WebGL_isVertexArrayOES(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     uint32_t v[1];
     buffer.parseArray(v, 1);
@@ -2546,3 +2546,4 @@ WEBGL_FUNC_IMP_PARAM_1_INT(bindVertexArrayOES)
 
 }
  
+
