@@ -7,8 +7,8 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#ifndef GCANVAS_GGL_h
-#define GCANVAS_GGL_h
+#ifndef WMCANVAS_WMGL_H
+#define WMCANVAS_WMGL_H
 
 #ifndef _WIN32
 
@@ -39,4 +39,4 @@
 using WmLuint = GLuint;
 using WmLint = GLint;
 
-#endif /* GCANVAS_GGL_h */
+#endif /* WMCANVAS_WMGL_H */
