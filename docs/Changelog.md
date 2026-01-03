@@ -26,7 +26,7 @@ All notable changes of this project will be documented in.
 * Core Engine
 	* Refacotor `WmCanvas` and `WmCanvasContext` class, make it more lower coupling. `WmCanvas` response for initialize, create `WmCanvasContext` and drawFrame, all 2d `property` and `API` move to `WmCanvasContext`
 	* Add `GCanvasWeex` only for `Weex` UI framework
-	* Add `WmCanvasHooks` and `GCanvasLog`, support for custom exception log.
+	* Add `WmCanvasHooks` and `WmCanvasLog`, support for custom exception log.
 	* `WmCanvasContext` Support set canvas dimension
 	* New `2d` property `lineDash` and `lineDashOffset`
 	* New `2d` property support `shadowColor`,`shadowBlur`, `shadowOffsetX`,`shadowOffstY`

@@ -18,7 +18,7 @@
 
 
     // external system log handler
-    GCanvasSystemLog gcanvasSystemLog;
+    WmCanvasSystemLog wmcanvasSystemLog;
 
     // default log level : Error
     LogLevel g_log_level = LOG_LEVEL_ERROR;
@@ -36,14 +36,14 @@
 
 
     // should rename to GCanvasTraceData
-    GCanvasLog::GCanvasLog() {
+    WmCanvasLog::WmCanvasLog() {
         tag.resize(TRACE_TAG_BUF_SIZE, '\0');
         detail.resize(TRACE_MSG_BUF_SIZE, '\0');
     }
 
 
     // @deprecated, will delete soon
-    void fillLogInfo(GCanvasLog &log, const char *tag, const char *format, ...) {
+    void fillLogInfo(WmCanvasLog &log, const char *tag, const char *format, ...) {
         snprintf((char*)log.tag.data(), TRACE_TAG_BUF_SIZE, "%s", tag);
         va_list va;
         va_start(va, format);
@@ -53,7 +53,7 @@
 
 
 
-    void FillLogInfo(GCanvasLog &log, const char *tag, const char *format, ...) {
+    void FillLogInfo(WmCanvasLog &log, const char *tag, const char *format, ...) {
         snprintf((char*)log.tag.data(), TRACE_TAG_BUF_SIZE, "%s", tag);
         va_list va;
         va_start(va, format);
@@ -62,13 +62,13 @@
     }
 
 
-    void AppendErrorLogInfo(std::vector<GCanvasLog> *errVec, const char *tag, const char *format, ...)
+    void AppendErrorLogInfo(std::vector<WmCanvasLog> *errVec, const char *tag, const char *format, ...)
     {
         if (errVec == nullptr) {
             return;
         }
 
-        GCanvasLog log;
+        WmCanvasLog log;
 
         snprintf((char*)log.tag.data(), TRACE_TAG_BUF_SIZE, "%s", tag);
 
@@ -105,14 +105,14 @@
         va_end(va);
 
 #if defined(__ANDROID__)
-        if (gcanvasSystemLog) {
-            gcanvasSystemLog(logLevel, tag, buffer);
+        if (wmcanvasSystemLog) {
+            wmcanvasSystemLog(logLevel, tag, buffer);
         } else {
             __android_log_write(TransLogLevel(logLevel), tag, buffer);
         }
 #else
-        if (gcanvasSystemLog) {
-            gcanvasSystemLog(logLevel, tag, buffer);
+        if (wmcanvasSystemLog) {
+            wmcanvasSystemLog(logLevel, tag, buffer);
         } else {
             printf("%s\n", buffer);
         }
@@ -132,24 +132,24 @@
 
 
 #if defined(__ANDROID__)
-        if (hooks && hooks->GCanvasException) {
-            hooks->GCanvasException(contextId.data(), tag, buffer, hooks);
+        if (hooks && hooks->WmCanvasException) {
+            hooks->WmCanvasException(contextId.data(), tag, buffer, hooks);
         } else {
             __android_log_write(TransLogLevel(g_log_level), tag, buffer);
         }
 #else
-        if (hooks && hooks->GCanvasException) {
-            hooks->GCanvasException(contextId.c_str(), tag, buffer, nullptr);
+        if (hooks && hooks->WmCanvasException) {
+            hooks->WmCanvasException(contextId.c_str(), tag, buffer, nullptr);
         }
 #endif
     }
 
 
-    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec)
+    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<WmCanvasLog> &vec)
     {
         if (vec.size()) {
             for (int i = 0; i < vec.size(); i++) {
-                GCanvasLog& log = vec[i];
+                WmCanvasLog& log = vec[i];
                 LogException(hooks, contextId, log.tag.data(), log.detail.data());
             }
         }

@@ -306,7 +306,7 @@ void WmCanvasContext::InitFBO()
 
     if (mFboMap.find(DefaultFboName) == mFboMap.end())
     {
-        std::vector<GCanvasLog> logVec;
+        std::vector<WmCanvasLog> logVec;
         mIsFboSupported = mFboMap[DefaultFboName].InitFBO(mWidth, mHeight,
                                                           mClearColor, false, &logVec);
 
@@ -2634,7 +2634,7 @@ void WmCanvasContext::PutImageData(const unsigned char *rgbaData, int tw,
 {
     SendVertexBufferToGPU();
 
-    std::vector<GCanvasLog> logVec;
+    std::vector<WmCanvasLog> logVec;
     GLuint glID = wmcanvas::PixelsBindTexture(rgbaData, GL_RGBA, tw, th, &logVec);
     LOG_EXCEPTION_VECTOR(mHooks, mContextId, logVec);
 
@@ -2652,7 +2652,7 @@ void WmCanvasContext::PutImageData(const unsigned char *rgbaData, int tw,
 int WmCanvasContext::BindImage(const unsigned char *rgbaData, GLint format, unsigned int width,
                               unsigned int height)
 {
-    std::vector<GCanvasLog> logVec;
+    std::vector<WmCanvasLog> logVec;
     GLuint result = wmcanvas::PixelsBindTexture(rgbaData, format, width, height, &logVec);
     LOG_EXCEPTION_VECTOR(mHooks, mContextId, logVec);
     return result;

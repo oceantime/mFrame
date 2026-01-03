@@ -73,7 +73,7 @@ public:
 
     virtual void SetWeight(float w[], int count) {}
 
-    std::vector<GCanvasLog>& GetErrorVector(){ return mErrVec;}
+    std::vector<WmCanvasLog>& GetErrorVector(){ return mErrVec;}
     
     void ClearErrorVector() { mErrVec.clear(); }
     
@@ -99,7 +99,7 @@ protected:
     GTransform mShaderTransform;
     bool mIsFirstCommit;
 
-    std::vector<GCanvasLog> mErrVec;
+    std::vector<WmCanvasLog> mErrVec;
     bool isCompleted;
 };
 

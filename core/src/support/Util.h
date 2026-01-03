@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_UTIL_H
-#define GCANVAS_UTIL_H
+#ifndef WMCANVAS_UTIL_H
+#define WMCANVAS_UTIL_H
 
 
 #ifdef ANDROID
@@ -77,4 +77,4 @@ namespace wmcanvas {
 
 }
 
-#endif /* GCANVAS_UTIL_H */
+#endif /* WMCANVAS_UTIL_H */

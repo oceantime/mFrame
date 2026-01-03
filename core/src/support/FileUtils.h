@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __GCANVAS_FILEUTILS_H__
-#define __GCANVAS_FILEUTILS_H__
+#ifndef __WMCANVAS_FILEUTILS_H__
+#define __WMCANVAS_FILEUTILS_H__
 
 #include <string>
 #include <vector>

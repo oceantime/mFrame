@@ -16,7 +16,7 @@ GLubyte *(*GTexture::loadPixelCallback)(const char *filePath, unsigned int *w,
                                          unsigned int *h) = nullptr;
 
 GTexture::GTexture(unsigned int w, unsigned int h, GLenum format,
-                     GLubyte *pixels, std::vector<GCanvasLog> *errVec)
+                     GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
     : mWidth(w), mHeight(h), mFormat(format), mTextureID(0)
 {
     CreateTexture(pixels, errVec);
@@ -72,12 +72,12 @@ GLubyte *GTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
     return buffer;
 }
 
-void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
+void GTexture::CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
 {
     GLenum glerror = 0;
     while ((glerror = glGetError()) != GL_NO_ERROR && errVec)
     {
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "glerror_before", "<function:%s, glGetError:%x>", __FUNCTION__, glerror);
         errVec->push_back(log);
     }
@@ -98,7 +98,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
     if ((int)mWidth > maxTextureSize || (int)mHeight > maxTextureSize)
     {
         if (errVec) {
-            GCanvasLog log;
+            WmCanvasLog log;
             FillLogInfo(log, "texture_size_exceed",
                         "<function:%s, width:%d, height:%d, maxSize:%d>", __FUNCTION__, mWidth,
                         mHeight, maxTextureSize);
@@ -113,7 +113,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
     glGenTextures(1, &mTextureID);
     if (mTextureID <= 0 && errVec) {
         // 有可能OOM导致生成纹理失败
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "gen_texture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                     glGetError());
         errVec->push_back(log);
@@ -121,7 +121,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
     glBindTexture(GL_TEXTURE_2D, mTextureID);
     glerror = glGetError();
     if (glerror && errVec && mWidth > 0 && mHeight > 0) {
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "bind_texture_fail", "<function:%s, glGetError:%x, width:%d, height:%d>",
                     __FUNCTION__, glerror, mWidth, mHeight);
         errVec->push_back(log);
@@ -133,7 +133,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
 
     glerror = glGetError();
     if (glerror && errVec) {
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "glTexImage2D_fail", "<function:%s, glGetError:%x>", __FUNCTION__, glerror);
         errVec->push_back(log);
     }
@@ -153,7 +153,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec)
     glBindTexture(GL_TEXTURE_2D, (GLuint)boundTexture);
     glerror = glGetError();
     if (glerror && errVec) {
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "glBindTexture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                     glerror);
         errVec->push_back(log);

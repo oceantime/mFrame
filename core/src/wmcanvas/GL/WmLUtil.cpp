@@ -92,7 +92,7 @@ namespace wmcanvas {
 ///   Pixels BindTexture
 //////////////////////////////////////////////////////////////////////////////
     GLuint PixelsBindTexture(const unsigned char *rgbaData, GLint format, unsigned int width,
-                             unsigned int height, std::vector<GCanvasLog> *errVec) {
+                             unsigned int height, std::vector<WmCanvasLog> *errVec) {
         if (nullptr == rgbaData)
             return (GLuint) - 1;
         
@@ -105,7 +105,7 @@ namespace wmcanvas {
         glGenTextures(1, &glID);
         glerror = glGetError();
         if (glerror && errVec) {
-            GCanvasLog log;
+            WmCanvasLog log;
             FillLogInfo(log, "gen_texture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                         glerror);
             errVec->push_back(log);
@@ -113,7 +113,7 @@ namespace wmcanvas {
         glBindTexture(GL_TEXTURE_2D, glID);
         glerror = glGetError();
         if (glerror && errVec) {
-            GCanvasLog log;
+            WmCanvasLog log;
             FillLogInfo(log, "bind_texture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                         glerror);
             errVec->push_back(log);
@@ -127,7 +127,7 @@ namespace wmcanvas {
                      GL_UNSIGNED_BYTE, rgbaData);
         glerror = glGetError();
         if (glerror && errVec) {
-            GCanvasLog log;
+            WmCanvasLog log;
             FillLogInfo(log, "glTexImage2D_fail", "<function:%s, glGetError:%x>",
                         __FUNCTION__, glerror);
             errVec->push_back(log);

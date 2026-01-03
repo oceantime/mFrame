@@ -90,7 +90,7 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
         GLchar message[256];
         glGetProgramInfoLog(mHandle, sizeof(message), 0, &message[0]);
         
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "program_link_fail", "name:%s, error:%x", name, message);
         mErrVec.push_back(log);
         
@@ -127,7 +127,7 @@ void GShader::TraceErrorIfHas(GShader* shader, WmCanvasHooks* hook, const std::s
     if (shader == nullptr) {
         return;
     }
-    std::vector<GCanvasLog> log = shader->GetErrorVector();
+    std::vector<WmCanvasLog> log = shader->GetErrorVector();
     LOG_EXCEPTION_VECTOR(hook, contextId, log);
     shader->ClearErrorVector();
 }
@@ -154,7 +154,7 @@ GLuint GShader::compileShader(const char *shader, GLenum shaderType)
         int len = 0;
         glGetShaderInfoLog(shaderHandle, sizeof(message), &len, &message[0]);
         
-        GCanvasLog log;
+        WmCanvasLog log;
         FillLogInfo(log, "shader_compile_fail", "type:%s,name:%s,error:%s",
                 shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment",
                 mName.data(), message);

@@ -158,7 +158,7 @@ GTexture *WmFontManagerImplementLinux::GetOrCreateFontTexture()
 {
     if (mFontTexture == nullptr)
     {
-        std::vector<GCanvasLog> logVec;
+        std::vector<WmCanvasLog> logVec;
         mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
                                     &logVec);
         // FIXME

@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_ENCODE_H
-#define GCANVAS_ENCODE_H
+#ifndef WMCANVAS_ENCODE_H
+#define WMCANVAS_ENCODE_H
 
 namespace wmcanvas
 {
@@ -17,4 +17,4 @@ int Base64EncodeBuf(char *szDest, const char *szSrc, int &iBufSize);
 int Base64DecodeBuf(char *szDest, const char *szSrc, int &iBufSize);
 }
 
-#endif /* GCANVAS_ENCODE_H */
+#endif /* WMCANVAS_ENCODE_H */

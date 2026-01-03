@@ -42,7 +42,7 @@ WmFontManagerAndroid::~WmFontManagerAndroid() {
 
 WmTexture* WmFontManagerAndroid::GetOrCreateFontTexture() {
     if (!mFontTexture) {
-        std::vector<GCanvasLog> logVec;
+        std::vector<WmCanvasLog> logVec;
         mFontTexture = new WmTexture(ANDROID_FONT_TEXTURE_SIZE, ANDROID_FONT_TEXTURE_SIZE,
                 GL_ALPHA, nullptr, &logVec);
         // FIXME

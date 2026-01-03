@@ -19,9 +19,7 @@
 #include <map>
 #include <set>
 
-struct GCanvasLog;
-
-using WmCanvasLog = GCanvasLog;
+struct WmCanvasLog;
 
 class WmFrameBufferObject
 {

@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_LOG_H
-#define GCANVAS_LOG_H
+#ifndef WMCANVAS_LOG_H
+#define WMCANVAS_LOG_H
 
 #if defined(__ANDROID__)
 #include <android/log.h>
@@ -23,9 +23,9 @@
 //namespace wmcanvas
 //{
 
-    typedef void (*GCanvasSystemLog)(int level, const char *tag, const char *log);
+    typedef void (*WmCanvasSystemLog)(int level, const char *tag, const char *log);
 
-    API_EXPORT extern GCanvasSystemLog gcanvasSystemLog;
+    API_EXPORT extern WmCanvasSystemLog wmcanvasSystemLog;
 
 
     typedef enum {
@@ -39,34 +39,30 @@
 
     struct WmCanvasHooks;
 
-    typedef void (*GCanvasExceptionHandler)(const char *canvasId, const char *tag, const char *detail, WmCanvasHooks* selfHooks);
+    typedef void (*WmCanvasExceptionHandler)(const char *canvasId, const char *tag, const char *detail, WmCanvasHooks* selfHooks);
 
 
     struct WmCanvasHooks
     {
-        GCanvasExceptionHandler GCanvasException;
+        WmCanvasExceptionHandler WmCanvasException;
     };
 
 
 
-    struct GCanvasLog
+    struct WmCanvasLog
     {
-        GCanvasLog();
+        WmCanvasLog();
         std::string tag;
         std::string detail;
     };
 
-
-    using WmCanvasLog = GCanvasLog;
-
-
-    void fillLogInfo(GCanvasLog &log, const char *tag, const char *format, ...);
+    void fillLogInfo(WmCanvasLog &log, const char *tag, const char *format, ...);
 
 
-    void FillLogInfo(GCanvasLog &log, const char *tag, const char *format, ...);
+    void FillLogInfo(WmCanvasLog &log, const char *tag, const char *format, ...);
 
 
-    void AppendErrorLogInfo(std::vector<GCanvasLog> *errVec, const char *tag, const char *format, ...);
+    void AppendErrorLogInfo(std::vector<WmCanvasLog> *errVec, const char *tag, const char *format, ...);
 
 
     #if defined(__ANDROID__)
@@ -81,7 +77,7 @@
     API_EXPORT void LogException(WmCanvasHooks *hooks, std::string contextId, const char *tag, const char *format, ...);
 
 
-    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<GCanvasLog> &vec);
+    API_EXPORT void LogExceptionVector(WmCanvasHooks *hooks, std::string contextId, std::vector<WmCanvasLog> &vec);
 
 
     #ifndef DEBUG
@@ -108,4 +104,4 @@
     #endif
 //}
 
-#endif /* GCANVAS_LOG_H */
+#endif /* WMCANVAS_LOG_H */

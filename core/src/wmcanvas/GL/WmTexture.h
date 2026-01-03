@@ -74,18 +74,18 @@ private:
     std::map< int, TextureGroup > mTextureGroupPool;
 };
 
-struct GCanvasLog;
+struct WmCanvasLog;
 
 class GTexture
 {
 public:
     GTexture(unsigned int w, unsigned int h, GLenum format = GL_RGBA,
-              GLubyte *pixels = nullptr, std::vector<GCanvasLog> *errVec = nullptr);
+              GLubyte *pixels = nullptr, std::vector<WmCanvasLog> *errVec = nullptr);
     GTexture(const char *filePath);
     GTexture();
     ~GTexture();
 
-    void CreateTexture(GLubyte *pixels, std::vector<GCanvasLog> *errVec = nullptr);
+    void CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec = nullptr);
 
     void Bind() const;
     void Unbind() const;

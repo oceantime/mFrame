@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef __GCANVAS_CHARACTER_SET_H__
-#define __GCANVAS_CHARACTER_SET_H__
+#ifndef __WMCANVAS_CHARACTER_SET_H__
+#define __WMCANVAS_CHARACTER_SET_H__
 
 #include <export.h>
 

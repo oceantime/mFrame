@@ -75,7 +75,7 @@ void WmCanvas2DContextAndroid::InitFBO() {
     }
 
     if (mFboMap.find(DefaultFboName) == mFboMap.end()) {
-        std::vector<GCanvasLog> logVec;
+        std::vector<WmCanvasLog> logVec;
         mIsFboSupported = mFboMap[DefaultFboName].InitFBO(mWidth, mHeight,
                                                           GColorTransparent, mEnableFboMsaa,
                                                           &logVec);
@@ -209,7 +209,7 @@ void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
         WmFrameBufferObject newFbo;
 
         // 记录新创建init fbo vector的异常
-        std::vector<GCanvasLog> logVec;
+        std::vector<WmCanvasLog> logVec;
         mIsFboSupported = newFbo.InitFBO(mWidth, mHeight, GColorTransparent, mEnableFboMsaa, &logVec);
         LOG_EXCEPTION_VECTOR(mHooks, mContextId, logVec);
 
