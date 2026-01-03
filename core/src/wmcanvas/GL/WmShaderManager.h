@@ -40,4 +40,6 @@ private:
     bool allShaderCompleted;
 };
 
+using WmShaderManager = GShaderManager;
+
 #endif /* GCANVAS_GSHADERMANAGER_H */

@@ -37,7 +37,7 @@ void WmCanvas2DContextAndroid::Create() {
     mShaderManager = nullptr;
 
     if (!mConfig.sharedShader) {
-        mShaderManager = new GShaderManager();
+        mShaderManager = new WmShaderManager();
     }
 }
 
@@ -206,7 +206,7 @@ void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
         // 1.切换回主fbo
         UnbindFBO();
         // 2.新创建fbo
-        GFrameBufferObject newFbo;
+        WmFrameBufferObject newFbo;
 
         // 记录新创建init fbo vector的异常
         std::vector<GCanvasLog> logVec;
@@ -244,7 +244,7 @@ void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
 }
 
 
-void WmCanvas2DContextAndroid::CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferObject &destFbo) {
+void WmCanvas2DContextAndroid::CopyFBO(WmFrameBufferObject &srcFbo, WmFrameBufferObject &destFbo) {
     if (!mIsFboSupported) {
         return;
     }
@@ -333,7 +333,7 @@ DrawFBO(std::string fboName, WmCompositeOperation compositeOp, float sx, float s
     Save();
     glViewport(mX, mY, mWidth, mHeight);
 
-    GFrameBufferObject &fbo = mFboMap[fboName];
+    WmFrameBufferObject &fbo = mFboMap[fboName];
 
     UseDefaultRenderPipeline();
 
@@ -402,11 +402,11 @@ void WmCanvas2DContextAndroid::DrawFrame(bool clear) {
 }
 
 
-void WmCanvas2DContextAndroid::SetShaderManager(GShaderManager* shaderManager) {
+void WmCanvas2DContextAndroid::SetShaderManager(WmShaderManager* shaderManager) {
     this->mShaderManager = shaderManager;
 }
 
 
-GShaderManager *WmCanvas2DContextAndroid::GetShaderManager() {
+WmShaderManager *WmCanvas2DContextAndroid::GetShaderManager() {
     return this->mShaderManager;
 }

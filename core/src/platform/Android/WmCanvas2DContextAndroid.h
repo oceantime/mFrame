@@ -64,7 +64,7 @@ public:
     API_EXPORT GTexture *GetFBOTextureData();
 
 
-    API_EXPORT void CopyFBO(GFrameBufferObject &srcFbo, GFrameBufferObject &destFbo);
+    API_EXPORT void CopyFBO(WmFrameBufferObject &srcFbo, WmFrameBufferObject &destFbo);
 
 
     API_EXPORT void CopyImageToCanvas(int width, int height, const unsigned char *rgbaData, int imgWidth,
@@ -89,10 +89,10 @@ public:
     void SetEnableFboMsaa(bool v) { mEnableFboMsaa = v; }
 
 
-    API_EXPORT void SetShaderManager(GShaderManager* shaderManager);
+    API_EXPORT void SetShaderManager(WmShaderManager* shaderManager);
 
 
-    GShaderManager *GetShaderManager() override;
+    WmShaderManager *GetShaderManager() override;
 
 protected:
 
@@ -114,7 +114,7 @@ private:
 
     bool mEnableFboMsaa = false;
 
-    GShaderManager *mShaderManager = nullptr;
+    WmShaderManager *mShaderManager = nullptr;
 
 };
 
