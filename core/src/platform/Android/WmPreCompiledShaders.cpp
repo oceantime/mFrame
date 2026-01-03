@@ -14,23 +14,23 @@
 #include <sys/stat.h>
 std::string g_shader_cache_path;
 
-static GPreCompiledShaders *sPreCompiledShaders = NULL;
-bool GPreCompiledShaders::sSupportPreCompiledShaders = false;
-GLenum GPreCompiledShaders::sProgramBinaryFormat = 0;
+static WmPreCompiledShaders *sPreCompiledShaders = NULL;
+bool WmPreCompiledShaders::sSupportPreCompiledShaders = false;
+GLenum WmPreCompiledShaders::sProgramBinaryFormat = 0;
 
-GPreCompiledShaders *GPreCompiledShaders::getInstance(void)
+WmPreCompiledShaders *WmPreCompiledShaders::getInstance(void)
 {
     if (!sPreCompiledShaders)
     {
-        sPreCompiledShaders = new GPreCompiledShaders();
+        sPreCompiledShaders = new WmPreCompiledShaders();
     }
 
     return sPreCompiledShaders;
 }
 
-GPreCompiledShaders::GPreCompiledShaders(void) { Init(); }
+WmPreCompiledShaders::WmPreCompiledShaders(void) { Init(); }
 
-void GPreCompiledShaders::Init(void)
+void WmPreCompiledShaders::Init(void)
 {
     mPrograms.clear();
     mPreCompiledPrograms.clear();
@@ -39,7 +39,7 @@ void GPreCompiledShaders::Init(void)
     loadPreCompiledPrograms(g_shader_cache_path);
 }
 
-GPreCompiledShaders::~GPreCompiledShaders(void)
+WmPreCompiledShaders::~WmPreCompiledShaders(void)
 {
     for (auto iter = mPrograms.begin(); iter != mPrograms.end(); ++iter)
     {
@@ -55,7 +55,7 @@ GPreCompiledShaders::~GPreCompiledShaders(void)
     mPreCompiledPrograms.clear();
 }
 
-void GPreCompiledShaders::loadPreCompiledPrograms(const std::string path)
+void WmPreCompiledShaders::loadPreCompiledPrograms(const std::string path)
 {
     mPreCompiledPrograms.clear();
 
@@ -84,7 +84,7 @@ void GPreCompiledShaders::loadPreCompiledPrograms(const std::string path)
     }
 }
 
-bool GPreCompiledShaders::LoadProgram(GLuint program, const std::string &id)
+bool WmPreCompiledShaders::LoadProgram(GLuint program, const std::string &id)
 {
     auto it = mPreCompiledPrograms.find(id);
     if (it == mPreCompiledPrograms.end())
@@ -100,7 +100,7 @@ bool GPreCompiledShaders::LoadProgram(GLuint program, const std::string &id)
     return true;
 }
 
-bool GPreCompiledShaders::AddProgram(GLuint program, const std::string &id)
+bool WmPreCompiledShaders::AddProgram(GLuint program, const std::string &id)
 {
     int length;
 
@@ -138,7 +138,7 @@ bool GPreCompiledShaders::AddProgram(GLuint program, const std::string &id)
     }
 }
 
-void GPreCompiledShaders::savePreCompiledPrograms(const std::string folder)
+void WmPreCompiledShaders::savePreCompiledPrograms(const std::string folder)
 {
     for (auto iter = mPrograms.begin(); iter != mPrograms.end(); ++iter)
     {
@@ -153,7 +153,7 @@ void GPreCompiledShaders::savePreCompiledPrograms(const std::string folder)
     }
 }
 
-void GPreCompiledShaders::SavePreCompiledShaders()
+void WmPreCompiledShaders::SavePreCompiledShaders()
 {
     if (mPreCompiledShaderCachePath.empty())
     {

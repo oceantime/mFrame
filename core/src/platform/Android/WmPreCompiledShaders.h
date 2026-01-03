@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef __GGL_PRECOMPILED_SHADERS_H__
-#define __GGL_PRECOMPILED_SHADERS_H__
+#ifndef __WMGL_PRECOMPILED_SHADERS_H__
+#define __WMGL_PRECOMPILED_SHADERS_H__
 
 #include <map>
 #include <string>
@@ -36,17 +36,17 @@ typedef struct _CompiledProgram
     GLenum binaryFormat;
 } CompiledProgram;
 
-class GPreCompiledShaders
+class WmPreCompiledShaders
 {
 public:
-    GPreCompiledShaders();
-    virtual ~GPreCompiledShaders();
+    WmPreCompiledShaders();
+    virtual ~WmPreCompiledShaders();
 
     /**
     @brief  Get current precompiled shaders instance.
     @return Current precompiled shaders instance pointer.
     */
-    static GPreCompiledShaders *getInstance();
+    static WmPreCompiledShaders *getInstance();
 
     bool GetSupportPreCompiledShaders() { return sSupportPreCompiledShaders; }
 
@@ -72,4 +72,4 @@ protected:
     static GLenum sProgramBinaryFormat;
 };
 
-#endif
+#endif // __WMGL_PRECOMPILED_SHADERS_H__

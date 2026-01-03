@@ -30,7 +30,7 @@ bool GShader::initWithPreCompiledProgramByteArray(
         const GLchar *fShaderByteArray)
 {
     mHandle = glCreateProgram();
-    bool haveProgram = GPreCompiledShaders::getInstance()->LoadProgram(mHandle, shaderName);
+    bool haveProgram = WmPreCompiledShaders::getInstance()->LoadProgram(mHandle, shaderName);
 
     CHECK_GL_ERROR_DEBUG();
 
@@ -50,7 +50,7 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
 
     if (g_use_pre_compile)
     {
-        if (GPreCompiledShaders::getInstance()
+        if (WmPreCompiledShaders::getInstance()
                     ->GetSupportPreCompiledShaders() &&
             initWithPreCompiledProgramByteArray(
                     shaderName.c_str(), vertexShaderSrc, fragmentShaderSrc))
@@ -104,10 +104,10 @@ GShader::GShader(const char *name, const char *vertexShaderSrc,
     else
     {
         if (g_use_pre_compile &&
-            GPreCompiledShaders::getInstance()
+            WmPreCompiledShaders::getInstance()
                     ->GetSupportPreCompiledShaders())
         {
-            GPreCompiledShaders::getInstance()->AddProgram(mHandle, mName);
+            WmPreCompiledShaders::getInstance()->AddProgram(mHandle, mName);
         }
     }
 #endif
