@@ -1,4 +1,4 @@
--keep class com.taobao.gcanvas.GCanvasJNI {
+-keep class com.honghu.gcanvas.GCanvasJNI {
     *** bindTexture(...);
     *** init(...);
     *** sendEvent(...);
@@ -22,7 +22,7 @@
 -keepattributes Signature
 
 
--keep class com.taobao.gcanvas.** {
+-keep class com.honghu.gcanvas.** {
     !private <fields>;
     !private <methods>;
 }

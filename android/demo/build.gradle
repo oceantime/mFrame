@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = 'com.taobao.wmcanvas.demo'
+    namespace = 'com.honghu.wmcanvas.demo'
     compileSdkVersion rootProject.extensions.sdks.CompileSDK
 
     defaultConfig {
-        applicationId "com.taobao.wmcanvas.demo"
+        applicationId "com.honghu.wmcanvas.demo"
         minSdkVersion rootProject.extensions.sdks.MinSDK
         targetSdkVersion rootProject.extensions.sdks.TargetSDK
         versionCode 1

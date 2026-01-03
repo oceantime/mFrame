@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -156,7 +156,7 @@ extern int g_js_version;
 
 #ifdef WmCanvas
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_newCanvas(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_newCanvas(
         JNIEnv *je, jclass jc, jstring contextId, jint jsVersion, jstring clearColor) {
     LOG_E("Canvas JNI::newCanvas. jsVer=%d", jsVersion);
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
@@ -172,7 +172,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_newCanvas(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_freeCanvas(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_freeCanvas(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::freeCanvas.");
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
@@ -183,7 +183,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_freeCanvas(
 }
 
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setClearColor(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setClearColor(
         JNIEnv *je, jclass jc, jstring contextId, jstring color) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
@@ -199,7 +199,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setClearColor(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setOrtho(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setOrtho(
         JNIEnv *je, jclass jc, jstring contextId, jint width, jint height) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
@@ -212,7 +212,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setOrtho(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addTexture(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addTexture(
         JNIEnv *je, jclass jc, jstring contextId, jint id, jint glID, jint width,
         jint height) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
@@ -226,7 +226,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addTexture(
     }
 }
 
-JNIEXPORT jboolean JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addPngTexture(
+JNIEXPORT jboolean JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addPngTexture(
         JNIEnv *je, jclass jc, jstring contextId, jobject assetManager,
         jstring path, jint textureId, jobject dimension) {
     bool success = false;
@@ -275,7 +275,7 @@ JNIEXPORT jboolean JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addPngTexture(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_taobao_wmcanvas_WmCanvasJNI_addPngTextureByStream(JNIEnv *je, jclass jc,
+Java_com_honghu_wmcanvas_WmCanvasJNI_addPngTextureByStream(JNIEnv *je, jclass jc,
                                                          jstring contextId,
                                                          jbyteArray array,
                                                          jint id, jobject dim) {
@@ -307,7 +307,7 @@ Java_com_taobao_wmcanvas_WmCanvasJNI_addPngTextureByStream(JNIEnv *je, jclass jc
     return (jboolean) success;
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_removeTexture(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_removeTexture(
         JNIEnv *je, jclass jc, jstring contextId, jint id) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
@@ -320,7 +320,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_removeTexture(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_render(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_render(
         JNIEnv *je, jclass jc, jstring contextId, jstring renderCommands) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     char *canvasId = jstringToString(je, contextId);
@@ -328,7 +328,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_render(
     free(canvasId);
     if (theCanvas) {
         const char *rc = je->GetStringUTFChars(renderCommands, 0);
-        LOG_D("Java_com_taobao_wmcanvas_WmCanvasJNI_render, cmd=%s", rc);
+        LOG_D("Java_com_honghu_wmcanvas_WmCanvasJNI_render, cmd=%s", rc);
         int length = je->GetStringUTFLength(renderCommands);
         if (0 != length) {
             const char *result = theCanvas->CallNative(0x60000001, rc);
@@ -343,7 +343,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_render(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_surfaceChanged(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_surfaceChanged(
         JNIEnv *je, jclass jc, jstring contextId, jint width, jint height) {
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
@@ -357,7 +357,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_surfaceChanged(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_captureGLLayer(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_captureGLLayer(
         JNIEnv *je, jclass jc, jstring contextId, jstring callbackId, jint x,
         jint y, jint w, jint h, jstring fileName) {
 //    LOG_D("Canvas JNI::captureGLLayer");
@@ -376,7 +376,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_captureGLLayer(
 //    }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_contextLost(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_contextLost(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::contextLost");
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
@@ -389,13 +389,13 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_contextLost(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_release(JNIEnv *je,
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_release(JNIEnv *je,
                                                                   jclass jc) {
     LOG_D("Canvas JNI::Release");
     WmCanvasManager::Release();
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setTyOffsetFlag(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setTyOffsetFlag(
         JNIEnv *je, jclass jc, jstring contextId, jboolean flag) {
     LOG_D("Canvas JNI::setTyOffsetFlag");
     char *cid = jstringToString(je, contextId);
@@ -408,7 +408,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setTyOffsetFlag(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setHiQuality(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setHiQuality(
         JNIEnv *je, jclass jc, jstring contextId, jboolean isHiQuality) {
     LOG_D("Canvas JNI::setHiQuality");
     char *cid = jstringToString(je, contextId);
@@ -421,7 +421,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setHiQuality(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setDevicePixelRatio(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setDevicePixelRatio(
         JNIEnv *je, jclass jc, jstring contextId, jdouble ratio) {
     LOG_D("Canvas JNI::setDevicePixelRatio");
     char *canvasId = jstringToString(je, contextId);
@@ -434,13 +434,13 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setDevicePixelRatio(
     free(canvasId);
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_init(JNIEnv *je, jclass jc) {
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_init(JNIEnv *je, jclass jc) {
 #ifdef ENABLE_GPROF
     monstartup("libWmCanvas.so");
 #endif
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_uninit(JNIEnv *,
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_uninit(JNIEnv *,
                                                                  jclass) {
 #ifdef ENABLE_GPROF
     moncleanup();
@@ -448,11 +448,11 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_uninit(JNIEnv *,
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_taobao_wmcanvas_WmCanvasJNI_isNeonSupport(JNIEnv *, jclass) {
+Java_com_honghu_wmcanvas_WmCanvasJNI_isNeonSupport(JNIEnv *, jclass) {
     return JNI_FALSE;
 }
 
-JNIEXPORT jboolean JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_isFboSupport(
+JNIEXPORT jboolean JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_isFboSupport(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::isFboSupport");
     char *cid = jstringToString(je, contextId);
@@ -467,7 +467,7 @@ JNIEXPORT jboolean JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_isFboSupport(
     return (jboolean) false;
 }
 
-JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_getImageData(
+JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getImageData(
         JNIEnv *je, jclass jc, jstring contextId, jint x, jint y, jint width,
         jint height) {
     LOG_D("Canvas JNI::getImageData xy=(%d, %d), wh=(%d, %d)", x, y, width,
@@ -491,7 +491,7 @@ JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_getImageData(
 extern bool g_use_pre_compile;
 extern std::string g_shader_cache_path;
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setPreCompilePath(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setPreCompilePath(
         JNIEnv *je, jclass jc, jstring path) {
     const char *pathPreCompile = je->GetStringUTFChars(path, 0);
 
@@ -503,7 +503,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setPreCompilePath(
     je->ReleaseStringUTFChars(path, pathPreCompile);
 }
 
-JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_getAllParameter(
+JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getAllParameter(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::getAllParameter");
 
@@ -521,7 +521,7 @@ JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_getAllParameter(
 }
 
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setContextType(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setContextType(
         JNIEnv *je, jclass jc, jstring contextId, jint type) {
     LOG_D("Canvas JNI::setContextType %d", type);
 
@@ -546,7 +546,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setContextType(
 
 }
 
-JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_exeSyncCmd
+JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_exeSyncCmd
         (JNIEnv *je, jclass jc, jstring ContextID, jint type, jstring args) {
     char *cid = jstringToString(je, ContextID);
     string contextID = cid;
@@ -574,7 +574,7 @@ JNIEXPORT jstring JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_exeSyncCmd
 //extern int g_encode_type;
 //extern int g_clear_color_time;
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setConfig(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setConfig(
         JNIEnv *je, jclass jc, jstring key, jint value) {
     char *configKey = jstringToString(je, key);
     LOG_D("Canvas JNI::setConfig %s=%d", configKey, value);
@@ -586,7 +586,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setConfig(
     free(configKey);
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_bindTexture(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_bindTexture(
         JNIEnv *je, jclass jc, jstring contextId, jobject bitmap, jint id,
         jint target, jint level, jint internalformat, jint format, jint type) {
 
@@ -609,7 +609,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_bindTexture(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_texSubImage2D(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_texSubImage2D(
         JNIEnv *je, jclass jc, jstring contextId, jobject bitmap,
         jint id, jint target, jint level, jint xoffset, jint yoffset, jint format, jint type) {
 
@@ -633,7 +633,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_texSubImage2D(
 }
 
 
-JNIEXPORT bool JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_sendEvent(
+JNIEXPORT bool JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_sendEvent(
         JNIEnv *je, jclass jc, jstring contextId) {
     if (!contextId) {
         return false;
@@ -655,7 +655,7 @@ JNIEXPORT bool JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_sendEvent(
 }
 
 JNIEXPORT void JNICALL
-Java_com_taobao_wmcanvas_WmCanvasJNI_registerCallback(JNIEnv *je, jclass jc, jstring soPath,
+Java_com_honghu_wmcanvas_WmCanvasJNI_registerCallback(JNIEnv *je, jclass jc, jstring soPath,
                                                     jint version) {
     LOG_D("start to register jsc callback.");
     if (version >= 24) {
@@ -683,7 +683,7 @@ Java_com_taobao_wmcanvas_WmCanvasJNI_registerCallback(JNIEnv *je, jclass jc, jst
 
 
 JNIEXPORT jint JNICALL
-Java_com_taobao_wmcanvas_WmCanvasJNI_getNativeFps(JNIEnv *je, jclass jc, jstring contextId) {
+Java_com_honghu_wmcanvas_WmCanvasJNI_getNativeFps(JNIEnv *je, jclass jc, jstring contextId) {
     if (!contextId) {
         return false;
     }
@@ -707,7 +707,7 @@ Java_com_taobao_wmcanvas_WmCanvasJNI_getNativeFps(JNIEnv *je, jclass jc, jstring
 #endif
 
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setFallbackFont(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setFallbackFont(
         JNIEnv *je, jclass jc, jstring fallback_font_file,
         jstring system_font_location) {
     // fallback_font_file_jvm is managed by JVM.
@@ -731,7 +731,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setFallbackFont(
     je->ReleaseStringUTFChars(system_font_location, system_font_location_jvm);
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addFontFamily(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addFontFamily(
         JNIEnv *je, jclass jc, jobjectArray font_names, jobjectArray font_files) {
     int length = je->GetArrayLength(font_files);
     std::list<const char *> font_file_list;
@@ -774,7 +774,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addFontFamily(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addFallbackFontFamily(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addFallbackFontFamily(
         JNIEnv *je, jclass jc, jobjectArray font_files) {
     LOG_D("Canvas JNI::addFallbackFontFamily");
 
@@ -805,7 +805,7 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_addFallbackFontFamil
     LOG_D("finish to insert fallbackfont.");
 }
 
-JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setLogLevel(
+JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setLogLevel(
         JNIEnv *je, jclass jc, jstring logLevel) {
     char *level = jstringToString(je, logLevel);
 
@@ -823,5 +823,6 @@ JNIEXPORT void JNICALL Java_com_taobao_wmcanvas_WmCanvasJNI_setLogLevel(
     free(level);
     return;
 }
+
 
 

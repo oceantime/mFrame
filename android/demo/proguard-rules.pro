@@ -3,7 +3,7 @@
 -keepattributes JavascriptInterface
 
 # Keep JavaScript interface
--keepclassmembers class com.taobao.gcanvas.demo.WebViewActivity$JsInterface {
+-keepclassmembers class com.honghu.gcanvas.demo.WebViewActivity$JsInterface {
     public *;
 }
 

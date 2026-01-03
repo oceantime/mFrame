@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by yuantong on 2017/8/1.
 //
 
@@ -36,14 +36,14 @@ char *jstringToString_(JNIEnv *env, jstring jstr) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceCreated(JNIEnv *env, jobject instance,
+Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onSurfaceCreated(JNIEnv *env, jobject instance,
                                                                       jstring key,
                                                                       jobject surface) {
 
 }
 
 JNIEXPORT void JNICALL
-Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *env, jobject instance,
+Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *env, jobject instance,
                                                                       jstring key,
                                                                       jobject surface, jint format,
                                                                       jint width, jint height,
@@ -100,7 +100,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *
 }
 
 JNIEXPORT void JNICALL
-Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv *env,
+Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv *env,
                                                                         jobject instance,
                                                                         jstring key,
                                                                         jobject surface) {
@@ -127,7 +127,7 @@ Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_taobao_wmcanvas_surface_WmTextureViewCallback_onRenderExit(JNIEnv *env,
+Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onRenderExit(JNIEnv *env,
                                                                   jobject instance,
                                                                   jstring key) {
     if (!key) {

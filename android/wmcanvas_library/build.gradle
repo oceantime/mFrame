@@ -4,7 +4,7 @@ group = rootProject.extensions.groups.Main
 version = "1.2.0"
 
 android {
-    namespace = 'com.taobao.wmcanvas'
+    namespace = 'com.honghu.wmcanvas'
     compileSdkVersion rootProject.extensions.sdks.CompileSDK
     ndkVersion = "21.1.6352462"
     
