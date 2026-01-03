@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GFREETYPEWRAP_H
-#define GCANVAS_GFREETYPEWRAP_H
+#ifndef WMCANVAS_WMFREETYPEWRAP_H
+#define WMCANVAS_WMFREETYPEWRAP_H
 
 
 #define WMFONT_LOAD_BY_FREETYPE
@@ -58,4 +58,4 @@ namespace wmcanvas
 
 
 
-#endif //GCANVAS_GFREETYPEWRAP_H
+#endif //WMCANVAS_WMFREETYPEWRAP_H
