@@ -7,17 +7,17 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GLUTIL_H
-#define GCANVAS_GLUTIL_H
+#ifndef WMCANVAS_GLUTIL_H
+#define WMCANVAS_GLUTIL_H
 
 #include "WmGL.h"
 #include "../../support/Log.h"
 #include <vector>
 
 namespace wmcanvas{
-    GLuint PixelsBindTexture(const unsigned char *rgbaData, GLint format, unsigned int width,
+    GLuint PixelsBindTexture(const unsigned char *rgbaData, WmLint format, unsigned int width,
                              unsigned int height, std::vector<WmCanvasLog> *errVec = nullptr);
     void PixelsSampler(int inWidth, int inHeight, int *inPixels, int outWidth, int outHeight, int *outPixels);
 }
 
-#endif /* GCANVAS_GLUTIL_H */
+#endif /* WMCANVAS_GLUTIL_H */
