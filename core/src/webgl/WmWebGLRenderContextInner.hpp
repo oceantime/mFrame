@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -7,8 +7,8 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#ifndef GCANVAS_GWEBGLRENDERCONTEXTINNER_H
-#define GCANVAS_GWEBGLRENDERCONTEXTINNER_H
+#ifndef WMCANVAS_WMWEBGLRENDERCONTEXTINNER_H
+#define WMCANVAS_WMWEBGLRENDERCONTEXTINNER_H
 
 #include "WmGL.h"
 #include <iostream>
@@ -189,4 +189,5 @@ const char *webglAPIName(uint32_t ID);
 
 } //namespace WebGL
 } //namespace wmcanvas
-#endif //GCANVAS_GWEBGLRENDERCONTEXTINNER_H
+#endif //WMCANVAS_WMWEBGLRENDERCONTEXTINNER_H
+

@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -30,26 +30,26 @@ JSBindingPixels::~JSBindingPixels()
 }
 
 
-GWebGLRenderContext::GWebGLRenderContext(std::string contextId)
+WmWebGLRenderContext::WmWebGLRenderContext(std::string contextId)
     : mContextId(contextId), mDrawCall(0),mNeed_draw(false),
     mUnpackFlipY_WebGL(false), mPremultiplyAlpha_WebGL(false)
 {
 
 }
 
-GWebGLRenderContext::GWebGLRenderContext(void* data, std::string contextId)
+WmWebGLRenderContext::WmWebGLRenderContext(void* data, std::string contextId)
     : mData(data), mContextId(contextId), mDrawCall(0),
       mNeed_draw(false), mUnpackFlipY_WebGL(false), mPremultiplyAlpha_WebGL(false)
 {
 
 }
 
-GWebGLRenderContext::~GWebGLRenderContext()
+WmWebGLRenderContext::~WmWebGLRenderContext()
 {
     ReleaseResource();
 }
 
-void GWebGLRenderContext::FetchPixels(uint64_t instanceId, int format, JSBindingPixels* pixels)
+void WmWebGLRenderContext::FetchPixels(uint64_t instanceId, int format, JSBindingPixels* pixels)
 {
     if (mFetchPixelsFunc)
     {
@@ -57,7 +57,7 @@ void GWebGLRenderContext::FetchPixels(uint64_t instanceId, int format, JSBinding
     }
 }
 
-void GWebGLRenderContext::BindFramebufferNull()
+void WmWebGLRenderContext::BindFramebufferNull()
 {
     if( mBindFramebufferNullFunc )
     {
@@ -65,7 +65,7 @@ void GWebGLRenderContext::BindFramebufferNull()
     }
 }
 
-void GWebGLRenderContext::AddGLResource(GLResourceType resType, GLuint v)
+void WmWebGLRenderContext::AddGLResource(GLResourceType resType, GLuint v)
 {
     if( mAddGLResourceFunc )
     {
@@ -111,7 +111,7 @@ void GWebGLRenderContext::AddGLResource(GLResourceType resType, GLuint v)
     }
 }
 
-void GWebGLRenderContext::DeleteGLResource(GLResourceType resType, GLuint v)
+void WmWebGLRenderContext::DeleteGLResource(GLResourceType resType, GLuint v)
 {
     switch (resType)
     {
@@ -152,7 +152,7 @@ void GWebGLRenderContext::DeleteGLResource(GLResourceType resType, GLuint v)
     }
 }
 
-void GWebGLRenderContext::ReleaseResource() {
+void WmWebGLRenderContext::ReleaseResource() {
     std::for_each(mBufferSet.begin(), mBufferSet.end(), [](GLuint v) {
         deleteBuffer(v);
     });
@@ -189,3 +189,4 @@ void GWebGLRenderContext::ReleaseResource() {
 
 } //namespace WebGL
 } //namespace wmcanvas
+

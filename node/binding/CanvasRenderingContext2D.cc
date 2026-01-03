@@ -1392,7 +1392,7 @@ DEFINE_GETTER_METHOD(gettextAlign)
 Napi::Env env = info.Env();
 if (mRenderContext)
 {
-    GTextAlign value = mRenderContext->getCtx()->TextAlign();
+    WmTextAlign value = mRenderContext->getCtx()->TextAlign();
     if (value == TEXT_ALIGN_LEFT)
     {
         return Napi::String::New(env, "left");

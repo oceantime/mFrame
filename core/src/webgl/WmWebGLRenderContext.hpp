@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -7,8 +7,8 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#ifndef GCANVAS_GWEBGLRENDERCONTEXT_H
-#define GCANVAS_GWEBGLRENDERCONTEXT_H
+#ifndef WMCANVAS_WMWEBGLRENDERCONTEXT_H
+#define WMCANVAS_WMWEBGLRENDERCONTEXT_H
 
 #include <stdio.h>
 #include <string>
@@ -73,12 +73,12 @@ enum GLResourceType
     VertexArray
 };
 
-class GWebGLRenderContext
+class WmWebGLRenderContext
 {
 public:
-    API_EXPORT GWebGLRenderContext(std::string contextId);
-    API_EXPORT GWebGLRenderContext(void* data, std::string contextId);
-    API_EXPORT ~GWebGLRenderContext();
+    API_EXPORT WmWebGLRenderContext(std::string contextId);
+    API_EXPORT WmWebGLRenderContext(void* data, std::string contextId);
+    API_EXPORT ~WmWebGLRenderContext();
 
     void FetchPixels(uint64_t instanceId, int format, JSBindingPixels* pixels);
     void BindFramebufferNull();
@@ -115,4 +115,5 @@ protected:
 
 } //namespace wmcanvas
 
-#endif /* GCANVAS_GWEBGLRENDERCONTEXT_H */
+#endif /* WMCANVAS_WMWEBGLRENDERCONTEXT_H */
+
