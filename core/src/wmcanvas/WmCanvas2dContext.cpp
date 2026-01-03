@@ -116,7 +116,7 @@ WmCanvasContext::WmCanvasContext(short w, short h, const WmCanvasConfig &config,
     mHooks = hooks;
     // init state
     mStateStack.clear();
-    GCanvasState *state = new GCanvasState();
+    WmCanvasState *state = new WmCanvasState();
     mStateStack.push_back(state);
     mCurrentState = mStateStack.back();
 
@@ -486,7 +486,7 @@ void WmCanvasContext::ResetStateStack()
     }
 
     mStateStack.clear();
-    mStateStack.push_back(new GCanvasState());
+    mStateStack.push_back(new WmCanvasState());
     mCurrentState = mStateStack.back();
 
     if (!hasOldState)
@@ -586,7 +586,7 @@ void WmCanvasContext::SendVertexBufferToGPU(const GLenum geometry_type)
 
 bool WmCanvasContext::NeedSendVertexBufferToGPUWithSize(size_t size)
 {
-    if (mVertexBufferIndex >= GCANVAS_VERTEX_BUFFER_SIZE - size)
+    if (mVertexBufferIndex >= WMCANVAS_VERTEX_BUFFER_SIZE - size)
     {
         SendVertexBufferToGPU();
         return true;
@@ -1068,7 +1068,7 @@ void WmCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, W
         curCountToTail = pointSize - i;
         segmentSize = curCountToTail > segmentStride ? segmentStride : curCountToTail;
 
-        if (mVertexBufferIndex + segmentStride >= (GCANVAS_VERTEX_BUFFER_SIZE - 1))
+        if (mVertexBufferIndex + segmentStride >= (WMCANVAS_VERTEX_BUFFER_SIZE - 1))
         {
             //LOG_D("SendVertexBufferToGPU, vertex count=%d, i=%d, segmentSize=%d", mVertexBufferIndex,
             //    i, segmentSize);
@@ -2110,7 +2110,7 @@ void WmCanvasContext::DoTranslate(float tx, float ty)
 void WmCanvasContext::Save()
 {
     // LOG_I("call save and the mstatestack size is %d\n", mStateStack.size());
-    GCanvasState *newState = new GCanvasState(*mCurrentState);
+    WmCanvasState *newState = new WmCanvasState(*mCurrentState);
     mStateStack.push_back(newState);
     mCurrentState = newState;
 }
@@ -2135,7 +2135,7 @@ bool WmCanvasContext::Restore()
     ResetClip();
 
     // free top state object
-    GCanvasState *state = mStateStack.back();
+    WmCanvasState *state = mStateStack.back();
     if (state != nullptr)
     {
         delete state;

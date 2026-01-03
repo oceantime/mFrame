@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by G-Canvas Open Source Team.
  * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
  *
@@ -9,7 +9,7 @@
 
 #include "WmCanvasState.h"
 
-GCanvasState::GCanvasState() {
+WmCanvasState::WmCanvasState() {
     mGlobalCompositeOp = COMPOSITE_OP_NONE;
     mFillColor.rgba = {0.0f, 0.0f, 0.0f, 1.0f};
     mStrokeColor.rgba = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -36,7 +36,7 @@ GCanvasState::GCanvasState() {
 }
 
 
-GCanvasState::GCanvasState(const GCanvasState &state) {
+WmCanvasState::WmCanvasState(const WmCanvasState &state) {
     mShader = nullptr;
     mFillStyle = nullptr;
     mStrokeStyle = nullptr;
@@ -46,13 +46,13 @@ GCanvasState::GCanvasState(const GCanvasState &state) {
 }
 
 
-GCanvasState &GCanvasState::operator=(const GCanvasState &state) {
+WmCanvasState &WmCanvasState::operator=(const WmCanvasState &state) {
     Clone(state);
     return *this;
 }
 
 
-void GCanvasState::Clone(const GCanvasState& state) {
+void WmCanvasState::Clone(const WmCanvasState& state) {
     mGlobalCompositeOp = state.mGlobalCompositeOp;
     mFillColor.rgba = state.mFillColor.rgba;
     mStrokeColor.rgba = state.mStrokeColor.rgba;
@@ -103,7 +103,7 @@ void GCanvasState::Clone(const GCanvasState& state) {
 }
 
 
-void GCanvasState::ClearClip() {
+void WmCanvasState::ClearClip() {
     if (clipPaths.size() > 0) {
         for (int i = 0; i < clipPaths.size(); i++) {
             delete clipPaths[i];
@@ -113,7 +113,7 @@ void GCanvasState::ClearClip() {
 }
 
 
-void GCanvasState::ClearStyle() {
+void WmCanvasState::ClearStyle() {
     if (mFont != nullptr) {
         delete mFont;
         mFont = nullptr;
@@ -130,7 +130,7 @@ void GCanvasState::ClearStyle() {
 }
 
 
-GCanvasState::~GCanvasState() {
+WmCanvasState::~WmCanvasState() {
     ClearClip();
     ClearStyle();
 }

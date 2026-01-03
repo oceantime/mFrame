@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GPATH_H
-#define GCANVAS_GPATH_H
+#ifndef WMCANVAS_WMPATH_H
+#define WMCANVAS_WMPATH_H
 
 #include "WmPoint.h"
 #include "WmTransform.h"
@@ -21,7 +21,7 @@ class WmCanvasContext;
 
 
 typedef struct {
-    std::vector<GPoint> points;
+    std::vector<WmPoint> points;
     bool isClosed;
 } GSubPath;
 
@@ -69,7 +69,7 @@ public:
     void Stroke(WmCanvasContext *context, WmColorRGBA color, std::vector<WmVertex> *vertexVec);
 
 
-    void Fill(WmCanvasContext *context, GFillRule rule, GFillTarget target = FILL_TARGET_COLOR,
+    void Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target = FILL_TARGET_COLOR,
               bool needTransform = false);
 
 
@@ -81,11 +81,11 @@ public:
 
     static void GetRectCoverVertex(WmRectf &rect, std::vector<WmVertex> &vertexVec);
 
-    static void SubdivideCubicTo(WmPath *path, GPoint points[4], int level = 4);
+    static void SubdivideCubicTo(WmPath *path, WmPoint points[4], int level = 4);
 
-    static void ChopCubicAt(GPoint src[4], GPoint dst[7], float t);
+    static void ChopCubicAt(WmPoint src[4], WmPoint dst[7], float t);
 
-    static inline GPoint Interp(const GPoint &v0, const GPoint &v1, const GPoint &t);
+    static inline WmPoint Interp(const WmPoint &v0, const WmPoint &v1, const WmPoint &t);
 
 private:
 
@@ -93,7 +93,7 @@ private:
     std::vector<GSubPath*> *CreateLineDashPath(WmCanvasContext *context);
 
 
-    void PushPoint(GPoint pt);
+    void PushPoint(WmPoint pt);
 
 
     void PushPoint(float x, float y);

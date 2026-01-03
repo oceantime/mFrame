@@ -988,7 +988,7 @@ void GCanvasWeex::execute2dCommands(const char *renderCommands, int length) {
                 //textBaseLine
                 float tokens[1] = {0};
                 p = parseTokens(p, tokens);
-                mCanvasContext->mCurrentState->mTextBaseline = GTextBaseline(tokens[0]);
+                mCanvasContext->mCurrentState->mTextBaseline = WmTextBaseline(tokens[0]);
                 break;
             }
             case 'T': {

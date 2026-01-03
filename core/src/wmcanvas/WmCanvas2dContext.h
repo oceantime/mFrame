@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GCANVASCONTEXT_H
-#define GCANVAS_GCANVASCONTEXT_H
+#ifndef WMCANVAS_WMCANVASCONTEXT_H
+#define WMCANVAS_WMCANVASCONTEXT_H
 
 #include "WmGL.h"
 #include "WmCanvasState.h"
@@ -75,10 +75,10 @@ struct GCanvasVertexShaderProperty {
 class WmCanvasContext {
 public:
 
-    static const int GCANVAS_STATE_STACK_SIZE = 16;
+    static const int WMCANVAS_STATE_STACK_SIZE = 16;
 
 
-    static const int GCANVAS_VERTEX_BUFFER_SIZE = 2048;
+    static const int WMCANVAS_VERTEX_BUFFER_SIZE = 2048;
 
 
     static const int MAX_BLUE_RADIUS = 127;
@@ -126,9 +126,9 @@ public:
     bool flagHack=true;
     
     //----------------Push Vertex------------------------
-    void PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA color,
+    void PushTriangle(WmPoint v1, WmPoint v2, WmPoint v3, WmColorRGBA color,
                      WmTransform transform, std::vector<WmVertex> *vec = NULL);
-    void PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4, WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec = NULL);
+    void PushQuad(WmPoint v1, WmPoint v2, WmPoint v3, WmPoint v4, WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec = NULL);
     //fbo size same with texutre
     void PushRectangle(float x, float y, float w, float h, float tx, float ty, float tw, float th,
                        WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false, std::vector<WmVertex> *vec = NULL);
@@ -142,9 +142,9 @@ public:
                                    WmTransform transform = WmTransformIdentity, bool flipY = false);
     void PushReverseRectangle(float x, float y, float w, float h, float tx, float ty,
                               float tw, float th, WmColorRGBA color);
-    void PushPoints(const std::vector<GPoint> &points, WmColorRGBA color);
+    void PushPoints(const std::vector<WmPoint> &points, WmColorRGBA color);
     void PushVertexs(const std::vector<WmVertex> &vertexs);
-    void PushTriangleFanPoints(const std::vector<GPoint> &points, WmColorRGBA color);
+    void PushTriangleFanPoints(const std::vector<WmPoint> &points, WmColorRGBA color);
 
     void SaveVertexShaderProperty(int offset, int count);
 
@@ -184,9 +184,9 @@ public:
     
     void SetContextLost(bool v) { mContextLost = v; }
     
-    GCanvasState *GetCurrentState() { return mCurrentState; }
+    WmCanvasState *GetCurrentState() { return mCurrentState; }
     
-    GTexture *GetFboTexture();
+    WmTexture *GetFboTexture();
 
     //non-w3c API
     API_EXPORT void ClearScreen();
@@ -209,8 +209,8 @@ public:
     API_EXPORT WmTextAlign TextAlign() const { return mCurrentState->mTextAlign; }
     API_EXPORT void SetTextAlign(WmTextAlign align);
 
-    API_EXPORT GTextBaseline TextBaseline() const { return mCurrentState->mTextBaseline; }
-    API_EXPORT void SetTextBaseline(GTextBaseline baseLine);
+    API_EXPORT WmTextBaseline TextBaseline() const { return mCurrentState->mTextBaseline; }
+    API_EXPORT void SetTextBaseline(WmTextBaseline baseLine);
     
     API_EXPORT void SetFont(const char *font);
 
@@ -247,13 +247,13 @@ public:
     API_EXPORT float LineWidth() const { return mCurrentState->mLineWidth; }
     API_EXPORT void SetLineWidth(float w) { mCurrentState->mLineWidth = w; }
     
-    API_EXPORT GLineCap LineCap() const { return mCurrentState->mLineCap; }
-    API_EXPORT void SetLineCap(GLineCap cap) { mCurrentState->mLineCap = cap; }
+    API_EXPORT WmLineCap LineCap() const { return mCurrentState->mLineCap; }
+    API_EXPORT void SetLineCap(WmLineCap cap) { mCurrentState->mLineCap = cap; }
     API_EXPORT void SetLineCap(const char *p);
 
     
-    API_EXPORT GLineJoin LineJoin() const { return mCurrentState->mLineJoin; }
-    API_EXPORT void SetLineJoin(GLineJoin join) { mCurrentState->mLineJoin = join; }
+    API_EXPORT WmLineJoin LineJoin() const { return mCurrentState->mLineJoin; }
+    API_EXPORT void SetLineJoin(WmLineJoin join) { mCurrentState->mLineJoin = join; }
     API_EXPORT void SetLineJoin(const char *p);
 
 
@@ -285,7 +285,7 @@ public:
     API_EXPORT void Translate(float tx, float ty);
     API_EXPORT void DoTranslate(float tx, float ty);
 
-    //GCanvasState save & restore
+    //WmCanvasState save & restore
     API_EXPORT void Save();
     API_EXPORT bool Restore();
 
@@ -309,16 +309,16 @@ public:
     API_EXPORT void ClearRect(float x, float y, float w, float h);
     
     //clip / stroke / fill
-    API_EXPORT void Clip(GFillRule rule = FILL_RULE_NONZERO);
-    API_EXPORT void Clip(GPath2D& path2d, GFillRule rule = FILL_RULE_NONZERO);
+    API_EXPORT void Clip(WmFillRule rule = FILL_RULE_NONZERO);
+    API_EXPORT void Clip(WmPath2D& path2d, WmFillRule rule = FILL_RULE_NONZERO);
 
     API_EXPORT void ResetClip();
 
-    API_EXPORT void Fill(GFillRule rule = FILL_RULE_NONZERO);
-    API_EXPORT void Fill(GPath2D& path2d, GFillRule rule = FILL_RULE_NONZERO);
+    API_EXPORT void Fill(WmFillRule rule = FILL_RULE_NONZERO);
+    API_EXPORT void Fill(WmPath2D& path2d, WmFillRule rule = FILL_RULE_NONZERO);
 
     API_EXPORT void Stroke();
-    API_EXPORT void Stroke(GPath2D& path2d);
+    API_EXPORT void Stroke(WmPath2D& path2d);
 
 
     //text
@@ -431,16 +431,16 @@ protected:
     bool NeedSendVertexBufferToGPUWithSize(size_t size);
 
 
-    void DoFillWithPath(WmPath& path, GFillRule rule);
+    void DoFillWithPath(WmPath& path, WmFillRule rule);
 
     void DoStrokeWithPath(WmPath& path);
 
-    void DoClipPath(WmPath* path, GFillRule rule);
+    void DoClipPath(WmPath* path, WmFillRule rule);
 
 
 public:
     WmCanvasConfig mConfig;
-    GCanvasState *mCurrentState;
+    WmCanvasState *mCurrentState;
     float mDevicePixelRatio;
     WmTransform mProjectTransform;
 
@@ -480,14 +480,14 @@ protected:
     // Path is not affect by save/restore, so we keep persistent object
     WmPath mPath;
 
-    std::vector<GCanvasState*> mStateStack;
+    std::vector<WmCanvasState*> mStateStack;
     bool mHasClipRegion;
 
     WmShader *mSaveShader;
     bool mSaveIsStroke;
 
     // gl vertex
-    WmVertex CanvasVertexBuffer[WmCanvasContext::GCANVAS_VERTEX_BUFFER_SIZE];
+    WmVertex CanvasVertexBuffer[WmCanvasContext::WMCANVAS_VERTEX_BUFFER_SIZE];
 
     // save vertex shader map
     std::vector<GCanvasVertexShaderProperty> mVertexShaderProperties;
@@ -510,4 +510,4 @@ protected:
 
 };
 
-#endif /* GCANVAS_GCANVASCONTEXT_H */
+#endif /* WMCANVAS_WMCANVASCONTEXT_H */

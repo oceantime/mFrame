@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GCONTEXT2DTYPE_H
-#define GCANVAS_GCONTEXT2DTYPE_H
+#ifndef WMCANVAS_WMCONTEXT2DTYPE_H
+#define WMCANVAS_WMCONTEXT2DTYPE_H
 
 #include "WmGL.h"
 
@@ -16,14 +16,18 @@ typedef enum
     LINE_CAP_BUTT = 0,
     LINE_CAP_ROUND,
     LINE_CAP_SQUARE
-} GLineCap;
+} WmLineCap;
+
+using GLineCap = WmLineCap;
 
 typedef enum
 {
     LINE_JOIN_MITER = 0,
     LINE_JOIN_BEVEL,
     LINE_JOIN_ROUND
-} GLineJoin;
+} WmLineJoin;
+
+using GLineJoin = WmLineJoin;
 
 typedef enum
 {
@@ -55,7 +59,9 @@ typedef enum
 {
     FILL_RULE_NONZERO,
     FILL_RULE_EVENODD
-} GFillRule;
+} WmFillRule;
+
+using GFillRule = WmFillRule;
 
 typedef enum
 {
@@ -63,4 +69,4 @@ typedef enum
     FILL_TARGET_DEPTH
 } GFillTarget;
 
-#endif /* GCANVAS_GCONTEXT2DTYPE_H */
+#endif /* WMCANVAS_WMCONTEXT2DTYPE_H */

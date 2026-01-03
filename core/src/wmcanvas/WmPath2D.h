@@ -6,8 +6,8 @@
 * For the full copyright and license information, please view
 * the LICENSE file in the root directory of this source tree.
 */
-#ifndef GCANVAS_GPATH2D_H
-#define GCANVAS_GPATH2D_H
+#ifndef WMCANVAS_WMPATH2D_H
+#define WMCANVAS_WMPATH2D_H
 
 
 #include "GL/WmGL.h"
@@ -50,22 +50,22 @@ struct GPathCmd {
 
 
 /**
- * GPath2D object, for implement Canvas Path2d interface
+ * WmPath2D object, for implement Canvas Path2d interface
  */
-class GPath2D {
+class WmPath2D {
 
 public:
 
-    API_EXPORT GPath2D();
+    API_EXPORT WmPath2D();
 
 
-    API_EXPORT ~GPath2D();
+    API_EXPORT ~WmPath2D();
 
 
-    API_EXPORT GPath2D(const GPath2D &other);
+    API_EXPORT WmPath2D(const WmPath2D &other);
 
 
-    API_EXPORT void AddPath(GPath2D&, WmTransform& transform);
+    API_EXPORT void AddPath(WmPath2D&, WmTransform& transform);
 
 
     API_EXPORT void ClosePath();
@@ -119,5 +119,6 @@ private:
 
 };
 
+using GPath2D = WmPath2D;
 
-#endif //GCANVAS_GPATH2D_H
+#endif //WMCANVAS_WMPATH2D_H

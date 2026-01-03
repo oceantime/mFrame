@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GTEXTDEFINE_H
-#define GCANVAS_GTEXTDEFINE_H
+#ifndef WMCANVAS_WMTEXTDEFINE_H
+#define WMCANVAS_WMTEXTDEFINE_H
 
 typedef enum {
     TEXT_BASELINE_ALPHABETIC = 0, // for Western fonts: Default. The text
@@ -20,7 +20,9 @@ typedef enum {
                             // box
     TEXT_BASELINE_IDEOGRAPHIC // for CJK fonts: The text baseline is the
                                // ideographic baseline
-} GTextBaseline;
+} WmTextBaseline;
+
+using GTextBaseline = WmTextBaseline;
 
 typedef enum {
     TEXT_ALIGN_START = 0, // Default. The text baseline is the normal alphabetic baseline
@@ -31,4 +33,4 @@ typedef enum {
     TEXT_ALIGN_RIGHT   // The text ends at the specified position
 } WmTextAlign;
 
-#endif /* GCANVAS_GTEXTDEFINE_H  */
+#endif /* WMCANVAS_WMTEXTDEFINE_H  */

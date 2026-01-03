@@ -6,8 +6,8 @@
 * For the full copyright and license information, please view
 * the LICENSE file in the root directory of this source tree.
 */
-#ifndef GCANVAS_GPATHSTROKER_H
-#define GCANVAS_GPATHSTROKER_H
+#ifndef WMCANVAS_WMPATHSTROKER_H
+#define WMCANVAS_WMPATHSTROKER_H
 
 
 #include "WmPoint.h"
@@ -27,17 +27,17 @@ class WmCanvasContext;
  *    [in]            [in]
  */
 struct GPathOutLine {
-    GPoint from;
-    GPoint to;
+    WmPoint from;
+    WmPoint to;
 
     float offsetX;
     float offsetY;
 
-    GPoint fromIn;
-    GPoint fromOut;
+    WmPoint fromIn;
+    WmPoint fromOut;
 
-    GPoint toIn;
-    GPoint toOut;
+    WmPoint toIn;
+    WmPoint toOut;
 };
 
 

@@ -6,8 +6,8 @@
  * For the full copyright and license information, please view
  * the LICENSE file in the root directory of this source tree.
  */
-#ifndef GCANVAS_GPOINT_H
-#define GCANVAS_GPOINT_H
+#ifndef WMCANVAS_WMPOINT_H
+#define WMCANVAS_WMPOINT_H
 
 #include "WmGL.h"
 #include "WmContext2dType.h"
@@ -21,7 +21,9 @@ typedef struct
 {
     GLfloat x;
     GLfloat y;
-} GPoint;
+} WmPoint;
+
+using GPoint = WmPoint;
 
 typedef union
 {
@@ -35,37 +37,37 @@ typedef union
 
 typedef struct
 {
-    GPoint pos;
-    GPoint uv;
+    WmPoint pos;
+    WmPoint uv;
     WmColorRGBA color;
 } WmVertex;
 
-static inline GPoint PointMake(float x, float y)
+static inline WmPoint PointMake(float x, float y)
 {
-    GPoint p = {x, y};
+    WmPoint p = {x, y};
     return p;
 }
 
-static inline GPoint PointAdd(GPoint a, GPoint b)
+static inline WmPoint PointAdd(WmPoint a, WmPoint b)
 {
-    GPoint p = {a.x + b.x, a.y + b.y};
+    WmPoint p = {a.x + b.x, a.y + b.y};
     return p;
 }
 
-static inline GPoint PointSub(GPoint a, GPoint b)
+static inline WmPoint PointSub(WmPoint a, WmPoint b)
 {
-    GPoint p = {a.x - b.x, a.y - b.y};
+    WmPoint p = {a.x - b.x, a.y - b.y};
     return p;
 }
 
-//static inline GPoint PointMultiply(GPoint a, GPoint b)
+//static inline WmPoint PointMultiply(WmPoint a, WmPoint b)
 //{
-//    GPoint p = {a.x * b.x, a.y * b.y};
+//    WmPoint p = {a.x * b.x, a.y * b.y};
 //    return p;
 //}
 
 
-static inline GPoint PointNormalize(GPoint v)
+static inline WmPoint PointNormalize(WmPoint v)
 {
     double ln = sqrtf(v.x * v.x + v.y * v.y);
     if (ln == 0)
@@ -81,8 +83,8 @@ static inline GPoint PointNormalize(GPoint v)
 struct WmRectf
 {
     bool isTransformed = false; //坐标是否经过transform变换
-    GPoint leftTop = {0, 0};
-    GPoint bottomRight = {0, 0};
+    WmPoint leftTop = {0, 0};
+    WmPoint bottomRight = {0, 0};
 
     float Width() const
     {

@@ -7,8 +7,8 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#ifndef GCANVAS_GCANVASSTATE_H
-#define GCANVAS_GCANVASSTATE_H
+#ifndef WMCANVAS_WMCANVASSTATE_H
+#define WMCANVAS_WMCANVASSTATE_H
 
 #include "WmShader.h"
 #include "WmPath.h"
@@ -23,18 +23,18 @@
 const int InvalidateTextureId = -1;
 
 
-class GCanvasState
+class WmCanvasState
 {
 public:
-    GCanvasState();
+    WmCanvasState();
 
-    GCanvasState(const GCanvasState &state);
+    WmCanvasState(const WmCanvasState &state);
 
-    GCanvasState &operator=(const GCanvasState &state);
+    WmCanvasState &operator=(const WmCanvasState &state);
 
-    ~GCanvasState();
+    ~WmCanvasState();
 
-    void Clone(const GCanvasState&st);
+    void Clone(const WmCanvasState&st);
 
     void ClearStyle();
 

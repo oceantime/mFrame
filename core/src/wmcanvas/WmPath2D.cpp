@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by G-Canvas Open Source Team.
 * Copyright (c) 2017, Alibaba, Inc. All rights reserved.
 *
@@ -11,24 +11,24 @@
 #include "WmPath.h"
 
 
-GPath2D::GPath2D() {
+WmPath2D::WmPath2D() {
 
 }
 
 
-GPath2D::~GPath2D() {
+WmPath2D::~WmPath2D() {
     ClearPath();
 }
 
 
-GPath2D::GPath2D(const GPath2D &other) {
+WmPath2D::WmPath2D(const WmPath2D &other) {
     ClearPath();
 
     AddPaths(const_cast<std::vector<GPathCmd *>&>(other.cmds));
 }
 
 
-void GPath2D::ClearPath() {
+void WmPath2D::ClearPath() {
     for (int i = 0; i < cmds.size(); i++) {
         GPathCmd *cmd = cmds[i];
         delete cmd;
@@ -38,7 +38,7 @@ void GPath2D::ClearPath() {
 
 
 
-void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, WmTransform* transform) {
+void WmPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, WmTransform* transform) {
     for (int i = 0; i < otherCmds.size(); i++) {
         GPathCmd *item = otherCmds[i];
 
@@ -58,12 +58,12 @@ void GPath2D::AddPaths(std::vector<GPathCmd*>& otherCmds, WmTransform* transform
     }
 }
 
-void GPath2D::AddPath(GPath2D &other, WmTransform &transform) {
+void WmPath2D::AddPath(WmPath2D &other, WmTransform &transform) {
     AddPaths(other.cmds, &transform);
 }
 
 
-void GPath2D::WriteToPath(WmPath &path) {
+void WmPath2D::WriteToPath(WmPath &path) {
     for (int i = 0; i < cmds.size(); i++) {
         GPathCmd *item = cmds[i];
         // decode and fill
@@ -99,14 +99,14 @@ void GPath2D::WriteToPath(WmPath &path) {
 }
 
 
-void GPath2D::ClosePath() {
+void WmPath2D::ClosePath() {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = CLOSE_PATH;
     cmds.push_back(cmd);
 }
 
 
-void GPath2D::MoveTo(float x, float y) {
+void WmPath2D::MoveTo(float x, float y) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = MOVE_TO;
     cmd->byteLen = sizeof(float) * 2;
@@ -120,7 +120,7 @@ void GPath2D::MoveTo(float x, float y) {
 }
 
 
-void GPath2D::LineTo(float x, float y) {
+void WmPath2D::LineTo(float x, float y) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::LINE_TO;
     cmd->byteLen = sizeof(float) * 2;
@@ -134,7 +134,7 @@ void GPath2D::LineTo(float x, float y) {
 }
 
 
-void GPath2D::QuadraticCurveTo(float cpx, float cpy, float x, float y, float scale) {
+void WmPath2D::QuadraticCurveTo(float cpx, float cpy, float x, float y, float scale) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::QUADRATIC_CURVE_TO;
     cmd->byteLen = sizeof(float) * 5;
@@ -151,7 +151,7 @@ void GPath2D::QuadraticCurveTo(float cpx, float cpy, float x, float y, float sca
 }
 
 
-void GPath2D::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y, float x,
+void WmPath2D::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y, float x,
                             float y, float scale) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::BEZIER_CURVE_TO;
@@ -171,7 +171,7 @@ void GPath2D::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y, floa
 }
 
 
-void GPath2D::ArcTo(float x1, float y1, float x2, float y2, float radius) {
+void WmPath2D::ArcTo(float x1, float y1, float x2, float y2, float radius) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::ARC_TO;
     cmd->byteLen = sizeof(float) * 5;
@@ -188,7 +188,7 @@ void GPath2D::ArcTo(float x1, float y1, float x2, float y2, float radius) {
 }
 
 
-void GPath2D::Arc(float x, float y, float radius, float startAngle, float endAngle,
+void WmPath2D::Arc(float x, float y, float radius, float startAngle, float endAngle,
                   bool antiClockwise2) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::ARC;
@@ -209,7 +209,7 @@ void GPath2D::Arc(float x, float y, float radius, float startAngle, float endAng
 
 
 void
-GPath2D::Ellipse(float x, float y, float radiusX, float radiusY, float rotation, float startAngle,
+WmPath2D::Ellipse(float x, float y, float radiusX, float radiusY, float rotation, float startAngle,
                  float endAngle, bool antiClockwise) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::ELLIPSE;
@@ -231,7 +231,7 @@ GPath2D::Ellipse(float x, float y, float radiusX, float radiusY, float rotation,
 }
 
 
-void GPath2D::Rect(int x, int y, int w, int h) {
+void WmPath2D::Rect(int x, int y, int w, int h) {
     GPathCmd *cmd = new GPathCmd();
     cmd->cmdType = GPathCmdType::RECT;
     cmd->byteLen = sizeof(float) * 4;
@@ -249,6 +249,6 @@ void GPath2D::Rect(int x, int y, int w, int h) {
 /**
  * TODO
  */
-void GPath2D::TransformPathCmd(GPathCmd* cmd,  WmTransform& transform) {
+void WmPath2D::TransformPathCmd(GPathCmd* cmd,  WmTransform& transform) {
 
 }
