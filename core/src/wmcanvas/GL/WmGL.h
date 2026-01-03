@@ -38,5 +38,7 @@
 
 using WmLuint = GLuint;
 using WmLint = GLint;
+using WmLenum = GLenum;
+using WmLubyte = GLubyte;
 
 #endif /* WMCANVAS_WMGL_H */

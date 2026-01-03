@@ -12,22 +12,22 @@
 #include "../../support/Util.h"
 
 
-GLubyte *(*GTexture::loadPixelCallback)(const char *filePath, unsigned int *w,
+WmLubyte *(*WmTexture::loadPixelCallback)(const char *filePath, unsigned int *w,
                                          unsigned int *h) = nullptr;
 
-GTexture::GTexture(unsigned int w, unsigned int h, GLenum format,
-                     GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
+WmTexture::WmTexture(unsigned int w, unsigned int h, WmLenum format,
+                     WmLubyte *pixels, std::vector<WmCanvasLog> *errVec)
     : mWidth(w), mHeight(h), mFormat(format), mTextureID(0)
 {
     CreateTexture(pixels, errVec);
 }
 
-GTexture::GTexture() : mWidth(0), mHeight(0), mFormat(0), mTextureID(0) {}
+WmTexture::WmTexture() : mWidth(0), mHeight(0), mFormat(0), mTextureID(0) {}
 
-GTexture::GTexture(const char *path)
+WmTexture::WmTexture(const char *path)
     : mWidth(0), mHeight(0), mFormat(GL_RGBA), mTextureID(0)
 {
-    GLubyte *pixels = nullptr;
+    WmLubyte *pixels = nullptr;
     if (loadPixelCallback == nullptr)
     {
         pixels = loadPixelsFromPNG(path, &mWidth, &mHeight);
@@ -44,7 +44,7 @@ GTexture::GTexture(const char *path)
     pixels = 0;
 }
 
-GTexture::~GTexture()
+WmTexture::~WmTexture()
 {
     if (IsValidate()) {
         glDeleteTextures(1, &mTextureID);
@@ -52,18 +52,18 @@ GTexture::~GTexture()
     mFormat = mTextureID = mWidth = mHeight = 0;
 }
 
-void GTexture::Bind() const { glBindTexture(GL_TEXTURE_2D, mTextureID); }
+void WmTexture::Bind() const { glBindTexture(GL_TEXTURE_2D, mTextureID); }
 
-void GTexture::Unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
+void WmTexture::Unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
 
-void GTexture::SetLoadPixelCallback(GLubyte *(*callback)(const char *filePath,
+void WmTexture::SetLoadPixelCallback(WmLubyte *(*callback)(const char *filePath,
                                                           unsigned int *w,
                                                           unsigned int *h))
 {
     loadPixelCallback = callback;
 }
 
-GLubyte *GTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
+WmLubyte *WmTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
                                       unsigned int *ph)
 {
     unsigned char *buffer = nullptr;
@@ -72,7 +72,7 @@ GLubyte *GTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
     return buffer;
 }
 
-void GTexture::CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
+void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec)
 {
     GLenum glerror = 0;
     while ((glerror = glGetError()) != GL_NO_ERROR && errVec)
@@ -161,7 +161,7 @@ void GTexture::CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
     glFlush();
 }
 
-void GTexture::UpdateTexture(GLubyte *pixels, int x, int y, int w, int h)
+void WmTexture::UpdateTexture(WmLubyte *pixels, int x, int y, int w, int h)
 {
     if (mTextureID == 0)
     {
@@ -183,7 +183,7 @@ void GTexture::UpdateTexture(GLubyte *pixels, int x, int y, int w, int h)
     glFlush();
 }
 
-unsigned int GTexture::size()
+unsigned int WmTexture::size()
 {
     unsigned int factor;
     switch (mFormat)
@@ -204,7 +204,7 @@ unsigned int GTexture::size()
             factor = 1;
     }
 
-    return sizeof(GTexture) + mWidth * mHeight * factor;
+    return sizeof(WmTexture) + mWidth * mHeight * factor;
 }
 
 TextureGroup::~TextureGroup() { Clear(); };
