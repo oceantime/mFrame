@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2017/8/1.
-//
 
 #include "g3d_jni.h"
 #include <android/native_window.h>

@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2018/4/17.
-//
 
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
@@ -23,9 +20,9 @@ EGLint WmEGLWindowContext::SwapBuffer() {
     if (!b) {
         EGLint err = eglGetError();
         // mymock
-        // ËùÓÐµÄswapBuffer failµÄ¶¼traceÏÂÀ´ (ÓÐ¿ÉÄÜµ¥¸ö´íÎó£¬µ¼ÖÂÊý¾Ý±¬¶à?)
+        // ï¿½ï¿½ï¿½Ðµï¿½swapBuffer failï¿½Ä¶ï¿½traceï¿½ï¿½ï¿½ï¿½ (ï¿½Ð¿ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½?)
         // TRACE_EXCEPTION("eglSwapBuffers_fail", "eglGetError=%x", err);
-        if (err == EGL_BAD_SURFACE) { // ²»Òª³¢ÊÔ»Ö¸´£¬ÈÎÆä±¨´í
+        if (err == EGL_BAD_SURFACE) { // ï¿½ï¿½Òªï¿½ï¿½ï¿½Ô»Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä±¨ï¿½ï¿½
             // DestroyEGLSurfaceIf();
             // InitEGLSurface();
             return err;
@@ -56,12 +53,12 @@ bool WmEGLWindowContext::Init(ANativeWindow *window) {
         return true;
     }
     nWindow = window;
-    // ³õÊ¼»¯eglDisplay & eglSurface(eglSurfaceºÍeglContextÎÞ¹ØÁª)
+    // ï¿½ï¿½Ê¼ï¿½ï¿½eglDisplay & eglSurface(eglSurfaceï¿½ï¿½eglContextï¿½Þ¹ï¿½ï¿½ï¿½)
     bool flag = InitEGLSurface();
     if (flag) {
         flag = InitEGLContext();
     }
-    // ±ê¼ÇÒÑ¾­Ö´ÐÐ¹ý³õÊ¼»¯(µ«ÓÐ¿ÉÄÜ³õÊ¼»¯Ê§°Ü)
+    // ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ö´ï¿½Ð¹ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½(ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½Ü³ï¿½Ê¼ï¿½ï¿½Ê§ï¿½ï¿½)
     isEGLInit = true;
 
     return flag;
@@ -90,7 +87,7 @@ bool WmEGLWindowContext::InitEGLSurface() {
                               24,
                               EGL_STENCIL_SIZE,
                               8,
-            // ¿ªÆômsaa
+            // ï¿½ï¿½ï¿½ï¿½msaa
              EGL_SAMPLE_BUFFERS, 1,
              EGL_SAMPLES, 4,
                               EGL_NONE};
@@ -161,7 +158,7 @@ bool WmEGLWindowContext::InitEGLContext() {
         return false;
     }
 
-    // ³õÊ¼»¯EGLContextÊ± Ç¿ÖÆMakeCurrent
+    // ï¿½ï¿½Ê¼ï¿½ï¿½EGLContextÊ± Ç¿ï¿½ï¿½MakeCurrent
     EGLint result = MakeCurrentWithScene("InitEGLContext", false);
     EGL_LOGI("InitEGLContext:end,result=%i", (result == EGL_SUCCESS));
 
@@ -177,8 +174,8 @@ bool WmEGLWindowContext::Invalidate() {
 
 
 /**
- * ÔÝÍ££¬½«´¥·¢É¾³ýEGL Surface
- * FIXME ÃüÃûÓÐµãÎÊÌâ, Íâ²¿Êµ¼ÊÓÃÀ´DestroyEGLSurface
+ * ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½EGL Surface
+ * FIXME ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½â²¿Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DestroyEGLSurface
  */
 void WmEGLWindowContext::Pause() {
     DestroyEGLSurfaceIf();
@@ -187,10 +184,10 @@ void WmEGLWindowContext::Pause() {
 
 
 void WmEGLWindowContext::DestroyEGLSurfaceIf() {
-    // 1.ÏÈclear current£¬ºóÐøgl²Ù×÷¶¼²»Æð×÷ÓÃ(±ÜÃâgl±¨´í)
+    // 1.ï¿½ï¿½clear currentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½glï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½glï¿½ï¿½ï¿½ï¿½)
     ClearCurrent();
 
-    // 2.destroy eglSurface(Î´currentµÄsurface½«Á¢¼´É¾³ý)
+    // 2.destroy eglSurface(Î´currentï¿½ï¿½surfaceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½)
     if (eglSurface != EGL_NO_SURFACE) {
         EGLBoolean result = eglDestroySurface(eglDisplay, eglSurface);
         eglSurface = EGL_NO_SURFACE;
@@ -206,7 +203,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
         return EGL_SUCCESS;
     }
 
-    // Èç¹ûegl surfaceÓÐÐ§£¬ÓÐ¿ÉÄÜÊÇÔàÊý¾Ý£¬ÏÈdestroy surface(±£Ö¤resumeÖ´ÐÐ³É¹¦)
+    // ï¿½ï¿½ï¿½egl surfaceï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½destroy surface(ï¿½ï¿½Ö¤resumeÖ´ï¿½Ð³É¹ï¿½)
     if (eglSurface != EGL_NO_SURFACE) {
         DestroyEGLSurfaceIf();
     }
@@ -214,7 +211,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
     int32_t original_width = width;
     int32_t original_height = height;
 
-    // ¸üÐÂwindow
+    // ï¿½ï¿½ï¿½ï¿½window
     nWindow = window;
 
     std::string scene = "Resume";
@@ -229,7 +226,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
         return result;
     }
 
-    // makeCurrentÊ§°Ü£¬ÓÐ¿ÉÄÜÊÇcontextÓÐÎÊÌâ
+    // makeCurrentÊ§ï¿½Ü£ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½contextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     EGL_LOGI("Resume:MakeCurrent Fail");
     if (result == EGL_CONTEXT_LOST) {
         // Recreate context
@@ -247,7 +244,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
 
 
 bool WmEGLWindowContext::Resize(int32_t newWidth, int32_t newHeight) {
-    // Ö»ÒªÊÇResizeµ÷ÓÃ£¬¼´Ê¹³ß´çÒ»Ñù£¬Ò²Ç¿ÖÆ´¥·¢ResizeÂß¼­(ÓÐ¿ÉÄÜSurfaceÒÑ¾­·¢Éú±ä»¯)
+    // Ö»Òªï¿½ï¿½Resizeï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ê¹ï¿½ß´ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ò²Ç¿ï¿½Æ´ï¿½ï¿½ï¿½Resizeï¿½ß¼ï¿½(ï¿½Ð¿ï¿½ï¿½ï¿½Surfaceï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»¯)
     EGL_LOGI("Resize:w=%i,h=%i", newWidth, newHeight);
     // 1.Destroy EGLSurface
     DestroyEGLSurfaceIf();
@@ -272,11 +269,11 @@ bool WmEGLWindowContext::MakeCurrent() {
 }
 
 
-// surface ×´Ì¬±ä¸ü
+// surface ×´Ì¬ï¿½ï¿½ï¿½
 EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 //    }
 
-    // ÅÐ¶ÏÊÇ·ñµ±Ç°
+    // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Ç°
     if (check && eglContext != nullptr) {
         EGLContext p = eglGetCurrentContext();
         EGLSurface surf = eglGetCurrentSurface(EGL_DRAW);
@@ -285,9 +282,9 @@ EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
         }
     }
 
-    // µ±View DestroyÊ±£¬ÏÈÖ´ÐÐDestroySurface()£¬È»ºóÖ´ÐÐcanvas coreµÄ»ØÊÕ£¬ÕâÊ±»áÐèÒªµ÷ÓÃgl½Ó¿Ú£¬
-    // ÕâÖÖÇé¿öÏÂ MakeCurrent ÄÜÕý³£¹¤×÷Âð?
-    // 1.preserve backbuffer²»¿ÉÒÔ£¬·Çpbb¿ÉÒÔ
+    // ï¿½ï¿½View DestroyÊ±ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½DestroySurface()ï¿½ï¿½È»ï¿½ï¿½Ö´ï¿½ï¿½canvas coreï¿½Ä»ï¿½ï¿½Õ£ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½glï¿½Ó¿Ú£ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MakeCurrent ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+    // 1.preserve backbufferï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½pbbï¿½ï¿½ï¿½ï¿½
     EGLBoolean result = eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
     // EGL_LOGI("eglMakeCurrent: surface=%p, context=%p, eglGetError=%x", eglSurface, eglContext, eglGetError());
     if (result != EGL_TRUE) {
@@ -302,7 +299,7 @@ EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 
 
 EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
-    if (nWindow == nullptr) { // ÎÈ¶¨ÐÔ±£»¤£¬±ÜÃânWindowÎªnullÊ±crash
+    if (nWindow == nullptr) { // ï¿½È¶ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nWindowÎªnullÊ±crash
         // TRACE_EXCEPTION("CreateWindowSurface_fail", "Scene=%s,window is null", scene.data());
         return EGL_NO_SURFACE;
     }
@@ -310,22 +307,22 @@ EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
     EGL_LOGI("CreateWindowSurface:start:eglDisplay=%p,nWindow=%p,scene=%s", eglDisplay, nWindow,
              scene.data());
     EGLSurface createdSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
-    if (createdSurface == EGL_NO_SURFACE) { // ´´½¨surfaceÊ§°Ü
+    if (createdSurface == EGL_NO_SURFACE) { // ï¿½ï¿½ï¿½ï¿½surfaceÊ§ï¿½ï¿½
         EGLint error = eglGetError();
         EGL_LOGI("CreateWindowSurface:fail:eglSurface=%p,eglError=%x", createdSurface, error);
         if (error == EGL_BAD_ALLOC && scene == "resume") {
-            // resumeÇé¿öÏÂsurface¿ÉÄÜÒÑ¾­°ó¶¨ÔÚnWindowÉÏ£¬´ËÊ±²»ÐèÒªÉÏ±¨´íÎó
-        } else if (error != EGL_SUCCESS) { // ×¢Òâ£ºÖØ¸´´´½¨eglSurface»á±¨EGL_BAD_ALLOC´íÎó
+            // resumeï¿½ï¿½ï¿½ï¿½ï¿½surfaceï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½nWindowï¿½Ï£ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½
+        } else if (error != EGL_SUCCESS) { // ×¢ï¿½â£ºï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½eglSurfaceï¿½á±¨EGL_BAD_ALLOCï¿½ï¿½ï¿½ï¿½
 //            TRACE_EXCEPTION("eglCreateWindowSurface_fail", "Scene.%s, eglGetError=%x",
 //                            scene.data(), error);
         }
         return EGL_NO_SURFACE;
-    } else { // ´´½¨surface³É¹¦
+    } else { // ï¿½ï¿½ï¿½ï¿½surfaceï¿½É¹ï¿½
         eglQuerySurface(eglDisplay, createdSurface, EGL_WIDTH, &width);
         eglQuerySurface(eglDisplay, createdSurface, EGL_HEIGHT, &height);
 
         if (usePreserveBackBuffer) {
-            eglGetError(); // Çå¿Õerror?
+            eglGetError(); // ï¿½ï¿½ï¿½error?
             eglSurfaceAttrib(eglDisplay, createdSurface, EGL_SWAP_BEHAVIOR, EGL_BUFFER_PRESERVED);
             EGLint error = eglGetError();
             if (error != EGL_SUCCESS) {

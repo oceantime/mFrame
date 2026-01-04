@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2017/8/1.
-//
 
 #include "WmManager.h"
 

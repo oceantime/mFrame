@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2017/8/2.
-//
 
 #ifndef WM_CANVAS_I_DELETE_H
 #define WM_CANVAS_I_DELETE_H

@@ -1,7 +1,3 @@
-//
-// Created by yuantong on 2018/4/16.
-//
-
 #ifndef WMCANVAS_GRENDER_H
 #define WMCANVAS_GRENDER_H
 
@@ -226,7 +222,7 @@ private:
 
 
 /**
- * ÀëÆÁContext
+ * ï¿½ï¿½ï¿½ï¿½Context
  */
 class WmEGLPbufferContext : public WmEGLContext
 {

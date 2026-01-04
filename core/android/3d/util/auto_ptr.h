@@ -1,7 +1,3 @@
-//
-// Created by yuantong on 2017/8/2.
-//
-
 #ifndef WM_CANVAS_AUTO_PTR_H
 #define WM_CANVAS_AUTO_PTR_H
 

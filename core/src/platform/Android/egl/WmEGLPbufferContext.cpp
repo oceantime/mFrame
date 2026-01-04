@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2018/4/17.
-//
 
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
@@ -59,7 +56,7 @@ bool WmEGLPbufferContext::InitEGLContext() {
     isES3Supported = is3;
 
 
-    // ÇÐ»»µ½·ÇsharedÄ£Ê½£¬ÒòÎª²¿·ÖÉè±¸´´½¨µÄ»ùÓÚsharedContextµÄPbufferÊýÁ¿½ÏÉÙ
+    // ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½sharedÄ£Ê½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½sharedContextï¿½ï¿½Pbufferï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (eglContext == EGL_NO_CONTEXT) {
         eglSharedContext = nullptr;
         eglContext = eglCreateContext(eglDisplay, eglConfig, nullptr, context_attribs);
@@ -100,7 +97,7 @@ bool WmEGLPbufferContext::InitEGLSurface() {
                               24,
                               EGL_STENCIL_SIZE,
                                   8,
-            // ¿ªÆômsaa
+            // ï¿½ï¿½ï¿½ï¿½msaa
             EGL_SAMPLE_BUFFERS, 1,
             EGL_SAMPLES, 4,
                               EGL_NONE};
@@ -205,7 +202,7 @@ bool WmEGLPbufferContext::MakeCurrent() {
 
 
 /**
- * ÀëÆÁcanavs Ä¬ÈÏÊ¹ÓÃFBO£¬¿ÉÌá¸ßdrawCanvasÐ§ÂÊ
+ * ï¿½ï¿½ï¿½ï¿½canavs Ä¬ï¿½ï¿½Ê¹ï¿½ï¿½FBOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½drawCanvasÐ§ï¿½ï¿½
  */
 bool WmEGLPbufferContext::IsPreserveBackBuffer() {
     return false;

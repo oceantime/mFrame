@@ -1,7 +1,3 @@
-//
-// Created by zhanqu on 2020/3/25.
-//
-
 #include "../support/Log.h"
 #include "WmFontManager.h"
 #include "GL/WmTexture.h"

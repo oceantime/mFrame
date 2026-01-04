@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2017/8/1.
-//
 
 #ifndef WM_CANVAS_WMRENDER_H
 #define WM_CANVAS_WMRENDER_H

@@ -1,6 +1,3 @@
-//
-// Created by mingzong on 2019-10-23.
-//
 #include "../../src/WmCanvasManager.h"
 #include "../../src/WmCanvasWeex.hpp"
 

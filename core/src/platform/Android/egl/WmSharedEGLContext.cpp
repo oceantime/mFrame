@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2018/10/26.
-//
 
 #include <support/Log.h>
 #include "WmEGLContext.h"

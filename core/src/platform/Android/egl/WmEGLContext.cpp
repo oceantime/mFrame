@@ -1,6 +1,3 @@
-//
-// Created by yuantong on 2018/4/17.
-//
 
 #include "WmEGLContext.h"
 #include <EGL/egl.h>
