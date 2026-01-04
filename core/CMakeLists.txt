@@ -45,7 +45,7 @@ set(SRC_FILES
         ./src/WmCanvas.cpp
         ./src/WmCanvasManager.cpp
 
-        # gcanvas srcs
+        # wmcanvas srcs
         ./src/wmcanvas/WmCanvas2dContext.cpp
         ./src/wmcanvas/WmCanvasState.cpp
         ./src/wmcanvas/WmConvert.cpp
@@ -121,7 +121,7 @@ endif()
 
 
 add_library( # Sets the name of the library.
-        gcanvas
+        wmcanvas
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
@@ -137,7 +137,9 @@ add_library( # Sets the name of the library.
 
 # Set output name based on WMCANVAS_RUNTIME flag
 if (WMCANVAS_RUNTIME)
-    set_target_properties(gcanvas PROPERTIES OUTPUT_NAME "wmcanvas_runtime")
+    set_target_properties(wmcanvas PROPERTIES OUTPUT_NAME "wmcanvas_runtime")
+else()
+    set_target_properties(wmcanvas PROPERTIES OUTPUT_NAME "WmCanvas")
 endif()
 
 
@@ -154,12 +156,12 @@ set_target_properties(freetype PROPERTIES IMPORTED_LOCATION
 
 
 
-#target_compile_options(gcanvas PUBLIC -fsanitize=address -fno-omit-frame-pointer)
-#set_target_properties(gcanvas PROPERTIES LINK_FLAGS -fsanitize=address)
+#target_compile_options(wmcanvas PUBLIC -fsanitize=address -fno-omit-frame-pointer)
+#set_target_properties(wmcanvas PROPERTIES LINK_FLAGS -fsanitize=address)
 
 
 target_link_libraries( # Specifies the target library.
-        gcanvas
+        wmcanvas
         GLESv1_CM
         GLESv2
         android
@@ -173,7 +175,7 @@ target_link_libraries( # Specifies the target library.
 
 
 # ---------------------------- distribute headers  ----------------------------
-if (GCANVAS_DISTRIBUTE_HEADER)
+if (WMCANVAS_DISTRIBUTE_HEADER)
     set(DIST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/distribution)
     message ("DIST_DIR=${DIST_DIR}")
     function(copy_header_under_dir)
@@ -187,16 +189,16 @@ if (GCANVAS_DISTRIBUTE_HEADER)
         foreach(header_file ${TARGET_HEADERS})
             get_filename_component(FN ${header_file} NAME)
             message("copy header file: ${header_file}, ${FN}")
-            add_custom_command(TARGET gcanvas POST_BUILD
+            add_custom_command(TARGET wmcanvas POST_BUILD
                     COMMAND "${CMAKE_COMMAND}" -E
-                    copy "${header_file}" "${DIST_DIR}/gcanvas_core/include/${DIR}/${FN}"
+                    copy "${header_file}" "${DIST_DIR}/wmcanvas_core/include/${DIR}/${FN}"
                     COMMENT "Copying ${FN} to output directory")
         endforeach(header_file)
     endfunction()
 
     copy_header_under_dir("." "src")
-    copy_header_under_dir("gcanvas" "src")
-    copy_header_under_dir("gcanvas/GL" "src")
+    copy_header_under_dir("wmcanvas", "src")
+    copy_header_under_dir("wmcanvas/GL", "src")
     copy_header_under_dir("commandbuffer" "src")
     copy_header_under_dir("webgl" "src")
     copy_header_under_dir("support" "src")
