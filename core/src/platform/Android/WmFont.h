@@ -1,5 +1,5 @@
-#ifndef __GCanvas__GFont__
-#define __GCanvas__GFont__
+#ifndef __WmCanvas__WmFont__
+#define __WmCanvas__WmFont__
 
 #include "WmPoint.h"
 #include "WmTexture.h"
