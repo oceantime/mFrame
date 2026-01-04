@@ -11,7 +11,7 @@
 #import <GLKit/GLKit.h>
 
 
-extern void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, void* context, void* fontContext);
+extern void iOS_WmCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, void* context, void* fontContext);
 extern void iOS_GCanvas_GWebGLTxtImage2D(GLenum target, GLint level, GLenum internalformat,
                                   GLenum format, GLenum type,  const char *src);
 extern void iOS_GCanvas_GWebGLTxtSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset,

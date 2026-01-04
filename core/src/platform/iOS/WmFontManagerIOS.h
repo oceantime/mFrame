@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
-#include "../../gcanvas/WmFontManager.h"
+#include "../../wmcanvas/WmFontManager.h"
 
-class GFontManagerIOS : public WmFontManager
+class WmFontManagerIOS : public WmFontManager
 {
 public:
-    GFontManagerIOS();
-    virtual ~GFontManagerIOS();
+    WmFontManagerIOS();
+    virtual ~WmFontManagerIOS();
 
     void DrawText(const unsigned short *text, unsigned int text_length, float x, float y,
                   bool isStroke, WmCanvasContext* context, float scaleX=1, float scaleY=1);

@@ -7,9 +7,9 @@
 * the LICENSE file in the root directory of this source tree.
 */
 
-#import "GFontManagerIOS.h"
-#include "../../gcanvas/WmFontManager.h"
-#include "../../gcanvas/GCanvas2dContext.h"
+#import "WmFontManagerIOS.h"
+#include "../../wmcanvas/WmFontManager.h"
+#include "../../wmcanvas/WmCanvas2dContext.h"
 #include "../../support/Log.h"
 #include "../../WmCanvas.hpp"
 #import "WmCVFont.h"
@@ -17,18 +17,18 @@
 #include <assert.h>
 
 
-extern void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext *context, void* fontContext);
-extern float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
-float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
+extern void iOS_WmCanvas_Draw_Text(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext *context, void* fontContext);
+extern float iOS_WmCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
+float* iOS_WmCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle);
 
 
 
 WmFontManager* WmFontManager::NewInstance()
 {
-    return new GFontManagerIOS();
+    return new WmFontManagerIOS();
 }
 
-GFontManagerIOS::~GFontManagerIOS()
+WmFontManagerIOS::~WmFontManagerIOS()
 {
     // clear font
     NSString *key = [NSString stringWithFormat:@"%p", this];
@@ -36,7 +36,7 @@ GFontManagerIOS::~GFontManagerIOS()
     [curFont cleanFont];
 }
 
-GFontManagerIOS::GFontManagerIOS()
+WmFontManagerIOS::WmFontManagerIOS()
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
     WmCVFont *curFont = [WmCVFont createGCFontWithKey:key];
@@ -45,7 +45,7 @@ GFontManagerIOS::GFontManagerIOS()
     [curFont setTreemap: &mTreemap];
 }
 
-void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext* context, float scaleX, float scaleY)
+void WmFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_length, float x, float y, bool isStroke, WmCanvasContext* context, float scaleX, float scaleY)
 {
     if (text == nullptr || text_length == 0)
     {
@@ -54,22 +54,22 @@ void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_len
 
     NSString *key = [NSString stringWithFormat:@"%p", this];
     WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
-    iOS_GCanvas_Draw_Text(text, text_length, x, y, isStroke, context, (__bridge void*)curFont);
+    iOS_WmCanvas_Draw_Text(text, text_length, x, y, isStroke, context, (__bridge void*)curFont);
 }
 
-float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
+float WmFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
     WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
-    return iOS_GCanvas_Measure_Text(text, textLength, (__bridge void*)curFont, fontStyle);
+    return iOS_WmCanvas_Measure_Text(text, textLength, (__bridge void*)curFont, fontStyle);
 }
 
 
-float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
+float* WmFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
     WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
-    return iOS_GCanvas_Measure_TextExt(text, textLength, (__bridge void*)curFont, fontStyle);
+    return iOS_WmCanvas_Measure_TextExt(text, textLength, (__bridge void*)curFont, fontStyle);
 }
 
 
@@ -112,7 +112,7 @@ void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length,
     [curFont drawString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:context] withLayout:fontLayout withPosition:destPoint context:context];
 }
 
-float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
+float iOS_WmCanvas_Measure_Text(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
 {
     if (text == nullptr || text_length == 0 || fontContext == nullptr) {
         return 0;
@@ -122,13 +122,13 @@ float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void*
     [curFont resetWithFontStyle:fontStyle isStroke:false context:nullptr];
     
     NSString *string = [[NSString alloc] initWithBytes:text length:text_length encoding:NSUTF8StringEncoding];
-    GFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:nullptr]];
+    WmFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:nullptr]];
     
     return fontLayout.metrics.width;
 }
 
 
-float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
+float* iOS_WmCanvas_Measure_TextExt(const char *text, unsigned int text_length, void* fontContext, gcanvas::WmFontStyle *fontStyle)
 {
     if (text == nullptr || text_length == 0 || fontContext == nullptr) {
         float *ret = new float[4];
@@ -140,7 +140,7 @@ float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, v
     [curFont resetWithFontStyle:fontStyle isStroke:false context:nullptr];
     
     NSString *string = [[NSString alloc] initWithBytes:text length:text_length encoding:NSUTF8StringEncoding];
-    GFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:nullptr]];
+    WmFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:nullptr]];
     
     float *ret = new float[4];
     ret[0] = fontLayout.metrics.width;
