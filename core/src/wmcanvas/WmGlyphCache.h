@@ -1,5 +1,5 @@
-#ifndef GCANVAS_GGLYPHCACHE_H
-#define GCANVAS_GGLYPHCACHE_H
+#ifndef WMCANVAS_WMGLYPHCACHE_H
+#define WMCANVAS_WMGLYPHCACHE_H
 
 #include "WmPoint.h"
 #include "WmTexture.h"
@@ -44,7 +44,7 @@ struct WmGlyphs
      */
     wchar_t charcode;
 
-    GTexture *texture;
+    WmTexture *texture;
 
     unsigned char *bitmapBuffer;
 
@@ -154,4 +154,4 @@ private:
     WmGlyphMap mGlyphs;
 };
 
-#endif /* GCANVAS_GGLYPHCACHE_H */
+#endif /* WMCANVAS_WMGLYPHCACHE_H */

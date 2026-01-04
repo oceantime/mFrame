@@ -110,12 +110,12 @@ void WmCanvas2DContextAndroid::BeginDraw(bool is_first_draw) {
     glEnable(GL_DEPTH_TEST);
 
     if (mConfig.useFbo) {
-        // Éî¶Ètest Ò»Ö±¿ªÆô
+        // ï¿½ï¿½ï¿½test Ò»Ö±ï¿½ï¿½ï¿½ï¿½
         // glEnable(GL_DEPTH_TEST);
         BindFBO();
     } else {
         if (is_first_draw) {
-            // ·ÇfboÄ£Ê½ÏÂ£¬Ê×´ÎäÖÈ¾Ç°Ö´ÐÐÒ»´ÎÇåÆÁ
+            // ï¿½ï¿½fboÄ£Ê½ï¿½Â£ï¿½ï¿½×´ï¿½ï¿½ï¿½È¾Ç°Ö´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             ClearScreen();
         }
     }
@@ -129,14 +129,14 @@ void WmCanvas2DContextAndroid::EndDraw() {
 
     // FBOÄ£Ê½
     UnbindFBO();
-    // ¿½±´fboÇ°Çå¿ÕÄ¬ÈÏframeBufferÄÚÈÝ (ÒòÎªËùÓÐÏÔÊ¾ÄÚÈÝÊÇµþ¼Ó»æÖÆÔÚfboÉÏµÄ)
+    // ï¿½ï¿½ï¿½ï¿½fboÇ°ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½frameBufferï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½fboï¿½Ïµï¿½)
     ClearScreen();
-    // ¿½±´FBO
+    // ï¿½ï¿½ï¿½ï¿½FBO
     DrawFBO(DefaultFboName);
 }
 
 
-GTexture *WmCanvas2DContextAndroid::GetFBOTextureData() {
+WmTexture *WmCanvas2DContextAndroid::GetFBOTextureData() {
     return &(mFboMap[DefaultFboName].mFboTexture);
 }
 
@@ -179,8 +179,8 @@ void WmCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
 
 
 /**
- * ÔÚ¸Ä±äcanvas view´óÐ¡Ê±½øÐÐÄÚÈÝ¸´ÖÆ
- * ÐÂ½¨fbo, ²¢½øÐÐfbo¸´ÖÆ
+ * ï¿½Ú¸Ä±ï¿½canvas viewï¿½ï¿½Ð¡Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½
+ * ï¿½Â½ï¿½fbo, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fboï¿½ï¿½ï¿½ï¿½
  */
 void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
     bool sizeChanged = mWidth != width || height != mHeight;
@@ -192,42 +192,42 @@ void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
 
     bool shouldChangeDimension = (mCanvasWidth <= 0 && mCanvasHeight <= 0);
     if (0 == mContextType && mIsFboSupported && mWidth > 0 && mHeight > 0) {
-        // 1.ÇÐ»»»ØÖ÷fbo
+        // 1.ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½fbo
         UnbindFBO();
-        // 2.ÐÂ´´½¨fbo
+        // 2.ï¿½Â´ï¿½ï¿½ï¿½fbo
         WmFrameBufferObject newFbo;
 
-        // ¼ÇÂ¼ÐÂ´´½¨init fbo vectorµÄÒì³£
+        // ï¿½ï¿½Â¼ï¿½Â´ï¿½ï¿½ï¿½init fbo vectorï¿½ï¿½ï¿½ì³£
         std::vector<WmCanvasLog> logVec;
         mIsFboSupported = newFbo.InitFBO(mWidth, mHeight, GColorTransparent, mEnableFboMsaa, &logVec);
         LOG_EXCEPTION_VECTOR(mHooks, mContextId, logVec);
 
-        // FIXME Èç¹ûÐÂ´´½¨fboÊ§°Ü£¬ÀÏfbo³ß´çÓÖ²»¶Ô£¬ºóÐø»æÖÆ±Ø¶¨³ö´í
+        // FIXME ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½fboÊ§ï¿½Ü£ï¿½ï¿½ï¿½fboï¿½ß´ï¿½ï¿½Ö²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        // ÊÇ·ñ´æÔÚ¾ÉµÄfbo, Èç¹ûÓÐÔò¿½±´¾Éfbo²¢É¾³ý¾ÉµÄ
+        // ï¿½Ç·ï¿½ï¿½ï¿½Ú¾Éµï¿½fbo, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò¿½±ï¿½ï¿½ï¿½fboï¿½ï¿½É¾ï¿½ï¿½ï¿½Éµï¿½
         if (mFboMap.find(DefaultFboName) != mFboMap.end()) {
-            // 3.¿½±´fbo
+            // 3.ï¿½ï¿½ï¿½ï¿½fbo
             CopyFBO(mFboMap[DefaultFboName], newFbo);
-            // 4.É¾³ý¾ÉµÄfbo£¬²¢»ØÊÕfbo×ÊÔ´
+            // 4.É¾ï¿½ï¿½ï¿½Éµï¿½fboï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fboï¿½ï¿½Ô´
             mFboMap.erase(DefaultFboName);
         }
 
-        // 5.¸´ÖÆÐÂFBOµ½mapÄÚ(¸´ÖÆ¶ÔÏóÄÚ´æ, ·½·¨ÄÚµÄ¶ÔÏóÒÀÈ»´æÔÚ)
+        // 5.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FBOï¿½ï¿½mapï¿½ï¿½(ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ú´ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½)
         std::string key = DefaultFboName;
-        // Ìæ»»µô¾ÉµÄÐ´Èë·½·¨
+        // ï¿½æ»»ï¿½ï¿½ï¿½Éµï¿½Ð´ï¿½ë·½ï¿½ï¿½
         mFboMap.emplace(key, std::move(newFbo));
 
-        // 6.ÇÐ»»µ½ÐÂFBOÉÏ(¿ÉÒÔ»æÖÆ)
+        // 6.ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½FBOï¿½ï¿½(ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½)
         BindFBO();
     }
 
-    // Èç¹û»­²¼³ß´çÎª0£¬±íÊ¾Òª¸úËæsurface±ä»»£¬¼ÌÐøÒÔ(0,0)¸üÐÂdimension£¬¼ÆËãÐÂµÄ±ä»»¾ØÕó
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½Îª0ï¿½ï¿½ï¿½ï¿½Ê¾Òªï¿½ï¿½ï¿½ï¿½surfaceï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0,0)ï¿½ï¿½ï¿½ï¿½dimensionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ±ä»»ï¿½ï¿½ï¿½ï¿½
     if (shouldChangeDimension) {
         SetCanvasDimension(0, 0);
     }
 
     if (mContextType == 0) {
-        // ¸üÐÂviewport±ä»»
+        // ï¿½ï¿½ï¿½ï¿½viewportï¿½ä»»
         glViewport(0, 0, mWidth, mHeight);
     }
 }
@@ -254,7 +254,7 @@ void WmCanvas2DContextAndroid::CopyFBO(WmFrameBufferObject &srcFbo, WmFrameBuffe
 
     RestoreGLAfterCopyFrame();
 
-    // ¿½±´Íê³É£¬ÇÐ»ØÖ÷fbo
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½Ð»ï¿½ï¿½ï¿½fbo
     UnbindFBO();
 }
 
@@ -269,21 +269,21 @@ WmCanvas2DContextAndroid::ResizeCopyUseImage(int width, int height, const unsign
         return;
     }
 
-    // ¸üÐÂ³ß´ç
+    // ï¿½ï¿½ï¿½Â³ß´ï¿½
     mWidth = width;
     mHeight = height;
 
     bool shouldChangeDimension = (mCanvasWidth <= 0 && mCanvasHeight <= 0);
-    // ¿ªÊ¼¸´ÖÆÍ¼Ïñ
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
     if (rgbaData != nullptr) {
         CopyImageToCanvas(width, height, rgbaData, imgWidth, imgHeight);
     }
 
-    // Èç¹û»­²¼³ß´çÎª0£¬±íÊ¾Òª¸úËæsurface±ä»»£¬¼ÌÐøÒÔ(0,0)¸üÐÂdimension£¬¼ÆËãÐÂµÄ±ä»»¾ØÕó
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½Îª0ï¿½ï¿½ï¿½ï¿½Ê¾Òªï¿½ï¿½ï¿½ï¿½surfaceï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0,0)ï¿½ï¿½ï¿½ï¿½dimensionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ±ä»»ï¿½ï¿½ï¿½ï¿½
     if (shouldChangeDimension) {
         SetCanvasDimension(0, 0);
     }
-    // ¸üÐÂviewport±ä»»
+    // ï¿½ï¿½ï¿½ï¿½viewportï¿½ä»»
     glViewport(0, 0, width, height);
 }
 
@@ -292,7 +292,7 @@ void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
                                                 const unsigned char *rgbaData, int imgWidth,
                                                 int imgHeight) {
     ResetGLBeforeCopyFrame(width, height);
-    // °ó¶¨Í¼ÏñÎÆÀí
+    // ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     GLuint glID = BindImage(rgbaData, GL_RGBA, (GLuint) imgWidth, (GLuint) imgHeight);
     WmColorRGBA color = GColorWhite;
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);

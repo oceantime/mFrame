@@ -325,7 +325,7 @@ void WmCanvasContext::ClearDrawCallCount()
     mDrawCallCount = 0;
 }
 
-GTexture *WmCanvasContext::GetFboTexture()
+WmTexture *WmCanvasContext::GetFboTexture()
 {
     return &mFboMap[DefaultFboName].mFboTexture;
 }

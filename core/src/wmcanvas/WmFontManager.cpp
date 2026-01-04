@@ -17,7 +17,7 @@ WmFontManager::~WmFontManager() {
 WmTexture *WmFontManager::GetOrCreateFontTexture() {
     if (mFontTexture == nullptr) {
         std::vector<WmCanvasLog> logVec;
-        mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
+        mFontTexture = new WmTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
                                     &logVec);
         // FIXME
     }

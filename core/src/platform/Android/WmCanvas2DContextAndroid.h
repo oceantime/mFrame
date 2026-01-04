@@ -51,7 +51,7 @@ public:
     API_EXPORT void EndDraw();
 
 
-    API_EXPORT GTexture *GetFBOTextureData();
+    API_EXPORT WmTexture *GetFBOTextureData();
 
 
     API_EXPORT void CopyFBO(WmFrameBufferObject &srcFbo, WmFrameBufferObject &destFbo);

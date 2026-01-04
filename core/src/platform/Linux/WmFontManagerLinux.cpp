@@ -13,7 +13,7 @@ WmFontManagerImplementLinux::WmFontManagerImplementLinux(unsigned w, unsigned h)
     ASSERT(tl);
     std::string home(getenv("HOME"));
     std::string path = home + FONT_PATH ".fontcache";
-    //¼ÓÔØfontcache
+    //ï¿½ï¿½ï¿½ï¿½fontcache
     ASSERT(tl->importFontCache(path));
 }
 
@@ -145,12 +145,12 @@ WmFont *WmFontManagerImplementLinux::GetFontByCharCode(wchar_t charCode, wmcanva
     return mFontCache->GetOrCreateFont(fontStyle, charCode, fontSize);
 }
 
-GTexture *WmFontManagerImplementLinux::GetOrCreateFontTexture()
+WmTexture *WmFontManagerImplementLinux::GetOrCreateFontTexture()
 {
     if (mFontTexture == nullptr)
     {
         std::vector<WmCanvasLog> logVec;
-        mFontTexture = new GTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
+        mFontTexture = new WmTexture(mTreemap.GetWidth(), mTreemap.GetHeight(), GL_ALPHA, nullptr,
                                     &logVec);
         // FIXME
     }

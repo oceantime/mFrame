@@ -23,20 +23,20 @@ public:
 
     float MeasureText(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override;
 
-    //¿ÕÊµÏÖ
+    //ï¿½ï¿½Êµï¿½ï¿½
     float *MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override
     {
         return nullptr;
     }
 
-    //¿ÕÊµÏÖ
+    //ï¿½ï¿½Êµï¿½ï¿½
     float *PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext *context) override
     {
         return nullptr;
     }
 
 
-    GTexture *GetOrCreateFontTexture() override;
+    WmTexture *GetOrCreateFontTexture() override;
 
 private:
     void AdjustTextPenPoint(WmCanvasContext *context, const std::vector<WmFont *> &font,
