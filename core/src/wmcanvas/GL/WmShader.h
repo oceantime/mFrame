@@ -47,7 +47,7 @@ public:
 
     virtual void SetRepeatMode(const std::string &pattern) {}
 
-    virtual void SetRange(const GPoint &start, const GPoint &end) {}
+    virtual void SetRange(const WmPoint &start, const WmPoint &end) {}
 
     virtual void SetRange(const float *start, const float *end) {}
 
@@ -364,7 +364,7 @@ public:
     LinearGradientShader(const char *name, const char *vertexShaderSrc,
                          const char *fragmentShaderSrc);
 
-    void SetRange(const GPoint &start, const GPoint &end)
+    void SetRange(const WmPoint &start, const WmPoint &end)
     {
         glUniform2f(mRangeStartSlot, start.x, start.y);
         glUniform2f(mRangeEndSlot, end.x, end.y);

@@ -640,7 +640,7 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
     mVertexBufferIndex = 0;
 }
 
-void WmCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA color,
+void WmCanvasContext::PushTriangle(WmPoint v1, WmPoint v2, WmPoint v3, WmColorRGBA color,
                                   WmTransform transform, std::vector<WmVertex> *vec)
 {
     WmVertex *vb = NULL;
@@ -655,13 +655,13 @@ void WmCanvasContext::PushTriangle(GPoint v1, GPoint v2, GPoint v3, WmColorRGBA 
         NeedSendVertexBufferToGPUWithSize(3);
         vb = &CanvasVertexBuffer[mVertexBufferIndex];
     }
-    GPoint p = {0, 0};
+    WmPoint p = {0, 0};
 
     if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyWmTransformInPlace(v1, transform);
-        GPointApplyWmTransformInPlace(v2, transform);
-        GPointApplyWmTransformInPlace(v3, transform);
+        WmPointApplyWmTransformInPlace(v1, transform);
+        WmPointApplyWmTransformInPlace(v2, transform);
+        WmPointApplyWmTransformInPlace(v3, transform);
     }
 
     vb[0].pos = v1;
@@ -721,13 +721,13 @@ void WmCanvasContext::DrawTexture(int textureId, float *vertexList)
 
     NeedSendVertexBufferToGPUWithSize(3);
 
-    GPoint p1 = PointMake(vertexList[0], vertexList[1]);
-    GPoint p2 = PointMake(vertexList[4], vertexList[5]);
-    GPoint p3 = PointMake(vertexList[8], vertexList[9]);
+    WmPoint p1 = PointMake(vertexList[0], vertexList[1]);
+    WmPoint p2 = PointMake(vertexList[4], vertexList[5]);
+    WmPoint p3 = PointMake(vertexList[8], vertexList[9]);
 
-    GPoint t1 = PointMake(vertexList[2], vertexList[3]);
-    GPoint t2 = PointMake(vertexList[6], vertexList[7]);
-    GPoint t3 = PointMake(vertexList[10], vertexList[11]);
+    WmPoint t1 = PointMake(vertexList[2], vertexList[3]);
+    WmPoint t2 = PointMake(vertexList[6], vertexList[7]);
+    WmPoint t3 = PointMake(vertexList[10], vertexList[11]);
 
     WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p1;
@@ -767,7 +767,7 @@ void WmCanvasContext::DrawTextureArray(int textureId, int count, float *vertexLi
     SaveVertexShaderProperty(mVertexBufferIndex - count, count);
 }
 
-void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
+void WmCanvasContext::PushQuad(WmPoint v1, WmPoint v2, WmPoint v3, WmPoint v4,
                               WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec)
 {
     WmVertex *vb = NULL;
@@ -782,14 +782,14 @@ void WmCanvasContext::PushQuad(GPoint v1, GPoint v2, GPoint v3, GPoint v4,
         NeedSendVertexBufferToGPUWithSize(6);
         vb = &CanvasVertexBuffer[mVertexBufferIndex];
     }
-    GPoint p = {0, 0};
+    WmPoint p = {0, 0};
 
     if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyWmTransformInPlace(v1, transform);
-        GPointApplyWmTransformInPlace(v2, transform);
-        GPointApplyWmTransformInPlace(v3, transform);
-        GPointApplyWmTransformInPlace(v4, transform);
+        WmPointApplyWmTransformInPlace(v1, transform);
+        WmPointApplyWmTransformInPlace(v2, transform);
+        WmPointApplyWmTransformInPlace(v3, transform);
+        WmPointApplyWmTransformInPlace(v4, transform);
     }
 
     vb[0].pos = v1;
@@ -851,17 +851,17 @@ void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
         th *= -1;
     }
 
-    GPoint p11 = PointMake(x, y);
-    GPoint p21 = PointMake(x + w, y);
-    GPoint p12 = PointMake(x, y + h);
-    GPoint p22 = PointMake(x + w, y + h);
+    WmPoint p11 = PointMake(x, y);
+    WmPoint p21 = PointMake(x + w, y);
+    WmPoint p12 = PointMake(x, y + h);
+    WmPoint p22 = PointMake(x + w, y + h);
 
     if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyWmTransformInPlace(p11, transform);
-        GPointApplyWmTransformInPlace(p21, transform);
-        GPointApplyWmTransformInPlace(p12, transform);
-        GPointApplyWmTransformInPlace(p22, transform);
+        WmPointApplyWmTransformInPlace(p11, transform);
+        WmPointApplyWmTransformInPlace(p21, transform);
+        WmPointApplyWmTransformInPlace(p12, transform);
+        WmPointApplyWmTransformInPlace(p22, transform);
     }
 
     if (formatIntVertex)
@@ -876,10 +876,10 @@ void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
         p22.y = (int)(p22.y + 0.5);
     }
 
-    GPoint t11 = PointMake(tx, ty);
-    GPoint t21 = PointMake(tx + tw, ty);
-    GPoint t12 = PointMake(tx, ty + th);
-    GPoint t22 = PointMake(tx + tw, ty + th);
+    WmPoint t11 = PointMake(tx, ty);
+    WmPoint t21 = PointMake(tx + tw, ty);
+    WmPoint t12 = PointMake(tx, ty + th);
+    WmPoint t22 = PointMake(tx + tw, ty + th);
     vb[0].pos = p11;
     vb[0].uv = t11;
     vb[1].pos = p21;
@@ -924,22 +924,22 @@ void WmCanvasContext::PushRectangle4TextureArea(float x, float y, float w, float
         th *= -1;
     }
 
-    GPoint p11 = PointMake(x, y);
-    GPoint p21 = PointMake(x + w, y);
-    GPoint p12 = PointMake(x, y + h);
-    GPoint p22 = PointMake(x + w, y + h);
+    WmPoint p11 = PointMake(x, y);
+    WmPoint p21 = PointMake(x + w, y);
+    WmPoint p12 = PointMake(x, y + h);
+    WmPoint p22 = PointMake(x + w, y + h);
 
     if (!WmTransformIsIdentity(transform))
     {
-        GPointApplyWmTransformInPlace(p11, transform);
-        GPointApplyWmTransformInPlace(p21, transform);
-        GPointApplyWmTransformInPlace(p12, transform);
-        GPointApplyWmTransformInPlace(p22, transform);
+        WmPointApplyWmTransformInPlace(p11, transform);
+        WmPointApplyWmTransformInPlace(p21, transform);
+        WmPointApplyWmTransformInPlace(p12, transform);
+        WmPointApplyWmTransformInPlace(p22, transform);
     }
-    GPoint t11 = PointMake(tx, ty);
-    GPoint t21 = PointMake(tx + tw, ty);
-    GPoint t12 = PointMake(tx, ty + th);
-    GPoint t22 = PointMake(tx + tw, ty + th);
+    WmPoint t11 = PointMake(tx, ty);
+    WmPoint t21 = PointMake(tx + tw, ty);
+    WmPoint t12 = PointMake(tx, ty + th);
+    WmPoint t22 = PointMake(tx + tw, ty + th);
     WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p11;
     vb[0].uv = t11;
@@ -968,15 +968,15 @@ void WmCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
 {
     NeedSendVertexBufferToGPUWithSize(6);
 
-    GPoint p11 = PointMake(x, y);
-    GPoint p21 = PointMake(x + w, y);
-    GPoint p12 = PointMake(x, y + h);
-    GPoint p22 = PointMake(x + w, y + h);
+    WmPoint p11 = PointMake(x, y);
+    WmPoint p21 = PointMake(x + w, y);
+    WmPoint p12 = PointMake(x, y + h);
+    WmPoint p22 = PointMake(x + w, y + h);
 
-    GPoint t11 = PointMake(tx, ty + th);
-    GPoint t21 = PointMake(tx + tw, ty + th);
-    GPoint t12 = PointMake(tx, ty);
-    GPoint t22 = PointMake(tx + tw, ty);
+    WmPoint t11 = PointMake(tx, ty + th);
+    WmPoint t21 = PointMake(tx + tw, ty + th);
+    WmPoint t12 = PointMake(tx, ty);
+    WmPoint t22 = PointMake(tx + tw, ty);
 
     WmVertex *vb = &CanvasVertexBuffer[mVertexBufferIndex];
     vb[0].pos = p11;
@@ -1003,10 +1003,10 @@ void WmCanvasContext::PushReverseRectangle(float x, float y, float w, float h,
 /**
  * deprecated
  */
-void WmCanvasContext::PushPoints(const std::vector<GPoint> &points,
+void WmCanvasContext::PushPoints(const std::vector<WmPoint> &points,
                                 WmColorRGBA color)
 {
-    GPoint uv = PointMake(0, 0);
+    WmPoint uv = PointMake(0, 0);
     for (int i = 0; i + 2 < (int)points.size(); i += 3)
     {
         NeedSendVertexBufferToGPUWithSize(3);
@@ -1037,10 +1037,10 @@ void WmCanvasContext::PushVertexs(const std::vector<WmVertex> &vertexs)
     }
 }
 
-void WmCanvasContext::PushTriangleFanPoints(const std::vector<GPoint> &points, WmColorRGBA color)
+void WmCanvasContext::PushTriangleFanPoints(const std::vector<WmPoint> &points, WmColorRGBA color)
 {
-    GPoint uv = PointMake(0, 0);
-    GPoint head = points[0];
+    WmPoint uv = PointMake(0, 0);
+    WmPoint head = points[0];
     int segmentStride = 3;
     int segmentSize;
     int curCountToTail;
@@ -1639,8 +1639,8 @@ void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
     if (style != nullptr && style->IsLinearGradient() && mCurrentState->mShader)
     {
         FillStyleLinearGradient *grad = (FillStyleLinearGradient *)(style);
-        GPoint startPos = GPointApplyWmTransform(grad->GetStartPos(), mCurrentState->mTransform);
-        GPoint endPos = GPointApplyWmTransform(grad->GetEndPos(), mCurrentState->mTransform);
+        WmPoint startPos = WmPointApplyWmTransform(grad->GetStartPos(), mCurrentState->mTransform);
+        WmPoint endPos = WmPointApplyWmTransform(grad->GetEndPos(), mCurrentState->mTransform);
 
         mCurrentState->mShader->SetRange(startPos, endPos);
         mCurrentState->mShader->SetColorStopCount(grad->GetColorStopCount());
@@ -1879,7 +1879,7 @@ void WmCanvasContext::SetFillStyleLinearGradient(float startArr[], float endArr[
         style = nullptr;
     }
 
-    GPoint start, end;
+    WmPoint start, end;
     start.x = startArr[0];
     start.y = startArr[1];
     end.x = endArr[0];

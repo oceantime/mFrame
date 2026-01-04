@@ -90,11 +90,11 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
         WmPathOutLine outline;
         WmPathOutLine nextOutline;
 
-        GPoint firstPoint = *(pts.begin());
+        WmPoint firstPoint = *(pts.begin());
         if (!isSimilarity) {
-            firstPoint = GPointApplyWmTransform(firstPoint, inverseTransform);
+            firstPoint = WmPointApplyWmTransform(firstPoint, inverseTransform);
         }
-        GPoint secondPoint = {0, 0};
+        WmPoint secondPoint = {0, 0};
 
         // filter close point
         FilterTooClosePoints(pts);
@@ -105,7 +105,7 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
                 outline.from = firstPoint;
                 outline.to = *ptIter;
                 if (!isSimilarity) {
-                    outline.to = GPointApplyWmTransform(outline.to, inverseTransform);
+                    outline.to = WmPointApplyWmTransform(outline.to, inverseTransform);
                 }
                 secondPoint = outline.to;
 
@@ -141,11 +141,11 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
             }
 
             // step4: draw line join
-            GPoint nextCenter;
+            WmPoint nextCenter;
             if (nextIter != pts.end()) {
                 nextCenter = *nextIter;
                 if (!isSimilarity) {
-                    nextCenter = GPointApplyWmTransform(nextCenter, inverseTransform);
+                    nextCenter = WmPointApplyWmTransform(nextCenter, inverseTransform);
                 }
             } else {
                 nextCenter = secondPoint;
@@ -170,13 +170,13 @@ void WmPathStroker::StrokePath(WmCanvasContext *context, WmPath *path, std::vect
 
 void WmPathStroker::FilterTooClosePoints(std::vector<WmPoint> &pts) {
     float minValidValue = PATH_MIN_VALID;
-    GPoint stopPoint = *(pts.begin());
+    WmPoint stopPoint = *(pts.begin());
 
-    GPoint prevPoint = stopPoint;
+    WmPoint prevPoint = stopPoint;
     float distance;
 
     for (auto ptIter = pts.begin() + 1; ptIter != pts.end();) {
-        GPoint curPoint = *ptIter;
+        WmPoint curPoint = *ptIter;
         distance = wmcanvas::PointDistance(curPoint, prevPoint);
         if (distance < minValidValue) {
             ptIter = pts.erase(ptIter);
@@ -199,7 +199,7 @@ void WmPathStroker::DrawLineJoin(WmCanvasContext* context, float halfLineWidth, 
         angleDiff += PI_1 * 2;
     }
     // resolve use which side outline points
-    GPoint joinP1,  joinP2;
+    WmPoint joinP1,  joinP2;
     if (angleDiff > PI_1) {
         joinP1 = lineTwo.fromOut;
         joinP2 = lineOne.toOut;
@@ -247,8 +247,8 @@ void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLine
         return;
     }
 
-    GPoint v1 = PointNormalize(PointSub(p1, center));
-    GPoint v2 = PointNormalize(PointSub(p2, center));
+    WmPoint v1 = PointNormalize(PointSub(p1, center));
+    WmPoint v2 = PointNormalize(PointSub(p2, center));
     float angle2;
     if (v1.x == -v2.x && v1.y == -v2.y) {
         angle2 = M_PI;
@@ -283,9 +283,9 @@ void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLine
         // starting point
         float angle = angle1;
 
-        GPoint arcP1 = {center.x + cosf(angle) * halfLineWidth,
+        WmPoint arcP1 = {center.x + cosf(angle) * halfLineWidth,
                         center.y - sinf(angle) * halfLineWidth};
-        GPoint arcP2;
+        WmPoint arcP2;
         for (int i = 0; i < numSteps; i++) {
             angle += step;
             arcP2 = PointMake(center.x + cosf(angle) * halfLineWidth,
@@ -301,7 +301,7 @@ void WmPathStroker::DrawArcForCapOrJoin(WmCanvasContext *context, float halfLine
 
 
 void WmPathStroker::DrawLineCap(WmCanvasContext *context, float halfLineWidth,
-                GPoint &center, GPoint &p1, GPoint &p2, float deltaX, float deltaY,
+                WmPoint &center, WmPoint &p1, WmPoint &p2, float deltaX, float deltaY,
                 WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                 float samePointThreshold) {
     if (context->LineCap() == LINE_CAP_SQUARE) {
@@ -332,7 +332,7 @@ void WmPathStroker::DrawMiterJoin(WmCanvasContext *context, float halfLineWidth,
     }
 
     float miterAngle = angle1 + angleGap;
-    GPoint miterPoint = { center.x + cosf(miterAngle) * miterLen * halfLineWidth,
+    WmPoint miterPoint = { center.x + cosf(miterAngle) * miterLen * halfLineWidth,
             center.y + sinf(miterAngle) * miterLen * halfLineWidth};
 
     //        center.x, center.y, p1.x, p1.y, miterPoint.x, miterPoint.y, p2.x, p2.y);

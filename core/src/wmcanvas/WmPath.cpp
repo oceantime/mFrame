@@ -2,11 +2,11 @@
 #include "WmCanvas2dContext.h"
 #include <cassert>
 
-#define  G_PATH_RECURSION_LIMIT 8
-#define  G_PATH_DISTANCE_EPSILON 1.0f
-#define  G_PATH_COLLINEARITY_EPSILON FLT_EPSILON
-#define  G_PATH_STEPS_FOR_CIRCLE 48.0f
-#define  G_PATH_ANGLE_EPSILON = 0.01;
+#define  WM_PATH_RECURSION_LIMIT 8
+#define  WM_PATH_DISTANCE_EPSILON 1.0f
+#define  WM_PATH_COLLINEARITY_EPSILON FLT_EPSILON
+#define  WM_PATH_STEPS_FOR_CIRCLE 48.0f
+#define  WM_PATH_ANGLE_EPSILON = 0.01;
 
 #define  ERROR_DEVIATION    1e-6
 #define  PI_1               M_PI
@@ -130,14 +130,14 @@ void WmPath::EnsureSubPathAtPoint(float x, float y) {
 
 
 void WmPath::MoveTo(float x, float y) {
-    GPoint p = TransformPoint(x, y);
+    WmPoint p = TransformPoint(x, y);
     NewSubPath(p.x, p.y);
     needNewSubPath = false;
 }
 
 
 void WmPath::LineTo(float x, float y) {
-    GPoint p = TransformPoint(x, y);
+    WmPoint p = TransformPoint(x, y);
     if (mPathStack.size() <= 0) {
         EnsureSubPathAtPoint(p.x, p.y);
     } else {
@@ -157,15 +157,15 @@ void WmPath::Rect(float x, float y, float w, float h) {
 
 
 void WmPath::QuadraticCurveTo(float cpx, float cpy, float x, float y) {
-    GPoint cp = TransformPoint(cpx, cpy);
-    GPoint p = TransformPoint(x, y);
+    WmPoint cp = TransformPoint(cpx, cpy);
+    WmPoint p = TransformPoint(x, y);
 
     EnsureSubPathAtPoint(cp.x, cp.y);
 
     float x0 = mCurrentPosition.x;
     float y0 = mCurrentPosition.y;
 
-    GPoint points[4] = {
+    WmPoint points[4] = {
             PointMake(x0, y0),
             PointMake(x0 + 2.0f/3.0f*(cp.x-x0), y0 + 2.0f/3.0f*(cp.y-y0)),
             PointMake(p.x + 2.0f/3.0f*(cp.x-p.x), p.y + 2.0f/3.0f*(cp.y-p.y)),
@@ -180,13 +180,13 @@ void WmPath::BezierCurveTo(float cp1x, float cp1y, float cp2x, float cp2y,
                           float x, float y) {
     // mDistanceTolerance = G_PATH_DISTANCE_EPSILON / scale;
     // mDistanceTolerance *= mDistanceTolerance;
-    GPoint cp1 = TransformPoint(cp1x, cp1y);
-    GPoint cp2 = TransformPoint(cp2x, cp2y);
-    GPoint p = TransformPoint(x, y);
+    WmPoint cp1 = TransformPoint(cp1x, cp1y);
+    WmPoint cp2 = TransformPoint(cp2x, cp2y);
+    WmPoint p = TransformPoint(x, y);
 
     EnsureSubPathAtPoint(cp1.x, cp1.y);
 
-    GPoint points[4] = {
+    WmPoint points[4] = {
             PointMake(mCurrentPosition.x, mCurrentPosition.y),
             PointMake(cp1.x, cp1.y),
             PointMake(cp2.x, cp2.y),
@@ -210,10 +210,10 @@ API_EXPORT void WmPath::Ellipse(float x, float y, float radiusX, float radiusY, 
 
 void WmPath::ArcTo(float x1, float y1, float x2, float y2, float radius) {
     // Lifted from http://code.google.com/p/fxcanvas/
-    GPoint cp1 = TransformPoint(x1, y1);
+    WmPoint cp1 = TransformPoint(x1, y1);
     EnsureSubPathAtPoint(cp1.x, cp1.y);
 
-    GPoint cp = GPointApplyWmTransform(mCurrentPosition, WmTransformInvert(mTransform));
+    WmPoint cp = WmPointApplyWmTransform(mCurrentPosition, WmTransformInvert(mTransform));
 
     float a1 = cp.y - y1;
     float b1 = cp.x - x1;
@@ -288,7 +288,7 @@ void WmPath::Arc(float cx, float cy, float radius, float startAngle,
     float xOffset = radius * cosf(startAngle);
     float yOffset = radius * sinf(startAngle);
 
-    GPoint point;
+    WmPoint point;
     for (int step = 0; step <= stepCount; ++step) {
         point = TransformPoint(cx + xOffset, cy + yOffset);
         if (step == 0) {
@@ -309,7 +309,7 @@ void WmPath::Arc(float cx, float cy, float radius, float startAngle,
 
 
 void WmPath::NewSubPath(float x, float y) {
-    GPoint pos = PointMake(x, y);
+    WmPoint pos = PointMake(x, y);
     WmSubPath* subPath = new WmSubPath();
     subPath->isClosed = false;
     mPathStack.push_back(subPath);
@@ -324,12 +324,12 @@ WmSubPath* WmPath::GetCurPath() {
 }
 
 
-void WmPath::PushPoint(GPoint pt) { PushPoint(pt.x, pt.y); }
+void WmPath::PushPoint(WmPoint pt) { PushPoint(pt.x, pt.y); }
 
 
 
 void WmPath::PushPoint(float x, float y) {
-    GPoint p = PointMake(x, y);
+    WmPoint p = PointMake(x, y);
 
     WmSubPath* curPath = GetCurPath();
     if (!curPath->points.empty()) {
@@ -369,13 +369,13 @@ void WmPath::ClipRegion(WmCanvasContext *context) {
     }
 
     for (auto pathIter = mPathStack.begin(); pathIter != mPathStack.end(); ++pathIter) {
-        const std::vector<GPoint> &path = (*pathIter)->points;
+        const std::vector<WmPoint> &path = (*pathIter)->points;
         if (path.size() < 3) {
             continue;
         }
 
         glVertexAttribPointer(context->PositionSlot(), 2, GL_FLOAT, GL_FALSE,
-                              sizeof(GPoint), &(path.front()));
+                              sizeof(WmPoint), &(path.front()));
         context->mDrawCallCount++;
         glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) path.size());
     }
@@ -387,7 +387,7 @@ void WmPath::ClipRegion(WmCanvasContext *context) {
 }
 
 
-//    std::vector<GPoint> &pts = subPath->points;
+//    std::vector<WmPoint> &pts = subPath->points;
 //        context->PushTriangleFanPoints(pts, color);
 //    } else {
 //        // push head point
@@ -425,14 +425,14 @@ void WmPath::Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target,
     glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
     WmColorRGBA white = {1,1,1,1};
     
-    GPoint minPos = mMinPosition;
-    GPoint maxPos = mMaxPosition;
+    WmPoint minPos = mMinPosition;
+    WmPoint maxPos = mMaxPosition;
     
     WmTransform transform = needTransform ? mTransform : WmTransformIdentity;
     
     if(needTransform) {
-        minPos = GPointApplyWmTransform(minPos, transform);
-        maxPos = GPointApplyWmTransform(maxPos, transform);
+        minPos = WmPointApplyWmTransform(minPos, transform);
+        maxPos = WmPointApplyWmTransform(maxPos, transform);
     }
 
     context->PushRectangle(minPos.x, minPos.y, maxPos.x-minPos.x, maxPos.y-minPos.y, 0, 0, 0, 0, white);
@@ -454,9 +454,9 @@ void WmPath::Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target,
         
         if (needTransform) {
             // fillBlur need apply transform
-            std::vector<GPoint> pointVector;
+            std::vector<WmPoint> pointVector;
             for (auto it = path->points.begin() ; it != path->points.end(); ++it) {
-                GPoint pt = GPointApplyWmTransform(*it, transform);
+                WmPoint pt = WmPointApplyWmTransform(*it, transform);
                 pointVector.push_back(pt);
             }
             if (context->mCurrentState->mShader) {
@@ -547,8 +547,8 @@ std::vector<WmSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
 
     std::vector<WmSubPath*> *tmpPathStack = new std::vector<WmSubPath*>;
     for (auto iter = mPathStack.begin(); iter != mPathStack.end(); ++iter) {
-        const std::vector<GPoint> &pts = (*iter)->points;
-        GPoint startPoint, stopPoint;
+        const std::vector<WmPoint> &pts = (*iter)->points;
+        WmPoint startPoint, stopPoint;
         if (pts.size() <= 1) {
             continue;
         }
@@ -579,7 +579,7 @@ std::vector<WmSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
                 float gapWidth = dashWidth - currentWidth;
                 float interDeltaX = deltaX * gapWidth / length;
                 float interDeltaY = deltaY * gapWidth / length;
-                GPoint interPoint = PointMake(interDeltaX + startPoint.x, interDeltaY + startPoint.y);
+                WmPoint interPoint = PointMake(interDeltaX + startPoint.x, interDeltaY + startPoint.y);
 
                 tmpPath.points.push_back(interPoint);
 
@@ -616,7 +616,7 @@ std::vector<WmSubPath*>* WmPath::CreateLineDashPath(WmCanvasContext *context) {
                 tmpPath.points.push_back(stopPoint);
                 currentWidth += length;
                 if (ptIter == pts.end() - 1) {
-                    // finished£¬push vertex
+                    // finishedï¿½ï¿½push vertex
                     if (needDraw) {
                         WmSubPath* rsubPath = new WmSubPath();
                         rsubPath->points = tmpPath.points;
@@ -717,9 +717,9 @@ void WmPath::StencilRectForStroke(WmCanvasContext *context, std::vector<WmVertex
 }
 
 
-void WmPath::SubdivideCubicTo(WmPath *path, GPoint points[4], int level) {
+void WmPath::SubdivideCubicTo(WmPath *path, WmPoint points[4], int level) {
     if (--level >= 0) {
-        GPoint tmp[7];
+        WmPoint tmp[7];
 
         ChopCubicAt(points, tmp, 0.5f);
         SubdivideCubicTo(path, &tmp[0], level);
@@ -732,15 +732,15 @@ void WmPath::SubdivideCubicTo(WmPath *path, GPoint points[4], int level) {
 }
 
 
-void WmPath::ChopCubicAt(GPoint src[4], GPoint dst[7], float t) {
-    GPoint tt = PointMake(t, t);
+void WmPath::ChopCubicAt(WmPoint src[4], WmPoint dst[7], float t) {
+    WmPoint tt = PointMake(t, t);
 
-    GPoint ab = Interp(src[0], src[1], tt);
-    GPoint bc = Interp(src[1], src[2], tt);
-    GPoint cd = Interp(src[2], src[3], tt);
-    GPoint abc = Interp(ab, bc, tt);
-    GPoint bcd = Interp(bc, cd, tt);
-    GPoint abcd = Interp(abc, bcd, tt);
+    WmPoint ab = Interp(src[0], src[1], tt);
+    WmPoint bc = Interp(src[1], src[2], tt);
+    WmPoint cd = Interp(src[2], src[3], tt);
+    WmPoint abc = Interp(ab, bc, tt);
+    WmPoint bcd = Interp(bc, cd, tt);
+    WmPoint abcd = Interp(abc, bcd, tt);
 
     dst[0] = src[0];
     dst[1] = ab;
@@ -752,7 +752,7 @@ void WmPath::ChopCubicAt(GPoint src[4], GPoint dst[7], float t) {
 }
 
 
-GPoint WmPath::Interp(const GPoint &v0, const GPoint &v1, const GPoint &t) {
+WmPoint WmPath::Interp(const WmPoint &v0, const WmPoint &v1, const WmPoint &t) {
     return PointMake(v0.x + (v1.x - v0.x) * t.x, v0.y + (v1.y - v0.y) * t.y);
 }
 
@@ -806,9 +806,9 @@ void WmPath::SetStencilForClip() {
 }
 
 
-GPoint WmPath::TransformPoint(float x, float y) {
+WmPoint WmPath::TransformPoint(float x, float y) {
     if(!WmTransformIsIdentity(mTransform) ){
-        return GPointApplyWmTransform(PointMake(x, y), mTransform);
+        return WmPointApplyWmTransform(PointMake(x, y), mTransform);
     } else {
         return PointMake(x, y);
     }

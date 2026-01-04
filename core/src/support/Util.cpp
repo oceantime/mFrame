@@ -72,28 +72,28 @@ namespace wmcanvas {
     }
 
 
-    bool IsSamePoint(GPoint& p1, GPoint& p2, float min) {
+    bool IsSamePoint(WmPoint& p1, WmPoint& p2, float min) {
         return abs(p1.x - p2.x) < min && abs(p1.y - p2.y) < min;
     }
 
 
-    bool IsNanPoint(const GPoint& p) {
+    bool IsNanPoint(const WmPoint& p) {
         return std::isnan(p.x) || std::isnan(p.y);
     }
 
 
-    bool HasSamePoint(GPoint& p1, GPoint& p2, GPoint& p3, float minValue) {
+    bool HasSamePoint(WmPoint& p1, WmPoint& p2, WmPoint& p3, float minValue) {
         return IsSamePoint(p1, p2, minValue) || IsSamePoint(p2, p3, minValue) || IsSamePoint(p1, p3, minValue);
     }
 
 
-    float CalcPointAngle(const GPoint &director, const GPoint &center) {
-        GPoint adjust = PointSub(director, center);
+    float CalcPointAngle(const WmPoint &director, const WmPoint &center) {
+        WmPoint adjust = PointSub(director, center);
         return atan2(adjust.y, adjust.x);
     }
 
 
-    bool IsTrianglePointsValid(GPoint& p1, GPoint& p2, GPoint& p3, float minValue) {
+    bool IsTrianglePointsValid(WmPoint& p1, WmPoint& p2, WmPoint& p3, float minValue) {
         if (IsNanPoint(p1) || IsNanPoint(p3) || IsNanPoint(p2)) {
             return false;
         }
@@ -101,14 +101,14 @@ namespace wmcanvas {
     }
 
 
-    float PointDistance(GPoint& s, GPoint& t) {
+    float PointDistance(WmPoint& s, WmPoint& t) {
         float deltaX = s.x - t.x;
         float deltaY = s.y - t.y;
         return sqrtf(deltaX * deltaX + deltaY * deltaY);
     }
 
 
-//    bool LineLineIntersect(GPoint& output,
+//    bool LineLineIntersect(WmPoint& output,
 //                           float x1, float y1, //Line 1 start
 //                           float x2, float y2, //Line 1 end
 //                           float x3, float y3, //Line 2 start

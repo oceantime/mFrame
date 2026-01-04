@@ -186,18 +186,18 @@ static inline WmTransform WmTransformConcat(const WmTransform& t2, const WmTrans
 /* Transform `point' by `t' and return the result:
  p' = p * t
  where p = [ x y 1 ]. */
-static inline GPoint GPointApplyWmTransform(const GPoint& point, const WmTransform& t)
+static inline WmPoint WmPointApplyWmTransform(const WmPoint& point, const WmTransform& t)
 {
     if(WmTransformIsIdentity(t)) {
         return point;
     }
-    GPoint p;
+    WmPoint p;
     p.x = (t.a * point.x + t.c * point.y + t.tx);
     p.y = (t.b * point.x + t.d * point.y + t.ty);
     return p;
 }
 
-static inline void GPointApplyWmTransformInPlace(GPoint& point, const WmTransform& t)
+static inline void WmPointApplyWmTransformInPlace(WmPoint& point, const WmTransform& t)
 {
     float oldX = point.x;
     float oldY = point.y;
