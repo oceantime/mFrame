@@ -1,9 +1,9 @@
-# WmCanvasMaster 项目代码架构分析报告
+# WmCanvas 项目架构文档
 
-**分析日期**：2025年12月28日  
+**更新日期**：2026年1月4日  
 **项目版本**：2.0.0（重构版）  
 **分析范围**：核心逻辑、平台实现、编译配置、模式裁剪  
-**重大变更**：全面重命名 WmCanvas → WmCanvas
+**重大变更**：全面重命名 GCanvas → WmCanvas
 
 ---
 
@@ -160,12 +160,12 @@
 core/src/platform/HarmonyOS/
 ├── WmCanvasHarmony.cpp/h              # 鸿蒙画布实现
 ├── WmCanvas2DContextHarmony.cpp/h     # 鸿蒙2D上下文
-├── GFontManagerHarmony.cpp/h         # 鸿蒙字体管理
-├── GFrameBufferObjectImpl.cpp        # FBO实现
+├── WmFontManagerHarmony.cpp/h        # 鸿蒙字体管理
+├── WmFrameBufferObjectImpl.cpp       # FBO实现
 ├── egl/
-│   ├── GEGLHarmonyContext.cpp        # 鸿蒙EGL上下文
-│   ├── GEGLPbufferContext.cpp        # 离屏渲染
-│   └── GEGLWindowContext.cpp         # 窗口渲染
+│   ├── WmEGLHarmonyContext.cpp       # 鸿蒙EGL上下文
+│   ├── WmEGLPbufferContext.cpp       # 离屏渲染
+│   └── WmEGLWindowContext.cpp        # 窗口渲染
 
 harmony/
 ├── napi/                              # N-API接口层
@@ -213,7 +213,7 @@ cmake -DWMCANVAS=1 .  # 包含Weex版本
 ```
 
 #### 编译产物
-- **输出文件**：`libwmcanvas.so`（原libwmcanvas.so）
+- **输出文件**：`libWmCanvas.so` (standalone模式) 或 `libwmcanvas_runtime.so` (runtime模式)
 - **支持架构**：armeabi-v7a, arm64-v8a, x86, x86_64
 
 ### 3.3 公开接口头文件
@@ -435,7 +435,7 @@ OpenGL ES (GPU渲染)
 #### 完整调用示例
 ```java
 public class MainActivity extends AppCompatActivity {
-    private GTextureView mTextureView;
+    private WmTextureView mTextureView;
     private String mCanvasId = "canvas1";
     
     @Override
@@ -443,7 +443,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         
         // 1. 创建WmCanvas View
-        mTextureView = new GTextureView(this, mCanvasId);
+        mTextureView = new WmTextureView(this, mCanvasId);
         setContentView(mTextureView);
         
         // 2. 初始化Native层
@@ -1140,13 +1140,14 @@ make
 
 ### C. 相关文档
 
-- [README.md](README.MD) - 项目介绍
-- [BUILD_ANDROID.md](BUILD_ANDROID.md) - Android构建指南
-- [docs/Guide_Developer.md](docs/Guide_Developer.md) - 开发者指南
-- [docs/APIs.md](docs/APIs.md) - API文档
+- [README.md](README.MD) - 项目架构文档
+- [BUILD_ANDROID.md](docs/BUILD_ANDROID.md) - Android构建指南
+- [APIs.md](docs/APIs.md) - API参考文档
+- [Reference_Graphics_2D.md](docs/Reference_Graphics_2D.md) - 2D图形API参考
+- [Reference_WebGL.md](docs/Reference_WebGL.md) - WebGL API参考
 
 ---
 
-**报告编写**：AI Assistant  
-**审核版本**：v1.0  
-**最后更新**：2025-12-26
+**文档维护**：AI Assistant  
+**当前版本**：v2.0  
+**最后更新**：2026-01-04
