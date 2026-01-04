@@ -12,7 +12,7 @@
 #include "../../gcanvas/GCanvas2dContext.h"
 #include "../../support/Log.h"
 #include "../../WmCanvas.hpp"
-#import "GCVFont.h"
+#import "WmCVFont.h"
 
 #include <assert.h>
 
@@ -32,14 +32,14 @@ GFontManagerIOS::~GFontManagerIOS()
 {
     // clear font
     NSString *key = [NSString stringWithFormat:@"%p", this];
-    GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
+    WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
     [curFont cleanFont];
 }
 
 GFontManagerIOS::GFontManagerIOS()
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
-    GCVFont *curFont = [GCVFont createGCFontWithKey:key];
+    WmCVFont *curFont = [WmCVFont createGCFontWithKey:key];
 
     [curFont setGlyphCache: &mGlyphCache];
     [curFont setTreemap: &mTreemap];
@@ -53,14 +53,14 @@ void GFontManagerIOS::DrawText(const unsigned short *text, unsigned int text_len
     }
 
     NSString *key = [NSString stringWithFormat:@"%p", this];
-    GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
+    WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
     iOS_GCanvas_Draw_Text(text, text_length, x, y, isStroke, context, (__bridge void*)curFont);
 }
 
 float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
-    GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
+    WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
     return iOS_GCanvas_Measure_Text(text, textLength, (__bridge void*)curFont, fontStyle);
 }
 
@@ -68,7 +68,7 @@ float GFontManagerIOS::MeasureText(const char *text, unsigned int textLength, gc
 float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength, gcanvas::WmFontStyle *fontStyle)
 {
     NSString *key = [NSString stringWithFormat:@"%p", this];
-    GCVFont *curFont = [GCVFont getGCVFontWithKey:key];
+    WmCVFont *curFont = [WmCVFont getWmCVFontWithKey:key];
     return iOS_GCanvas_Measure_TextExt(text, textLength, (__bridge void*)curFont, fontStyle);
 }
 
@@ -76,7 +76,7 @@ float* GFontManagerIOS::MeasureTextExt(const char *text, unsigned int textLength
 
 #pragma mark - iOS implementation of Font & texImage
 /**
- * Draw GCanvas2D Text with GCVFont.
+ * Draw GCanvas2D Text with WmCVFont.
  *
  * @param text          text string to draw
  * @param text_length   text length
@@ -94,11 +94,11 @@ void iOS_GCanvas_Draw_Text(const unsigned short *text, unsigned int text_length,
     
     GCanvasState *current_state_ = context->GetCurrentState();
     gcanvas::WmFontStyle *fontStyle = current_state_->mFont;
-    GCVFont *curFont = (__bridge GCVFont*)fontContext;
+    WmCVFont *curFont = (__bridge WmCVFont*)fontContext;
     [curFont resetWithFontStyle:fontStyle isStroke:isStroke context:context];
     
     NSString *string = [[NSString alloc] initWithBytes:text length:text_length encoding:NSUTF8StringEncoding];
-    GFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:context]];
+    WmFontLayout *fontLayout = [curFont getLayoutForString:string withFontName:[curFont getFontNameWithCurrentScale:fontStyle context:context]];
     CGPoint destPoint = [curFont adjustTextPenPoint:CGPointMake(x, y)
                                           textAlign:current_state_->mTextAlign
                                            baseLine:current_state_->mTextBaseline
@@ -118,7 +118,7 @@ float iOS_GCanvas_Measure_Text(const char *text, unsigned int text_length, void*
         return 0;
     }
     
-    GCVFont *curFont = (__bridge GCVFont*)fontContext;
+    WmCVFont *curFont = (__bridge WmCVFont*)fontContext;
     [curFont resetWithFontStyle:fontStyle isStroke:false context:nullptr];
     
     NSString *string = [[NSString alloc] initWithBytes:text length:text_length encoding:NSUTF8StringEncoding];
@@ -136,7 +136,7 @@ float* iOS_GCanvas_Measure_TextExt(const char *text, unsigned int text_length, v
         return ret;
     }
     
-    GCVFont *curFont = (__bridge GCVFont*)fontContext;
+    WmCVFont *curFont = (__bridge WmCVFont*)fontContext;
     [curFont resetWithFontStyle:fontStyle isStroke:false context:nullptr];
     
     NSString *string = [[NSString alloc] initWithBytes:text length:text_length encoding:NSUTF8StringEncoding];

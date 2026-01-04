@@ -1,5 +1,5 @@
-#ifndef GCANVAS_GCVFONT_H
-#define GCANVAS_GCVFONT_H
+#ifndef WMCANVAS_WMCVFONT_H
+#define WMCANVAS_WMCVFONT_H
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
@@ -19,42 +19,42 @@ typedef struct {
 typedef struct {
     float xpos;
     WmGlyphs info;
-} GFontGlyphLayout;
+} WmFontGlyphLayout;
 
 typedef struct {
     float width;
     float ascent;
     float descent;
-} GTextMetrics;
+} WmTextMetrics;
 
 namespace wmcanvas
 {
     class WmFontStyle;
 }
 
-@interface GFontLayout : NSObject
+@interface WmFontLayout : NSObject
 
 @property (nonatomic, strong) NSMutableData *glyphLayout;
-@property (nonatomic, assign) GTextMetrics metrics;
+@property (nonatomic, assign) WmTextMetrics metrics;
 @property (nonatomic, assign) NSInteger glyphCount;
 
 @end
 
 class WmCanvasContext;
 
-@interface GCVFont : NSObject
+@interface WmCVFont : NSObject
 
 @property(nonatomic,assign) WmGlyphCache *glyphCache;
 @property(nonatomic,assign) GTreemap *treemap;
 
 + (instancetype)createGCFontWithKey:(NSString*)key;
-+ (GCVFont*)getGCVFontWithKey:(NSString*)key;
++ (WmCVFont*)getWmCVFontWithKey:(NSString*)key;
 
 
 - (void)cleanFont;
 
 /**
- * Reset GCVFont style with fontStyle, isStroke.
+ * Reset WmCVFont style with fontStyle, isStroke.
  *
  * @param fontStyle     fontStyle name
  * @param isStroke      stroke flag
@@ -66,20 +66,20 @@ class WmCanvasContext;
  *
  * @param string        input string
  *
- * return  return GFontLayout
+ * return  return WmFontLayout
  */
-- (GFontLayout *)getLayoutForString:(NSString *)string
+- (WmFontLayout *)getLayoutForString:(NSString *)string
                        withFontName:(NSString*)fontName;
 
 - (void )drawString:(NSString*)string
        withFontName:(NSString*)fontName
-         withLayout:(GFontLayout*)fontLayout
+         withLayout:(WmFontLayout*)fontLayout
        withPosition:(CGPoint)destPoint
             context:(WmCanvasContext *)context;
 
 - (void)getGlyphForChar:(wchar_t)c
            withFontName:(NSString*)fontName
-         withFontLayout:(GFontLayout *)fontLayout
+         withFontLayout:(WmFontLayout *)fontLayout
             withOffsetX:(int*)x;
 
 /**
@@ -104,18 +104,18 @@ class WmCanvasContext;
  * @param srcPoint          source point to adjust
  * @param textAlign         see WmTextAlign definition
  * @param baseLine          see GTextBaseline definition
- * @param metrics           see GTextMetrics definition
+ * @param metrics           see WmTextMetrics definition
  *
  * return  adjuested text source CGPoint
  */
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
                    textAlign:(WmTextAlign)textAlign
                     baseLine:(GTextBaseline)baseLine
-                     metrics:(GTextMetrics)metrics;
+                     metrics:(WmTextMetrics)metrics;
 
 - (NSString *)getFontNameWithCurrentScale:(wmcanvas::WmFontStyle *)fontStyle
                                   context:(WmCanvasContext *)context;
 
 @end
 
-#endif /* GCANVAS_GCVFONT_H */
+#endif /* WMCANVAS_WMCVFONT_H */

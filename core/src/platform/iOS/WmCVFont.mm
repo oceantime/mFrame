@@ -7,7 +7,7 @@
  * the LICENSE file in the root directory of this source tree.
  */
 
-#import "GCVFont.h"
+#import "WmCVFont.h"
 
 #include <malloc/malloc.h>
 #include <unordered_map>
@@ -17,13 +17,13 @@
 
 #define GCV_FONT_GLYPH_PADDING 0
 
-#pragma mark - GFontLayout
-@implementation GFontLayout
+#pragma mark - WmFontLayout
+@implementation WmFontLayout
 
 @end
 
-#pragma mark - GCVFont
-@interface GCVFont()
+#pragma mark - WmCVFont
+@interface WmCVFont()
 {
     // Font preferences
     float pointSize, ascent, descent, glyphPadding, xHeight, capHeight;
@@ -44,7 +44,7 @@
 
 @end
 
-@implementation GCVFont
+@implementation WmCVFont
 {
     NSString            *_key;
 }
@@ -61,17 +61,17 @@ static NSMutableDictionary *staticFontInstaceDict;
 
 + (instancetype)createGCFontWithKey:(NSString*)key
 {
-    GCVFont *gcvFont = [[GCVFont alloc] initWithKey:key];
+    WmCVFont *gcvFont = [[WmCVFont alloc] initWithKey:key];
     self.staticFontInstaceDict[key] = gcvFont;
     return gcvFont;
 }
 
-+ (GCVFont *)getGCVFontWithKey:(NSString*)key
++ (WmCVFont *)getWmCVFontWithKey:(NSString*)key
 {
     return self.staticFontInstaceDict[key];
 }
 
-+ (void)removeGCVFontWithKey:(NSString*)key
++ (void)removeWmCVFontWithKey:(NSString*)key
 {
     return [self.staticFontInstaceDict removeObjectForKey:key];
 }
@@ -96,7 +96,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 - (void)cleanFont
 {
     @synchronized(self){
-        [GCVFont removeGCVFontWithKey:_key];
+        [WmCVFont removeWmCVFontWithKey:_key];
         [fontCache removeAllObjects];
     }
 }
@@ -213,16 +213,16 @@ static NSMutableDictionary *staticFontInstaceDict;
     }
 }
 
-- (GFontLayout *)getLayoutForString:(NSString *)string withFontName:(NSString*)fontName
+- (WmFontLayout *)getLayoutForString:(NSString *)string withFontName:(NSString*)fontName
 {
-    GTextMetrics metrics = {
+    WmTextMetrics metrics = {
         .width = 0,
         .ascent = 0,
         .descent = 0,
     };
     NSMutableData *layoutData = [NSMutableData dataWithCapacity:string.length];
 
-    GFontLayout *fontLayout = [[GFontLayout alloc] init];
+    WmFontLayout *fontLayout = [[WmFontLayout alloc] init];
     fontLayout.glyphLayout = layoutData;
     fontLayout.glyphCount = 0;
   
@@ -246,7 +246,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 
 - (void )drawString:(NSString*)string
        withFontName:(NSString*)fontName
-         withLayout:(GFontLayout*)fontLayout
+         withLayout:(WmFontLayout*)fontLayout
        withPosition:(CGPoint)destPoint
             context:(WmCanvasContext *)context
 {
@@ -265,7 +265,7 @@ static NSMutableDictionary *staticFontInstaceDict;
         
         if (pGlyph == nullptr) {
             // texture is full，get font glyph again
-            GFontLayout *fontLayout = [[GFontLayout alloc] init];
+            WmFontLayout *fontLayout = [[WmFontLayout alloc] init];
             fontLayout.glyphLayout = [NSMutableData dataWithCapacity:string.length];
             fontLayout.glyphCount = 0;
             int offsetX = 0;
@@ -275,7 +275,7 @@ static NSMutableDictionary *staticFontInstaceDict;
         }
         
         if (pGlyph) {
-            GFontGlyphLayout gl;
+            WmFontGlyphLayout gl;
             
             gl.info = *pGlyph;
             gl.xpos = offsetX;
@@ -338,15 +338,15 @@ static NSMutableDictionary *staticFontInstaceDict;
 
 - (void)getGlyphForChar:(wchar_t)c
            withFontName:(NSString*)fontName
-         withFontLayout:(GFontLayout *)fontLayout
+         withFontLayout:(WmFontLayout *)fontLayout
             withOffsetX:(int *)offsetX
 {
-    GTextMetrics metrics = fontLayout.metrics;
+    WmTextMetrics metrics = fontLayout.metrics;
     NSMutableData *layoutData = fontLayout.glyphLayout;
     const WmGlyphs *pGlyph = _glyphCache->GetGlyph([fontName UTF8String], c, [fontName UTF8String], self.isStroke);
     
     if (pGlyph) {
-        GFontGlyphLayout gl;
+        WmFontGlyphLayout gl;
         
         gl.info = *pGlyph;
         gl.xpos = *offsetX;
@@ -360,7 +360,7 @@ static NSMutableDictionary *staticFontInstaceDict;
         return ;
     }
     
-    GCVFont *curFont = self;
+    WmCVFont *curFont = self;
     
     NSString *nsString =[[NSString alloc] initWithBytes:&c length:sizeof(c) encoding:NSUTF32LittleEndianStringEncoding];
     if (!nsString) {
@@ -404,7 +404,7 @@ static NSMutableDictionary *staticFontInstaceDict;
         // Go through all glyphs for this run, create the textures and collect the glyph
         // info and positions as well as the max ascent and descent
         for (int g = 0; g < runGlyphCount; g++) {
-            GFontGlyphLayout gl;
+            WmFontGlyphLayout gl;
 
             CGGlyph glyph = glyphs[g];
             gl.info.charcode = c;
@@ -485,7 +485,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
                    textAlign:(WmTextAlign)textAlign
                     baseLine:(GTextBaseline)baseLine
-                     metrics:(GTextMetrics)metrics
+                     metrics:(WmTextMetrics)metrics
 {
     switch (textAlign) {
         case WmTextAlign::TEXT_ALIGN_START:

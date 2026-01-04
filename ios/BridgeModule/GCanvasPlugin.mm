@@ -9,7 +9,7 @@
 
 #import "GCanvasPlugin.h"
 #import "GCVCommon.h"
-#import "GCVFont.h"
+#import "WmCVFont.h"
 #import "GCVLog.h"
 
 #include "GCanvasWeex.hpp"
