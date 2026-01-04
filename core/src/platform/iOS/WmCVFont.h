@@ -13,7 +13,7 @@ typedef struct {
     CGSize advances;
     unsigned short textureIndex;
     float tx, ty, tw, th;
-} GFontGlyphInfo;
+} WmFontGlyphInfo;
 
 
 typedef struct {
@@ -88,7 +88,7 @@ class WmCanvasContext;
  * @param glyph         CGGlyph
  * @param font          CTFontRef
  * @param fontName     NSString
- * @param glyphInfo     GFontGlyphInfo
+ * @param glyphInfo     WmFontGlyphInfo
  *
  * return  font textureId
  */
