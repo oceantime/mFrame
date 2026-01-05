@@ -1,86 +1,100 @@
-# Canvas 演示应用 - 使用说明
+﻿# WMCanvas 演示应用 - 使用说明
 
-## 📁 目录结构
+## 📁 项目结构
 
 ```
-third_party/GCanvasMaster/android/demo/src/main/assets/
-├── index.html              # 唯一入口 - 加载Vue单页应用
-├── wmcanvas-wrapper.js     # 统一封装（Canvas拦截 + 相机API）
-├── package.json            # Vue项目依赖
+android/demo/src/main/assets/
+├── index.html              # 应用入口页面
+├── wmcanvas-wrapper.js     # WMCanvas API 检测脚本
+├── package.json            # Vue项目依赖配置
 ├── vite.config.js          # Vite构建配置
-├── CODE_CLEANUP_REPORT.md  # 代码整合报告
-├── dist/                   # Vue应用构建输出
-│   ├── app.js             # 主应用JS
+├── dist/                   # Vue构建输出目录
+│   ├── app.js             # 编译后的主应用JS
 │   └── assets/
 │       └── main.css       # 样式文件
 └── src/                    # Vue应用源码
     ├── main.js            # Vue应用入口
-    ├── App.vue            # 根组件（含导航栏）
+    ├── App.vue            # 根组件（导航栏）
     ├── router/            # 路由配置
     │   └── index.js
-    ├── views/             # 页面组件
-    │   ├── list/          # 列表演示
-    │   ├── picture/       # 相机演示
-    │   └── gcanvas/       # GCanvas演示
+    ├── views/             # 页面视图
+    │   ├── list/          # 列表演示页
+    │   ├── picture/       # 相机演示页
+    │   └── gcanvas/       # Canvas演示页
     └── share/             # 共享组件
         └── components/
-            ├── scroll/    # 滚动组件
-            └── camera/    # 相机组件
+            ├── scroll/    # 虚拟滚动组件
+            └── camera/    # 相机渲染组件
 ```
 
-## 🎯 功能说明
+## 🎯 功能模块
 
 ### 1. 单页应用架构
 **入口**: `index.html`
 
-Vue单页应用，包含顶部导航栏和三个主要视图：
+基于Vue 3 + Vue Router的单页应用，提供：
+- 顶部导航栏快速切换
+- 三个独立功能视图
+- 前端路由无刷新切换
 
-- **📋 列表视图** (`/list`): Canvas长列表优化演示
-- **📷 相机视图** (`/picture`): 实时相机预览和拍照
-- **🎯 GCanvas视图** (`/gcanvas`): Canvas绘图功能演示
+### 2. 列表视图 (`/#/list`)
 
-### 2. 列表视图功能
-**路由**: `/#/list`
+**Canvas长列表优化演示**
 
-功能特性：
-- ✅ Canvas长列表虚拟滚动
-- ✅ GPU加速开关
-- ✅ Canvas池缓存优化
-- ✅ Tween平滑滚动动画
-- ✅ FPS性能监控
+核心功能：
+- ✅ 虚拟滚动渲染（仅渲染可见区域）
+- ✅ Canvas对象池复用
+- ✅ GPU硬件加速切换
+- ✅ Tween.js平滑滚动动画
+- ✅ 实时FPS性能监控
 - ✅ 缓存命中率统计
 
-### 3. 相机视图功能
-**路由**: `/#/picture`
+性能指标：
+- 列表容量：10,000项
+- 可见项数：动态计算
+- 目标帧率：60 FPS
+- 缓存策略：LRU
 
-功能特性：
-- ✅ 实时相机预览（Camera2 API）
+### 3. 相机视图 (`/#/picture`)
+
+**实时相机预览与拍照**
+
+核心功能：
+- ✅ Camera2 API集成
 - ✅ 640x480分辨率捕获
-- ✅ 拍照功能
-- ✅ 帧率显示
 - ✅ Canvas渲染预览
+- ✅ 实时帧率显示
+- ✅ 拍照功能（闪白效果）
+- ✅ 画布尺寸自适应
 
-### 4. GCanvas视图功能
-**路由**: `/#/gcanvas`
+技术细节：
+- 图像格式：YUV_420_888 → JPEG → Base64
+- 传输方式：JavaScript回调
+- 渲染引擎：Canvas 2D
+- 帧率统计：每秒更新
 
-Canvas绘图API演示：
-- 绘制渐变矩形
-- 绘制多个圆形
-- 旋转动画效果
-- 清空画布
-- Android Bridge测试
+### 4. Canvas演示 (`/#/gcanvas`)
 
-## 🚀 使用方式
+**Canvas 2D API 绘图示例**
 
-### 在Android应用中加载
+演示内容：
+- 渐变背景绘制
+- 旋转矩形动画
+- 多个圆形动画
+- 文字渲染
+- 清空画布操作
 
-**唯一入口（推荐）**
+## 🚀 使用指南
+
+### 在WebView中加载
+
+**方式一：加载主页（推荐）**
 ```java
+WebView webView = findViewById(R.id.webview);
 webView.loadUrl("file:///android_asset/index.html");
 ```
-这将加载Vue单页应用，用户可通过导航栏切换不同视图。
 
-### 直接访问特定路由
+**方式二：直接加载特定页面**
 ```java
 // 列表视图
 webView.loadUrl("file:///android_asset/index.html#/list");
@@ -88,59 +102,100 @@ webView.loadUrl("file:///android_asset/index.html#/list");
 // 相机视图
 webView.loadUrl("file:///android_asset/index.html#/picture");
 
-// GCanvas演示
+// Canvas演示
 webView.loadUrl("file:///android_asset/index.html#/gcanvas");
 ```
 
-### WMCanvas API Bridge
-
-确保在Android端实现以下Bridge：
+### WebView配置要求
 
 ```java
-// 相机API Bridge - 直接注入为WMCanvasCamera
-webView.addJavascriptInterface(new WMCanvasCameraBridge(), "WMCanvasCamera");
+WebSettings settings = webView.getSettings();
+
+// 必需配置
+settings.setJavaScriptEnabled(true);
+settings.setDomStorageEnabled(true);
+settings.setAllowFileAccess(true);
+
+// 推荐配置
+settings.setAllowFileAccessFromFileURLs(true);
+settings.setAllowUniversalAccessFromFileURLs(true);
+settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+// 性能优化
+settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 ```
 
-## 🔧 WMCanvas统一封装工作原理
+### 注入JavaScript接口
 
-**文件**: `wmcanvas-wrapper.js`
+```java
+// 相机功能API
+webView.addJavascriptInterface(
+    new WMCanvasCameraBridge(), 
+    "WMCanvasCamera"
+);
+```
 
-### 功能说明
+## 📡 WMCanvasCamera API
 
-该文件主要用于：
-1. 检测WMCanvasCamera API是否可用
-2. 提供日志记录和调试信息
+### Java端实现
 
-### WMCanvasCamera API
+```java
+public class WMCanvasCameraBridge {
+    @JavascriptInterface
+    public String start(int width, int height) {
+        // 启动相机
+        return "{\"success\":true,\"message\":\"Camera starting\"}";
+    }
 
-WMCanvasCamera由Java端直接注入，提供以下方法：
+    @JavascriptInterface
+    public String stop() {
+        // 停止相机
+        return "{\"success\":true,\"message\":\"Camera stopped\"}";
+    }
+
+    @JavascriptInterface
+    public void setFrameEnabled(boolean enabled) {
+        // 启用/禁用帧传输
+    }
+
+    @JavascriptInterface
+    public String takePicture() {
+        // 拍照
+        return "{\"success\":true,\"message\":\"Picture taken\"}";
+    }
+
+    @JavascriptInterface
+    public String getCapabilities() {
+        // 获取功能支持
+        return "{\"camera\":true,\"canvas2d\":true}";
+    }
+}
+```
+
+### JavaScript端调用
 
 ```javascript
 // 启动相机
-const result = window.WMCanvasCamera.start(width, height);
-// 返回: {"success":true,"message":"Camera starting"}
+const result = window.WMCanvasCamera.start(640, 480);
+console.log(JSON.parse(result));
 
-// 设置帧传输
+// 启用帧传输
 window.WMCanvasCamera.setFrameEnabled(true);
 
 // 拍照
-const result = window.WMCanvasCamera.takePicture();
-// 返回: {"success":true,"message":"Picture taken","path":"/sdcard/picture.jpg"}
+const photo = window.WMCanvasCamera.takePicture();
+console.log(JSON.parse(photo));
 
 // 停止相机
-const result = window.WMCanvasCamera.stop();
-// 返回: {"success":true,"message":"Camera stopped"}
-
-// 获取功能支持
-const caps = window.WMCanvasCamera.getCapabilities();
-// 返回: {"camera":true,"canvas2d":true,"webgl":false}
+window.WMCanvasCamera.stop();
 ```
 
-**相机帧回调**:
+### 相机帧回调
+
 ```javascript
-// 全局回调函数接收Base64图像数据
+// 全局回调函数接收Base64图像
 window.updateCameraFrame = function(base64ImageData) {
-    // base64ImageData 格式: "data:image/jpeg;base64,..."
+    // base64ImageData: "data:image/jpeg;base64,..."
     const img = new Image();
     img.onload = () => {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -149,92 +204,101 @@ window.updateCameraFrame = function(base64ImageData) {
 };
 ```
 
-## 📊 性能优化特性
+## 🔧 开发与构建
 
-### Canvas池缓存
-- 复用离屏Canvas，避免重复创建
-- LRU策略控制缓存数量
-- 缓存命中率实时监控
-
-### 虚拟滚动
-- 只渲染可见区域
-- 动态计算渲染范围
-- 减少DOM操作
-
-### GPU加速
-- 可选的GPU硬件加速
-- 适合大量Canvas元素
-- 可能增加内存消耗
-
-### 平滑动画
-- Tween.js动画库
-- 缓动函数优化体验
-- 60fps流畅滚动
-
-## 🐛 调试信息
-
-所有模式都会在控制台输出详细日志：
-
-```javascript
-// Vue应用初始化
-console.log('=== 开始初始化Vue应用 ===')
-
-// WMCanvas检测
-console.log('✅ WMCanvas Android Bridge detected')
-
-// Android Bridge检测
-console.log('✅ Android Bridge detected')
-console.log('📱 Device Info:', deviceInfo)
+### 安装依赖
+```bash
+cd android/demo/src/main/assets
+npm install
 ```
 
-## 📝 开发与构建
+### 开发模式
+```bash
+npm run dev
+# 访问 http://localhost:5173
+```
 
-### 修改Vue应用
+### 生产构建
+```bash
+npm run build
+# 输出到 dist/ 目录
+```
 
-1. 编辑 `src/` 目录下的源文件
-2. 重新构建：
-   ```bash
-   cd third_party/GCanvasMaster/android/demo/src/main/assets
-   npm install  # 首次需要安装依赖
-   npm run build
-   ```
-3. 构建输出会更新到 `dist/` 目录
+### 构建配置
+详见 `vite.config.js`：
+- 单文件输出：`dist/app.js`
+- CSS提取：`dist/assets/main.css`
+- Hash禁用：便于WebView加载
 
-### Vite配置
+## 📊 性能优化
 
-**文件**: `vite.config.js`
-- Vue 3 + Vue Router
-- 相对路径构建（适配Android assets）
-- 开发服务器配置
+### 列表视图优化
+1. **虚拟滚动**：只渲染可见区域（~10项）
+2. **Canvas池**：复用Canvas对象，避免频繁创建
+3. **LRU缓存**：最多缓存50个Canvas
+4. **GPU加速**：可选的`will-change: transform`
+5. **平滑动画**：Tween.js缓动函数
 
-## ⚠️ 注意事项
+### 相机视图优化
+1. **图像压缩**：JPEG质量70%
+2. **分辨率控制**：640x480平衡性能与质量
+3. **帧率控制**：requestAnimationFrame节流
+4. **异步处理**：Camera2 Handler线程
 
-1. **文件访问权限**
-   - 确保WebView启用文件访问：`setAllowFileAccess(true)`
-   - 确保允许访问文件URL：`setAllowFileAccessFromFileURLs(true)`
+## 🐛 调试技巧
 
-2. **JavaScript启用**
-   - 必须启用JavaScript：`setJavaScriptEnabled(true)`
-   - 必须启用DOM Storage：`setDomStorageEnabled(true)`
+### Chrome DevTools调试
+```java
+// 启用WebView调试
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    WebView.setWebContentsDebuggingEnabled(true);
+}
+```
 
-3. **网络请求**
-   - Vue应用包含API请求功能
-   - 失败时会自动降级到Mock数据
-   - 需要网络权限和CORS配置
+然后访问：`chrome://inspect`
 
-4. **内存管理**
-   - Canvas池有上限（默认50个）
-   - GPU模式可能增加内存
-   - 监控性能指标调整参数
+### 日志输出
+- Java端：`android.util.Log.d("WMCanvasCamera", message)`
+- JavaScript端：`console.log()` → Logcat
 
-## 🔗 相关文件
+### 常见问题
 
-- 原始app资源: `app/src/main/assets/`
-- 构建配置: `app/src/main/assets/package.json`
-- Vue源码: `app/src/main/assets/src/`
-- 列表组件: `app/src/main/assets/src/views/list/list.vue`
-- 优化文档: `app/src/main/assets/src/views/list/POC_优化方案.md`
+**相机无法启动**
+- 检查相机权限：`Manifest.permission.CAMERA`
+- 确认Bridge注入：`typeof WMCanvasCamera !== 'undefined'`
+
+**帧率过低**
+- 关闭GPU加速尝试
+- 减少Canvas缓存数量
+- 降低相机分辨率
+
+**页面白屏**
+- 检查`file:///`协议支持
+- 确认`setAllowFileAccessFromFileURLs(true)`
+- 查看Logcat错误日志
+
+## 📝 更新日志
+
+### v2.0.0 (2026-01-05)
+- ✅ 重命名GCanvas → WMCanvas
+- ✅ 简化wmcanvas-wrapper.js（仅检测）
+- ✅ WMCanvasCamera直接由Java注入
+- ✅ 移除无用的Canvas拦截代码
+- ✅ 更新文档和API说明
+
+### v1.0.0
+- 初始版本
+- Vue 3单页应用
+- 三个演示视图
+- Camera2集成
+
+## 📚 相关文档
+
+- [WebViewActivity.java](../../../java/com/honghu/wmcanvas/demo/WebViewActivity.java) - Android端实现
+- [camera.vue](src/share/components/camera/camera.vue) - 相机组件
+- [wmcanvas-wrapper.js](wmcanvas-wrapper.js) - API检测脚本
+- [项目根目录README](../../../../../../README.MD) - 完整架构文档
 
 ## 📄 许可证
 
-遵循 WmCanvas 项目的原始许可证。
+详见项目根目录 LICENSE 文件
