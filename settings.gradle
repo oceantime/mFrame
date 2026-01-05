@@ -1,17 +1,4 @@
-// STABLE_PUBLISHING 功能已在 Gradle 5.0+ 中移除，不再需要
-
-// Temporarily comment out :core module due to configuration issues
-// include ':core'
 include ':android:wmcanvas_library'
-// Integrated into wmcanvas_library
-// include ':android:bridge_spec'
-// include ':android:adapters:gcanvas_imageloader_picasso'
-// include ':android:adapters:gcanvas_imageloader_fresco'
-// include ':android:adapters:bridge_adapter'
 include ':android:demo'
-
-// Weex bridge modules are not available in this workspace
-// include ':bridges:weex-gcanvas:android:weex_bridge'
-// include ':bridges:weex-gcanvas:android:weex_playground'
 
 
