@@ -56,14 +56,10 @@ sdk.dir=C\:\\Users\\YourUsername\\AppData\\Local\\Android\\sdk
 ```bash
 # Windows PowerShell
 .\gradlew clean
-.\gradlew :android:gcanvas_library:assembleRelease
-.\gradlew :android:bridge_spec:assembleRelease
-.\gradlew :android:adapters:gcanvas_imageloader_fresco:assembleRelease
+.\gradlew :android:wmcanvas_library:assembleStandaloneRelease
 
 # 发布到本地 Maven 仓库 (需要配置 maven-publish)
-.\gradlew :android:gcanvas_library:publishToMavenLocal
-.\gradlew :android:bridge_spec:publishToMavenLocal
-.\gradlew :android:adapters:gcanvas_imageloader_fresco:publishToMavenLocal
+.\gradlew :android:wmcanvas_library:publishToMavenLocal
 ```
 
 ### 方法二：直接编译 AAR 文件
@@ -75,28 +71,22 @@ sdk.dir=C\:\\Users\\YourUsername\\AppData\\Local\\Android\\sdk
 .\gradlew clean
 
 # 编译所有 Release 版本
-.\gradlew assembleRelease
+.\gradlew assembleStandaloneRelease
 
-# 或者单独编译每个模块
-.\gradlew :android:gcanvas_library:assembleRelease
-.\gradlew :android:bridge_spec:assembleRelease
-.\gradlew :android:adapters:gcanvas_imageloader_fresco:assembleRelease
+# 或者单独编译模块
+.\gradlew :android:wmcanvas_library:assembleStandaloneRelease
+.\gradlew :android:demo:assembleStandaloneRelease
 ```
 
 生成的 AAR 文件位置及大小：
 
 | 模块 | 文件名 | 大小 | 路径 |
 |------|--------|------|------|
-| gcanvas_library (ali) | gcanvas_library-ali-release.aar | 924.04 KB | `android/gcanvas_library/build/outputs/aar/` |
-| gcanvas_library (standalone) | gcanvas_library-standalone-release.aar | 776.41 KB | `android/gcanvas_library/build/outputs/aar/` |
-| bridge_spec (ali) | bridge_spec-ali-release.aar | 15.57 KB | `android/bridge_spec/build/outputs/aar/` |
-| bridge_spec (standalone) | bridge_spec-standalone-release.aar | 15.57 KB | `android/bridge_spec/build/outputs/aar/` |
-| gcanvas_imageloader_fresco | gcanvas_imageloader_fresco-release.aar | 5.53 KB | `android/adapters/gcanvas_imageloader_fresco/build/outputs/aar/` |
+| wmcanvas_library (standalone) | wmcanvas_library-standalone-release.aar | ~800 KB | `android/wmcanvas_library/build/outputs/aar/` |
 
 **注意事项：**
-- gcanvas_library 和 bridge_spec 有两个 flavor：`ali`（含 Weex）和 `standalone`（不含 Weex）
-- 推荐使用 `ali` 版本以获得完整功能
-- gcanvas_imageloader_fresco 没有 flavor，只有一个 release 版本
+- 当前项目使用 `standalone` flavor，不含 Weex 功能
+- 使用精简版本以减小体积
 
 ## 使用生成的组件
 
@@ -112,9 +102,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.taobao.gcanvas:gcanvas_library:1.2.0'
-    implementation 'com.taobao.gcanvas.adapters:img_fresco:1.1.0'
-    implementation 'com.taobao.gcanvas.bridges:spec:1.1.0'
+    implementation 'com.honghu.canvas:wmcanvas_library:2.0.0'
 }
 ```
 

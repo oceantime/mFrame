@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+project(WmCanvas)
+
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-exceptions -funwind-tables")
 
@@ -199,11 +201,11 @@ if (WMCANVAS_DISTRIBUTE_HEADER)
     copy_header_under_dir("." "src")
     copy_header_under_dir("wmcanvas", "src")
     copy_header_under_dir("wmcanvas/GL", "src")
-    copy_header_under_dir("commandbuffer" "src")
-    copy_header_under_dir("webgl" "src")
-    copy_header_under_dir("support" "src")
-    copy_header_under_dir("platform/Android" "src")
-    copy_header_under_dir("platform/Android/egl" "src")
+    copy_header_under_dir("commandbuffer", "src")
+    copy_header_under_dir("webgl", "src")
+    copy_header_under_dir("support", "src")
+    copy_header_under_dir("platform/Android", "src")
+    copy_header_under_dir("platform/Android/egl", "src")
 
 
     copy_header_under_dir("freetype-prebuilt/include" "android")
