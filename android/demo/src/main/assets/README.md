@@ -97,55 +97,56 @@ webView.loadUrl("file:///android_asset/index.html#/gcanvas");
 确保在Android端实现以下Bridge：
 
 ```java
-webView.addJavascriptInterface(new WMCanvasBridge(), "WMCanvasAndroid");
-webView.addJavascriptInterface(new AndroidBridge(), "AndroidBridge");
+// 相机API Bridge - 直接注入为WMCanvasCamera
+webView.addJavascriptInterface(new WMCanvasCameraBridge(), "WMCanvasCamera");
 ```
 
 ## 🔧 WMCanvas统一封装工作原理
 
 **文件**: `wmcanvas-wrapper.js`
 
-### 第一部分：Canvas 2D API拦截器
+### 功能说明
 
-自动拦截Canvas 2D API调用（预留架构）：
+该文件主要用于：
+1. 检测WMCanvasCamera API是否可用
+2. 提供日志记录和调试信息
 
-1. **方法拦截**: 
-   - 绘图方法：`fillRect`, `strokeRect`, `arc`, `fill`, `stroke` 等
-   - 变换方法：`translate`, `rotate`, `scale` 等
-   - 状态方法：`save`, `restore` 等
+### WMCanvasCamera API
 
-2. **属性拦截**:
-   - 样式属性：`fillStyle`, `strokeStyle`, `lineWidth` 等
-   - 文本属性：`font`, `textAlign`, `textBaseline` 等
-   - 合成属性：`globalAlpha`, `globalCompositeOperation` 等
-
-3. **命令缓冲**:
-   所有Canvas操作会被记录到 `window.WMCanvasCommands` 数组中，
-   供Native层批量处理（当前预留功能）。
-
-4. **双模式运行**:
-   - **有WMCanvas**: 同时调用原生Canvas API和记录命令
-   - **无WMCanvas**: 只调用原生Canvas API（兼容模式）
-
-### 第二部分：相机API封装器
-
-将WMCanvasAndroid Bridge同步方法包装为Promise API：
+WMCanvasCamera由Java端直接注入，提供以下方法：
 
 ```javascript
 // 启动相机
-await window.WMCanvasCamera.start(width, height);
+const result = window.WMCanvasCamera.start(width, height);
+// 返回: {"success":true,"message":"Camera starting"}
 
 // 设置帧传输
 window.WMCanvasCamera.setFrameEnabled(true);
 
 // 拍照
-const result = await window.WMCanvasCamera.takePicture();
+const result = window.WMCanvasCamera.takePicture();
+// 返回: {"success":true,"message":"Picture taken","path":"/sdcard/picture.jpg"}
 
 // 停止相机
-await window.WMCanvasCamera.stop();
+const result = window.WMCanvasCamera.stop();
+// 返回: {"success":true,"message":"Camera stopped"}
 
 // 获取功能支持
 const caps = window.WMCanvasCamera.getCapabilities();
+// 返回: {"camera":true,"canvas2d":true,"webgl":false}
+```
+
+**相机帧回调**:
+```javascript
+// 全局回调函数接收Base64图像数据
+window.updateCameraFrame = function(base64ImageData) {
+    // base64ImageData 格式: "data:image/jpeg;base64,..."
+    const img = new Image();
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+    img.src = base64ImageData;
+};
 ```
 
 ## 📊 性能优化特性

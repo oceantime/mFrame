@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 /**
  * WebView加载H5页面示例
- * 集成GCanvas进行Canvas渲染
+ * 集成WMCanvas相机功能
  */
 public class WebViewActivity extends AppCompatActivity {
 
@@ -108,8 +108,8 @@ public class WebViewActivity extends AppCompatActivity {
         });
 
         
-        mWebView.addJavascriptInterface(new JsInterface(), "AndroidBridge");
-        mWebView.addJavascriptInterface(new WMCanvasBridge(), "WMCanvasAndroid");
+        // 注入JavaScript接口 - 相机API
+        mWebView.addJavascriptInterface(new WMCanvasCameraBridge(), "WMCanvasCamera");
 
         
         
@@ -117,47 +117,14 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     /**
-     * JavaScript调用Android的接�?
+     * WMCanvas Camera JavaScript Bridge
+     * 提供相机相关API给前端调用
      */
-    public class JsInterface {
-        @JavascriptInterface
-        public void showToast(String message) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(WebViewActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        @JavascriptInterface
-        public String getDeviceInfo() {
-            return android.os.Build.MODEL + " - Android " + android.os.Build.VERSION.RELEASE;
-        }
-    }
-
-    /**
-     * WMCanvas JavaScript Bridge
-     * 用于Canvas 2D API加速和命令处理
-     */
-    public class WMCanvasBridge {
-        @JavascriptInterface
-        public void sendCommands(String commands) {
-            
-            
-            android.util.Log.d("WMCanvas", "Received commands: " + commands);
-        }
-
-        @JavascriptInterface
-        public void flush() {
-            
-            android.util.Log.d("WMCanvas", "Flush canvas buffer");
-        }
-
+    public class WMCanvasCameraBridge {
         @JavascriptInterface
         public String start(int width, int height) {
             
-            android.util.Log.d("WMCanvas", "Camera start request: " + width + "x" + height);
+            android.util.Log.d("WMCanvasCamera", "Camera start: " + width + "x" + height);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -172,7 +139,7 @@ public class WebViewActivity extends AppCompatActivity {
         @JavascriptInterface
         public String stop() {
             
-            android.util.Log.d("WMCanvas", "Camera stop request");
+            android.util.Log.d("WMCanvasCamera", "Camera stop");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -186,13 +153,13 @@ public class WebViewActivity extends AppCompatActivity {
         @JavascriptInterface
         public void setFrameEnabled(boolean enabled) {
             
-            android.util.Log.d("WMCanvas", "Frame enabled: " + enabled);
+            android.util.Log.d("WMCanvasCamera", "Frame enabled: " + enabled);
         }
 
         @JavascriptInterface
         public String takePicture() {
             
-            android.util.Log.d("WMCanvas", "Take picture");
+            android.util.Log.d("WMCanvasCamera", "Take picture");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -277,21 +244,21 @@ public class WebViewActivity extends AppCompatActivity {
                 public void onOpened(@NonNull CameraDevice camera) {
                     mCameraDevice = camera;
                     createCaptureSession();
-                    android.util.Log.d("WMCanvas", "Camera opened successfully");
+                    android.util.Log.d("WMCanvasCamera", "Camera opened successfully");
                 }
                 
                 @Override
                 public void onDisconnected(@NonNull CameraDevice camera) {
                     camera.close();
                     mCameraDevice = null;
-                    android.util.Log.d("WMCanvas", "Camera disconnected");
+                    android.util.Log.d("WMCanvasCamera", "Camera disconnected");
                 }
                 
                 @Override
                 public void onError(@NonNull CameraDevice camera, int error) {
                     camera.close();
                     mCameraDevice = null;
-                    android.util.Log.e("WMCanvas", "Camera error: " + error);
+                    android.util.Log.e("WMCanvasCamera", "Camera error: " + error);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -304,7 +271,7 @@ public class WebViewActivity extends AppCompatActivity {
             mCameraRunning = true;
             
         } catch (CameraAccessException e) {
-            android.util.Log.e("WMCanvas", "Camera access error", e);
+            android.util.Log.e("WMCanvasCamera", "Camera access error", e);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -330,18 +297,18 @@ public class WebViewActivity extends AppCompatActivity {
                     public void onConfigured(@NonNull CameraCaptureSession session) {
                         mCaptureSession = session;
                         startPreview();
-                        android.util.Log.d("WMCanvas", "Capture session configured");
+                        android.util.Log.d("WMCanvasCamera", "Capture session configured");
                     }
                     
                     @Override
                     public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-                        android.util.Log.e("WMCanvas", "Capture session configuration failed");
+                        android.util.Log.e("WMCanvasCamera", "Capture session configuration failed");
                     }
                 },
                 mCameraHandler
             );
         } catch (CameraAccessException e) {
-            android.util.Log.e("WMCanvas", "Create capture session error", e);
+            android.util.Log.e("WMCanvasCamera", "Create capture session error", e);
         }
     }
     
@@ -359,10 +326,10 @@ public class WebViewActivity extends AppCompatActivity {
             builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
             
             mCaptureSession.setRepeatingRequest(builder.build(), null, mCameraHandler);
-            android.util.Log.d("WMCanvas", "Camera preview started");
+            android.util.Log.d("WMCanvasCamera", "Camera preview started");
             
         } catch (CameraAccessException e) {
-            android.util.Log.e("WMCanvas", "Start preview error", e);
+            android.util.Log.e("WMCanvasCamera", "Start preview error", e);
         }
     }
     
@@ -421,7 +388,7 @@ public class WebViewActivity extends AppCompatActivity {
             });
             
         } catch (Exception e) {
-            android.util.Log.e("WMCanvas", "Process image error", e);
+            android.util.Log.e("WMCanvasCamera", "Process image error", e);
         }
     }
     
@@ -436,7 +403,7 @@ public class WebViewActivity extends AppCompatActivity {
                 mCaptureSession.stopRepeating();
                 mCaptureSession.close();
             } catch (CameraAccessException e) {
-                android.util.Log.e("WMCanvas", "Stop capture session error", e);
+                android.util.Log.e("WMCanvasCamera", "Stop capture session error", e);
             }
             mCaptureSession = null;
         }
@@ -456,12 +423,12 @@ public class WebViewActivity extends AppCompatActivity {
             try {
                 mCameraThread.join();
             } catch (InterruptedException e) {
-                android.util.Log.e("WMCanvas", "Camera thread join error", e);
+                android.util.Log.e("WMCanvasCamera", "Camera thread join error", e);
             }
             mCameraThread = null;
         }
         
-        android.util.Log.d("WMCanvas", "Camera stopped");
+        android.util.Log.d("WMCanvasCamera", "Camera stopped");
     }
     
     @Override
