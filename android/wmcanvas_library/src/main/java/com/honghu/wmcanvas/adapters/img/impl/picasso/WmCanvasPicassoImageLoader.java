@@ -15,7 +15,6 @@ import java.util.HashMap;
 
 /**
  * Image loader implemented with Picasso.
- * @author ertong
  */
 public class WmCanvasPicassoImageLoader implements IWmImageLoader {
     private static final String TAG = WmCanvasPicassoImageLoader.class.getSimpleName();

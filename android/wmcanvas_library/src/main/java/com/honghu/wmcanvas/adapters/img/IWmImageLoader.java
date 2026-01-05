@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 /**
  * An Image loader that loads url into bitmap.
  * Will replace it with C++ image library.
- * @author ertong
  */
 public interface IWmImageLoader {
     /**

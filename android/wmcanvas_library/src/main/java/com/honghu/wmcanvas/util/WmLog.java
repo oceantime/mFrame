@@ -4,11 +4,6 @@ import android.util.Log;
 
 import com.honghu.wmcanvas.WmCanvasJNI;
 
-
-/**
- *
- *
- */
 public class WmLog {
 
     public static final String TAG = "CANVAS";

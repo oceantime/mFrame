@@ -4,7 +4,6 @@ package com.honghu.wmcanvas.bridges.spec.bridge;
  * <p>Communications between Javascript runtime and native are container dependent. Different environment has different standards.</p>
  * <p>This interface provides an map that allows typed access to its members. Used to pass parameters from native
  * to javascript.</p>
- * @author ertong
  */
 
 public interface IJSCallbackMap {

@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Abstract bridge module.
- * @author ertong
  */
 public abstract class AbsWmBridgeModule<JSCallback> implements IWmBridgeModule<JSCallback> {
 

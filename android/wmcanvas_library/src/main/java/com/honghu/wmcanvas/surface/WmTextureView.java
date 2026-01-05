@@ -8,11 +8,6 @@ import android.view.TextureView;
 
 import com.honghu.wmcanvas.util.WmLog;
 
-/**
- * @author ertong
- * create at 2017/8/1
- */
-
 public class WmTextureView extends TextureView {
     private WmTextureViewCallback mCallback;
 

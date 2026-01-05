@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class for recording image loading status and basic information.
- * @author ertong
  */
 
 public class WmImageLoadInfo {

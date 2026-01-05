@@ -24,8 +24,6 @@ import com.honghu.wmcanvas.adapters.img.IWmImageLoader;
 
 /**
  * Image loader implemented with Fresco.
- *
- * @author ertong
  */
 public class WmCanvasFrescoImageLoader implements IWmImageLoader {
     private static final String TAG = WmCanvasFrescoImageLoader.class.getSimpleName();

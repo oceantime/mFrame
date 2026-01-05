@@ -3,7 +3,6 @@ package com.honghu.wmcanvas.bridges.spec.bridge;
 /**
  * Communications between Javascript runtime and native are container dependent. Different environment has different standards.
  * This interface provides array data structure for passing parameters from native to javascript.
- * @author ertong
  */
 
 public interface IJSCallbackArray {

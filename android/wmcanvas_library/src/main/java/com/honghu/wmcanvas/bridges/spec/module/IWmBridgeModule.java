@@ -13,7 +13,6 @@ import org.json.JSONObject;
  * </p>
  * <p>However, on other view, WmCanvas bridge is a plugin for Javascript runtime container, so we also use "plugin" to describe these bridges.</p>
  * <p>This class is for bridge extension in case of situation that you need your own bridge.</p>
- * @author ertong
  */
 
 public interface IWmBridgeModule<JSCallback> {

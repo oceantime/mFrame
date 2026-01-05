@@ -2,7 +2,6 @@ package com.honghu.wmcanvas.bridges.spec.bridge;
 
 /**
  * Factory for creating Callback data structures.
- * @author ertong
  */
 
 public interface IJSCallbackDataFactory {

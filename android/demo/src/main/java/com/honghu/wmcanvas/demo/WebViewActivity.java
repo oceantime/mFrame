@@ -1,4 +1,4 @@
-﻿package com.honghu.wmcanvas.demo;
+package com.honghu.wmcanvas.demo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

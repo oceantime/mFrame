@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation means the specified code are only used by Android.
- * @author ertong
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.METHOD, ElementType.TYPE})

@@ -26,11 +26,6 @@ import com.honghu.wmcanvas.util.WmLog;
 
 import java.util.ArrayList;
 
-/**
- * @author ertong
- * create at 2017/8/1
- */
-
 public class WmTextureViewCallback implements TextureView.SurfaceTextureListener {
     private final String mKey;
     private String mBackgroundColor = "#ffffff";
