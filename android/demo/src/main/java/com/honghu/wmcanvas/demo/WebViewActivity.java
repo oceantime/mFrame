@@ -108,12 +108,39 @@ public class WebViewActivity extends AppCompatActivity {
         });
 
         
-        // 注入JavaScript接口 - 相机API
+        // 注入JavaScript接口
+        mWebView.addJavascriptInterface(new AndroidBridge(), "AndroidBridge");
         mWebView.addJavascriptInterface(new WMCanvasCameraBridge(), "WMCanvasCamera");
 
         
         
         mWebView.loadUrl("file:///android_asset/index.html");
+    }
+
+    /**
+     * Android 通用 JavaScript Bridge
+     * 提供通用API给前端调用
+     */
+    public class AndroidBridge {
+        @JavascriptInterface
+        public void showToast(final String message) {
+            android.util.Log.d("AndroidBridge", "showToast: " + message);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(WebViewActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public String getDeviceInfo() {
+            android.util.Log.d("AndroidBridge", "getDeviceInfo");
+            String manufacturer = android.os.Build.MANUFACTURER;
+            String model = android.os.Build.MODEL;
+            String version = android.os.Build.VERSION.RELEASE;
+            return String.format("%s %s (Android %s)", manufacturer, model, version);
+        }
     }
 
     /**
@@ -174,26 +201,6 @@ public class WebViewActivity extends AppCompatActivity {
         public String getCapabilities() {
             
             return "{\"camera\":true,\"canvas2d\":true,\"webgl\":false}";
-        }
-
-        @JavascriptInterface
-        public void showToast(final String message) {
-            android.util.Log.d("WMCanvasCamera", "showToast: " + message);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(WebViewActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        @JavascriptInterface
-        public String getDeviceInfo() {
-            android.util.Log.d("WMCanvasCamera", "getDeviceInfo");
-            String manufacturer = android.os.Build.MANUFACTURER;
-            String model = android.os.Build.MODEL;
-            String version = android.os.Build.VERSION.RELEASE;
-            return String.format("%s %s (Android %s)", manufacturer, model, version);
         }
     }
 

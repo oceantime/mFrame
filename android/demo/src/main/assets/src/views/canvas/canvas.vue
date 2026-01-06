@@ -43,15 +43,21 @@ export default {
             this.ctx = canvas.getContext('2d');
             this.updateInfo(`Canvas已初始化，尺寸: ${canvas.width}x${canvas.height}`);
             
-            // 测试Android Bridge
-            if (typeof WMCanvasCamera !== 'undefined') {
-                try {
-                    const deviceInfo = WMCanvasCamera.getDeviceInfo();
-                    this.updateInfo('设备信息: ' + deviceInfo);
-                } catch (e) {
-                    console.error('WMCanvasCamera error:', e);
+            // 测试Android Bridge - 延迟检测确保Bridge已注入
+            setTimeout(() => {
+                console.log('检测Bridge:', typeof window.AndroidBridge);
+                if (typeof window.AndroidBridge !== 'undefined') {
+                    try {
+                        const deviceInfo = window.AndroidBridge.getDeviceInfo();
+                        this.updateInfo('设备信息: ' + deviceInfo);
+                    } catch (e) {
+                        console.error('AndroidBridge error:', e);
+                        this.updateInfo('Bridge错误: ' + e.message);
+                    }
+                } else {
+                    this.updateInfo('AndroidBridge不可用（在浏览器中运行）');
                 }
-            }
+            }, 100);
         },
 
         drawRect() {
@@ -160,15 +166,16 @@ export default {
         },
 
         testBridge() {
-            if (typeof WMCanvasCamera !== 'undefined') {
+            console.log('测试Bridge:', typeof window.AndroidBridge);
+            if (typeof window.AndroidBridge !== 'undefined') {
                 try {
-                    WMCanvasCamera.showToast('Hello from JavaScript!');
-                    this.updateInfo('已调用WMCanvasCamera Bridge显示Toast');
+                    window.AndroidBridge.showToast('Hello from JavaScript!');
+                    this.updateInfo('已调用AndroidBridge显示Toast');
                 } catch (e) {
-                    this.updateInfo('WMCanvasCamera Bridge调用失败: ' + e.message);
+                    this.updateInfo('AndroidBridge调用失败: ' + e.message);
                 }
             } else {
-                this.updateInfo('WMCanvasCamera Bridge不可用（在浏览器中运行）');
+                this.updateInfo('AndroidBridge不可用（在浏览器中运行）');
             }
         },
 
