@@ -209,18 +209,21 @@ window.updateCameraFrame = function(base64ImageData) {
 ### 安装依赖
 ```bash
 cd android/demo/src/main/assets
-npm install
+npm install -p pnpm@lastest
+pnpm up rollup@lastest vite@latest
+pnpm add -D @rollup/rollup-win32-x64-msvc
+pnpm build
 ```
 
 ### 开发模式
 ```bash
-npm run dev
+pnpm dev
 # 访问 http://localhost:5173
 ```
 
 ### 生产构建
 ```bash
-npm run build
+pnpm build
 # 输出到 dist/ 目录
 ```
 
