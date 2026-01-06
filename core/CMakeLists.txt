@@ -116,12 +116,6 @@ else()
 endif()
 
 
-if (WMCANVAS_RUNTIME)
-    add_definitions(-DWMCANVAS_RUNTIME)
-endif()
-
-
-
 add_library( # Sets the name of the library.
         wmcanvas
         # Sets the library as a shared library.
@@ -137,12 +131,8 @@ add_library( # Sets the name of the library.
         ${native_android_manager_src}
         ${SRC_FILES} )
 
-# Set output name based on WMCANVAS_RUNTIME flag
-if (WMCANVAS_RUNTIME)
-    set_target_properties(wmcanvas PROPERTIES OUTPUT_NAME "wmcanvas_runtime")
-else()
-    set_target_properties(wmcanvas PROPERTIES OUTPUT_NAME "WmCanvas")
-endif()
+# Output name unified to wmcanvas (generates libwmcanvas.so)
+# No longer generates libWmCanvas.so or libwmcanvas_runtime.so
 
 
 find_library( # Sets the name of the path variable.

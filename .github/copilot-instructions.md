@@ -10,7 +10,7 @@
 ## Native Build & Flags
 - Primary CMake file [core/CMakeLists.txt](core/CMakeLists.txt) configures C++14, hides symbols by default, and conditionally pulls JNI, PNG, and 3D code when `WMCANVAS=1`.
 - `WMCANVAS=0` (default Android flavor) strips legacy Weex pieces, while `WMCANVAS=1` includes [core/android/manager](core/android/manager) and related bridge code for full stacks.
-- `WMCANVAS_RUNTIME=1` (set by the standalone flavor) renames the shared object to `libwmcanvas_runtime.so`; keep this flag if you add new native targets so the demo continues to resolve the correct library.
+- Native library output is unified to `libwmcanvas.so` (previously generated `libWmCanvas.so` or `libwmcanvas_runtime.so` based on build flags).
 - `GCANVAS_DISTRIBUTE_HEADER` enables header staging into `core/distribution`; if you introduce new public headers, add them to the copy list near the bottom of [core/CMakeLists.txt](core/CMakeLists.txt).
 - Font rendering depends on the prebaked FreeType bundle in [core/android/freetype-prebuilt](core/android/freetype-prebuilt); do not remove or rename its layout without updating include and import paths.
 

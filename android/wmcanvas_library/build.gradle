@@ -55,7 +55,7 @@ android {
             dimension "target_app"
             externalNativeBuild {
                 cmake {
-                    arguments  '-DWMCANVAS=0', '-DANDROID_STL=c++_shared', '-DGSTANDALONE=1', '-DWMCANVAS_RUNTIME=1'
+                    arguments  '-DWMCANVAS=0', '-DANDROID_STL=c++_shared', '-DGSTANDALONE=1'
                 }
 
                 ndk {

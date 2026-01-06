@@ -44,28 +44,6 @@ public class WmCanvasJNI {
     }
 
 
-
-
-    public static void loadRuntime() {
-        if (isRuntimeEnable) {
-            return;
-        }
-
-        WmLog.i("CANVAS", "WmCanvasJNI load runtime ");
-        try {
-            isRuntimeEnable = true;
-            System.loadLibrary("c++_shared");
-            System.loadLibrary("wmcanvas_runtime");
-        } catch (UnsatisfiedLinkError e) {
-            isRuntimeEnable = false;
-            WmLog.e("CANVAS", "wmcanvas_runtime is not found." + e.getLocalizedMessage());
-        } catch (Exception e) {
-            isRuntimeEnable = false;
-            WmLog.e("CANVAS", "fail to load wmcanvas_runtime" + e.getLocalizedMessage());
-        }
-    }
-
-
     private static void loadInternal(String scene) {
         if (GCanvaslibEnable) {
             return;
@@ -76,16 +54,16 @@ public class WmCanvasJNI {
             GCanvaslibEnable = true;
 
             System.loadLibrary("freetype");
-            System.loadLibrary("WmCanvas");
+            System.loadLibrary("wmcanvas");
 
             WmCanvasJNI.setFontFamilies();
 
         } catch (UnsatisfiedLinkError e) {
             GCanvaslibEnable = false;
-            WmLog.e("CANVAS", "WmCanvas is not found." + e.getLocalizedMessage());
+            WmLog.e("CANVAS", "wmcanvas is not found." + e.getLocalizedMessage());
         } catch (Exception e) {
             GCanvaslibEnable = false;
-            WmLog.e("CANVAS", "fail to load WmCanvas." + e.getLocalizedMessage());
+            WmLog.e("CANVAS", "fail to load wmcanvas." + e.getLocalizedMessage());
         }
         WmLog.i("CANVAS", "WmCanvasJNI init end---- ");
     }
