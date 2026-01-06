@@ -175,6 +175,26 @@ public class WebViewActivity extends AppCompatActivity {
             
             return "{\"camera\":true,\"canvas2d\":true,\"webgl\":false}";
         }
+
+        @JavascriptInterface
+        public void showToast(final String message) {
+            android.util.Log.d("WMCanvasCamera", "showToast: " + message);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(WebViewActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public String getDeviceInfo() {
+            android.util.Log.d("WMCanvasCamera", "getDeviceInfo");
+            String manufacturer = android.os.Build.MANUFACTURER;
+            String model = android.os.Build.MODEL;
+            String version = android.os.Build.VERSION.RELEASE;
+            return String.format("%s %s (Android %s)", manufacturer, model, version);
+        }
     }
 
     /**
