@@ -1,8 +1,7 @@
 #ifndef PNG_CODER_H_
 #define PNG_CODER_H_
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 class IPngCoder
 {
 public:

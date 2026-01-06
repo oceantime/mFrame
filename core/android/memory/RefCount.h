@@ -1,8 +1,7 @@
 #ifndef REFCOUNT_H_
 #define REFCOUNT_H_
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 /// <description>
 /// RefCount
 /// </description>

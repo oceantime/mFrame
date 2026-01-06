@@ -4,8 +4,7 @@
 #include "IDelete.h"
 #include "RefCount.h"
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 template < typename T > class AutoPtr final
 {
 public:

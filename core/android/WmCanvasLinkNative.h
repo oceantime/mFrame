@@ -2,7 +2,7 @@
 #define WmCanvas_WmCanvasLINKNATIVE_H
 
 
-namespace WmCanvas {
+namespace wmcanvas {
     class WmCanvasLinkNative {
     public:
         static const char* CallNative(const char* ContextId,int type,const char* args);

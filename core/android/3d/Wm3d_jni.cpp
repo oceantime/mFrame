@@ -8,7 +8,7 @@
 #include "WmManager.h"
 
 using namespace std;
-using namespace WmCanvas;
+using namespace wmcanvas;
 
 
 char *jstringToString_(JNIEnv *env, jstring jstr) {

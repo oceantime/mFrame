@@ -9,8 +9,7 @@
 #define ENABLE_LODE_PNG 1
 #endif
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 class PngLoader
 {
 public:

@@ -8,7 +8,7 @@
 #include <string>
 #include <memory/AutoPtr.h>
 
-using namespace WmCanvas;
+using namespace wmcanvas;
 
 class WmManager{
 public:

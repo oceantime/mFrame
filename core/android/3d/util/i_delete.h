@@ -3,7 +3,7 @@
 #define WM_CANVAS_I_DELETE_H
 namespace wm {
     namespace wm_engine {
-        namespace WmCanvas {
+        namespace wmcanvas {
             class IDelete {
             public:
                 IDelete() {}

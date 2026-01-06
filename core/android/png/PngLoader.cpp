@@ -1,8 +1,7 @@
 #include "PngLoader.h"
 #include "LodePngCoder.h"
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 PngLoader::PngLoader()
 {
 #if ENABLE_LODE_PNG

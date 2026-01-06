@@ -4,7 +4,7 @@
 
 namespace wm {
     namespace wm_engine {
-        namespace WmCanvas {
+        namespace wmcanvas {
             class RefCount {
             public:
                 RefCount() : mRefCount(0) {}

@@ -1,8 +1,7 @@
 #ifndef IDELETE_H_
 #define IDELETE_H_
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 class IDelete
 {
 public:

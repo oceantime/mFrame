@@ -5,8 +5,7 @@ extern "C" {
 }
 #include "../support/Log.h"
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 LodePngCoder::LodePngCoder() {}
 
 LodePngCoder::~LodePngCoder() {}

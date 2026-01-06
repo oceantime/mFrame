@@ -2,8 +2,7 @@
 #define LODE_PNG_CODER_H_
 #include "IPngCoder.h"
 
-namespace WmCanvas
-{
+namespace wmcanvas {
 class LodePngCoder : public IPngCoder
 {
 public:

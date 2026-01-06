@@ -6,7 +6,7 @@
 
 namespace wm {
     namespace wm_engine {
-        namespace WmCanvas {
+        namespace wmcanvas {
             template<typename T>
             class AutoPtr final {
             public:

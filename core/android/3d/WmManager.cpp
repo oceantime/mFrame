@@ -3,7 +3,7 @@
 
 
 using namespace std;
-using namespace WmCanvas;
+using namespace wmcanvas;
 
 AutoPtr<WmManager> WmManager::theManager;
 

@@ -3,7 +3,7 @@
 #include "WmCanvasManager.h"
 
 using namespace std;
-using namespace WmCanvas;
+using namespace wmcanvas;
 
 
 __attribute__ ((visibility ("default"))) const char *
