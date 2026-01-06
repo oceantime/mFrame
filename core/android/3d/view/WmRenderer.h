@@ -8,9 +8,8 @@
 #include <pthread.h>
 
 #include "../../WmCanvas.hpp"
-#include <WmCanvasWeex.hpp>
 
-using namespace WmCanvas;
+using namespace wmcanvas;
 
 class WmRenderer {
 public:

@@ -16,7 +16,7 @@ WmCanvasLinkNative::CallNative(const char *ContextId, int type, const char *args
 
     WmCanvasManager *theManager = WmCanvasManager::GetManager();
     string sContextId = ContextId;
-    WmCanvasWeex *theCanvas = static_cast<WmCanvasWeex *>(theManager->GetCanvas(sContextId));
+    wmcanvas::WmCanvas *theCanvas = static_cast<wmcanvas::WmCanvas *>(theManager->GetCanvas(sContextId));
     string sArgs = args;
     if (theCanvas != nullptr) {
         return theCanvas->CallNative(type, sArgs);

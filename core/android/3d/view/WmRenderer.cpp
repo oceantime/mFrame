@@ -152,11 +152,12 @@ void WmRenderer::stop() {
         pthread_join(m_thread_id, 0);
     } else {
         LOG_D("thread require exit on Stop");
-        if (mProxy) {
-            mProxy->setContextLost(true);
-            mProxy->setThreadExit();
-            mProxy->finishProc();
-        }
+        // WmCanvas base class doesn't have these Weex-specific methods
+        // if (mProxy) {
+        //     mProxy->setContextLost(true);
+        //     mProxy->setThreadExit();
+        //     mProxy->finishProc();
+        // }
 
         surfaceExit();
         m_requestSurfaceDestroy = false;
@@ -169,7 +170,7 @@ void WmRenderer::stop() {
 }
 
 void WmRenderer::destroy() {
-    WmCanvasManager *m = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *m = wmcanvas::WmCanvasManager::GetManager();
     m->RemoveCanvas(mContextId);
     mProxy = nullptr;
 
@@ -206,8 +207,8 @@ void WmRenderer::surfaceExit() {
 
 void WmRenderer::drawFrame() {
     if (mProxy != nullptr) {
-        LOG_D("start to linkNativeGLProc.");
-        mProxy->LinkNativeGLProc();
+        LOG_D("start to draw frame.");
+        mProxy->drawFrame();
     }
 }
 
@@ -216,8 +217,8 @@ void WmRenderer::renderLoop() {
 
         pthread_mutex_lock(&m_mutex);
 
-        if (!mProxy || (mProxy && !mProxy->continueProcess() &&
-                        !m_viewportchanged && !m_requestSurfaceDestroy)) {
+        // Simplified condition without Weex-specific continueProcess
+        if (!mProxy || (!m_viewportchanged && !m_requestSurfaceDestroy)) {
             pthread_cond_wait(&m_cond, &m_mutex);
         }
 
@@ -226,9 +227,10 @@ void WmRenderer::renderLoop() {
             pthread_cond_wait(&m_cond, &m_mutex);
         }
 
-        if (mProxy != nullptr) {
-            mProxy->finishProc();
-        }
+        // WmCanvas base class doesn't have finishProc
+        // if (mProxy != nullptr) {
+        //     mProxy->finishProc();
+        // }
 
         if (m_viewportchanged) {
             if (!m_initialized) {
@@ -237,12 +239,14 @@ void WmRenderer::renderLoop() {
                 if (!initResult) {
                     break;
                 }
-                if (mProxy) mProxy->setContextLost(false);
+                // WmCanvas base class doesn't have setContextLost
+                // if (mProxy) mProxy->setContextLost(false);
             }
 
             mProxy->OnSurfaceChanged(0, 0, m_width, m_height);
-            mProxy->SetClearColor(mClearColor);
-            mProxy->SetDevicePixelRatio(m_device_pixel_ratio);
+            // WmCanvas base class doesn't have SetClearColor and SetDevicePixelRatio
+            // mProxy->SetClearColor(mClearColor);
+            // mProxy->SetDevicePixelRatio(m_device_pixel_ratio);
             m_viewportchanged = false;
 
             if (!m_requestInitialize) {
@@ -253,12 +257,12 @@ void WmRenderer::renderLoop() {
             sem_post(&m_SyncSem);
         }
 
-
+        // WmCanvas base class doesn't have bindTexture and texSubImage2D methods
+        // Bitmap texture operations are Weex-specific
         if (m_bindtexture && m_egl_surface != EGL_NO_SURFACE) {
             while (!mBitmapQueue.empty()) {
                 struct BitmapCmd *p = reinterpret_cast<struct BitmapCmd * >(mBitmapQueue.front());
-                mProxy->bindTexture(*p);
-
+                // mProxy->bindTexture(*p);
                 mBitmapQueue.pop();
                 delete p;
             }
@@ -270,8 +274,7 @@ void WmRenderer::renderLoop() {
         if (m_subImage2D && m_egl_surface != EGL_NO_SURFACE) {
             while (!mBitmapQueue.empty()) {
                 struct BitmapCmd *p = reinterpret_cast<struct BitmapCmd * >(mBitmapQueue.front());
-                mProxy->texSubImage2D(*p);
-
+                // mProxy->texSubImage2D(*p);
                 mBitmapQueue.pop();
                 delete p;
             }
@@ -294,11 +297,12 @@ void WmRenderer::renderLoop() {
 
     if (m_requestExit) {
         LOG_D("thread require exit.");
-        if (mProxy) {
-            mProxy->setContextLost(true);
-            mProxy->setThreadExit();
-            mProxy->finishProc();
-        }
+        // WmCanvas base class doesn't have these Weex-specific methods
+        // if (mProxy) {
+        //     mProxy->setContextLost(true);
+        //     mProxy->setThreadExit();
+        //     mProxy->finishProc();
+        // }
 
         surfaceExit();
         m_requestSurfaceDestroy = false;
@@ -335,15 +339,12 @@ void WmRenderer::requestCreateCanvas(const std::string contextid) {
         LOG_D("not create canvas create");
         if (!mProxy) {
             WmCanvasConfig config = {false, true};
-            mProxy = new WmCanvasWeex(mContextId, config);
-            mProxy->SetSignalUpGLThreadCallback([this]() { this->signalUpGLthread(); });
-            mProxy->SetRefreshFlagCallback([this](bool refreshFlag) { this->setRefreshFlag(refreshFlag); });
-            mProxy->CreateContext();
-            mProxy->SetContextType(m_context_type);
-            WmCanvasManager *m = WmCanvasManager::GetManager();
-            m->AddCanvas(mProxy);
-            m_createCanvas = true;
-            m_sendEvent = true;
+            mProxy = wmcanvas::WmCanvasManager::GetManager()->NewCanvas(mContextId, config);
+            if (mProxy) {
+                mProxy->CreateContext();
+                m_createCanvas = true;
+                m_sendEvent = true;
+            }
         }
         pthread_cond_signal(&m_cond);
     } else {
@@ -492,7 +493,8 @@ bool WmRenderer::sendEvent() {
 
 void WmRenderer::setDevicePixelRatio(const float ratio) {
     this->m_device_pixel_ratio = ratio;
-    if (mProxy) {
-        mProxy->SetDevicePixelRatio(ratio);
-    }
+    // WmCanvas base class doesn't have SetDevicePixelRatio
+    // if (mProxy) {
+    //     mProxy->SetDevicePixelRatio(ratio);
+    // }
 }

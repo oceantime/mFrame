@@ -110,11 +110,11 @@ void RegisterCallNativeCallback_belowN() {
 
 
 void executeCallbacks(JNIEnv *je, jstring contextId) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
 
     Callback *callback = theCanvas ? theCanvas->GetNextCallback() : nullptr;
     if (callback) {
@@ -151,23 +151,26 @@ extern int g_js_version;
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_newCanvas(
         JNIEnv *je, jclass jc, jstring contextId, jint jsVersion, jstring clearColor) {
     LOG_E("Canvas JNI::newCanvas. jsVer=%d", jsVersion);
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = theManager->NewCanvasWeex(canvasId);
+    WmCanvasConfig config = {false, true};
+    wmcanvas::WmCanvas *theCanvas = theManager->NewCanvas(canvasId, config);
     if (theCanvas) {
-        char *ccolor = jstringToString(je, clearColor);
-        string colorId = ccolor;
-        free(ccolor);
-        theCanvas->SetClearColor(StrValueToColorRGBA(colorId.c_str()));
+        // Note: WmCanvas base class doesn't have SetClearColor
+        // This was a Weex-specific feature
+        // char *ccolor = jstringToString(je, clearColor);
+        // string colorId = ccolor;
+        // free(ccolor);
+        // theCanvas->SetClearColor(StrValueToColorRGBA(colorId.c_str()));
     }
 }
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_freeCanvas(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::freeCanvas.");
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
@@ -177,14 +180,14 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_freeCanvas(
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setClearColor(
         JNIEnv *je, jclass jc, jstring contextId, jstring color) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
     char *colorStr = jstringToString(je, color);
     string colorId = colorStr;
     free(colorStr);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::setClearColor. %s", colorId.c_str());
         theCanvas->SetClearColor(StrValueToColorRGBA(colorId.c_str()));
@@ -193,11 +196,11 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setClearColor(
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setOrtho(
         JNIEnv *je, jclass jc, jstring contextId, jint width, jint height) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::SetOrtho.");
         theCanvas->SetOrtho(width, height);
@@ -207,11 +210,11 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setOrtho(
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addTexture(
         JNIEnv *je, jclass jc, jstring contextId, jint id, jint glID, jint width,
         jint height) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::AddTexture");
         theCanvas->AddTexture(id, glID, width, height);
@@ -222,11 +225,11 @@ JNIEXPORT jboolean JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_addPngTexture(
         JNIEnv *je, jclass jc, jstring contextId, jobject assetManager,
         jstring path, jint textureId, jobject dimension) {
     bool success = false;
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::addPngTexture");
 
@@ -272,11 +275,11 @@ Java_com_honghu_wmcanvas_WmCanvasJNI_addPngTextureByStream(JNIEnv *je, jclass jc
                                                          jbyteArray array,
                                                          jint id, jobject dim) {
     bool success = false;
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::addPngTextureByStream");
         jboolean isCopy;
@@ -301,11 +304,11 @@ Java_com_honghu_wmcanvas_WmCanvasJNI_addPngTextureByStream(JNIEnv *je, jclass jc
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_removeTexture(
         JNIEnv *je, jclass jc, jstring contextId, jint id) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::removeTexture");
         theCanvas->RemoveTexture(id);
@@ -314,9 +317,9 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_removeTexture(
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_render(
         JNIEnv *je, jclass jc, jstring contextId, jstring renderCommands) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *canvasId = jstringToString(je, contextId);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     free(canvasId);
     if (theCanvas) {
         const char *rc = je->GetStringUTFChars(renderCommands, 0);
@@ -337,11 +340,11 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_render(
 
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_surfaceChanged(
         JNIEnv *je, jclass jc, jstring contextId, jint width, jint height) {
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         LOG_D("Canvas JNI::OnSurfaceChanged (%d, %d)", width, height);
 
@@ -353,7 +356,7 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_captureGLLayer(
         JNIEnv *je, jclass jc, jstring contextId, jstring callbackId, jint x,
         jint y, jint w, jint h, jstring fileName) {
 //
-//    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+//    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
 //    char *cid = jstringToString(je, contextId);
 //    string canvasId = cid;
 //    free(cid);
@@ -369,11 +372,11 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_captureGLLayer(
 JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_contextLost(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::contextLost");
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         theCanvas->Clear();
     }
@@ -391,8 +394,8 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setTyOffsetFlag(
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         theCanvas->SetTyOffsetFlag(flag);
     }
@@ -404,8 +407,8 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setHiQuality(
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         theCanvas->GetWmCanvasContext()->SetHiQuality(isHiQuality);
     }
@@ -448,8 +451,8 @@ JNIEXPORT jboolean JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_isFboSupport(
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (theCanvas) {
         return (jboolean) theCanvas->GetWmCanvasContext()->IsFboSupport();
     }
@@ -462,11 +465,11 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getImageData(
         jint height) {
     LOG_D("Canvas JNI::getImageData xy=(%d, %d), wh=(%d, %d)", x, y, width,
           height);
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (NULL == theCanvas) {
         return je->NewStringUTF("");
     }
@@ -497,11 +500,11 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getAllParameter(
         JNIEnv *je, jclass jc, jstring contextId) {
     LOG_D("Canvas JNI::getAllParameter");
 
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
     char *cid = jstringToString(je, contextId);
     string canvasId = cid;
     free(cid);
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(canvasId);
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
     if (NULL == theCanvas) {
         return je->NewStringUTF("");
     }
@@ -542,8 +545,8 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_exeSyncCmd
     string contextID = cid;
     free(cid);
 
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(contextID);
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(contextID);
     if (theCanvas) {
         const char *cargs = nullptr;
         if (args != NULL) {
@@ -685,8 +688,8 @@ Java_com_honghu_wmcanvas_WmCanvasJNI_getNativeFps(JNIEnv *je, jclass jc, jstring
 
     string cxx_string = string(str_chars);
 
-    WmCanvasManager *theManager = WmCanvasManager::GetManager();
-    WmCanvasWeex *theCanvas = (WmCanvasWeex *) theManager->GetCanvas(cxx_string);
+    wmcanvas::WmCanvasManager *theManager = wmcanvas::WmCanvasManager::GetManager();
+    wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(cxx_string);
     if (theCanvas) {
         return theCanvas->mFps;
     }

@@ -1,7 +1,6 @@
 #include "../../src/WmCanvasManager.h"
-#include "../../src/WmCanvasWeex.hpp"
 
-namespace WmCanvas {
+namespace wmcanvas {
     void WmCanvasManager::AddtoQueue(const std::string contextId, struct WmCanvasCmd *p) {
         std::map<std::string, std::queue<struct WmCanvasCmd *> *>::iterator it = mCmdQueue.find(
                 contextId);
