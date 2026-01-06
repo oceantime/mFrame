@@ -2,6 +2,7 @@
     <div class="list-view">
         <div class="header">
             <button class="nav-btn" @click="goToCamera">📷 相机演示</button>
+            <button class="nav-btn tests" @click="goToTests">🧪 API测试</button>
             
             <!-- 功能按钮 -->
             <div class="controls">
@@ -358,6 +359,10 @@ export default {
 
         goToCamera() {
             this.$router.push('/picture');
+        },
+
+        goToTests() {
+            this.$router.push('/tests');
         }
     }
 };
@@ -396,6 +401,12 @@ export { loadImageWithReferer };
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.nav-btn.tests {
+    background: rgba(46, 213, 115, 0.3);
+    border-color: #2ed573;
 }
 
 .nav-btn:active {

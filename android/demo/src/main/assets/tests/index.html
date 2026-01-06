@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WmCanvas Tests</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .test-canvas {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .test-status {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .test-status.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        .test-status.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .test-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .run-all-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .run-all-btn:hover {
+            background: #0056b3;
+        }
+        .summary {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>WmCanvas API Tests</h1>
+    
+    <div class="summary" id="summary">
+        <div>Total Tests: <span id="total-tests">0</span></div>
+        <div>Passed: <span id="passed-tests">0</span></div>
+        <div>Failed: <span id="failed-tests">0</span></div>
+    </div>
+
+    <button class="run-all-btn" onclick="runAllTests()">Run All Tests</button>
+
+    <!-- Canvas 2D Tests -->
+    <h2>Canvas 2D Tests</h2>
+    
+    <div class="test-container">
+        <div class="test-title">1. fillRect - Rectangle Filling</div>
+        <canvas id="test-fillRect" class="test-canvas" width="400" height="300"></canvas>
+        <div class="test-status pending" id="status-fillRect">Pending...</div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">2. strokeRect - Rectangle Stroking</div>
+        <canvas id="test-strokeRect" class="test-canvas" width="400" height="300"></canvas>
+        <div class="test-status pending" id="status-strokeRect">Pending...</div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">3. arc - Circle and Arc Drawing</div>
+        <canvas id="test-arc" class="test-canvas" width="400" height="300"></canvas>
+        <div class="test-status pending" id="status-arc">Pending...</div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">4. text - Text Rendering</div>
+        <canvas id="test-text" class="test-canvas" width="400" height="400"></canvas>
+        <div class="test-status pending" id="status-text">Pending...</div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">5. transforms - Translate, Rotate, Scale</div>
+        <canvas id="test-transforms" class="test-canvas" width="450" height="300"></canvas>
+        <div class="test-status pending" id="status-transforms">Pending...</div>
+    </div>
+
+    <script>
+        const tests = [
+            { name: 'fillRect', file: 'canvas2d/fillRect.js' },
+            { name: 'strokeRect', file: 'canvas2d/strokeRect.js' },
+            { name: 'arc', file: 'canvas2d/arc.js' },
+            { name: 'text', file: 'canvas2d/text.js' },
+            { name: 'transforms', file: 'canvas2d/transforms.js' }
+        ];
+
+        let testResults = {
+            total: tests.length,
+            passed: 0,
+            failed: 0
+        };
+
+        function updateSummary() {
+            document.getElementById('total-tests').textContent = testResults.total;
+            document.getElementById('passed-tests').textContent = testResults.passed;
+            document.getElementById('failed-tests').textContent = testResults.failed;
+        }
+
+        function updateTestStatus(testName, passed) {
+            const statusElement = document.getElementById('status-' + testName);
+            if (passed) {
+                statusElement.textContent = '✓ Passed';
+                statusElement.className = 'test-status pass';
+                testResults.passed++;
+            } else {
+                statusElement.textContent = '✗ Failed';
+                statusElement.className = 'test-status fail';
+                testResults.failed++;
+            }
+            updateSummary();
+        }
+
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        async function runTest(test) {
+            try {
+                await loadScript(test.file);
+                const testFunction = window['test' + test.name.charAt(0).toUpperCase() + test.name.slice(1)];
+                if (typeof testFunction === 'function') {
+                    const result = testFunction('test-' + test.name);
+                    updateTestStatus(test.name, result);
+                } else {
+                    console.error('Test function not found:', test.name);
+                    updateTestStatus(test.name, false);
+                }
+            } catch (error) {
+                console.error('Error running test:', test.name, error);
+                updateTestStatus(test.name, false);
+            }
+        }
+
+        async function runAllTests() {
+            testResults = { total: tests.length, passed: 0, failed: 0 };
+            updateSummary();
+
+            for (const test of tests) {
+                await runTest(test);
+                // Small delay between tests
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            console.log('All tests completed!');
+            console.log('Results:', testResults);
+        }
+
+        // Initialize
+        updateSummary();
+    </script>
+</body>
+</html>
