@@ -1,5 +1,5 @@
 <template>
-    <div class="gcanvas-container">
+    <div class="canvas-container">
         <h1>🎨 WmCanvas WebView Demo</h1>
         
         <canvas ref="canvas" id="myCanvas" width="400" height="400"></canvas>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name: 'GCanvasView',
+    name: 'CanvasView',
     data() {
         return {
             ctx: null,
@@ -44,12 +44,12 @@ export default {
             this.updateInfo(`Canvas已初始化，尺寸: ${canvas.width}x${canvas.height}`);
             
             // 测试Android Bridge
-            if (typeof AndroidBridge !== 'undefined') {
+            if (typeof WMCanvasCamera !== 'undefined') {
                 try {
-                    const deviceInfo = AndroidBridge.getDeviceInfo();
+                    const deviceInfo = WMCanvasCamera.getDeviceInfo();
                     this.updateInfo('设备信息: ' + deviceInfo);
                 } catch (e) {
-                    console.error('AndroidBridge error:', e);
+                    console.error('WMCanvasCamera error:', e);
                 }
             }
         },
@@ -160,15 +160,15 @@ export default {
         },
 
         testBridge() {
-            if (typeof AndroidBridge !== 'undefined') {
+            if (typeof WMCanvasCamera !== 'undefined') {
                 try {
-                    AndroidBridge.showToast('Hello from JavaScript!');
-                    this.updateInfo('已调用Android Bridge显示Toast');
+                    WMCanvasCamera.showToast('Hello from JavaScript!');
+                    this.updateInfo('已调用WMCanvasCamera Bridge显示Toast');
                 } catch (e) {
-                    this.updateInfo('Android Bridge调用失败: ' + e.message);
+                    this.updateInfo('WMCanvasCamera Bridge调用失败: ' + e.message);
                 }
             } else {
-                this.updateInfo('Android Bridge不可用（在浏览器中运行）');
+                this.updateInfo('WMCanvasCamera Bridge不可用（在浏览器中运行）');
             }
         },
 
@@ -181,7 +181,7 @@ export default {
 </script>
 
 <style scoped>
-.gcanvas-container {
+.canvas-container {
     max-width: 800px;
     margin: 0 auto;
     background: white;

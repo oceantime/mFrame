@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import ListView from '@/views/list/list.vue'
 import PictureView from '@/views/picture/picture.vue'
-import GCanvasView from '@/views/gcanvas/gcanvas.vue'
+import CanvasView from '@/views/canvas/canvas.vue'
 
 const routes = [
     {
@@ -19,9 +19,9 @@ const routes = [
         component: PictureView
     },
     {
-        path: '/gcanvas',
+        path: '/canvas',
         name: 'WmCanvas',
-        component: GCanvasView
+        component: CanvasView
     }
 ]
 
