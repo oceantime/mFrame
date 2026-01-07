@@ -83,4 +83,4 @@ private:
 };
 }
 
-#endif /* GCANVAS_GFONTSTYLE_H */
+#endif /* WMCANVAS_WMFONTSTYLE_H */
