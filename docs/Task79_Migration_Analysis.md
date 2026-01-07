@@ -487,6 +487,24 @@ ctx.fillRect(10, 10, 100, 100);
 - iOS 也可以引用 core/ (虽然当前未激活)
 - 符合"平台无关核心 + 平台特定封装"的设计原则
 
+
+```mermaid
+flowchart TD
+    A[JS/WebGL 调用<br/>glcube2 示例<br/>node/examples/webgl/glcube2.js] --> B[WmCanvasJNI.render()<br/>native 指令桥<br/><br/>WmCanvasManager<br/>解析并转交 WmCanvasAndroid]
+    B --> C[WmRenderer 渲染线程<br/>core/android/3d/view/WmRenderer.cpp#L32-L360<br/>· 初始化 EGL / ANativeWindow<br/>· requestCreateCanvas / requestViewportChanged<br/>· renderLoop -> drawFrame -> eglSwapBuffers]
+    subgraph TextureView 层
+        D[WmTextureView<br/>android/wmcanvas_library/.../WmTextureView.java#L11-L102] --> E[WmTextureViewCallback<br/>android/wmcanvas_library/.../WmTextureViewCallback.java#L29-L152]
+        E -->|SurfaceTexture 事件| F[JNI onSurfaceChanged<br/>core/android/3d/Wm3d_jni.cpp#L34-L146<br/>· 绑定 Surface<br/>· 启动 WmRenderer]
+    end
+    C --> G[WmCanvasAndroid / WmCanvas2DContextAndroid<br/>core/src/platform/Android/WmCanvasAndroid.cpp#L5-L23<br/>core/src/platform/Android/WmCanvas2DContextAndroid.cpp#L144-L220<br/>· ResizeCanvas<br/>· FBO/Shader 管线<br/>· Clear/Draw 批次]
+    G --> H[TextureView SurfaceTexture<br/>最终帧显示在 UI]
+
+    E -.->|sendEvent 回调| B
+    C -->|bindTexture / texSubImage2D （可选）| G
+```
+
+
+
 ---
 
 ## 八、确认问题
