@@ -128,4 +128,4 @@ public:
 
 };
 
-#endif /* GCANVAS_GPATH_H */
+#endif /* WMCANVAS_WMPATH_H */
