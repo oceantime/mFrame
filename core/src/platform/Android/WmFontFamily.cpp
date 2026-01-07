@@ -28,8 +28,8 @@ namespace wmcanvas
         WmFontStyle::Weight weight = fontStyle.GetWeight();
         WmFontStyle::Variant variant = fontStyle.GetVariant();
 
-        // webÊôĞÔÊÕÁ²
-        // AndroidÄÚobliqueÓëitalicÒ»Ñù
+        // webå±æ€§æ”¶æ•›
+        // Androidå†…obliqueä¸italicä¸€æ ·
         if (style == WmFontStyle::Style::OBLIQUE) {
             style = WmFontStyle::Style::ITALIC;
         }
@@ -47,10 +47,10 @@ namespace wmcanvas
             if (item != nullptr) {
                 closetItem = item;
                 if (item->style == style) {
-                    if (closetItem == nullptr) { // Ñ¡ÔñÊ×¸östyleÆ¥ÅäµÄitem
+                    if (closetItem == nullptr) { // é€‰æ‹©é¦–ä¸ªstyleåŒ¹é…çš„item
                         closetItem = item;
                     }
-                    if (item->weight == weight) { // style & weight ¶¼Æ¥ÅäµÄitem
+                    if (item->weight == weight) { // style & weight éƒ½åŒ¹é…çš„item
                         closetItem = item;
                         if (item->variant == variant) {
                             break;
@@ -68,7 +68,7 @@ namespace wmcanvas
 
 
     /**
-     * ½«xmlÖĞµÄfontÃû³Æ ×ª»¯Îªfont family item
+     * å°†xmlä¸­çš„fontåç§° è½¬åŒ–ä¸ºfont family item
      */
     void WmFontFamily::InitFontFamily(std::list<const char *> &fontFamily) {
         fontItems.clear();
@@ -80,7 +80,7 @@ namespace wmcanvas
         // variant
         const char *var_smallcaps = "smallcaps";
 
-        // weight£¨lighter,bolder,extra-light,extra-boldµÈ²»Ö§³Ö)
+        // weightï¼ˆlighter,bolder,extra-light,extra-boldç­‰ä¸æ”¯æŒ)
         const char *weight_thin = "thin";
         const char *weight_light = "light";
         const char *weight_regular = "regular";

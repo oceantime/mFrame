@@ -165,7 +165,7 @@ class WmCommandDecoderWebGL : public WmCommandDecoder
         WMWEBGL_FUNC_isVertexArrayOES,
         WMWEBGL_FUNC_bindVertexArrayOES,
         
-        //API����
+        //API锟斤拷锟斤拷
         WMWEBGL_FUNC_COUNT,
     };
     

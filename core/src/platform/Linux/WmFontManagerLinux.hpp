@@ -23,13 +23,13 @@ public:
 
     float MeasureText(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override;
 
-    //��ʵ��
+    //锟斤拷实锟斤拷
     float *MeasureTextExt(const char *text, unsigned int text_length, wmcanvas::WmFontStyle *fontStyle) override
     {
         return nullptr;
     }
 
-    //��ʵ��
+    //锟斤拷实锟斤拷
     float *PreMeasureTextHeight(const char *text, unsigned int text_length, WmCanvasContext *context) override
     {
         return nullptr;

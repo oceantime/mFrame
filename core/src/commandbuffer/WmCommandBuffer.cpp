@@ -12,10 +12,10 @@ namespace wmcanvas
     WmCommandBuffer::WmCommandBuffer(int8_t* buffer, size_t size):
             mCurrentPos(0), mBufferData(buffer), mBufferSize(size)
     {
-        //解析meta信息
+        //瑙ｆ瀽meta淇℃伅
         parseArray<uint32_t>(mMeta, 2);
 
-        //计算buffersize
+        //璁＄畻buffersize
         mBufferSize = mMeta[0] * 4;
     }
 
@@ -28,10 +28,10 @@ namespace wmcanvas
     {
         mBufferData = bufffer, mBufferSize = size, mCurrentPos = 0;
 
-        //解析meta信息
+        //瑙ｆ瀽meta淇℃伅
         parseArray<uint32_t>(mMeta, 2);
 
-        //计算buffersize
+        //璁＄畻buffersize
         mBufferSize = mMeta[0] * 4;
 
     }

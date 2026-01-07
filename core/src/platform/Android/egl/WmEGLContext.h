@@ -222,7 +222,7 @@ private:
 
 
 /**
- * ����Context
+ * 锟斤拷锟斤拷Context
  */
 class WmEGLPbufferContext : public WmEGLContext
 {

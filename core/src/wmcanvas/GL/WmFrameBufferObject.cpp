@@ -27,7 +27,7 @@ WmFrameBufferObject::WmFrameBufferObject(WmFrameBufferObject&& src) {
     this->mWidth = src.mWidth;
     this->mHeight = src.mHeight;
 
-    // Çå¿ÕsrcÊı¾İ
+    // æ¸…ç©ºsrcæ•°æ®
     src.mFboFrame = 0;
     src.mFboStencil = 0;
     src.mFboTexture.Detach();
@@ -49,7 +49,7 @@ void WmFrameBufferObject::DeleteFBO() {
     }
 
     if (mFboTexture.IsValidate()) {
-        // mFboTextureÎö¹¹·½·¨ÄÚÒÑ¾­»ádeleteTextures, ÕâÀï²»ĞèÒªÈç´Ë
+        // mFboTextureææ„æ–¹æ³•å†…å·²ç»ä¼šdeleteTextures, è¿™é‡Œä¸éœ€è¦å¦‚æ­¤
         WmLuint textureId = mFboTexture.GetTextureID();
         glDeleteTextures(1, &textureId);
         mFboTexture.Unbind();

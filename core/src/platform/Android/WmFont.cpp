@@ -251,7 +251,7 @@ void WmFont::LoadGlyphs(wmcanvas::WmFontStyle* fontStyle, const wchar_t *charcod
         int ft_glyph_top = 0;
         int ft_glyph_left = 0;
         FT_UInt glyph_index = FT_Get_Char_Index(face, charcodes[i]);
-        // TODO glyph_index≤ª¥Ê‘⁄£ø
+        // TODO glyph_index‰∏çÂ≠òÂú®Ôºü
         FT_Error error = FT_Load_Glyph(face, glyph_index, flags);
         if (error) {
             return;

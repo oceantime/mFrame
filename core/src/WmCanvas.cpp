@@ -45,7 +45,7 @@ WmCanvas::~WmCanvas() {
 
 
 /**
- * View´óĞ¡±ä»¯»Øµ÷(GCanvas´´½¨Ê±»áÖ÷¶¯µ÷Ò»´Î)
+ * Viewå¤§å°å˜åŒ–å›è°ƒ(GCanvasåˆ›å»ºæ—¶ä¼šä¸»åŠ¨è°ƒä¸€æ¬¡)
  */
 void WmCanvas::OnSurfaceChanged(int x, int y, int width, int height) {
     GLint maxRenderbufferSize;

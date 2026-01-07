@@ -56,7 +56,7 @@ bool WmEGLPbufferContext::InitEGLContext() {
     isES3Supported = is3;
 
 
-    // �л�����sharedģʽ����Ϊ�����豸�����Ļ���sharedContext��Pbuffer��������
+    // 锟叫伙拷锟斤拷锟斤拷shared模式锟斤拷锟斤拷为锟斤拷锟斤拷锟借备锟斤拷锟斤拷锟侥伙拷锟斤拷sharedContext锟斤拷Pbuffer锟斤拷锟斤拷锟斤拷锟斤拷
     if (eglContext == EGL_NO_CONTEXT) {
         eglSharedContext = nullptr;
         eglContext = eglCreateContext(eglDisplay, eglConfig, nullptr, context_attribs);
@@ -97,7 +97,7 @@ bool WmEGLPbufferContext::InitEGLSurface() {
                               24,
                               EGL_STENCIL_SIZE,
                                   8,
-            // ����msaa
+            // 锟斤拷锟斤拷msaa
             EGL_SAMPLE_BUFFERS, 1,
             EGL_SAMPLES, 4,
                               EGL_NONE};
@@ -202,7 +202,7 @@ bool WmEGLPbufferContext::MakeCurrent() {
 
 
 /**
- * ����canavs Ĭ��ʹ��FBO�������drawCanvasЧ��
+ * 锟斤拷锟斤拷canavs 默锟斤拷使锟斤拷FBO锟斤拷锟斤拷锟斤拷锟絛rawCanvas效锟斤拷
  */
 bool WmEGLPbufferContext::IsPreserveBackBuffer() {
     return false;

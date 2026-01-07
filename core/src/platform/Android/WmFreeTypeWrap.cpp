@@ -80,7 +80,7 @@ const struct
                             (int)((0.0) * 0x10000L), (int)((1.0) * 0x10000L)};
 
         FT_Error error;
-        // ����ߵ������Ĭ�����壬��ôĬ��0���õ�������JP(�ᵼ�¡���/�ء��Ȳ�����)��ǿ�Ƹ�Ϊ������SC�ſ���
+        // 如果走的是这个默认字体，那么默认0采用的是日文JP(会导致【复/关】等不正常)，强制改为走中文SC才可以
         FT_Long faceIndex = 0;
         if (strstr(filename, "NotoSansCJK-Regular.ttc"))
         {
@@ -100,7 +100,7 @@ const struct
 
             for (i = 0; i < num_faces; i++)
             {
-                FT_Done_Face(tmpFace); //�����ͷŵ���ǰһ�Σ���ѭ����ĵ�һ�Σ�
+                FT_Done_Face(tmpFace); //这里释放的是前一次（或循环外的第一次）
                 error = FT_Open_Face(library, &args, i, &tmpFace);
                 if (error)
                 {
@@ -116,7 +116,7 @@ const struct
                     }
                 }
             }
-            FT_Done_Face(tmpFace); //�����ͷ��ǵ�ѭ�������һ�Σ���û����ѭ�����ĵ�һ�Σ�
+            FT_Done_Face(tmpFace); //这里释放是当循环的最后一次（或没进入循环过的第一次）
         }
 
         error = FT_New_Face(library, filename, faceIndex, face);

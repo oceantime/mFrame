@@ -110,12 +110,12 @@ void WmCanvas2DContextAndroid::BeginDraw(bool is_first_draw) {
     glEnable(GL_DEPTH_TEST);
 
     if (mConfig.useFbo) {
-        // ���test һֱ����
+        // 锟斤拷锟絫est 一直锟斤拷锟斤拷
         // glEnable(GL_DEPTH_TEST);
         BindFBO();
     } else {
         if (is_first_draw) {
-            // ��fboģʽ�£��״���Ⱦǰִ��һ������
+            // 锟斤拷fbo模式锟铰ｏ拷锟阶达拷锟斤拷染前执锟斤拷一锟斤拷锟斤拷锟斤拷
             ClearScreen();
         }
     }
@@ -127,11 +127,11 @@ void WmCanvas2DContextAndroid::EndDraw() {
         return;
     }
 
-    // FBOģʽ
+    // FBO模式
     UnbindFBO();
-    // ����fboǰ���Ĭ��frameBuffer���� (��Ϊ������ʾ�����ǵ��ӻ�����fbo�ϵ�)
+    // 锟斤拷锟斤拷fbo前锟斤拷锟侥�锟斤拷frameBuffer锟斤拷锟斤拷 (锟斤拷为锟斤拷锟斤拷锟斤拷示锟斤拷锟斤拷锟角碉拷锟接伙拷锟斤拷锟斤拷fbo锟较碉拷)
     ClearScreen();
-    // ����FBO
+    // 锟斤拷锟斤拷FBO
     DrawFBO(DefaultFboName);
 }
 
@@ -179,8 +179,8 @@ void WmCanvas2DContextAndroid::ResizeCanvas(int width, int height) {
 
 
 /**
- * �ڸı�canvas view��Сʱ�������ݸ���
- * �½�fbo, ������fbo����
+ * 锟节改憋拷canvas view锟斤拷小时锟斤拷锟斤拷锟斤拷锟捷革拷锟斤拷
+ * 锟铰斤拷fbo, 锟斤拷锟斤拷锟斤拷fbo锟斤拷锟斤拷
  */
 void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
     bool sizeChanged = mWidth != width || height != mHeight;
@@ -192,42 +192,42 @@ void WmCanvas2DContextAndroid::ResizeCopyUseFbo(int width, int height) {
 
     bool shouldChangeDimension = (mCanvasWidth <= 0 && mCanvasHeight <= 0);
     if (0 == mContextType && mIsFboSupported && mWidth > 0 && mHeight > 0) {
-        // 1.�л�����fbo
+        // 1.锟叫伙拷锟斤拷锟斤拷fbo
         UnbindFBO();
-        // 2.�´���fbo
+        // 2.锟铰达拷锟斤拷fbo
         WmFrameBufferObject newFbo;
 
-        // ��¼�´���init fbo vector���쳣
+        // 锟斤拷录锟铰达拷锟斤拷init fbo vector锟斤拷锟届常
         std::vector<WmCanvasLog> logVec;
         mIsFboSupported = newFbo.InitFBO(mWidth, mHeight, GColorTransparent, mEnableFboMsaa, &logVec);
         LOG_EXCEPTION_VECTOR(mHooks, mContextId, logVec);
 
-        // FIXME ����´���fboʧ�ܣ���fbo�ߴ��ֲ��ԣ��������Ʊض�����
+        // FIXME 锟斤拷锟斤拷麓锟斤拷锟絝bo失锟杰ｏ拷锟斤拷fbo锟竭达拷锟街诧拷锟皆ｏ拷锟斤拷锟斤拷锟斤拷锟狡必讹拷锟斤拷锟斤拷
 
-        // �Ƿ���ھɵ�fbo, ������򿽱���fbo��ɾ���ɵ�
+        // 锟角凤拷锟斤拷诰傻锟絝bo, 锟斤拷锟斤拷锟斤拷蚩奖锟斤拷锟絝bo锟斤拷删锟斤拷锟缴碉拷
         if (mFboMap.find(DefaultFboName) != mFboMap.end()) {
-            // 3.����fbo
+            // 3.锟斤拷锟斤拷fbo
             CopyFBO(mFboMap[DefaultFboName], newFbo);
-            // 4.ɾ���ɵ�fbo��������fbo��Դ
+            // 4.删锟斤拷锟缴碉拷fbo锟斤拷锟斤拷锟斤拷锟斤拷fbo锟斤拷源
             mFboMap.erase(DefaultFboName);
         }
 
-        // 5.������FBO��map��(���ƶ����ڴ�, �����ڵĶ�����Ȼ����)
+        // 5.锟斤拷锟斤拷锟斤拷FBO锟斤拷map锟斤拷(锟斤拷锟狡讹拷锟斤拷锟节达拷, 锟斤拷锟斤拷锟节的讹拷锟斤拷锟斤拷然锟斤拷锟斤拷)
         std::string key = DefaultFboName;
-        // �滻���ɵ�д�뷽��
+        // 锟芥换锟斤拷锟缴碉拷写锟诫方锟斤拷
         mFboMap.emplace(key, std::move(newFbo));
 
-        // 6.�л�����FBO��(���Ի���)
+        // 6.锟叫伙拷锟斤拷锟斤拷FBO锟斤拷(锟斤拷锟皆伙拷锟斤拷)
         BindFBO();
     }
 
-    // ��������ߴ�Ϊ0����ʾҪ����surface�任��������(0,0)����dimension�������µı任����
+    // 锟斤拷锟斤拷锟斤拷锟斤拷叽锟轿�0锟斤拷锟斤拷示要锟斤拷锟斤拷surface锟戒换锟斤拷锟斤拷锟斤拷锟斤拷(0,0)锟斤拷锟斤拷dimension锟斤拷锟斤拷锟斤拷锟铰的变换锟斤拷锟斤拷
     if (shouldChangeDimension) {
         SetCanvasDimension(0, 0);
     }
 
     if (mContextType == 0) {
-        // ����viewport�任
+        // 锟斤拷锟斤拷viewport锟戒换
         glViewport(0, 0, mWidth, mHeight);
     }
 }
@@ -254,7 +254,7 @@ void WmCanvas2DContextAndroid::CopyFBO(WmFrameBufferObject &srcFbo, WmFrameBuffe
 
     RestoreGLAfterCopyFrame();
 
-    // ������ɣ��л���fbo
+    // 锟斤拷锟斤拷锟斤拷桑锟斤拷谢锟斤拷锟絝bo
     UnbindFBO();
 }
 
@@ -269,21 +269,21 @@ WmCanvas2DContextAndroid::ResizeCopyUseImage(int width, int height, const unsign
         return;
     }
 
-    // ���³ߴ�
+    // 锟斤拷锟铰尺达拷
     mWidth = width;
     mHeight = height;
 
     bool shouldChangeDimension = (mCanvasWidth <= 0 && mCanvasHeight <= 0);
-    // ��ʼ����ͼ��
+    // 锟斤拷始锟斤拷锟斤拷图锟斤拷
     if (rgbaData != nullptr) {
         CopyImageToCanvas(width, height, rgbaData, imgWidth, imgHeight);
     }
 
-    // ��������ߴ�Ϊ0����ʾҪ����surface�任��������(0,0)����dimension�������µı任����
+    // 锟斤拷锟斤拷锟斤拷锟斤拷叽锟轿�0锟斤拷锟斤拷示要锟斤拷锟斤拷surface锟戒换锟斤拷锟斤拷锟斤拷锟斤拷(0,0)锟斤拷锟斤拷dimension锟斤拷锟斤拷锟斤拷锟铰的变换锟斤拷锟斤拷
     if (shouldChangeDimension) {
         SetCanvasDimension(0, 0);
     }
-    // ����viewport�任
+    // 锟斤拷锟斤拷viewport锟戒换
     glViewport(0, 0, width, height);
 }
 
@@ -292,7 +292,7 @@ void WmCanvas2DContextAndroid::CopyImageToCanvas(int width, int height,
                                                 const unsigned char *rgbaData, int imgWidth,
                                                 int imgHeight) {
     ResetGLBeforeCopyFrame(width, height);
-    // ��ͼ������
+    // 锟斤拷图锟斤拷锟斤拷锟斤拷
     GLuint glID = BindImage(rgbaData, GL_RGBA, (GLuint) imgWidth, (GLuint) imgHeight);
     WmColorRGBA color = GColorWhite;
     PushRectangle(-1, -1, 2, 2, 0, 0, 1, 1, color);

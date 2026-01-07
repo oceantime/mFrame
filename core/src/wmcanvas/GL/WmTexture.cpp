@@ -79,8 +79,8 @@ void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec
     }
 
     // FIXME
-    // 1.textureSizeÎŞĞèÃ¿´Îget£¬Ö»ĞèÒªgetÒ»´Î¼´¿É
-    // 2.ÓĞ¿ÉÄÜget textureSizeÊ±Î´makeCurrent or currentÊ§°Ü£¬µ¼ÖÂÎ´È¡µ½textureSize, ´ËÊ±Ó¦¸ÃÄ¬ÈÏtextureSizeÎª2048,ÄÜ´¦Àí´ó²¿·ÖÎÆÀí³ß´ç
+    // 1.textureSizeæ— éœ€æ¯æ¬¡getï¼Œåªéœ€è¦getä¸€æ¬¡å³å¯
+    // 2.æœ‰å¯èƒ½get textureSizeæ—¶æœªmakeCurrent or currentå¤±è´¥ï¼Œå¯¼è‡´æœªå–åˆ°textureSize, æ­¤æ—¶åº”è¯¥é»˜è®¤textureSizeä¸º2048,èƒ½å¤„ç†å¤§éƒ¨åˆ†çº¹ç†å°ºå¯¸
     GLint maxTextureSize;
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
 
@@ -101,7 +101,7 @@ void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec
 
     glGenTextures(1, &mTextureID);
     if (mTextureID <= 0 && errVec) {
-        // ÓĞ¿ÉÄÜOOMµ¼ÖÂÉú³ÉÎÆÀíÊ§°Ü
+        // æœ‰å¯èƒ½OOMå¯¼è‡´ç”Ÿæˆçº¹ç†å¤±è´¥
         WmCanvasLog log;
         FillLogInfo(log, "gen_texture_fail", "<function:%s, glGetError:%x>", __FUNCTION__,
                     glGetError());

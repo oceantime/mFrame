@@ -9,10 +9,10 @@
 namespace wmcanvas {
 
 /**
- commandbuffer编码具体格式:
-    meta: 2个uint32
-        meta[0] - 4字节长度
-        meta[1] - 保留字段
+ commandbuffer缂栫爜鍏蜂綋鏍煎紡:
+    meta: 2涓猽int32
+        meta[0] - 4瀛楄妭闀垮害
+        meta[1] - 淇濈暀瀛楁
 
     funcId+param+...+funcId+param
  */
@@ -48,8 +48,8 @@ namespace wmcanvas {
 
         uint32_t mMeta[2];              //meta
         int8_t *mBufferData;
-        size_t mBufferSize;             //字节长度
-        size_t mBufferFourByteSize;     //4字节长度
+        size_t mBufferSize;             //瀛楄妭闀垮害
+        size_t mBufferFourByteSize;     //4瀛楄妭闀垮害
         size_t mCurrentPos;
 
     };

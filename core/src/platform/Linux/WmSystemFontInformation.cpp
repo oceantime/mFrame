@@ -105,7 +105,7 @@ namespace wmcanvas {
             return false;
         }
 
-        //字体名转为小写，防止用户传入大小写混合字符串
+        //瀛椾綋鍚嶈浆涓哄皬鍐欙紝闃叉鐢ㄦ埛浼犲叆澶у皬鍐欐贩鍚堝瓧绗︿覆
         int length = strlen(fontName);
         char *newFontName = new char[length + 1];
         strcpy(newFontName, fontName);

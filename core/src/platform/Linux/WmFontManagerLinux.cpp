@@ -13,7 +13,7 @@ WmFontManagerImplementLinux::WmFontManagerImplementLinux(unsigned w, unsigned h)
     ASSERT(tl);
     std::string home(getenv("HOME"));
     std::string path = home + FONT_PATH ".fontcache";
-    //����fontcache
+    //锟斤拷锟斤拷fontcache
     ASSERT(tl->importFontCache(path));
 }
 

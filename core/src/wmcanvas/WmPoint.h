@@ -73,7 +73,7 @@ static inline WmPoint PointNormalize(WmPoint v)
 
 struct WmRectf
 {
-    bool isTransformed = false; //坐标是否经过transform变换
+    bool isTransformed = false; //鍧愭爣鏄惁缁忚繃transform鍙樻崲
     WmPoint leftTop = {0, 0};
     WmPoint bottomRight = {0, 0};
 

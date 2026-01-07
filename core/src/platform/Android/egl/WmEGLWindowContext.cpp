@@ -20,9 +20,9 @@ EGLint WmEGLWindowContext::SwapBuffer() {
     if (!b) {
         EGLint err = eglGetError();
         // mymock
-        // ���е�swapBuffer fail�Ķ�trace���� (�п��ܵ������󣬵������ݱ���?)
+        // 锟斤拷锟叫碉拷swapBuffer fail锟侥讹拷trace锟斤拷锟斤拷 (锟叫匡拷锟杰碉拷锟斤拷锟斤拷锟襟，碉拷锟斤拷锟斤拷锟捷憋拷锟斤拷?)
         // TRACE_EXCEPTION("eglSwapBuffers_fail", "eglGetError=%x", err);
-        if (err == EGL_BAD_SURFACE) { // ��Ҫ���Իָ������䱨��
+        if (err == EGL_BAD_SURFACE) { // 锟斤拷要锟斤拷锟皆恢革拷锟斤拷锟斤拷锟戒报锟斤拷
             // DestroyEGLSurfaceIf();
             // InitEGLSurface();
             return err;
@@ -53,12 +53,12 @@ bool WmEGLWindowContext::Init(ANativeWindow *window) {
         return true;
     }
     nWindow = window;
-    // ��ʼ��eglDisplay & eglSurface(eglSurface��eglContext�޹���)
+    // 锟斤拷始锟斤拷eglDisplay & eglSurface(eglSurface锟斤拷eglContext锟睫癸拷锟斤拷)
     bool flag = InitEGLSurface();
     if (flag) {
         flag = InitEGLContext();
     }
-    // ����Ѿ�ִ�й���ʼ��(���п��ܳ�ʼ��ʧ��)
+    // 锟斤拷锟斤拷丫锟街达拷泄锟斤拷锟绞硷拷锟�(锟斤拷锟叫匡拷锟杰筹拷始锟斤拷失锟斤拷)
     isEGLInit = true;
 
     return flag;
@@ -87,7 +87,7 @@ bool WmEGLWindowContext::InitEGLSurface() {
                               24,
                               EGL_STENCIL_SIZE,
                               8,
-            // ����msaa
+            // 锟斤拷锟斤拷msaa
              EGL_SAMPLE_BUFFERS, 1,
              EGL_SAMPLES, 4,
                               EGL_NONE};
@@ -158,7 +158,7 @@ bool WmEGLWindowContext::InitEGLContext() {
         return false;
     }
 
-    // ��ʼ��EGLContextʱ ǿ��MakeCurrent
+    // 锟斤拷始锟斤拷EGLContext时 强锟斤拷MakeCurrent
     EGLint result = MakeCurrentWithScene("InitEGLContext", false);
     EGL_LOGI("InitEGLContext:end,result=%i", (result == EGL_SUCCESS));
 
@@ -174,8 +174,8 @@ bool WmEGLWindowContext::Invalidate() {
 
 
 /**
- * ��ͣ��������ɾ��EGL Surface
- * FIXME �����е�����, �ⲿʵ������DestroyEGLSurface
+ * 锟斤拷停锟斤拷锟斤拷锟斤拷锟斤拷删锟斤拷EGL Surface
+ * FIXME 锟斤拷锟斤拷锟叫碉拷锟斤拷锟斤拷, 锟解部实锟斤拷锟斤拷锟斤拷DestroyEGLSurface
  */
 void WmEGLWindowContext::Pause() {
     DestroyEGLSurfaceIf();
@@ -184,10 +184,10 @@ void WmEGLWindowContext::Pause() {
 
 
 void WmEGLWindowContext::DestroyEGLSurfaceIf() {
-    // 1.��clear current������gl��������������(����gl����)
+    // 1.锟斤拷clear current锟斤拷锟斤拷锟斤拷gl锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷(锟斤拷锟斤拷gl锟斤拷锟斤拷)
     ClearCurrent();
 
-    // 2.destroy eglSurface(δcurrent��surface������ɾ��)
+    // 2.destroy eglSurface(未current锟斤拷surface锟斤拷锟斤拷锟斤拷删锟斤拷)
     if (eglSurface != EGL_NO_SURFACE) {
         EGLBoolean result = eglDestroySurface(eglDisplay, eglSurface);
         eglSurface = EGL_NO_SURFACE;
@@ -203,7 +203,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
         return EGL_SUCCESS;
     }
 
-    // ���egl surface��Ч���п����������ݣ���destroy surface(��֤resumeִ�гɹ�)
+    // 锟斤拷锟絜gl surface锟斤拷效锟斤拷锟叫匡拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷ｏ拷锟斤拷destroy surface(锟斤拷证resume执锟叫成癸拷)
     if (eglSurface != EGL_NO_SURFACE) {
         DestroyEGLSurfaceIf();
     }
@@ -211,7 +211,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
     int32_t original_width = width;
     int32_t original_height = height;
 
-    // ����window
+    // 锟斤拷锟斤拷window
     nWindow = window;
 
     std::string scene = "Resume";
@@ -226,7 +226,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
         return result;
     }
 
-    // makeCurrentʧ�ܣ��п�����context������
+    // makeCurrent失锟杰ｏ拷锟叫匡拷锟斤拷锟斤拷context锟斤拷锟斤拷锟斤拷
     EGL_LOGI("Resume:MakeCurrent Fail");
     if (result == EGL_CONTEXT_LOST) {
         // Recreate context
@@ -244,7 +244,7 @@ EGLint WmEGLWindowContext::Resume(ANativeWindow *window) {
 
 
 bool WmEGLWindowContext::Resize(int32_t newWidth, int32_t newHeight) {
-    // ֻҪ��Resize���ã���ʹ�ߴ�һ����Ҳǿ�ƴ���Resize�߼�(�п���Surface�Ѿ������仯)
+    // 只要锟斤拷Resize锟斤拷锟矫ｏ拷锟斤拷使锟竭达拷一锟斤拷锟斤拷也强锟狡达拷锟斤拷Resize锟竭硷拷(锟叫匡拷锟斤拷Surface锟窖撅拷锟斤拷锟斤拷锟戒化)
     EGL_LOGI("Resize:w=%i,h=%i", newWidth, newHeight);
     // 1.Destroy EGLSurface
     DestroyEGLSurfaceIf();
@@ -269,11 +269,11 @@ bool WmEGLWindowContext::MakeCurrent() {
 }
 
 
-// surface ״̬���
+// surface 状态锟斤拷锟�
 EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 //    }
 
-    // �ж��Ƿ�ǰ
+    // 锟叫讹拷锟角凤拷前
     if (check && eglContext != nullptr) {
         EGLContext p = eglGetCurrentContext();
         EGLSurface surf = eglGetCurrentSurface(EGL_DRAW);
@@ -282,9 +282,9 @@ EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
         }
     }
 
-    // ��View Destroyʱ����ִ��DestroySurface()��Ȼ��ִ��canvas core�Ļ��գ���ʱ����Ҫ����gl�ӿڣ�
-    // ��������� MakeCurrent ������������?
-    // 1.preserve backbuffer�����ԣ���pbb����
+    // 锟斤拷View Destroy时锟斤拷锟斤拷执锟斤拷DestroySurface()锟斤拷然锟斤拷执锟斤拷canvas core锟侥伙拷锟秸ｏ拷锟斤拷时锟斤拷锟斤拷要锟斤拷锟斤拷gl锟接口ｏ拷
+    // 锟斤拷锟斤拷锟斤拷锟斤拷锟� MakeCurrent 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷?
+    // 1.preserve backbuffer锟斤拷锟斤拷锟皆ｏ拷锟斤拷pbb锟斤拷锟斤拷
     EGLBoolean result = eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
     // EGL_LOGI("eglMakeCurrent: surface=%p, context=%p, eglGetError=%x", eglSurface, eglContext, eglGetError());
     if (result != EGL_TRUE) {
@@ -299,7 +299,7 @@ EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 
 
 EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
-    if (nWindow == nullptr) { // �ȶ��Ա���������nWindowΪnullʱcrash
+    if (nWindow == nullptr) { // 锟饺讹拷锟皆憋拷锟斤拷锟斤拷锟斤拷锟斤拷nWindow为null时crash
         // TRACE_EXCEPTION("CreateWindowSurface_fail", "Scene=%s,window is null", scene.data());
         return EGL_NO_SURFACE;
     }
@@ -307,22 +307,22 @@ EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
     EGL_LOGI("CreateWindowSurface:start:eglDisplay=%p,nWindow=%p,scene=%s", eglDisplay, nWindow,
              scene.data());
     EGLSurface createdSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
-    if (createdSurface == EGL_NO_SURFACE) { // ����surfaceʧ��
+    if (createdSurface == EGL_NO_SURFACE) { // 锟斤拷锟斤拷surface失锟斤拷
         EGLint error = eglGetError();
         EGL_LOGI("CreateWindowSurface:fail:eglSurface=%p,eglError=%x", createdSurface, error);
         if (error == EGL_BAD_ALLOC && scene == "resume") {
-            // resume�����surface�����Ѿ�����nWindow�ϣ���ʱ����Ҫ�ϱ�����
-        } else if (error != EGL_SUCCESS) { // ע�⣺�ظ�����eglSurface�ᱨEGL_BAD_ALLOC����
+            // resume锟斤拷锟斤拷锟絪urface锟斤拷锟斤拷锟窖撅拷锟斤拷锟斤拷nWindow锟较ｏ拷锟斤拷时锟斤拷锟斤拷要锟较憋拷锟斤拷锟斤拷
+        } else if (error != EGL_SUCCESS) { // 注锟解：锟截革拷锟斤拷锟斤拷eglSurface锟结报EGL_BAD_ALLOC锟斤拷锟斤拷
 //            TRACE_EXCEPTION("eglCreateWindowSurface_fail", "Scene.%s, eglGetError=%x",
 //                            scene.data(), error);
         }
         return EGL_NO_SURFACE;
-    } else { // ����surface�ɹ�
+    } else { // 锟斤拷锟斤拷surface锟缴癸拷
         eglQuerySurface(eglDisplay, createdSurface, EGL_WIDTH, &width);
         eglQuerySurface(eglDisplay, createdSurface, EGL_HEIGHT, &height);
 
         if (usePreserveBackBuffer) {
-            eglGetError(); // ���error?
+            eglGetError(); // 锟斤拷锟絜rror?
             eglSurfaceAttrib(eglDisplay, createdSurface, EGL_SWAP_BEHAVIOR, EGL_BUFFER_PRESERVED);
             EGLint error = eglGetError();
             if (error != EGL_SUCCESS) {

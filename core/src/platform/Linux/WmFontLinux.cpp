@@ -260,7 +260,7 @@ void WmFont::LoadGlyphs(wmcanvas::WmFontStyle *fontStyle, const wchar_t *charcod
         int ft_glyph_top = 0;
         int ft_glyph_left = 0;
         FT_UInt glyph_index = FT_Get_Char_Index(face, charcodes[i]);
-        // TODO glyph_index≤ª¥Ê‘⁄£ø
+        // TODO glyph_index‰∏çÂ≠òÂú®Ôºü
         FT_Error error = FT_Load_Glyph(face, glyph_index, flags);
         if (error)
         {
@@ -498,7 +498,7 @@ bool WmFont::LoadStroke(const char *filename, FT_Stroker *stroker, float sx, flo
         return false;
     }
 
-    //  freetypeµƒµ„ ˝=px*64/dpi
+    //  freetypeÁöÑÁÇπÊï∞=px*64/dpi
     float strokeRaduis = lineWidth * 36;
     FT_Stroker_Set(*stroker, (int)(mOutlineThickness * strokeRaduis),
                    FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);

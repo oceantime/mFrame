@@ -14,7 +14,7 @@ void WmCanvasContext::DrawTextWithLength(const char *text, int strLength, float 
     // scaleWidth
     float scaleWidth = 1.0;
     if (fabs(maxWidth - SHRT_MAX) > 1) {
-        // 对maxwidth进行判断，避免默认值导致的每次measure操作
+        // 瀵筸axwidth杩涜鍒ゆ柇锛岄伩鍏嶉粯璁ゅ�煎鑷寸殑姣忔measure鎿嶄綔
         float measureWidth = MeasureTextWidth(text);
         if (measureWidth > maxWidth) {
             scaleWidth = maxWidth / measureWidth;

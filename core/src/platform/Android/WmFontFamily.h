@@ -11,7 +11,7 @@ namespace wmcanvas
 
 
     /**
-     * font family内的单个字体
+     * font family鍐呯殑鍗曚釜瀛椾綋
      */
     struct WmFontFamilyItem {
 

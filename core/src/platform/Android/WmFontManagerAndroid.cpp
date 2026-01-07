@@ -98,12 +98,12 @@ float *WmFontManagerAndroid::MeasureTextWidthHeight(const char *text, unsigned i
     }
 
     if (fonts.size() > 0) {
-        //ÎÄ±¾¸ß¶È±¾À´Ó¦¸ÃÈ¥³ýÉÏÏÂ¿Õ°×µÄ£¬µ«ÊÇlaya1£¬»¹ÊÇÓÐµãÎÊÌâ£¬ËùÒÔÕâ¸ö¸ß¶È£¬»¹ÊÇÓÃÀÏµÄ¸ß¶Èascender+descender¾ø¶ÔÖµ
+        //æ–‡æœ¬é«˜åº¦æœ¬æ¥åº”è¯¥åŽ»é™¤ä¸Šä¸‹ç©ºç™½çš„ï¼Œä½†æ˜¯laya1ï¼Œè¿˜æ˜¯æœ‰ç‚¹é—®é¢˜ï¼Œæ‰€ä»¥è¿™ä¸ªé«˜åº¦ï¼Œè¿˜æ˜¯ç”¨è€çš„é«˜åº¦ascender+descenderç»å¯¹å€¼
         maxHeight = fabs(fonts[0]->GetMetrics()->ascender / sy) +
                     fabs(fonts[0]->GetMetrics()->descender / sy);
     }
 
-    // Èç¹ûÂú×ãÌõ¼þÔò£¬·µ»Ø²»´ø¿Õ°×µÄÎÄ×Ö¸ß¶È
+    // å¦‚æžœæ»¡è¶³æ¡ä»¶åˆ™ï¼Œè¿”å›žä¸å¸¦ç©ºç™½çš„æ–‡å­—é«˜åº¦
     float m_ascender = fontStyle->GetAscender();
     float m_descender = fontStyle->GetDescender();
     if (m_ascender > 0 && m_descender > 0) {
@@ -220,7 +220,7 @@ void WmFontManagerAndroid::AdjustTextPenPoint(WmCanvasContext *context, std::vec
     auto ascender = font_metrics->ascender / sy;
     auto descender = font_metrics->descender / sy;
 
-    //m_ascender£¬m_descender²»ÄÜ³ýscale£¬ÒòÎªÔÚPreMeasureTextHeight»ñÈ¡ÕâÁ½¸öÖµÊ±£¬ÒÑ¾­³ý¹ýÁË
+    //m_ascenderï¼Œm_descenderä¸èƒ½é™¤scaleï¼Œå› ä¸ºåœ¨PreMeasureTextHeightèŽ·å–è¿™ä¸¤ä¸ªå€¼æ—¶ï¼Œå·²ç»é™¤è¿‡äº†
     float m_ascender = fontStyle->GetAscender();
     float m_descender = fontStyle->GetDescender();
 

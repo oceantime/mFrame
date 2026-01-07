@@ -25,7 +25,7 @@ using WebGL::bindVertexArrayOES;
 #define WEBGL_SYNC_FUNC_ID_INSERT(NAME) \
 mWebGLSyncFuncSet.insert(WMWEBGL_FUNC_##NAME);
 
-//�޷���ֵ�ģ�����0��
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷0锟斤拷
 #define WEBGL_FUNC_IMP_PARAM_0(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -33,7 +33,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(), error=%d", #NAME,getError()); \
 }
 
-//�޷���ֵ�ģ�����1��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷1锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_1_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -52,7 +52,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%d), error=%d", #NAME,*v,getError()); \
 }
 
-//�޷���ֵ�ģ�����2��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷2锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_2_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -63,7 +63,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%d,%d), error=%d", #NAME,v[0],v[1],getError()); \
 }
 
-//�޷���ֵ�ģ�����3��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷3锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_3_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -74,7 +74,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],getError()); \
 }
 
-//�޷���ֵ�ģ�����4��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷4锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_4_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -85,7 +85,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%d,%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],v[3],getError()); \
 }
 
-//�޷���ֵ�ģ�����5��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷5锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_5_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -96,7 +96,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%d,%d,%d,%d,%d), error=%d", #NAME,v[0],v[1],v[2],v[3],v[4],getError()); \
 }
 
-//�޷���ֵ�ģ�����8��int
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷8锟斤拷int
 #define WEBGL_FUNC_IMP_PARAM_8_INT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -108,7 +108,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
 }
 
 
-//�޷���ֵ�ģ�����1��float
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷1锟斤拷float
 #define WEBGL_FUNC_IMP_PARAM_1_FLOAT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -127,7 +127,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%f), error=%d", #NAME,v[0],,getError()); \
 }
 
-//�޷���ֵ�ģ�����2��float
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷2锟斤拷float
 #define WEBGL_FUNC_IMP_PARAM_2_FLOAT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -148,7 +148,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%f,%f,%f), error=%d", #NAME,v[0],v[1],v[2],getError()); \
 }
 
-//�޷���ֵ�ģ�����4��float
+//锟睫凤拷锟斤拷值锟侥ｏ拷锟斤拷锟斤拷4锟斤拷float
 #define WEBGL_FUNC_IMP_PARAM_4_FLOAT(NAME) \
 void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& res) \
 { \
@@ -159,7 +159,7 @@ void WmCommandDecoderWebGL::WebGL_##NAME(WmCommandBuffer& buffer, WmDecodeRes& r
     LOG_D("[webgl::exec] %s(%f,%f,%f,%f), error=%d", #NAME,v[0],v[1],v[2],v[3],getError()); \
 }
 
-//����E
+//锟斤拷锟斤拷E
 #define DECODER_PARSE_ERROR LOG_E("%s parse failed !!", __FUNCTION__);
 
 
@@ -688,7 +688,7 @@ void WmCommandDecoderWebGL::WebGL_bindFramebuffer(WmCommandBuffer& buffer, WmDec
         if( mRenderContext->mBindFramebufferNullFunc ){
             mRenderContext->BindFramebufferNull();
         } else {
-            //todo ��ʱ��������-1�����?
+            //todo 锟斤拷时锟斤拷锟斤拷锟斤拷锟斤拷-1锟斤拷锟斤拷锟?
             if(v[1] < 0){
                 v[1] = 0;
             }
@@ -1036,7 +1036,7 @@ void WmCommandDecoderWebGL::WebGL_getActiveAttrib(WmCommandBuffer& buffer, WmDec
     {
         res.hasResult = true;
 
-        //��ʽ��"type,size,name"
+        //锟斤拷式锟斤拷"type,size,name"
         std::ostringstream ostr;
         ostr << type << "," << size << "," << name;
         std::string strValue = ostr.str();
@@ -1067,7 +1067,7 @@ void WmCommandDecoderWebGL::WebGL_getActiveUniform(WmCommandBuffer& buffer, WmDe
     {
         res.hasResult = true;
 
-        //��ʽ��"type,size,name"
+        //锟斤拷式锟斤拷"type,size,name"
         std::ostringstream ostr;
         ostr << type << "," << size << "," << name;
         std::string strValue = ostr.str();
@@ -1097,7 +1097,7 @@ void WmCommandDecoderWebGL::WebGL_getAttachedShaders(WmCommandBuffer& buffer, Wm
     {
         res.hasResult = true;
 
-        //��ʽ��"id,id,id"
+        //锟斤拷式锟斤拷"id,id,id"
         std::ostringstream ostr;
         for (int i=0; i<count; ++i)
         {
@@ -1162,7 +1162,7 @@ void WmCommandDecoderWebGL::WebGL_getError(WmCommandBuffer& buffer, WmDecodeRes&
     res.type = WmResType_UInt32;
 }
 
-//WebGL_getExtension ֱ�ӷ�����չ�ĺ��������ָ��ϲ�,���ϲ�ֱ�Ӵ���
+//WebGL_getExtension 直锟接凤拷锟斤拷锟斤拷展锟侥猴拷锟斤拷锟斤拷锟斤拷锟街革拷锟较诧拷,锟斤拷锟较诧拷直锟接达拷锟斤拷
 void WmCommandDecoderWebGL::WebGL_getExtension(WmCommandBuffer &buffer, WmDecodeRes &res) {
     uint32_t v[1];
     bool ret = buffer.parseArray<uint32_t>(v, 1);
@@ -1196,7 +1196,7 @@ void WmCommandDecoderWebGL::WebGL_getFramebufferAttachmentParameter(WmCommandBuf
 
 void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
-    /** ��֧������
+    /** 锟斤拷支锟斤拷锟斤拷锟斤拷
         GL_COMPRESSED_TEXTURE_FORMATS
      */
     uint32_t pname = *(buffer.parseValue<uint32_t>());
@@ -1204,7 +1204,7 @@ void WmCommandDecoderWebGL::WebGL_getParameter(WmCommandBuffer& buffer, WmDecode
     {
         case GL_COMPRESSED_TEXTURE_FORMATS:
         {
-            //TODO ����
+            //TODO 锟斤拷锟斤拷
             LOG_E("getParameter not support GL_COMPRESSED_TEXTURE_FORMATS");
             return;
         }
@@ -1446,7 +1446,7 @@ void WmCommandDecoderWebGL::WebGL_getShaderPrecisionFormat(WmCommandBuffer& buff
     GLint precision = 0;
     GLint range[2] = {0, 0};
     getShaderPrecisionFormat(v[0], v[1], range, &precision);
-    //��ʽ��"rangeMin,rangeMax,precision"
+    //锟斤拷式锟斤拷"rangeMin,rangeMax,precision"
     std::ostringstream ostr;
     ostr << range[0] << "," << range[1] << "," << precision;
     std::string strValue = ostr.str();
@@ -1479,7 +1479,7 @@ void WmCommandDecoderWebGL::WebGL_getShaderSource(WmCommandBuffer& buffer, WmDec
 }
 
 
-// ֱ�ӷ���һ�� WmResType_CharPtr_GetSupportedExtention��ö�٣���jsbinding�㴦��
+// 直锟接凤拷锟斤拷一锟斤拷 WmResType_CharPtr_GetSupportedExtention锟斤拷枚锟劫ｏ拷锟斤拷jsbinding锟姐处锟斤拷
 void WmCommandDecoderWebGL::WebGL_getSupportedExtensions(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
     res.hasResult = true;
@@ -1494,7 +1494,7 @@ void WmCommandDecoderWebGL::WebGL_getTexParameter(WmCommandBuffer& buffer, WmDec
     if( !ret ) return;
 
     int32_t params;
-    getTexParameteriv(v[0], v[1], &params);  //webgl1.0��ȡ�������ͼ���
+    getTexParameteriv(v[0], v[1], &params);  //webgl1.0锟斤拷取锟斤拷锟斤拷锟斤拷锟酵硷拷锟斤拷
     res.hasResult = true;
     res.intValue = params;
     res.type = WmResType_Int32;
@@ -1750,7 +1750,7 @@ WEBGL_FUNC_IMP_PARAM_2_FLOAT(polygonOffset)
 
 void WmCommandDecoderWebGL::WebGL_readPixels(WmCommandBuffer& buffer, WmDecodeRes& res)
 {
-    //TODO ֱ�ӵ�binding�ӿ�
+    //TODO 直锟接碉拷binding锟接匡拷
 }
 
 void WmCommandDecoderWebGL::WebGL_renderbufferStorage(WmCommandBuffer &buffer, WmDecodeRes &res)
@@ -1830,9 +1830,9 @@ WEBGL_FUNC_IMP_PARAM_4_INT(stencilOpSeparate)
 
 
 /**
-//6������
+//6锟斤拷锟斤拷锟斤拷
 texImage2D(target, level, internalformat, format, type, ImageData? pixels);
-//9������
+//9锟斤拷锟斤拷锟斤拷
 texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView? pixels);
  */
 void WmCommandDecoderWebGL::WebGL_texImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)
@@ -1999,9 +1999,9 @@ void WmCommandDecoderWebGL::WebGL_texParameterf(WmCommandBuffer& buffer, WmDecod
 WEBGL_FUNC_IMP_PARAM_3_INT(texParameteri)
 
 /**
-7������
+7锟斤拷锟斤拷锟斤拷
 texSubImage2D(target, level, xoffset, yoffset, format, type, ImageData? pixels);
-9������
+9锟斤拷锟斤拷锟斤拷
 texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, ArrayBufferView? pixels);
  */
 void WmCommandDecoderWebGL::WebGL_texSubImage2D(WmCommandBuffer& buffer, WmDecodeRes& res)

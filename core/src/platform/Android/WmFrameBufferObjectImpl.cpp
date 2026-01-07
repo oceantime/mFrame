@@ -36,21 +36,21 @@ bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool
     mWidth = width;
     mHeight = height;
 
-    // ÊÇ·ñÊ¹ÓÃmsaa
+    // æ˜¯å¦ä½¿ç”¨msaa
     bool useMsaa;
-    // ÔÚÊ¹ÓÃmsaaÌõ¼şÏÂ£¬¿ªÆômsaaÊÇ·ñ³É¹¦
+    // åœ¨ä½¿ç”¨msaaæ¡ä»¶ä¸‹ï¼Œå¼€å¯msaaæ˜¯å¦æˆåŠŸ
     bool openMsaaOk = false;
     GLint samples = 0;
 
     bool support_render_texture_msaa = true;
     if (enableMsaa) {
         glGetIntegerv(GL_MAX_SAMPLES_EXT, &samples);
-        // samplesÂß¼­£¬±£Ö¤²»³¬¹ıGL_MAX_SAMPLES_EXT
+        // samplesé€»è¾‘ï¼Œä¿è¯ä¸è¶…è¿‡GL_MAX_SAMPLES_EXT
         if (samples > 4 || samples <= 0)
         {
             samples = 4;
         }
-        // Ä¬ÈÏsamplesÎª4£¬ÊÇ·ñĞèÒª´¦Àí£¿
+        // é»˜è®¤samplesä¸º4ï¼Œæ˜¯å¦éœ€è¦å¤„ç†ï¼Ÿ
         support_render_texture_msaa = extension_available("GL_EXT_multisampled_render_to_texture");
         glFramebufferTexture2DMultisampleEXTFunc = (PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMGPROC) eglGetProcAddress(
                 "glFramebufferTexture2DMultisampleEXT");
@@ -95,7 +95,7 @@ bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool
         GLenum  err = glGetError();
         if (err)
         {
-            // Âñµã¼ÇÂ¼¿ªÆômsaaÊ§°Ü
+            // åŸ‹ç‚¹è®°å½•å¼€å¯msaaå¤±è´¥
             AppendErrorLogInfo(errVec, "fbo_enable_msaa_fail", "<function:%s, glGetError:%x>", __FUNCTION__, glGetError());
             openMsaaOk = false;
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mFboTexture.GetTextureID(), 0);
@@ -110,13 +110,13 @@ bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mFboTexture.GetTextureID(), 0);
     }
 
-    // Renderbuffer depth & stencil ÅäÖÃ
+    // Renderbuffer depth & stencil é…ç½®
     bool OES_packed_depth_stencil;
     const char *extString = (const char *) glGetString(GL_EXTENSIONS);
-    if (extString == nullptr) { // À©Õ¹»ñÈ¡Ê§°Ü£¬Ä¬ÈÏ²ÉÓÃ
+    if (extString == nullptr) { // æ‰©å±•è·å–å¤±è´¥ï¼Œé»˜è®¤é‡‡ç”¨
         OES_packed_depth_stencil = false;
         LOG_E("initFBO get extension packed depth null, use=GL_STENCIL_INDEX8");
-    } else { // iosÆ½Ì¨Ö»Ö§³ÖGL_DEPTH24_STENCIL8_OES (²¿·ÖAndroid»úĞÍÒ²Ö§³Ö´Ë¸ñÊ½)
+    } else { // ioså¹³å°åªæ”¯æŒGL_DEPTH24_STENCIL8_OES (éƒ¨åˆ†Androidæœºå‹ä¹Ÿæ”¯æŒæ­¤æ ¼å¼)
         OES_packed_depth_stencil = (strstr(extString, OES_PACKED_DEPTH_STENCIL) != 0);
     }
 
