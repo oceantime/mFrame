@@ -1,4 +1,4 @@
-#include "WmCommandDecoderWebGL.hpp"
+﻿#include "WmCommandDecoderWebGL.hpp"
 #include "WmWebGLRenderContextInner.hpp"
 #include "../webgl/WmWebGLRenderContext.hpp"
 #include "../support/Log.h"
@@ -725,7 +725,7 @@ void WmCommandDecoderWebGL::WebGL_bufferData_size(WmCommandBuffer& buffer, WmDec
     uint64_t *size = buffer.parseValue<uint64_t>();
     if( !size ) return;
 
-    bufferData(v[0], (size_t)*size, NULL, v[1]);
+    bufferData(v[0], (size_t)*size, nullptr, v[1]);
     LOG_D("[webgl::exec] bufferData_size(%s,%d,%d), error=%d",
           WebGL_CONST(v[0]), size, WebGL_CONST(v[1]), getError());
 }
@@ -1000,7 +1000,7 @@ void WmCommandDecoderWebGL::WebGL_drawElements(WmCommandBuffer& buffer, WmDecode
     uint32_t v[4];
     bool ret = buffer.parseArray<uint32_t>(v, 4);
     if( !ret ) return;
-    drawElements(v[0], v[1], v[2], (char*)NULL +v[3]);
+    drawElements(v[0], v[1], v[2], (char*)nullptr +v[3]);
     LOG_D("[webgl::exec] drawElements(%s,%d,%s,%d), error=%d",
           WebGL_CONST(v[0]), v[1], WebGL_CONST(v[2]), v[3], getError());
     mRenderContext->mNeed_draw=true;
@@ -1520,7 +1520,7 @@ void WmCommandDecoderWebGL::WebGL_getUniform(WmCommandBuffer& buffer, WmDecodeRe
     getProgramiv(programID, GL_ACTIVE_UNIFORMS, &num);
     for (int i=0; i<num; i++)
     {
-        glGetActiveUniform(programID, i, maxLen, NULL, &maxLen, &type, nameBuffer);
+        glGetActiveUniform(programID, i, maxLen, nullptr, &maxLen, &type, nameBuffer);
         GLint loc = getUniformLocation(programID, nameBuffer);
         if ( loc ==  locationID)
         {
@@ -2072,7 +2072,7 @@ void WmCommandDecoderWebGL::WebGL_texSubImage2D_null(WmCommandBuffer& buffer, Wm
     if( !ret ) return;
 
     texSubImage2D(v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], nullptr);
-    LOG_D("[webgl::exec] texSubImage2D_null(%s,%d,%d,%d,%d,%d,%s,%s,null), error=%d",
+    LOG_D("[webgl::exec] texSubImage2D_null(%s,%d,%d,%d,%d,%d,%s,%s,nullptr), error=%d",
           WebGL_CONST(v[0]), v[1], v[2], v[3], v[4], v[5], WebGL_CONST(v[6]),WebGL_CONST(v[7]),getError());
 }
 
@@ -2437,7 +2437,7 @@ void WmCommandDecoderWebGL::WebGL_vertexAttribPointer(WmCommandBuffer& buffer, W
     bool ret = buffer.parseArray<uint32_t>(v, 6);
     if( !ret ) return;
 
-    vertexAttribPointer(v[0], v[1], v[2], v[3], v[4], (char*)NULL + v[5]);
+    vertexAttribPointer(v[0], v[1], v[2], v[3], v[4], (char*)nullptr + v[5]);
     LOG_D("[webgl::exec] vertexAttribPointer(%d,%d,%d,%d,%d), error=%d",
     v[0], v[1], v[2], v[3], v[4], getError());
 }

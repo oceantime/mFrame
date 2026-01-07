@@ -1,0 +1,237 @@
+================================================================
+File Encoding Conversion Report - GB2312/GBK to UTF-8 (No BOM)
+Conversion Time: 2026-01-07 20:19:05
+================================================================
+
+----------------------------------------------------------------
+File: core/src/WmCanvas.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments: None detected
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/commandbuffer/WmCommandBuffer.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 15 : //瑙ｆ瀽meta淇℃伅
+  Line 18 : //璁＄畻buffersize
+  Line 31 : //瑙ｆ瀽meta淇℃伅
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/commandbuffer/WmCommandBuffer.hpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 2 locations
+Examples:
+  Line 51 : size_t mBufferSize;             //瀛楄妭闀垮害
+  Line 52 : size_t mBufferFourByteSize;     //4瀛楄妭闀垮害
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/egl/WmEGLContext.h
+Original Encoding: GB2312/GBK
+Chinese Comments: None detected
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/egl/WmEGLPbufferContext.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 2 locations
+Examples:
+  Line 59 : // 閿熷彨浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹shared妯″紡閿熸枻鎷烽敓鏂ゆ嫹涓洪敓鏂ゆ嫹閿熸枻鎷烽敓鍊熷閿熸枻鎷烽敓鏂ゆ嫹閿熶茎浼欐嫹閿熸枻鎷穝haredContext閿熸枻鎷稰buffer閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+  Line 100 : // 閿熸枻鎷烽敓鏂ゆ嫹msaa
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/egl/WmEGLWindowContext.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 23 : // 閿熸枻鎷烽敓鍙鎷穝wapBuffer fail閿熶茎璁规嫹trace閿熸枻鎷烽敓鏂ゆ嫹 (閿熷彨鍖℃嫹閿熸澃纰夋嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻锛岀鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鎹锋唻鎷烽敓鏂ゆ嫹?)
+  Line 25 : if (err == EGL_BAD_SURFACE) { // 閿熸枻鎷疯閿熸枻鎷烽敓鐨嗘仮闈╂嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸垝鎶ラ敓鏂ゆ嫹
+  Line 56 : // 閿熸枻鎷峰閿熸枻鎷積glDisplay & eglSurface(eglSurface閿熸枻鎷積glContext閿熺潾鐧告嫹閿熸枻鎷?
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmCanvas2DContextAndroid.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 113 : // 閿熸枻鎷烽敓绲玡st 涓€鐩撮敓鏂ゆ嫹閿熸枻鎷?
+  Line 118 : // 閿熸枻鎷穎bo妯″紡閿熼摪锝忔嫹閿熼樁杈炬嫹閿熸枻鎷锋煋鍓嶆墽閿熸枻鎷蜂竴閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷?
+  Line 130 : // FBO妯″紡
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmCanvas2DContextImpl.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 17 : // 瀵筸axwidth杩涜鍒ゆ柇锛岄伩鍏嶉粯璁ゅ€煎鑷寸殑姣忔measure鎿嶄綔
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFont.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 254 : // TODO glyph_index涓嶅瓨鍦紵
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFontFamily.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 31 : // web灞炴€ф敹鏁?
+  Line 32 : // Android鍐卭blique涓巌talic涓€鏍?
+  Line 50 : if (closetItem == nullptr) { // 閫夋嫨棣栦釜style鍖归厤鐨刬tem
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFontFamily.h
+Original Encoding: GB2312/GBK
+Chinese Comments: None detected
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFontManagerAndroid.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 101 : //鏂囨湰楂樺害鏈潵搴旇鍘婚櫎涓婁笅绌虹櫧鐨勶紝浣嗘槸laya1锛岃繕鏄湁鐐归棶棰橈紝鎵€浠ヨ繖涓珮搴︼紝杩樻槸鐢ㄨ€佺殑楂樺害ascender+descender缁濆鍊?
+  Line 106 : // 濡傛灉婊¤冻鏉′欢鍒欙紝杩斿洖涓嶅甫绌虹櫧鐨勬枃瀛楅珮搴?
+  Line 223 : //m_ascender锛宮_descender涓嶈兘闄cale锛屽洜涓哄湪PreMeasureTextHeight鑾峰彇杩欎袱涓€兼椂锛屽凡缁忛櫎杩囦簡
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFrameBufferObjectImpl.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 39 : // 鏄惁浣跨敤msaa
+  Line 41 : // 鍦ㄤ娇鐢╩saa鏉′欢涓嬶紝寮€鍚痬saa鏄惁鎴愬姛
+  Line 48 : // samples閫昏緫锛屼繚璇佷笉瓒呰繃GL_MAX_SAMPLES_EXT
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Android/WmFreeTypeWrap.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 83 : // 濡傛灉璧扮殑鏄繖涓粯璁ゅ瓧浣擄紝閭ｄ箞榛樿0閲囩敤鐨勬槸鏃ユ枃JP(浼氬鑷淬€愬/鍏炽€戠瓑涓嶆甯?锛屽己鍒舵敼涓鸿蛋涓枃SC鎵嶅彲浠?
+  Line 103 : FT_Done_Face(tmpFace); //杩欓噷閲婃斁鐨勬槸鍓嶄竴娆★紙鎴栧惊鐜鐨勭涓€娆★級
+  Line 119 : FT_Done_Face(tmpFace); //杩欓噷閲婃斁鏄綋寰幆鐨勬渶鍚庝竴娆★紙鎴栨病杩涘叆寰幆杩囩殑绗竴娆★級
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Linux/WmFontLinux.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 2 locations
+Examples:
+  Line 263 : // TODO glyph_index涓嶅瓨鍦紵
+  Line 501 : //  freetype鐨勭偣鏁?px*64/dpi
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Linux/WmFontManagerLinux.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 16 : //閿熸枻鎷烽敓鏂ゆ嫹fontcache
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Linux/WmFontManagerLinux.hpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 2 locations
+Examples:
+  Line 26 : //閿熸枻鎷峰疄閿熸枻鎷?
+  Line 32 : //閿熸枻鎷峰疄閿熸枻鎷?
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/platform/Linux/WmSystemFontInformation.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 108 : //瀛椾綋鍚嶈浆涓哄皬鍐欙紝闃叉鐢ㄦ埛浼犲叆澶у皬鍐欐贩鍚堝瓧绗︿覆
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/webgl/WmCommandDecoderWebGL.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 28 : //閿熺潾鍑ゆ嫹閿熸枻鎷峰€奸敓渚ワ綇鎷烽敓鏂ゆ嫹閿熸枻鎷?閿熸枻鎷?
+  Line 36 : //閿熺潾鍑ゆ嫹閿熸枻鎷峰€奸敓渚ワ綇鎷烽敓鏂ゆ嫹閿熸枻鎷?閿熸枻鎷穒nt
+  Line 55 : //閿熺潾鍑ゆ嫹閿熸枻鎷峰€奸敓渚ワ綇鎷烽敓鏂ゆ嫹閿熸枻鎷?閿熸枻鎷穒nt
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/webgl/WmCommandDecoderWebGL.hpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 168 : //API閿熸枻鎷烽敓鏂ゆ嫹
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/wmcanvas/GL/WmFrameBufferObject.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 2 locations
+Examples:
+  Line 30 : // 娓呯┖src鏁版嵁
+  Line 52 : // mFboTexture鏋愭瀯鏂规硶鍐呭凡缁忎細deleteTextures, 杩欓噷涓嶉渶瑕佸姝?
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/wmcanvas/GL/WmTexture.cpp
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 3 locations
+Examples:
+  Line 82 : // 1.textureSize鏃犻渶姣忔get锛屽彧闇€瑕乬et涓€娆″嵆鍙?
+  Line 83 : // 2.鏈夊彲鑳絞et textureSize鏃舵湭makeCurrent or current澶辫触锛屽鑷存湭鍙栧埌textureSize, 姝ゆ椂搴旇榛樿textureSize涓?048,鑳藉鐞嗗ぇ閮ㄥ垎绾圭悊灏哄
+  Line 104 : // 鏈夊彲鑳絆OM瀵艰嚧鐢熸垚绾圭悊澶辫触
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+----------------------------------------------------------------
+File: core/src/wmcanvas/WmPoint.h
+Original Encoding: GB2312/GBK
+Chinese Comments Found: 1 locations
+Examples:
+  Line 76 : bool isTransformed = false; //鍧愭爣鏄惁缁忚繃transform鍙樻崲
+After Conversion: UTF-8 without BOM
+Status: SUCCESS
+
+================================================================
+Conversion Summary
+================================================================
+Total Files: 23
+Successfully Converted: 23
+Skipped (already correct): 0
+Failed: 0
+================================================================

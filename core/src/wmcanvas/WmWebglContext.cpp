@@ -1,4 +1,4 @@
-#ifdef WMCANVAS
+﻿#ifdef WMCANVAS
 
 #include "WmGL.h"
 #include "WmCanvas.hpp"
@@ -27,7 +27,7 @@ PFNGLISVERTEXARRAYOESPROC glIsVertexArrayOESv;
 #define WEBGL_API_COUNT     137 //(1 + 136)
 #define g_encode_type       0
 
-#define G_BUFFER_OFFSET(i) ((char *)NULL + (i))
+#define G_BUFFER_OFFSET(i) ((char *)nullptr + (i))
 
 
 namespace wmcanvas {
@@ -121,7 +121,7 @@ namespace wmcanvas {
         while (pstr) {
 
             elems.push_back(atoi(pstr));
-            pstr = strtok(NULL, delim);
+            pstr = strtok(nullptr, delim);
         }
 
         size = (unsigned int) elems.size();
@@ -134,7 +134,7 @@ namespace wmcanvas {
 
             return int8Array;
         } else {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -147,7 +147,7 @@ namespace wmcanvas {
         while (pstr) {
 
             elems.push_back(atoi(pstr));
-            pstr = strtok(NULL, delim);
+            pstr = strtok(nullptr, delim);
         }
 
         size = (unsigned int) elems.size();
@@ -160,7 +160,7 @@ namespace wmcanvas {
 
             return uint16Array;
         } else {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -172,7 +172,7 @@ namespace wmcanvas {
         while (pstr) {
 
             elems.push_back(atoi(pstr));
-            pstr = strtok(NULL, delim);
+            pstr = strtok(nullptr, delim);
         }
 
         size = (unsigned int) elems.size();
@@ -185,7 +185,7 @@ namespace wmcanvas {
 
             return uint32Array;
         } else {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -198,7 +198,7 @@ namespace wmcanvas {
         while (pstr) {
 
             elems.push_back(atof(pstr));
-            pstr = strtok(NULL, delim);
+            pstr = strtok(nullptr, delim);
         }
 
         size = (unsigned int) elems.size();
@@ -210,7 +210,7 @@ namespace wmcanvas {
             }
             return floatArray;
         } else {
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -221,7 +221,7 @@ namespace wmcanvas {
  float32            14
  */
     void *SplitStringToArray(const char *pos, int bytes, unsigned int &size) {
-        void *array = NULL;
+        void *array = nullptr;
 
         if (bytes == 1) {
             int8_t *int8Array = SplitStringToInt8Array(pos, ",", size);
@@ -1136,7 +1136,7 @@ namespace wmcanvas {
         LOG_D("[webgl::exec] getActiveAttrib(%d, %d)=type:%s,size:%d,name:%s",
               program, index, GetMacroValDebug(type), size, name);
         if (len == 0) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             //WebGLActiveInfo format: type,size,name
             std::string result = wmcanvas::toString(type);
@@ -1166,7 +1166,7 @@ namespace wmcanvas {
               program, index, GetMacroValDebug(type), size, name);
 
         if (len == 0) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             //WebGLActiveInfo format: type,size,name
             std::string result = wmcanvas::toString(type);
@@ -1226,7 +1226,7 @@ namespace wmcanvas {
         LOG_D("[webgl::exec] glGetBufferParameteriv(%s, %s)=%d",
               GetMacroValDebug(target), GetMacroValDebug(pname), params);
         if (params == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             GLuint retType = kReturnInt; //int
             std::string result(wmcanvas::toString(retType));
@@ -1274,7 +1274,7 @@ namespace wmcanvas {
               GetMacroValDebug(target), GetMacroValDebug(attachment), GetMacroValDebug(pname),
               params);
         if (params == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             GLuint retType = kReturnInt; //int
             std::string result(wmcanvas::toString(retType));
@@ -1616,7 +1616,7 @@ namespace wmcanvas {
             case GL_LINK_STATUS:
             case GL_VALIDATE_STATUS: {
                 if (params == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     GLuint retType = kReturnBoolean; //boolean
                     std::string result(wmcanvas::toString(retType));
@@ -1631,7 +1631,7 @@ namespace wmcanvas {
             case GL_ACTIVE_ATTRIBUTES:
             case GL_ACTIVE_UNIFORMS: {
                 if (params == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     GLuint retType = kReturnInt; //int
                     std::string result(wmcanvas::toString(retType));
@@ -1661,7 +1661,7 @@ namespace wmcanvas {
         LOG_D("[webgl::exec] glGetRenderbufferParameteriv(%s, %s, %d)",
               GetMacroValDebug(target), GetMacroValDebug(pname), params);
         if (params == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             GLuint retType = kReturnInt; //int
             std::string result(wmcanvas::toString(retType));
@@ -1707,7 +1707,7 @@ namespace wmcanvas {
             case GL_DELETE_STATUS:
             case GL_COMPILE_STATUS: {
                 if (params == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     GLuint retType = kReturnBoolean; //boolean
                     std::string result(wmcanvas::toString(retType));
@@ -1720,7 +1720,7 @@ namespace wmcanvas {
                 //returnType GLenum
             case GL_SHADER_TYPE:
                 if (params == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     GLuint retType = kReturnInt; //int
                     std::string result(wmcanvas::toString(retType));
@@ -1747,7 +1747,7 @@ namespace wmcanvas {
               GetMacroValDebug(shadertype), GetMacroValDebug(precisiontype), range[0], range[1],
               precision);
         if (range[0] == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             //format range[0],range[1],precision
             std::string result;
@@ -1804,7 +1804,7 @@ namespace wmcanvas {
         LOG_D("[webgl::exec] glGetTexParameteriv(%s, %s)=%d", GetMacroValDebug(target),
               GetMacroValDebug(pname), params);
         if (params == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             GLuint retType = kReturnInt; //int
             std::string result(wmcanvas::toString(retType));
@@ -1941,7 +1941,7 @@ namespace wmcanvas {
         GLint ret = glGetUniformLocation(program, name.c_str());
         LOG_D("[webgl::exec] glGetUniformLocation(%d, %s)=%d", program, name.c_str(), ret);
         if (ret == -1) {
-            obj->setSyncResult("null");
+            obj->setSyncResult("nullptr");
         } else {
             obj->setSyncResult(wmcanvas::toString(ret));
         }
@@ -1967,7 +1967,7 @@ namespace wmcanvas {
                       GetMacroValDebug(pname), params);
 
                 if (params == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     GLuint retType = kReturnInt; //Int
                     std::string result = wmcanvas::toString(retType);
@@ -1988,7 +1988,7 @@ namespace wmcanvas {
                 std::string result = wmcanvas::toString(retType);
 
                 if (params[0] == -1) {
-                    obj->setSyncResult("null");
+                    obj->setSyncResult("nullptr");
                 } else {
                     for (int i = 0; i < 4; i++) {
                         result += ",";
@@ -2681,7 +2681,7 @@ namespace wmcanvas {
         GLuint transpose = tokens[1];
 
         unsigned int size = 0;
-        const GLfloat *fvalue = NULL;
+        const GLfloat *fvalue = nullptr;
         if (g_encode_type == 1) {
             fvalue = ParseTokensFloat(p, 16);
         } else {
@@ -2886,7 +2886,7 @@ namespace wmcanvas {
     }
 
     int (*g_webglFuncMap[WEBGL_API_COUNT])(WmCanvas *, const char *&) = {
-            NULL,   //0
+            nullptr,   //0
             activeTexture,
             attachShader,
             bindAttribLocation,
@@ -2932,9 +2932,9 @@ namespace wmcanvas {
             disable,
             disableVertexAttribArray,
             drawArrays,
-            NULL, // drawArraysInstancedANGLE,
+            nullptr, // drawArraysInstancedANGLE,
             drawElements,
-            NULL, // drawElementsInstancedANGLE,
+            nullptr, // drawElementsInstancedANGLE,
             enable,
             enableVertexAttribArray, //50
             flush,
@@ -2947,9 +2947,9 @@ namespace wmcanvas {
             getAttachedShaders,//new
             getAttribLocation,
             getBufferParameter,//60 new
-            NULL, // getContextAttributes,      //OpenGL ES not support
+            nullptr, // getContextAttributes,      //OpenGL ES not support
             getError,//new
-            NULL, //getExtension,              //OpenGL ES not support
+            nullptr, //getExtension,              //OpenGL ES not support
             getFramebufferAttachmentParameter,//new
             getParameter,//new
             getProgramInfoLog,//new
@@ -2966,7 +2966,7 @@ namespace wmcanvas {
             getVertexAttrib,
             getVertexAttribOffset,
             isBuffer,
-            NULL, //80 isContextLost,             //opengl es not support
+            nullptr, //80 isContextLost,             //opengl es not support
             isEnabled,
             isFramebuffer,
             isProgram,

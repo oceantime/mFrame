@@ -1,4 +1,4 @@
-#include "WmPath.h"
+﻿#include "WmPath.h"
 #include "WmCanvas2dContext.h"
 #include <cassert>
 
@@ -644,7 +644,7 @@ void WmPath::Stroke(WmCanvasContext *context) {
         Stroke(context, color, &vertexVec);
         StencilRectForStroke(context, vertexVec);
     } else {
-        Stroke(context, color, NULL);
+        Stroke(context, color, nullptr);
     }
 }
 

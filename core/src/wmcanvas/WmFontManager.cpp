@@ -1,4 +1,4 @@
-#include "../support/Log.h"
+﻿#include "../support/Log.h"
 #include "WmFontManager.h"
 #include "GL/WmTexture.h"
 #include <vector>
@@ -60,7 +60,7 @@ bool WmFontManager::LoadGlyphToTexture(WmGlyphs &glyph) {
         flag = PrepareGlyphTexture((int)glyph.width, (int)glyph.height, rect);
     }
     if(texture==nullptr){
-        printf("GetOrCreateFontTexture is null \n");
+        printf("GetOrCreateFontTexture is nullptr \n");
     }
     if (!flag) {
         return false;

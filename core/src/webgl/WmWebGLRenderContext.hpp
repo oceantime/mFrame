@@ -1,4 +1,4 @@
-#ifndef WMCANVAS_WMWEBGLRENDERCONTEXT_H
+﻿#ifndef WMCANVAS_WMWEBGLRENDERCONTEXT_H
 #define WMCANVAS_WMWEBGLRENDERCONTEXT_H
 
 #include <stdio.h>
@@ -47,7 +47,7 @@ public:
 
 //Fectch pixels form JSBinding instance with instanceID
 using FetchPixelsFunc = std::function< void (void*obj, uint64_t, JSBindingPixels*) >;
-//bindframebuffer null
+//bindframebuffer nullptr
 using BindFramebufferNullFunc = std::function< void(void*obj) >;
 //glResource
 using GLResourceFunc = std::function< void(void*obj, int, GLuint) >;

@@ -1,4 +1,4 @@
-#ifndef WMCANVAS_WMCANVASCONTEXT_H
+﻿#ifndef WMCANVAS_WMCANVASCONTEXT_H
 #define WMCANVAS_WMCANVASCONTEXT_H
 
 #include "WmGL.h"
@@ -119,15 +119,15 @@ public:
     
     //----------------Push Vertex------------------------
     void PushTriangle(WmPoint v1, WmPoint v2, WmPoint v3, WmColorRGBA color,
-                     WmTransform transform, std::vector<WmVertex> *vec = NULL);
-    void PushQuad(WmPoint v1, WmPoint v2, WmPoint v3, WmPoint v4, WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec = NULL);
+                     WmTransform transform, std::vector<WmVertex> *vec = nullptr);
+    void PushQuad(WmPoint v1, WmPoint v2, WmPoint v3, WmPoint v4, WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec = nullptr);
     //fbo size same with texutre
     void PushRectangle(float x, float y, float w, float h, float tx, float ty, float tw, float th,
-                       WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false, std::vector<WmVertex> *vec = NULL);
+                       WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false, std::vector<WmVertex> *vec = nullptr);
 
     void PushRectangleFormat(float x, float y, float w, float h, float tx, float ty, float tw, float th,
                        WmColorRGBA color, WmTransform transform = WmTransformIdentity, bool flipY = false,
-                       std::vector<WmVertex> *vec = NULL, bool formatIntVertex = false);
+                       std::vector<WmVertex> *vec = nullptr, bool formatIntVertex = false);
     //fbo size isn't with texutre, tw,th vaule is tw=fbo.w/texture.w, th=fbo.h/texture.h
     void PushRectangle4TextureArea(float x, float y, float w, float h,
                                    float tx, float ty, float tw, float th,WmColorRGBA color,

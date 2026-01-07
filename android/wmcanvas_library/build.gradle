@@ -33,6 +33,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs << '-Xlint:-options'
+    }
+
     defaultConfig {
         minSdkVersion rootProject.extensions.sdks.MinSDK
         targetSdkVersion rootProject.extensions.sdks.TargetSDK

@@ -1,4 +1,4 @@
-#include <EGL/egl.h>
+﻿#include <EGL/egl.h>
 
 #include "WmCanvas2dContext.h"
 
@@ -8,8 +8,8 @@
 
 
 /* OpenGL ES extension functions. */
-PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMGPROC glFramebufferTexture2DMultisampleEXTFunc = NULL;
-PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMGPROC glRenderbufferStorageMultisampleEXTFunc = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMGPROC glFramebufferTexture2DMultisampleEXTFunc = nullptr;
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMGPROC glRenderbufferStorageMultisampleEXTFunc = nullptr;
 
 
 #define OES_PACKED_DEPTH_STENCIL "GL_OES_packed_depth_stencil"
@@ -115,7 +115,7 @@ bool WmFrameBufferObject::InitFBO(int width, int height, WmColorRGBA color, bool
     const char *extString = (const char *) glGetString(GL_EXTENSIONS);
     if (extString == nullptr) { // 扩展获取失败，默认采用
         OES_packed_depth_stencil = false;
-        LOG_E("initFBO get extension packed depth null, use=GL_STENCIL_INDEX8");
+        LOG_E("initFBO get extension packed depth nullptr, use=GL_STENCIL_INDEX8");
     } else { // ios平台只支持GL_DEPTH24_STENCIL8_OES (部分Android机型也支持此格式)
         OES_packed_depth_stencil = (strstr(extString, OES_PACKED_DEPTH_STENCIL) != 0);
     }

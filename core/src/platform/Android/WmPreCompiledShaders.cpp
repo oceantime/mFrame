@@ -1,4 +1,4 @@
-#include "WmPreCompiledShaders.h"
+﻿#include "WmPreCompiledShaders.h"
 #include "support/FileUtils.h"
 #include "support/Log.h"
 
@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 std::string g_shader_cache_path;
 
-static WmPreCompiledShaders *sPreCompiledShaders = NULL;
+static WmPreCompiledShaders *sPreCompiledShaders = nullptr;
 bool WmPreCompiledShaders::sSupportPreCompiledShaders = false;
 GLenum WmPreCompiledShaders::sProgramBinaryFormat = 0;
 
@@ -51,15 +51,15 @@ void WmPreCompiledShaders::loadPreCompiledPrograms(const std::string path)
 {
     mPreCompiledPrograms.clear();
 
-    struct dirent *ent = NULL;
-    DIR *pDir = NULL;
+    struct dirent *ent = nullptr;
+    DIR *pDir = nullptr;
     pDir = opendir(path.c_str());
-    if (pDir == NULL)
+    if (pDir == nullptr)
     {
         return;
     }
 
-    while (NULL != (ent = readdir(pDir)))
+    while (nullptr != (ent = readdir(pDir)))
     {
         if (ent->d_type != DT_DIR)
         {
@@ -121,7 +121,7 @@ bool WmPreCompiledShaders::AddProgram(GLuint program, const std::string &id)
         p->length = length;
         p->key = id;
 
-        glGetProgramBinaryOES(program, length, NULL, &p->binaryFormat,
+        glGetProgramBinaryOES(program, length, nullptr, &p->binaryFormat,
                               &p->program[0]);
         mPrograms[id] = p;
         sProgramBinaryFormat = p->binaryFormat;

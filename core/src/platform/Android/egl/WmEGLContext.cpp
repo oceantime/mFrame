@@ -1,4 +1,4 @@
-
+﻿
 #include "WmEGLContext.h"
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
@@ -28,7 +28,7 @@ EGLint WmEGLContext::SwapBuffer() {
     return EGL_SUCCESS;
 }
 
-WmEGLContext::WmEGLContext() : nWindow(NULL),
+WmEGLContext::WmEGLContext() : nWindow(nullptr),
                                          eglDisplay(EGL_NO_DISPLAY),
                                          eglSurface(EGL_NO_SURFACE),
                                          eglContext(EGL_NO_CONTEXT),
@@ -54,7 +54,7 @@ bool WmEGLContext::Init(ANativeWindow *window) {
 
 
 bool WmEGLContext::CheckHasExtension(const char *extension) {
-    if (extension == NULL) {
+    if (extension == nullptr) {
         return false;
     }
 
@@ -70,7 +70,7 @@ bool WmEGLContext::InitEGLContext() {
     const EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION,
                                       2,  // Request opengl ES2.0
                                       EGL_NONE};
-    eglContext = eglCreateContext(eglDisplay, eglConfig, NULL, context_attribs);
+    eglContext = eglCreateContext(eglDisplay, eglConfig, nullptr, context_attribs);
 
     if (eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext) == EGL_FALSE) {
         LOGW("Unable to eglMakeCurrent");
@@ -135,7 +135,7 @@ bool WmEGLContext::InitEGLSurface() {
         return false;
     }
 
-    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
+    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, nullptr);
     eglQuerySurface(eglDisplay, eglSurface, EGL_WIDTH, &width);
     eglQuerySurface(eglDisplay, eglSurface, EGL_HEIGHT, &height);
 
@@ -179,7 +179,7 @@ EGLint WmEGLContext::Resume(ANativeWindow *window) {
 
     // Create surface
     nWindow = window;
-    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
+    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, nullptr);
     eglQuerySurface(eglDisplay, eglSurface, EGL_WIDTH, &width);
     eglQuerySurface(eglDisplay, eglSurface, EGL_HEIGHT, &height);
 
@@ -221,7 +221,7 @@ bool WmEGLContext::Resize(int32_t width, int32_t height) {
         eglDestroySurface(eglDisplay, eglSurface);
     }
 
-    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
+    eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, nullptr);
     if(eglSurface == EGL_NO_SURFACE){
         LOGE("Resize failed! create egl surface returns EGL_NO_SURFACE");
         return false;

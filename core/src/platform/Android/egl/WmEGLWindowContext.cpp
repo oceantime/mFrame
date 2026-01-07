@@ -1,4 +1,4 @@
-
+﻿
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <string>
@@ -37,13 +37,13 @@ EGLint WmEGLWindowContext::SwapBuffer() {
 }
 
 
-WmEGLWindowContext::WmEGLWindowContext() : nWindow(NULL),
+WmEGLWindowContext::WmEGLWindowContext() : nWindow(nullptr),
                                          isGLESInit(false),
                                          isES3Supported(false) {}
 
 WmEGLWindowContext::WmEGLWindowContext(EGLDisplay sharedDisplay, EGLContext sharedContext) :
                                                                                         WmEGLContext(sharedDisplay, sharedContext),
-                                                                                        nWindow(NULL),
+                                                                                        nWindow(nullptr),
                                                                                            isGLESInit(false),
                                                                                            isES3Supported(
                                                                                                    false) {}
@@ -300,13 +300,13 @@ EGLint WmEGLWindowContext::MakeCurrentWithScene(const char *scene, bool check) {
 
 EGLSurface WmEGLWindowContext::CreateWindowSurface(std::string &scene) {
     if (nWindow == nullptr) { // 锟饺讹拷锟皆憋拷锟斤拷锟斤拷锟斤拷锟斤拷nWindow为null时crash
-        // TRACE_EXCEPTION("CreateWindowSurface_fail", "Scene=%s,window is null", scene.data());
+        // TRACE_EXCEPTION("CreateWindowSurface_fail", "Scene=%s,window is nullptr", scene.data());
         return EGL_NO_SURFACE;
     }
 
     EGL_LOGI("CreateWindowSurface:start:eglDisplay=%p,nWindow=%p,scene=%s", eglDisplay, nWindow,
              scene.data());
-    EGLSurface createdSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, NULL);
+    EGLSurface createdSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nWindow, nullptr);
     if (createdSurface == EGL_NO_SURFACE) { // 锟斤拷锟斤拷surface失锟斤拷
         EGLint error = eglGetError();
         EGL_LOGI("CreateWindowSurface:fail:eglSurface=%p,eglError=%x", createdSurface, error);

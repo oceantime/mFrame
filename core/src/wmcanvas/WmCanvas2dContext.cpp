@@ -1,4 +1,4 @@
-#include "WmCanvas2dContext.h"
+﻿#include "WmCanvas2dContext.h"
 #include "WmShaderManager.h"
 #include "../WmCanvas.hpp"
 #include "GL/WmLUtil.h"
@@ -643,7 +643,7 @@ void WmCanvasContext::SendVertexBufferToGPUOptim(const GLenum geometry_type)
 void WmCanvasContext::PushTriangle(WmPoint v1, WmPoint v2, WmPoint v3, WmColorRGBA color,
                                   WmTransform transform, std::vector<WmVertex> *vec)
 {
-    WmVertex *vb = NULL;
+    WmVertex *vb = nullptr;
     WmVertex vertex[3];
     if (vec)
     {
@@ -770,7 +770,7 @@ void WmCanvasContext::DrawTextureArray(int textureId, int count, float *vertexLi
 void WmCanvasContext::PushQuad(WmPoint v1, WmPoint v2, WmPoint v3, WmPoint v4,
                               WmColorRGBA color, WmTransform transform, std::vector<WmVertex> *vec)
 {
-    WmVertex *vb = NULL;
+    WmVertex *vb = nullptr;
     WmVertex vertex[6];
     if (vec)
     {
@@ -831,7 +831,7 @@ void WmCanvasContext::PushRectangleFormat(float x, float y, float w, float h,
                                          WmColorRGBA color, WmTransform transform, bool flipY,
                                          std::vector<WmVertex> *vec, bool formatIntVertex)
 {
-    WmVertex *vb = NULL;
+    WmVertex *vb = nullptr;
     WmVertex vertex[6];
     if (vec)
     {
@@ -1130,14 +1130,14 @@ void WmCanvasContext::SetTransformOfShader(const WmTransform &trans)
         WmShader *shader = mCurrentState->mShader;
         if (nullptr == shader)
         {
-            LOG_I("SetTransformOfShader ===> shader is null");
+            LOG_I("SetTransformOfShader ===> shader is nullptr");
             return;
         }
 
         std::string name = shader->GetName();
         if (nullptr == FindShader(name.data()))
         {
-            LOG_I("SetTransformOfShader program for key is null");
+            LOG_I("SetTransformOfShader program for key is nullptr");
             return;
         }
 
@@ -1794,7 +1794,7 @@ void WmCanvasContext::SetShadowOffsetY(float y)
 //style
 void WmCanvasContext::SetFillStyle(const char *str)
 {
-    if ((str != NULL) && (str[0] == '\0'))
+    if ((str != nullptr) && (str[0] == '\0'))
     { // empty str
         return;
     }
@@ -1817,7 +1817,7 @@ void WmCanvasContext::SetFillStyle(WmColorRGBA c)
 
 void WmCanvasContext::SetStrokeStyle(const char *str)
 {
-    if ((str != NULL) && (str[0] == '\0'))
+    if ((str != nullptr) && (str[0] == '\0'))
     { // empty str
         return;
     }

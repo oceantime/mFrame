@@ -1,4 +1,4 @@
-#include <cstdlib>
+﻿#include <cstdlib>
 #include "LodePngCoder.h"
 extern "C" {
 #include "thirdparty/lodepng.h"
@@ -23,7 +23,7 @@ int LodePngCoder::Decode(const char *filePath, unsigned char **outputBuffer,
                          unsigned int *outputHeight)
 {
     unsigned int uw = 0, uh = 0;
-    unsigned char *buffer = NULL;
+    unsigned char *buffer = nullptr;
     int error = lodepng_decode32_file(&buffer, &uw, &uh, filePath);
 
     if (outputWidth) *outputWidth = uw;
@@ -45,7 +45,7 @@ int LodePngCoder::Decode(const unsigned char *inBuffer,
                          unsigned int *output_height)
 {
     unsigned int uw = 0, uh = 0;
-    unsigned char *buffer = NULL;
+    unsigned char *buffer = nullptr;
     int error = lodepng_decode32(&buffer, &uw, &uh, inBuffer, bufferLen);
 
     if (output_width) *output_width = uw;

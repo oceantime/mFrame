@@ -1,4 +1,4 @@
-#include "FileUtils.h"
+﻿#include "FileUtils.h"
 
 #include <stack>
 #include <stdlib.h>
@@ -46,7 +46,7 @@ size_t FileUtils::WriteFileData(const std::string &filename, const char *data,
     do
     {
         FILE *fp = fopen(filename.c_str(), "wb");
-        if (fp == NULL)
+        if (fp == nullptr)
         {
             break;
         }

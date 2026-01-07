@@ -1,4 +1,4 @@
-#include <GLES/gl.h>
+﻿#include <GLES/gl.h>
 #include <stdlib.h>
 #include <list>
 
@@ -470,7 +470,7 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getImageData(
     string canvasId = cid;
     free(cid);
     wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
-    if (NULL == theCanvas) {
+    if (nullptr == theCanvas) {
         return je->NewStringUTF("");
     }
     std::string strRet;
@@ -505,7 +505,7 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_getAllParameter(
     string canvasId = cid;
     free(cid);
     wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(canvasId);
-    if (NULL == theCanvas) {
+    if (nullptr == theCanvas) {
         return je->NewStringUTF("");
     }
     std::string strRet;
@@ -525,7 +525,7 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_setContextType(
         LOG_D("start to create renderer.id=%s\n", canvasId);
         render = WmManager::getSingleton()->newRenderer(canvasId);
     } else {
-        LOG_D("render is not null,id=%s\n", render->mContextId.c_str());
+        LOG_D("render is not nullptr,id=%s\n", render->mContextId.c_str());
     }
 
     render->m_context_type = type;
@@ -549,7 +549,7 @@ JNIEXPORT jstring JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_exeSyncCmd
     wmcanvas::WmCanvas *theCanvas = (wmcanvas::WmCanvas *) theManager->GetCanvas(contextID);
     if (theCanvas) {
         const char *cargs = nullptr;
-        if (args != NULL) {
+        if (args != nullptr) {
             cargs = (const char *) jstringToString(je, args);
             LOG_D("Canvas JNI::exeSyncCmd type is %d,args is %s\n", type, cargs);
         }
@@ -588,7 +588,7 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_bindTexture(
     if (!contextId) {
         return;
     }
-    const char *str_chars = je->GetStringUTFChars(contextId, NULL);
+    const char *str_chars = je->GetStringUTFChars(contextId, nullptr);
     if (!str_chars) {
         je->ReleaseStringUTFChars(contextId, str_chars);
         return;
@@ -611,7 +611,7 @@ JNIEXPORT void JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_texSubImage2D(
     if (!contextId) {
         return;
     }
-    const char *str_chars = je->GetStringUTFChars(contextId, NULL);
+    const char *str_chars = je->GetStringUTFChars(contextId, nullptr);
     if (!str_chars) {
         je->ReleaseStringUTFChars(contextId, str_chars);
         return;
@@ -631,7 +631,7 @@ JNIEXPORT bool JNICALL Java_com_honghu_wmcanvas_WmCanvasJNI_sendEvent(
     if (!contextId) {
         return false;
     }
-    const char *str_chars = je->GetStringUTFChars(contextId, NULL);
+    const char *str_chars = je->GetStringUTFChars(contextId, nullptr);
     if (!str_chars) {
         je->ReleaseStringUTFChars(contextId, str_chars);
         return false;
@@ -657,7 +657,7 @@ Java_com_honghu_wmcanvas_WmCanvasJNI_registerCallback(JNIEnv *je, jclass jc, jst
             LOG_E("so path is empty");
             return;
         }
-        const char *cSoPath = je->GetStringUTFChars(soPath, NULL);
+        const char *cSoPath = je->GetStringUTFChars(soPath, nullptr);
         if (!cSoPath) {
             LOG_E("so path is empty");
             je->ReleaseStringUTFChars(soPath, cSoPath);
@@ -680,7 +680,7 @@ Java_com_honghu_wmcanvas_WmCanvasJNI_getNativeFps(JNIEnv *je, jclass jc, jstring
     if (!contextId) {
         return false;
     }
-    const char *str_chars = je->GetStringUTFChars(contextId, NULL);
+    const char *str_chars = je->GetStringUTFChars(contextId, nullptr);
     if (!str_chars) {
         je->ReleaseStringUTFChars(contextId, str_chars);
         return false;

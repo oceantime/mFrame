@@ -138,7 +138,7 @@ namespace wmcanvas
         if (closetItem != nullptr) {
             return (char *)closetItem->font_file_name;
         }
-        return "NotoSansCJK-Regular.ttc";
+        return const_cast<char*>("NotoSansCJK-Regular.ttc");
     }
 
 }

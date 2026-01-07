@@ -1,4 +1,4 @@
-#include "Util.h"
+﻿#include "Util.h"
 #include "Log.h"
 #include "WmGL.h"
 #include <string.h>
@@ -205,6 +205,9 @@ namespace wmcanvas {
             case COMPOSITE_OP_XOR:
                 result = "xor";
                 break;
+            case COMPOSITE_OP_NONE:
+                result = "";
+                break;
         }
         return result;
     }
@@ -227,16 +230,16 @@ namespace wmcanvas {
         struct timeval now;
         struct timespec outtime;
 
-        gettimeofday(&now, NULL);
+        gettimeofday(&now, nullptr);
         timeraddMS(&now, ms);
         outtime.tv_sec = now.tv_sec;
         outtime.tv_nsec = now.tv_usec * 1000;
         ret = sem_timedwait(sem, &outtime);
         if (ret == -1) {
-            gettimeofday(&now, NULL);
+            gettimeofday(&now, nullptr);
             LOG_D("wait time out,sec=%d,usec=%d\n", now.tv_sec, now.tv_usec);
         } else {
-            gettimeofday(&now, NULL);
+            gettimeofday(&now, nullptr);
         }
 #endif
     }

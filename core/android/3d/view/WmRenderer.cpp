@@ -1,4 +1,4 @@
-
+﻿
 #include <WmCanvasManager.h>
 #include <android/bitmap.h>
 #include <support/Util.h>
@@ -389,9 +389,9 @@ void WmRenderer::bindTexture(JNIEnv *env, jobject bitmap, int id, int target, in
     }
 
     // Lock the bitmap to get the buffer
-    void *pixels = NULL;
+    void *pixels = nullptr;
     int res = AndroidBitmap_lockPixels(env, bitmap, &pixels);
-    if (pixels == NULL) {
+    if (pixels == nullptr) {
         return;
     }
 
@@ -421,7 +421,7 @@ void WmRenderer::bindTexture(JNIEnv *env, jobject bitmap, int id, int target, in
         LOG_D("finish wait in bindtexture.");
     } else {
         delete p;
-        LOG_D("the proxy is null when binding texture.");
+        LOG_D("the proxy is nullptr when binding texture.");
     }
 }
 
@@ -441,9 +441,9 @@ WmRenderer::texSubImage2D(JNIEnv *env, jobject bitmap, int id, int target, int l
     }
 
     // Lock the bitmap to get the buffer
-    void *pixels = NULL;
+    void *pixels = nullptr;
     int res = AndroidBitmap_lockPixels(env, bitmap, &pixels);
-    if (pixels == NULL) {
+    if (pixels == nullptr) {
         return;
     }
 
@@ -474,7 +474,7 @@ WmRenderer::texSubImage2D(JNIEnv *env, jobject bitmap, int id, int target, int l
         LOG_D("finish wait in texSubImage2D.");
     } else {
         delete p;
-        LOG_D("the proxy is null when texSubImage2D texture.");
+        LOG_D("the proxy is nullptr when texSubImage2D texture.");
     }
 }
 

@@ -1,4 +1,4 @@
-
+﻿
 #include <support/Log.h>
 #include "WmEGLContext.h"
 #include <cassert>
@@ -10,7 +10,7 @@ EGLContext currentEGLContext = nullptr;
 WmSharedEGLContext::WmSharedEGLContext() {
     eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     assert(eglDisplay != EGL_NO_DISPLAY);
-    assert(eglInitialize(eglDisplay, NULL, NULL));
+    assert(eglInitialize(eglDisplay, nullptr, nullptr));
 
     EGLConfig mEGLConfig;
 
@@ -64,10 +64,10 @@ WmSharedEGLContext::WmSharedEGLContext() {
     EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION,
                                 3,  // Request opengl ES Version
                                 EGL_NONE};
-    eglContext = eglCreateContext(eglDisplay, mEGLConfig, NULL, context_attribs);
+    eglContext = eglCreateContext(eglDisplay, mEGLConfig, nullptr, context_attribs);
     if (eglContext == EGL_NO_CONTEXT) {
         context_attribs[1] = 2;
-        eglContext = eglCreateContext(eglDisplay, mEGLConfig, NULL, context_attribs);
+        eglContext = eglCreateContext(eglDisplay, mEGLConfig, nullptr, context_attribs);
     }
 
     if (eglContext == EGL_NO_CONTEXT) {
@@ -88,7 +88,7 @@ bool WmSharedEGLContext::MakeCurrent() {
         }
     }
 
-    EGLBoolean result = eglMakeCurrent(eglDisplay, NULL, NULL, eglContext);
+    EGLBoolean result = eglMakeCurrent(eglDisplay, nullptr, nullptr, eglContext);
     if (result != EGL_TRUE) {
         EGLint error = eglGetError();
         EGL_LOGE("SharedEGLContext(%p) MakeCurrent:error %x", this, error);

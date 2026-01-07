@@ -1,4 +1,4 @@
-
+﻿
 #include "WmManager.h"
 
 
@@ -42,7 +42,7 @@ WmRenderer* WmManager::findRenderer(const std::string& key) {
         return it->second;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void WmManager::removeRenderer(const std::string& key) {

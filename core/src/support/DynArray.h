@@ -1,4 +1,4 @@
-#ifndef WMCANVAS_DYNARRAY_H
+﻿#ifndef WMCANVAS_DYNARRAY_H
 #define WMCANVAS_DYNARRAY_H
 
 #include <cstdlib>
@@ -77,7 +77,7 @@ private:
 template < class T > DynArray< T >::DynArray(unsigned int initialSize)
 {
     m_size = m_allocatedSize = 0;
-    m_entries = NULL;
+    m_entries = nullptr;
     SetSize(initialSize);
     SetSize(0);
 }
@@ -87,7 +87,7 @@ template < class T > DynArray< T >::~DynArray()
     if (m_entries)
     {
         free(m_entries);
-        m_entries = NULL;
+        m_entries = nullptr;
         m_size = 0;
         m_allocatedSize = 0;
     }

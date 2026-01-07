@@ -1,4 +1,4 @@
-
+﻿
 #include "g3d_jni.h"
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
@@ -50,7 +50,7 @@ Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onSurfaceChanged(JNIEnv *
 
     LOG_D("onSurfaceChanged. width=%d,height=%d\n", width, height);
 
-    const char *str_chars = env->GetStringUTFChars(key, NULL);
+    const char *str_chars = env->GetStringUTFChars(key, nullptr);
     if (!str_chars) {
         env->ReleaseStringUTFChars(key, str_chars);
         return;
@@ -106,7 +106,7 @@ Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onSurfaceDestroyed(JNIEnv
 
     LOG_D("onSurfaceDestroyed");
 
-    const char *str_chars = env->GetStringUTFChars(key, NULL);
+    const char *str_chars = env->GetStringUTFChars(key, nullptr);
     if (!str_chars) {
         env->ReleaseStringUTFChars(key, str_chars);
         return;
@@ -132,7 +132,7 @@ Java_com_honghu_wmcanvas_surface_WmTextureViewCallback_onRenderExit(JNIEnv *env,
 
     LOG_D("onRenderExit");
 
-    const char *str_chars = env->GetStringUTFChars(key, NULL);
+    const char *str_chars = env->GetStringUTFChars(key, nullptr);
     if (!str_chars) {
         env->ReleaseStringUTFChars(key, str_chars);
         return;

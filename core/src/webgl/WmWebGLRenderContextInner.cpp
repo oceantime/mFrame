@@ -1,4 +1,4 @@
-#include "WmWebGLRenderContext.hpp"
+﻿#include "WmWebGLRenderContext.hpp"
 #include "WmWebGLRenderContextInner.hpp"
 #include <algorithm>
 #include "../support/Log.h"
@@ -218,10 +218,10 @@ namespace wmcanvas {
         if(drawElementsInstancedEXTFunc == nullptr)
             drawElementsInstancedEXTFunc =(PFNGLDRAWELEMENTSINSTANCEDEXTPROC)eglGetProcAddress("glDrawElementsInstancedEXT");
         if(drawElementsInstancedEXTFunc!= nullptr) {
-            drawElementsInstancedEXTFunc(mode, count, type, (char *) NULL + indices, instanceCount);
+            drawElementsInstancedEXTFunc(mode, count, type, (char *) nullptr + indices, instanceCount);
         }
 #else
-        glDrawElementsInstancedEXT(mode, count, type, (char*)NULL+indices, instanceCount);
+        glDrawElementsInstancedEXT(mode, count, type, (char*)nullptr+indices, instanceCount);
 #endif
         }
 
