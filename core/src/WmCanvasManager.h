@@ -71,14 +71,14 @@ class WmCanvasManager {
      * @param contextId 上下文标识符
      * @param cmd 命令指针
      */
-    void AddtoQueue(const std::string contextId, struct GCanvasCmd*);
+    void AddtoQueue(const std::string contextId, struct WmCanvasCmd*);
     
     /**
      * @brief 根据上下文ID获取命令队列（Android平台专用）
      * @param contextId 上下文标识符
      * @return 命令队列指针
      */
-    std::queue<struct GCanvasCmd*>* getQueueByContextId(const std::string contextId);
+    std::queue<struct WmCanvasCmd*>* getQueueByContextId(const std::string contextId);
     
     /**
      * @brief 根据上下文ID清除命令队列（Android平台专用）
@@ -90,7 +90,7 @@ class WmCanvasManager {
      * @brief 清除指定命令队列（Android平台专用）
      * @param queue 命令队列指针
      */
-    void clearQueue(std::queue<struct GCanvasCmd*>* queue);
+    void clearQueue(std::queue<struct WmCanvasCmd*>* queue);
 #endif
 
     /**
@@ -107,7 +107,7 @@ class WmCanvasManager {
    protected:
     std::map<std::string, WmCanvas*> mCanvases; // Canvas实例映射表
 #ifdef ANDROID
-    std::map<std::string, std::queue<struct GCanvasCmd*>*> mCmdQueue; // 命令队列映射表（Android平台）
+    std::map<std::string, std::queue<struct WmCanvasCmd*>*> mCmdQueue; // 命令队列映射表（Android平台）
 #endif
 };
 

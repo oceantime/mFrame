@@ -124,7 +124,7 @@ void WmCanvasManager::Clear() {
 #ifdef WMCANVAS
 #ifdef ANDROID
     // Android平台：清理命令队列
-    std::map<std::string, std::queue<struct GCanvasCmd*>*>::iterator it1 = mCmdQueue.begin();
+    std::map<std::string, std::queue<struct WmCanvasCmd*>*>::iterator it1 = mCmdQueue.begin();
     for (; it1 != mCmdQueue.end(); ++it1) {
         if (it1->second) {
             clearQueue(it1->second);
