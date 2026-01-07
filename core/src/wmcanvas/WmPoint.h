@@ -15,8 +15,6 @@ typedef struct
     GLfloat y;
 } WmPoint;
 
-using GPoint = WmPoint;
-
 typedef union
 {
     struct

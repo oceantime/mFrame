@@ -343,7 +343,7 @@ RECORD_TIME_END
 DEFINE_VOID_METHOD_BEGIN(clip)
 Napi::Env env = info.Env();
 
-GFillRule rule = FILL_RULE_NONZERO;
+WmFillRule rule = FILL_RULE_NONZERO;
 if (info.Length() == 1)
 {
     std::string value = info[0].As<Napi::String>().Utf8Value();
@@ -536,7 +536,7 @@ if (mRenderContext)
 DEFINE_VOID_METHOD_BEGIN(fill)
 Napi::Env env = info.Env();
 
-GFillRule rule = FILL_RULE_NONZERO;
+WmFillRule rule = FILL_RULE_NONZERO;
 if (info.Length() == 1)
 {
     std::string value = info[0].As<Napi::String>().Utf8Value();
@@ -1266,7 +1266,7 @@ DEFINE_GETTER_METHOD(getlineCap)
 Napi::Env env = info.Env();
 if (mRenderContext)
 {
-    GLineCap cap = mRenderContext->getCtx()->LineCap();
+    WmLineCap cap = mRenderContext->getCtx()->LineCap();
     if (cap == LINE_CAP_BUTT)
     {
         return Napi::String::New(env, "butt");
@@ -1299,7 +1299,7 @@ DEFINE_GETTER_METHOD(getlineJoin)
 Napi::Env env = info.Env();
 if (mRenderContext)
 {
-    GLineJoin value = mRenderContext->getCtx()->LineJoin();
+    WmLineJoin value = mRenderContext->getCtx()->LineJoin();
     if (value == LINE_JOIN_BEVEL)
     {
         return Napi::String::New(env, "bevel");

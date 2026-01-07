@@ -45,7 +45,7 @@ class WmCanvasContext;
 @interface WmCVFont : NSObject
 
 @property(nonatomic,assign) WmGlyphCache *glyphCache;
-@property(nonatomic,assign) GTreemap *treemap;
+@property(nonatomic,assign) WmTreemap *treemap;
 
 + (instancetype)createGCFontWithKey:(NSString*)key;
 + (WmCVFont*)getWmCVFontWithKey:(NSString*)key;

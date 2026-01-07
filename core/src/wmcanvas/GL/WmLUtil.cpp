@@ -82,13 +82,13 @@ namespace wmcanvas {
 //////////////////////////////////////////////////////////////////////////////
 ///   Pixels BindTexture
 //////////////////////////////////////////////////////////////////////////////
-    GLuint PixelsBindTexture(const unsigned char *rgbaData, WmLint format, unsigned int width,
+    GLuint PixelsBindTexture(const unsigned char *rgbaData, GLint format, unsigned int width,
                              unsigned int height, std::vector<WmCanvasLog> *errVec) {
         if (nullptr == rgbaData)
             return (GLuint) - 1;
         
         
-        WmLint bindingTexture = 0;
+        GLint bindingTexture = 0;
         glGetIntegerv(GL_TEXTURE_BINDING_2D, &bindingTexture);
         
         GLenum glerror = 0;

@@ -17,11 +17,6 @@ typedef struct {
     bool isClosed;
 } WmSubPath;
 
-using GSubPath = WmSubPath;
-
-
-
-
 class WmPath {
 
 public:
@@ -63,7 +58,7 @@ public:
     void Stroke(WmCanvasContext *context, WmColorRGBA color, std::vector<WmVertex> *vertexVec);
 
 
-    void Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target = FILL_TARGET_COLOR,
+    void Fill(WmCanvasContext *context, WmFillRule rule, WmFillTarget target = FILL_TARGET_COLOR,
               bool needTransform = false);
 
 

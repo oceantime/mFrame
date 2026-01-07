@@ -399,7 +399,7 @@ void WmPath::ClipRegion(WmCanvasContext *context) {
 //}
 
 
-void WmPath::Fill(WmCanvasContext *context, WmFillRule rule, GFillTarget target, bool needTransform) {
+void WmPath::Fill(WmCanvasContext *context, WmFillRule rule, WmFillTarget target, bool needTransform) {
     context->SendVertexBufferToGPU();
     
     WmColorRGBA color = BlendColor(context, context->mCurrentState->mFillColor);

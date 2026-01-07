@@ -14,10 +14,6 @@ struct WmSize
     int height;
 };
 
-using GSize = WmSize;
-
-using GSize = WmSize;
-
 struct WmRect
 {
     WmRect(int x = 0, int y = 0, int w = 0, int h = 0) : x(x), y(y), width(w), height(h)
@@ -53,10 +49,6 @@ struct WmRect
     int height;
 };
 
-using GRect = WmRect;
-using GRect = WmRect;
-
-
 class WmTreemap
 {
 public:
@@ -82,7 +74,5 @@ private:
     int mVerticalLast;
     int mCurrentLineHeight;
 };
-
-using GTreemap = WmTreemap;
 
 #endif /* WMCANVAS_WMTREEMAP_H */

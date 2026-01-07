@@ -68,9 +68,9 @@ public:
     bool mIsFboSupported = true;
 
     WmTexture mFboTexture;
-    WmLuint mFboFrame = 0;
-    WmLuint mFboStencil = 0;
-    WmLint mSaveFboFrame = 0;
+    GLuint mFboFrame = 0;
+    GLuint mFboStencil = 0;
+    GLint mSaveFboFrame = 0;
     WmTransform mSavedTransform;
 
     int mWidth;

@@ -180,6 +180,4 @@ private:
     ColorStop mStops[MAX_STOP_NUM];
 };
 
-using GFillStyle = WmFillStyle;
-
 #endif /* WMCANVAS_WMFILLSTYLE_H */

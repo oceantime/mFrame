@@ -27,9 +27,4 @@
 #include <GLES2/gl2.h>
 #endif
 
-using WmLuint = GLuint;
-using WmLint = GLint;
-using WmLenum = GLenum;
-using WmLubyte = GLubyte;
-
 #endif /* WMCANVAS_WMGL_H */

@@ -70,29 +70,29 @@ struct WmCanvasLog;
 class WmTexture
 {
 public:
-    WmTexture(unsigned int w, unsigned int h, WmLenum format = GL_RGBA,
-              WmLubyte *pixels = nullptr, std::vector<WmCanvasLog> *errVec = nullptr);
+    WmTexture(unsigned int w, unsigned int h, GLenum format = GL_RGBA,
+              GLubyte *pixels = nullptr, std::vector<WmCanvasLog> *errVec = nullptr);
     WmTexture(const char *filePath);
     WmTexture();
     ~WmTexture();
 
-    void CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec = nullptr);
+    void CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec = nullptr);
 
     void Bind() const;
     void Unbind() const;
 
     unsigned int GetWidth() const { return mWidth; }
     unsigned int GetHeight() const { return mHeight; }
-    WmLenum GetFormat() const { return mFormat; }
+    GLenum GetFormat() const { return mFormat; }
     void SetWidth(const unsigned int w) { mWidth = w; }
     void SetHeight(const unsigned int h) { mHeight = h; }
-    void SetFormat(const WmLenum format) { mFormat = format; }
-    WmLuint GetTextureID() const { return mTextureID; }
-    void SetTextureID(const WmLuint id) { mTextureID = id; }
-    void UpdateTexture(WmLubyte *pixels, int x, int y, int w, int h);
+    void SetFormat(const GLenum format) { mFormat = format; }
+    GLuint GetTextureID() const { return mTextureID; }
+    void SetTextureID(const GLuint id) { mTextureID = id; }
+    void UpdateTexture(GLubyte *pixels, int x, int y, int w, int h);
 
     // Caution: the memeory allocated by callback should be allocated by new []
-    static void SetLoadPixelCallback(WmLubyte *(*callback)(const char *filePath,
+    static void SetLoadPixelCallback(GLubyte *(*callback)(const char *filePath,
                                                           unsigned int *w,
                                                           unsigned int *h));
 
@@ -109,18 +109,16 @@ public:
     }
 
 private:
-    static WmLubyte *(*loadPixelCallback)(const char *filePath, unsigned int *w,
+    static GLubyte *(*loadPixelCallback)(const char *filePath, unsigned int *w,
                                          unsigned int *h);
-    static WmLubyte *loadPixelsFromPNG(const char *filePath, unsigned int *w,
+    static GLubyte *loadPixelsFromPNG(const char *filePath, unsigned int *w,
                                       unsigned int *h);
 
 private:
     unsigned int mWidth;
     unsigned int mHeight;
-    WmLenum mFormat;
-    WmLuint mTextureID;
+    GLenum mFormat;
+    GLuint mTextureID;
 };
-
-using GTexture = WmTexture;
 
 #endif /* WMCANVAS_WMTEXTURE_H */

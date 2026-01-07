@@ -50,7 +50,7 @@ void WmFrameBufferObject::DeleteFBO() {
 
     if (mFboTexture.IsValidate()) {
         // mFboTexture析构方法内已经会deleteTextures, 这里不需要如此
-        WmLuint textureId = mFboTexture.GetTextureID();
+        GLuint textureId = mFboTexture.GetTextureID();
         glDeleteTextures(1, &textureId);
         mFboTexture.Unbind();
     }

@@ -10,16 +10,12 @@ typedef enum
     LINE_CAP_SQUARE
 } WmLineCap;
 
-using GLineCap = WmLineCap;
-
 typedef enum
 {
     LINE_JOIN_MITER = 0,
     LINE_JOIN_BEVEL,
     LINE_JOIN_ROUND
 } WmLineJoin;
-
-using GLineJoin = WmLineJoin;
 
 typedef enum
 {
@@ -53,12 +49,10 @@ typedef enum
     FILL_RULE_EVENODD
 } WmFillRule;
 
-using GFillRule = WmFillRule;
-
 typedef enum
 {
     FILL_TARGET_COLOR,
     FILL_TARGET_DEPTH
-} GFillTarget;
+} WmFillTarget;
 
 #endif /* WMCANVAS_WMCONTEXT2DTYPE_H */

@@ -1376,7 +1376,7 @@ bool WmCanvasContext::NeedDrawShadow()
 
 float WmCanvasContext::GetCurrentAlphaOfStyle(bool isStroke)
 {
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style == nullptr || style->IsDefault() || style->IsPattern())
     {
         return isStroke ? mCurrentState->mStrokeColor.rgba.a : mCurrentState->mFillColor.rgba.a;
@@ -1415,7 +1415,7 @@ float WmCanvasContext::GetCurrentAlphaOfStyle(bool isStroke)
 
 void WmCanvasContext::ApplyFillStylePipeline(bool isStroke)
 {
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style == nullptr || style->IsDefault())
     {
         UseDefaultRenderPipeline();
@@ -1603,7 +1603,7 @@ void WmCanvasContext::UsePatternRenderPipeline(bool isStroke)
     }
 
     //Pattern
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style != nullptr && style->IsPattern() && mCurrentState->mShader)
     {
         FillStylePattern *pattern = (FillStylePattern *)(style);
@@ -1635,7 +1635,7 @@ void WmCanvasContext::UseLinearGradientPipeline(bool isStroke)
         mCurrentState->mShader->Bind();
     }
 
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style != nullptr && style->IsLinearGradient() && mCurrentState->mShader)
     {
         FillStyleLinearGradient *grad = (FillStyleLinearGradient *)(style);
@@ -1667,7 +1667,7 @@ void WmCanvasContext::UseRadialGradientPipeline(bool isStroke)
     }
 
     //Radial Gradinet
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style != nullptr && style->IsRadialGradient() && mCurrentState->mShader)
     {
         FillStyleRadialGradient *grad = (FillStyleRadialGradient *)(style);
@@ -1845,7 +1845,7 @@ void WmCanvasContext::SetFillStylePattern(int textureId, int width, int height, 
     //change fill style, need send vertex buffer
     SendVertexBufferToGPU();
 
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
     if (style != nullptr)
     {
         delete style;
@@ -1871,7 +1871,7 @@ void WmCanvasContext::SetFillStyleLinearGradient(float startArr[], float endArr[
     //change fill style, need send vertex buffer
     SendVertexBufferToGPU();
 
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
 
     if (style != nullptr)
     {
@@ -1911,7 +1911,7 @@ void WmCanvasContext::SetFillStyleRadialGradient(float startArr[], float endArr[
     //change fill style, need send vertex buffer
     SendVertexBufferToGPU();
 
-    GFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
+    WmFillStyle *style = isStroke ? mCurrentState->mStrokeStyle : mCurrentState->mFillStyle;
 
     if (style != nullptr)
     {
@@ -1939,7 +1939,7 @@ void WmCanvasContext::SetFillStyleRadialGradient(float startArr[], float endArr[
 //path
 void WmCanvasContext::SetLineCap(const char *p)
 {
-    GLineCap lineCap = mCurrentState->mLineCap;
+    WmLineCap lineCap = mCurrentState->mLineCap;
     if (strncmp(p, "butt", 4) == 0)
     {
         lineCap = LINE_CAP_BUTT;
@@ -1957,7 +1957,7 @@ void WmCanvasContext::SetLineCap(const char *p)
 
 void WmCanvasContext::SetLineJoin(const char *p)
 {
-    GLineJoin lineJoin = mCurrentState->mLineJoin;
+    WmLineJoin lineJoin = mCurrentState->mLineJoin;
     if (strncmp(p, "miter", 4) == 0)
     {
         lineJoin = LINE_JOIN_MITER;
@@ -2313,7 +2313,7 @@ void WmCanvasContext::Clip(WmFillRule rule)
     DoClipPath(newPath, rule);
 }
 
-void WmCanvasContext::Clip(WmPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Clip(WmPath2D &path2d, WmFillRule rule)
 {
     WmPath *path = new WmPath();
     path->mTransform = mPath.mTransform;
@@ -2348,7 +2348,7 @@ void WmCanvasContext::ClipRegion()
 //    DoClipPath(*newPath, rule);
 //}
 
-void WmCanvasContext::DoClipPath(WmPath *path, GFillRule rule)
+void WmCanvasContext::DoClipPath(WmPath *path, WmFillRule rule)
 {
     path->mClipFillRule = rule;
     DrawClipPath(path);
@@ -2422,7 +2422,7 @@ void WmCanvasContext::Fill(WmFillRule rule)
     DoFillWithPath(mPath, rule);
 }
 
-void WmCanvasContext::Fill(WmPath2D &path2d, GFillRule rule)
+void WmCanvasContext::Fill(WmPath2D &path2d, WmFillRule rule)
 {
     WmPath path;
     path.mTransform = mPath.mTransform;
@@ -2431,7 +2431,7 @@ void WmCanvasContext::Fill(WmPath2D &path2d, GFillRule rule)
     DoFillWithPath(path, rule);
 }
 
-void WmCanvasContext::DoFillWithPath(WmPath &path, GFillRule rule)
+void WmCanvasContext::DoFillWithPath(WmPath &path, WmFillRule rule)
 {
     ApplyFillStylePipeline();
     if (NeedDrawShadow())

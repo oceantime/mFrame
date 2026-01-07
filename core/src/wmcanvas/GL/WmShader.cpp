@@ -52,14 +52,14 @@ WmShader::WmShader(const char *name, const char *vertexShaderSrc,
 #endif
     
     isCompleted = true;
-    WmLuint vertexShader = compileShader(vertexShaderSrc, GL_VERTEX_SHADER);
+    GLuint vertexShader = compileShader(vertexShaderSrc, GL_VERTEX_SHADER);
     if (vertexShader == 0)
     {
         isCompleted = false;
         return;
     }
 
-    WmLuint fragmentShader = compileShader(fragmentShaderSrc, GL_FRAGMENT_SHADER);
+    GLuint fragmentShader = compileShader(fragmentShaderSrc, GL_FRAGMENT_SHADER);
     if (fragmentShader == 0)
     {
         isCompleted = false;
@@ -74,7 +74,7 @@ WmShader::WmShader(const char *name, const char *vertexShaderSrc,
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    WmLint linkSuccess;
+    GLint linkSuccess;
     glGetProgramiv(mHandle, GL_LINK_STATUS, &linkSuccess);
     if (linkSuccess == GL_FALSE)
     {
@@ -124,19 +124,19 @@ void WmShader::TraceErrorIfHas(WmShader* shader, WmCanvasHooks* hook, const std:
 }
 
 
-WmLuint WmShader::compileShader(const char *shader, GLenum shaderType)
+GLuint WmShader::compileShader(const char *shader, GLenum shaderType)
 {
-    WmLuint shaderHandle = glCreateShader(shaderType);
+    GLuint shaderHandle = glCreateShader(shaderType);
     if (shaderHandle == 0)
     {
         return 0;
     }
 
-    WmLint shaderLength = (WmLint) strlen(shader);
+    GLint shaderLength = (GLint) strlen(shader);
     glShaderSource(shaderHandle, 1, &shader, &shaderLength);
     glCompileShader(shaderHandle);
 
-    WmLint compileResult;
+    GLint compileResult;
     glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileResult);
 
     if (compileResult == GL_FALSE)

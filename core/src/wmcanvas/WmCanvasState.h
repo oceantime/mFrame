@@ -40,10 +40,10 @@ public:
 
     //fill style,stroke style,shadow
     WmColorRGBA mFillColor;
-    GFillStyle *mFillStyle;
+    WmFillStyle *mFillStyle;
 
     WmColorRGBA mStrokeColor;
-    GFillStyle *mStrokeStyle;
+    WmFillStyle *mStrokeStyle;
 
     WmColorRGBA mShadowColor;
     float mShadowBlur;
@@ -51,8 +51,8 @@ public:
     float mShadowOffsetY;
     
     //line style
-    GLineCap mLineCap;
-    GLineJoin mLineJoin;
+    WmLineCap mLineCap;
+    WmLineJoin mLineJoin;
     float mLineWidth;
     float mMiterLimit;
     

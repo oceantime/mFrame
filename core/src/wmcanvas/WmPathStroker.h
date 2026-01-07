@@ -32,10 +32,6 @@ struct WmPathOutLine {
     WmPoint toOut;
 };
 
-using GPathOutLine = WmPathOutLine;
-
-
-
 class WmPathStroker {
 
 public:
@@ -69,9 +65,5 @@ private:
                                    WmColorRGBA color, WmTransform& transform, std::vector<WmVertex> *vec,
                                    float samePointThreshold = 0.001f);
 };
-
-using GPathStroker = WmPathStroker;
-
-
 
 #endif //WMCANVAS_WMPATHSTROKER_H

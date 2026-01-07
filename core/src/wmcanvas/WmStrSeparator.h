@@ -19,8 +19,6 @@ private:
     char *mPointers[PARSELOCALBUFFERSIZE];
 };
 
-using GStrSeparator = WmStrSeparator;
-
 }
 
 #endif /* WMCANVAS_WMSTRSEPARATOR_H */

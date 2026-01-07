@@ -3,11 +3,11 @@
 #include "../../support/Util.h"
 
 
-WmLubyte *(*WmTexture::loadPixelCallback)(const char *filePath, unsigned int *w,
+GLubyte *(*WmTexture::loadPixelCallback)(const char *filePath, unsigned int *w,
                                          unsigned int *h) = nullptr;
 
-WmTexture::WmTexture(unsigned int w, unsigned int h, WmLenum format,
-                     WmLubyte *pixels, std::vector<WmCanvasLog> *errVec)
+WmTexture::WmTexture(unsigned int w, unsigned int h, GLenum format,
+                     GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
     : mWidth(w), mHeight(h), mFormat(format), mTextureID(0)
 {
     CreateTexture(pixels, errVec);
@@ -18,7 +18,7 @@ WmTexture::WmTexture() : mWidth(0), mHeight(0), mFormat(0), mTextureID(0) {}
 WmTexture::WmTexture(const char *path)
     : mWidth(0), mHeight(0), mFormat(GL_RGBA), mTextureID(0)
 {
-    WmLubyte *pixels = nullptr;
+    GLubyte *pixels = nullptr;
     if (loadPixelCallback == nullptr)
     {
         pixels = loadPixelsFromPNG(path, &mWidth, &mHeight);
@@ -47,21 +47,21 @@ void WmTexture::Bind() const { glBindTexture(GL_TEXTURE_2D, mTextureID); }
 
 void WmTexture::Unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
 
-void WmTexture::SetLoadPixelCallback(WmLubyte *(*callback)(const char *filePath,
+void WmTexture::SetLoadPixelCallback(GLubyte *(*callback)(const char *filePath,
                                                           unsigned int *w,
                                                           unsigned int *h))
 {
     loadPixelCallback = callback;
 }
 
-WmLubyte *WmTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
+GLubyte *WmTexture::loadPixelsFromPNG(const char *path, unsigned int *pw,
                                       unsigned int *ph)
 {
     unsigned char *buffer = nullptr;
     return buffer;
 }
 
-void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec)
+void WmTexture::CreateTexture(GLubyte *pixels, std::vector<WmCanvasLog> *errVec)
 {
     GLenum glerror = 0;
     while ((glerror = glGetError()) != GL_NO_ERROR && errVec)
@@ -150,7 +150,7 @@ void WmTexture::CreateTexture(WmLubyte *pixels, std::vector<WmCanvasLog> *errVec
     glFlush();
 }
 
-void WmTexture::UpdateTexture(WmLubyte *pixels, int x, int y, int w, int h)
+void WmTexture::UpdateTexture(GLubyte *pixels, int x, int y, int w, int h)
 {
     if (mTextureID == 0)
     {

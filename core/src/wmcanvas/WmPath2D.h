@@ -20,9 +20,6 @@ enum WmPathCmdType {
     CLOSE_PATH
 };
 
-using GPathCmdType = WmPathCmdType;
-
-
 struct WmPathCmd {
 
     WmPathCmd () {
@@ -40,10 +37,6 @@ struct WmPathCmd {
     size_t byteLen;
     void* data;
 };
-
-using GPathCmd = WmPathCmd;
-
-
 
 /**
  * WmPath2D object, for implement Canvas Path2d interface
@@ -114,7 +107,5 @@ private:
 
 
 };
-
-using GPath2D = WmPath2D;
 
 #endif //WMCANVAS_WMPATH2D_H

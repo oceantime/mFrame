@@ -4,7 +4,7 @@
 #include <android/native_window_jni.h>
 #include <WmCanvasLinkNative.h>
 #include <dlfcn.h>
-#include <wmcanvas/GPoint.h>
+#include <wmcanvas/WmPoint.h>
 #include "WmManager.h"
 
 using namespace std;

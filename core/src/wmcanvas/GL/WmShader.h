@@ -37,13 +37,13 @@ public:
 
     virtual void SetOverideTextureColor(int value) {}
     
-    WmLint GetTexcoordSlot() { return mTexcoordSlot; }
+    GLint GetTexcoordSlot() { return mTexcoordSlot; }
     
-    WmLint GetPositionSlot() { return mPositionSlot; }
+    GLint GetPositionSlot() { return mPositionSlot; }
     
-    WmLint GetColorSlot() { return mColorSlot; }
+    GLint GetColorSlot() { return mColorSlot; }
     
-    WmLint GetTransformSlot() { return mTransfromSlot; }
+    GLint GetTransformSlot() { return mTransfromSlot; }
 
     virtual void SetRepeatMode(const std::string &pattern) {}
 
@@ -78,16 +78,16 @@ public:
 protected:
     virtual void calculateAttributesLocations();
 
-    WmLuint compileShader(const char *shader, GLenum shaderType);
+    GLuint compileShader(const char *shader, GLenum shaderType);
 
-    WmLuint mHandle;
+    GLuint mHandle;
     std::string mName;
     
-    WmLint mTexcoordSlot;
-    WmLint mPositionSlot;
-    WmLint mColorSlot;
+    GLint mTexcoordSlot;
+    GLint mPositionSlot;
+    GLint mColorSlot;
     
-    WmLint mTransfromSlot;
+    GLint mTransfromSlot;
     WmTransform mShaderTransform;
     bool mIsFirstCommit;
 
@@ -134,9 +134,9 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    WmLint mTextureSamplerSlot;
-    WmLint mHasTextureSlot;
-    WmLint mOverrideTextureColorSlot;
+    GLint mTextureSamplerSlot;
+    GLint mHasTextureSlot;
+    GLint mOverrideTextureColorSlot;
 
     bool mHasTextureFlag;
     bool mOverrideTextureColorFlag;
@@ -164,8 +164,8 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    WmLint mTextureSamplerSlot;
-    WmLint mPremultipliedAlphaSlot;
+    GLint mTextureSamplerSlot;
+    GLint mPremultipliedAlphaSlot;
 };
 
 class ShadowShader : public WmShader
@@ -190,8 +190,8 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    WmLint mTextureSamplerSlot;
-    WmLint mShadowColorSlot;
+    GLint mTextureSamplerSlot;
+    GLint mShadowColorSlot;
 };
 
 class BlurShader : public WmShader
@@ -228,12 +228,12 @@ protected:
     void calculateAttributesLocations();
 
 private:
-    WmLint mRadiusSlot;
-    WmLint mXDeltaSlot;
-    WmLint mYDeltaSlot;
-    WmLint mWeightSlot;
-    WmLint mSamplerSlot;
-    WmLint mOverrideTextureColorSlot;
+    GLint mRadiusSlot;
+    GLint mXDeltaSlot;
+    GLint mYDeltaSlot;
+    GLint mWeightSlot;
+    GLint mSamplerSlot;
+    GLint mOverrideTextureColorSlot;
 };
 
 class PatternShader : public WmShader
@@ -265,16 +265,16 @@ public:
         glUniform1f(mPatternAlphaSlot, patternAlpha);
     }
 
-    WmLint GetTextureSamplerSlot() { return mTextureSamplerSlot; }
+    GLint GetTextureSamplerSlot() { return mTextureSamplerSlot; }
 
 protected:
     void calculateAttributesLocations();
     
-    WmLint mTextureSamplerSlot;
-    WmLint mRepeatXSlot;
-    WmLint mRepeatYslot;
-    WmLint mTextureSizeSlot;
-    WmLint mPatternAlphaSlot;
+    GLint mTextureSamplerSlot;
+    GLint mRepeatXSlot;
+    GLint mRepeatYslot;
+    GLint mTextureSizeSlot;
+    GLint mPatternAlphaSlot;
 };
 
 
@@ -299,8 +299,8 @@ public:
     
     void SetColorStop(float *color, float stop, int id)
     {
-        WmLint stopLoc;
-        WmLint colorLoc;
+        GLint stopLoc;
+        GLint colorLoc;
         if (id == 0)
         {
             stopLoc = mStop0Slot;
@@ -338,23 +338,23 @@ public:
 protected:
     void calculateAttributesLocations();
     
-    WmLint mTextureSamplerSlot;
+    GLint mTextureSamplerSlot;
     
-    WmLint mStopCountSlot;
+    GLint mStopCountSlot;
     
-    WmLint mStop0ColorSlot;
-    WmLint mStop1ColorSlot;
-    WmLint mStop2ColorSlot;
-    WmLint mStop3ColorSlot;
-    WmLint mStop4ColorSlot;
+    GLint mStop0ColorSlot;
+    GLint mStop1ColorSlot;
+    GLint mStop2ColorSlot;
+    GLint mStop3ColorSlot;
+    GLint mStop4ColorSlot;
     
-    WmLint mStop0Slot;
-    WmLint mStop1Slot;
-    WmLint mStop2Slot;
-    WmLint mStop3Slot;
-    WmLint mStop4Slot;
+    GLint mStop0Slot;
+    GLint mStop1Slot;
+    GLint mStop2Slot;
+    GLint mStop3Slot;
+    GLint mStop4Slot;
     
-    WmLint mHasTextureSlot;
+    GLint mHasTextureSlot;
     bool mHasTextureFlag;
 };
 
@@ -372,8 +372,8 @@ public:
 
 protected:
     void calculateAttributesLocations();
-    WmLint mRangeStartSlot;
-    WmLint mRangeEndSlot;
+    GLint mRangeStartSlot;
+    GLint mRangeEndSlot;
 };
 
 class RadialGradientShader : public GradientShader
@@ -392,9 +392,9 @@ public:
     
 protected:
     void calculateAttributesLocations();
-    WmLint mStartSlot;
-    WmLint mEndSlot;
-    WmLint mInvertTransformSlot;
+    GLint mStartSlot;
+    GLint mEndSlot;
+    GLint mInvertTransformSlot;
 
 };
 

@@ -111,9 +111,6 @@ class WmCanvasManager {
 #endif
 };
 
-// 类型别名：GCanvasManager
-using GCanvasManager = WmCanvasManager;
-
 }  // namespace wmcanvas
 
 #endif /* WMCANVAS_WMCANVASMANAGER_H */
