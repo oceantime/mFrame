@@ -484,7 +484,7 @@ static NSMutableDictionary *staticFontInstaceDict;
 
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
                    textAlign:(WmTextAlign)textAlign
-                    baseLine:(GTextBaseline)baseLine
+                    baseLine:(WmTextBaseline)baseLine
                      metrics:(WmTextMetrics)metrics
 {
     switch (textAlign) {
@@ -501,17 +501,17 @@ static NSMutableDictionary *staticFontInstaceDict;
     }
     
     switch( baseLine ) {
-        case GTextBaseline::TEXT_BASELINE_ALPHABETIC:
-        case GTextBaseline::TEXT_BASELINE_IDEOGRAPHIC:
+        case WmTextBaseline::TEXT_BASELINE_ALPHABETIC:
+        case WmTextBaseline::TEXT_BASELINE_IDEOGRAPHIC:
             break;
-        case GTextBaseline::TEXT_BASELINE_TOP:
-        case GTextBaseline::TEXT_BASELINE_HANGING:
+        case WmTextBaseline::TEXT_BASELINE_TOP:
+        case WmTextBaseline::TEXT_BASELINE_HANGING:
             srcPoint.y += ascent;
             break;
-        case GTextBaseline::TEXT_BASELINE_MIDDLE:
+        case WmTextBaseline::TEXT_BASELINE_MIDDLE:
             srcPoint.y += capHeight/2;
             break;
-        case GTextBaseline::TEXT_BASELINE_BOTTOM:
+        case WmTextBaseline::TEXT_BASELINE_BOTTOM:
             srcPoint.y -= descent;
             break;
     }

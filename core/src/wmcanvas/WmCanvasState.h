@@ -62,7 +62,7 @@ public:
     //font style
     wmcanvas::WmFontStyle *mFont;
     WmTextAlign mTextAlign;
-    GTextBaseline mTextBaseline;
+    WmTextBaseline mTextBaseline;
     
     //global alpha / composite
     float mGlobalAlpha;
@@ -76,4 +76,4 @@ public:
 };
 
 
-#endif /* GCANVAS_GCANVASSTATE_H */
+#endif /* WMCANVAS_WMCANVASSTATE_H */

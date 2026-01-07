@@ -103,14 +103,14 @@ class WmCanvasContext;
  *
  * @param srcPoint          source point to adjust
  * @param textAlign         see WmTextAlign definition
- * @param baseLine          see GTextBaseline definition
+ * @param baseLine          see WmTextBaseline definition
  * @param metrics           see WmTextMetrics definition
  *
  * return  adjuested text source CGPoint
  */
 - (CGPoint)adjustTextPenPoint:(CGPoint)srcPoint
                    textAlign:(WmTextAlign)textAlign
-                    baseLine:(GTextBaseline)baseLine
+                    baseLine:(WmTextBaseline)baseLine
                      metrics:(WmTextMetrics)metrics;
 
 - (NSString *)getFontNameWithCurrentScale:(wmcanvas::WmFontStyle *)fontStyle

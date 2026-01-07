@@ -1422,7 +1422,7 @@ DEFINE_GETTER_METHOD(gettextBaseline)
 Napi::Env env = info.Env();
 if (mRenderContext)
 {
-    GTextBaseline value = mRenderContext->getCtx()->TextBaseline();
+    WmTextBaseline value = mRenderContext->getCtx()->TextBaseline();
     if (value == TEXT_BASELINE_TOP)
     {
         return Napi::String::New(env, "top");

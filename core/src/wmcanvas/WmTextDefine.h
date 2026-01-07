@@ -14,8 +14,6 @@ typedef enum {
                                // ideographic baseline
 } WmTextBaseline;
 
-using GTextBaseline = WmTextBaseline;
-
 typedef enum {
     TEXT_ALIGN_START = 0, // Default. The text baseline is the normal alphabetic baseline
     TEXT_ALIGN_END,    // The text ends at the specified position

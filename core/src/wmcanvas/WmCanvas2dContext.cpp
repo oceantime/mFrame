@@ -1751,7 +1751,7 @@ void WmCanvasContext::SetTextAlign(WmTextAlign textAlign)
     mCurrentState->mTextAlign = textAlign;
 }
 
-void WmCanvasContext::SetTextBaseline(GTextBaseline textbaseline)
+void WmCanvasContext::SetTextBaseline(WmTextBaseline textbaseline)
 {
     mCurrentState->mTextBaseline = textbaseline;
 }
