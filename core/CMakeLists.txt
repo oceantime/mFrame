@@ -88,7 +88,7 @@ set(SRC_FILES
         ./src/support/CharacterSet.cpp
         ./src/support/Encode.cpp
         ./src/support/FileUtils.cpp
-        ./src/wmcanvas/GL/WmLUtil.cpp
+        ./src/wmcanvas/GL/WmGLUtil.cpp
         ./src/support/Log.cpp
         ./src/support/Util.cpp
         ./src/support/Value.cpp

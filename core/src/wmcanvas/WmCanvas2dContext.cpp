@@ -1,7 +1,7 @@
 ﻿#include "WmCanvas2dContext.h"
 #include "WmShaderManager.h"
 #include "../WmCanvas.hpp"
-#include "GL/WmLUtil.h"
+#include "GL/WmGLUtil.h"
 #include <stdio.h>
 #include <assert.h>
 

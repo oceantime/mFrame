@@ -1,5 +1,5 @@
-#ifndef WMCANVAS_GLUTIL_H
-#define WMCANVAS_GLUTIL_H
+#ifndef WMCANVAS_WMGLUTIL_H
+#define WMCANVAS_WMGLUTIL_H
 
 #include "WmGL.h"
 #include "../../support/Log.h"
@@ -11,4 +11,4 @@ namespace wmcanvas{
     void PixelsSampler(int inWidth, int inHeight, int *inPixels, int outWidth, int outHeight, int *outPixels);
 }
 
-#endif /* WMCANVAS_GLUTIL_H */
+#endif /* WMCANVAS_WMGLUTIL_H */
